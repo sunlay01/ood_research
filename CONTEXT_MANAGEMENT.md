@@ -12,6 +12,8 @@
 
 讨论链接中提到 Wu et al. (2020)、Galstyan et al. (2022)、Shui et al.、Moment Alignment (2025)、Lai & Wang (2024) 等线索。这些只是**待核验种子**：不要直接引用、不要依赖其中的年份/结论或“尚无人做过”的判断。
 
+2026-09-04 更新：分享链接中可定位到的 10 篇论文已下载到本地 `papers/pdfs/`，并在 `papers/download_manifest.tsv` 和 `docs/research/01_evidence_register.md` 登记。`VERIFIED` 仅表示论文存在性、元数据、PDF 下载和页数已核验；技术命题、定理和证明质量仍需在后续精读阶段逐页确认。
+
 ## 术语约定
 
 | 名称 | 约定 |

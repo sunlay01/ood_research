@@ -12,6 +12,8 @@ venv/
 data/
 artifacts/*
 !artifacts/.gitkeep
+papers/pdfs/*
+!papers/pdfs/.gitkeep
 wandb/
 mlruns/
 *.pt
