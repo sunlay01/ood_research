@@ -2,11 +2,13 @@
 
 ## 当前状态
 
-- 项目阶段：0 — 课题组织完成，尚未完成独立的新颖性检索。
+- 项目阶段：0.5 — 已完成一次探索性正则扫描；尚未完成独立的新颖性检索，不能进入论文级验证。
 - 工作性母题：**正则化目标如何诱导表示空间的优化，并影响 OOD 风险？**
 - 当前最小对象：多环境、core/spurious 分解、线性或浅层表示模型。
 - 当前候选方法：ERM、IRMv1、weight decay/L1、谱或低秩正则；它们是比较对象，非承诺都要研究。
 - 当前候选路线：representation risk decomposition、nested oracle error、局部 sensitivity / regularization path。尚未选择主路线。
+
+2026-09-04 探索更新：`EXPL-001` 已在统一合成模型上比较 ERM、L1、L2、IRMv1、MMD、CORAL、gradient alignment 与 Hessian alignment。完整复跑逐字节一致；结果只标记为 `EXPLORATORY_SIGNAL`。当前最具体的理论候选是线性平方损失下的 gradient/Hessian risk-difference identity，以及它向 unseen target 扩展时所需的 coverage、task discrepancy 与 sufficiency residual。详见 `docs/experiments/02_exploratory_regularizer_results.md` 与理论 ledger。
 
 ## 已知证据状态
 

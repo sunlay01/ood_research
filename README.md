@@ -17,6 +17,10 @@
 3. 只有取得 `DISTINCT_BUT_RISKY`、`CLEAR_NOVELTY_GAP` 或受限的 `PROBE_AUTHORIZED` 结论，才进入 [理论路线](prompts/02_theory_decomposition.md) 或 [局部实验](prompts/04_local_experiment.md)。
 4. 每个阶段都把可复查证据登记到相应 ledger；没有证据时标记 `UNVERIFIED`，不补造引用。
 
+## 当前探索状态
+
+`EXPL-001` 已用统一合成模型比较 ERM、L1、L2、IRMv1、MMD、CORAL、gradient alignment 和 Hessian alignment。执行结果可逐值复现，但科学解释仍是探索性的。主要结果、统计限制和候选风险上界见 `docs/experiments/02_exploratory_regularizer_results.md`。
+
 ## 目录
 
 ```text

@@ -6,6 +6,16 @@
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | EXP-001 | PLANNED | TBD | TBD | TBD | TBD | core/spurious loading、环境 moment、有效秩等（待选） | TBD | ≤ 1 小时本地 |
 
+## 探索性实验（不占用验证编号）
+
+| ID | 状态 | 目的 | 方法 | 输出限制 | 预算 |
+| --- | --- | --- | --- | --- | --- |
+| EXPL-001 | COMPLETE / EXPLORATORY_SIGNAL | 比较七类正则下降时的 latent response 与 cross-domain / cross-task error，生成可证伪猜想 | ERM、L1、L2、IRMv1、MMD、CORAL、gradient alignment、Hessian alignment | 已形成 3 个 `CONJECTURE` 和 1 个 `NEGATIVE_RESULT`；执行可复现，但统计推断为 `CAUTION`，不得给出验证或新颖性结论 | 首次主运行 95.1 秒；完整复跑一致 |
+
+完整预注册见 `docs/experiments/01_exploratory_regularizer_sweep.md`。
+
+结果、限制与下一证明义务见 `docs/experiments/02_exploratory_regularizer_results.md`。
+
 ## 每个实验的记录模板
 
 ```markdown
