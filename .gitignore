@@ -1,0 +1,22 @@
+.DS_Store
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+*.egg-info/
+
+# Local research inputs and generated outputs
+data/
+artifacts/*
+!artifacts/.gitkeep
+wandb/
+mlruns/
+*.pt
+*.pth
+*.ckpt
+
+# Jupyter runtime state
+.ipynb_checkpoints/

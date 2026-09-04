@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ood-repr-reg"
+version = "0.1.0"
+description = "Research scaffold for regularization-induced representation changes in OOD learning"
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+research = [
+  "numpy>=1.26",
+  "scipy>=1.11",
+  "pandas>=2.1",
+  "matplotlib>=3.8",
+  "torch>=2.2",
+]
+dev = ["pytest>=8.0", "ruff>=0.6"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
