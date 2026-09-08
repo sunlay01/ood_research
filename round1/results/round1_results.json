@@ -1,0 +1,91 @@
+{
+  "component_accounting": {
+    "bound": 1.4942178838828493,
+    "diagonal": [
+      0.0,
+      0.0,
+      0.0,
+      0.0006990069570609081
+    ],
+    "interactions": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0038989054716064,
+      0.0
+    ],
+    "total": 0.004597912428667308
+  },
+  "exposure": {
+    "source_kernel_dimension": 13,
+    "source_observation_dimension": 16,
+    "source_observation_rank": 3,
+    "target_alignment": [
+      0.9812763534806487
+    ],
+    "target_blind_norm": [
+      0.5656854249492381
+    ]
+  },
+  "methods": {
+    "CORAL_identity_representation": {
+      "blind_candidate": "mean shift and conditional label response",
+      "observed_object": "representation covariance differences",
+      "operator_rank": 2,
+      "source_covariance_penalty": 0.5398166666666667
+    },
+    "ERM_three_source": {
+      "irmv1_operator_rank": 3,
+      "irmv1_penalty": 0.0002749656257451919,
+      "source_risk": 0.20951729686242962,
+      "target_risk": 0.220951885668351,
+      "weights": [
+        0.0,
+        0.7980691874497184,
+        0.0241351568785197
+      ]
+    },
+    "ERM_two_source": {
+      "irmv1_penalty": 0.023799224400276243,
+      "source_risk": 0.19181818181818183,
+      "target_risk": 0.5710651974288339,
+      "weights": [
+        0.0,
+        0.7272727272727273,
+        0.3030303030303031
+      ]
+    },
+    "IRMv1_two_source_blind": {
+      "irmv1_penalty": 2.6006072780303894e-32,
+      "source_risk": 0.51,
+      "target_risk": 1.100031828357653,
+      "weights": [
+        0.0,
+        0.73841681234051,
+        -0.7947227078017002
+      ]
+    },
+    "L2_ridge": {
+      "blind_candidate": "task/nuisance distinction and shift direction",
+      "nuisance_norm": 0.00103686304127291,
+      "observed_object": "global coefficient norm",
+      "penalty": 0.32546798045321157,
+      "source_risk": 0.2744574230113191,
+      "target_risk": 0.3062165379655083,
+      "task_observation_norm": 0.32443111741193864,
+      "weights": [
+        0.0,
+        0.5695885509838998,
+        0.03220035778175314
+      ]
+    }
+  },
+  "state": {
+    "ambient_state_dimension": 16,
+    "full_target_excess_over_noise": 0.210951885668351,
+    "quotient_projection_residual": 2.220446049250313e-16,
+    "source_moment_rank": 4,
+    "target_transport_pairing": 0.004597912428667104
+  }
+}

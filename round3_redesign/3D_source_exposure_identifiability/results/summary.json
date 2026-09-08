@@ -1,0 +1,2129 @@
+{
+  "status": "complete",
+  "benchmark": {
+    "n_probes": 35,
+    "n_relevant": 33,
+    "feature_dimension": 9
+  },
+  "exposure": {
+    "source_state_dimension": 55,
+    "source_contrast_rank": 4,
+    "exposed_response_rank": 3,
+    "total_response_rank": 5,
+    "unexposed_quotient_dimension": 2,
+    "source_reference_audit": {
+      "rank_first": 4,
+      "rank_last": 4,
+      "exposed_rank_first": 3,
+      "exposed_rank_last": 3,
+      "response_basis_residual": 2.7408477210327455e-15,
+      "invariant": true
+    },
+    "quotient": {
+      "total_dimension": 5,
+      "exposed_dimension": 3,
+      "unexposed_quotient_dimension": 2,
+      "inclusion_residual": 6.603038687379271e-16,
+      "combined_rank": 5,
+      "tolerance": 1e-09
+    },
+    "target_information_used_in_exposure": false,
+    "mechanism_labels_used_in_exposure": false,
+    "cluster_labels_used_in_exposure": false,
+    "regularizer_used_in_exposure": false
+  },
+  "source_designs": [
+    {
+      "name": "single_source",
+      "note": "single source environment",
+      "n_source": 1,
+      "ambient_state_rank": 1,
+      "source_contrast_rank": 0,
+      "exposed_response_rank": 0,
+      "total_response_rank": 5,
+      "unexposed_quotient_dimension": 5,
+      "singular_values": [],
+      "condition_number": Infinity,
+      "tolerance_profile": {
+        "relative": 1e-09,
+        "rank_rule": "singular > relative * max singular"
+      },
+      "source_optimum_dimension": 9
+    },
+    {
+      "name": "one_relation_contrast",
+      "note": "one independent relation contrast",
+      "n_source": 3,
+      "ambient_state_rank": 3,
+      "source_contrast_rank": 2,
+      "exposed_response_rank": 2,
+      "total_response_rank": 5,
+      "unexposed_quotient_dimension": 3,
+      "singular_values": [
+        0.08612691000501556,
+        0.011374609478138195,
+        0.0
+      ],
+      "condition_number": 7.571856437845185,
+      "tolerance_profile": {
+        "relative": 1e-09,
+        "rank_rule": "singular > relative * max singular"
+      },
+      "source_optimum_dimension": 9
+    },
+    {
+      "name": "two_shortcut_contrasts",
+      "note": "two independent shortcut contrasts",
+      "n_source": 5,
+      "ambient_state_rank": 5,
+      "source_contrast_rank": 4,
+      "exposed_response_rank": 3,
+      "total_response_rank": 5,
+      "unexposed_quotient_dimension": 2,
+      "singular_values": [
+        0.08665498486524738,
+        0.07825116352061387,
+        0.010368820064007264,
+        3.839021108805005e-19,
+        0.0
+      ],
+      "condition_number": 8.357265757368888,
+      "tolerance_profile": {
+        "relative": 1e-09,
+        "rank_rule": "singular > relative * max singular"
+      },
+      "source_optimum_dimension": 9
+    },
+    {
+      "name": "duplicate_source",
+      "note": "duplicate source row",
+      "n_source": 4,
+      "ambient_state_rank": 3,
+      "source_contrast_rank": 2,
+      "exposed_response_rank": 2,
+      "total_response_rank": 5,
+      "unexposed_quotient_dimension": 3,
+      "singular_values": [
+        0.0862788830920324,
+        0.01145208307527625,
+        1.7094752060248727e-18,
+        0.0
+      ],
+      "condition_number": 7.533903004799077,
+      "tolerance_profile": {
+        "relative": 1e-09,
+        "rank_rule": "singular > relative * max singular"
+      },
+      "source_optimum_dimension": 9
+    },
+    {
+      "name": "risk_null_nuisance",
+      "note": "source variation in an independent noise variance",
+      "n_source": 4,
+      "ambient_state_rank": 4,
+      "source_contrast_rank": 3,
+      "exposed_response_rank": 2,
+      "total_response_rank": 5,
+      "unexposed_quotient_dimension": 3,
+      "singular_values": [
+        0.08627888309203237,
+        0.011452083075276249,
+        0.0,
+        0.0
+      ],
+      "condition_number": 7.533903004799075,
+      "tolerance_profile": {
+        "relative": 1e-09,
+        "rank_rule": "singular > relative * max singular"
+      },
+      "source_optimum_dimension": 9
+    },
+    {
+      "name": "new_target_relevant_contrast",
+      "note": "new U-Y relevant contrast",
+      "n_source": 4,
+      "ambient_state_rank": 4,
+      "source_contrast_rank": 3,
+      "exposed_response_rank": 3,
+      "total_response_rank": 5,
+      "unexposed_quotient_dimension": 2,
+      "singular_values": [
+        0.1809738237475906,
+        0.0857324407719097,
+        0.01117414163522999,
+        0.0
+      ],
+      "condition_number": 16.19576963093199,
+      "tolerance_profile": {
+        "relative": 1e-09,
+        "rank_rule": "singular > relative * max singular"
+      },
+      "source_optimum_dimension": 9
+    },
+    {
+      "name": "redundant_shortcut_copies",
+      "note": "repeated shortcut contrast copies",
+      "n_source": 5,
+      "ambient_state_rank": 3,
+      "source_contrast_rank": 2,
+      "exposed_response_rank": 2,
+      "total_response_rank": 5,
+      "unexposed_quotient_dimension": 3,
+      "singular_values": [
+        0.12163119308569097,
+        0.015999212043591532,
+        1.457612489272962e-18,
+        3.9983772143313776e-20,
+        0.0
+      ],
+      "condition_number": 7.602323961598485,
+      "tolerance_profile": {
+        "relative": 1e-09,
+        "rank_rule": "singular > relative * max singular"
+      },
+      "source_optimum_dimension": 9
+    },
+    {
+      "name": "independent_nuisance_dimensions",
+      "note": "additional nuisance-state diversity",
+      "n_source": 4,
+      "ambient_state_rank": 4,
+      "source_contrast_rank": 3,
+      "exposed_response_rank": 2,
+      "total_response_rank": 5,
+      "unexposed_quotient_dimension": 3,
+      "singular_values": [
+        0.08627888309203237,
+        0.011452083075276249,
+        0.0,
+        0.0
+      ],
+      "condition_number": 7.533903004799075,
+      "tolerance_profile": {
+        "relative": 1e-09,
+        "rank_rule": "singular > relative * max singular"
+      },
+      "source_optimum_dimension": 9
+    }
+  ],
+  "target_exposure_records": [
+    {
+      "shift_id": "S1-relation--1-0.25",
+      "relevance_squared": 0.0006917238640540102,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000002,
+      "residual_unexposed_norm": 7.15983998699412e-18,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "relation",
+        "probe_index": 0
+      }
+    },
+    {
+      "shift_id": "S1-mean--1-0.25",
+      "relevance_squared": 0.0023513876484882934,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.01088069290500335,
+      "residual_unexposed_norm": 0.04822657899524364,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "mean",
+        "probe_index": 1
+      }
+    },
+    {
+      "shift_id": "S1-relation-+1-0.25",
+      "relevance_squared": 0.000607596385055951,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0,
+      "residual_unexposed_norm": 5.0671229862552e-18,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "relation",
+        "probe_index": 2
+      }
+    },
+    {
+      "shift_id": "S1-mean-+1-0.25",
+      "relevance_squared": 0.002351387648488293,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.01088069290500335,
+      "residual_unexposed_norm": 0.04822657899524363,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "mean",
+        "probe_index": 3
+      }
+    },
+    {
+      "shift_id": "S1-variance-0.25",
+      "relevance_squared": 0.002455110819924973,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000018,
+      "residual_unexposed_norm": 1.717288626685379e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "variance",
+        "probe_index": 4
+      }
+    },
+    {
+      "shift_id": "S1-relation--1-0.5",
+      "relevance_squared": 0.0029678852251444803,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000002,
+      "residual_unexposed_norm": 1.2018516789897274e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "relation",
+        "probe_index": 5
+      }
+    },
+    {
+      "shift_id": "S1-mean--1-0.5",
+      "relevance_squared": 0.009712567316798997,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.04214700574101269,
+      "residual_unexposed_norm": 0.09645315799048726,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "mean",
+        "probe_index": 6
+      }
+    },
+    {
+      "shift_id": "S1-relation-+1-0.5",
+      "relevance_squared": 0.002294865393160023,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000007,
+      "residual_unexposed_norm": 1.5048163733240194e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "relation",
+        "probe_index": 7
+      }
+    },
+    {
+      "shift_id": "S1-mean-+1-0.5",
+      "relevance_squared": 0.009712567316799004,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.04214700574101329,
+      "residual_unexposed_norm": 0.09645315799048727,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "mean",
+        "probe_index": 8
+      }
+    },
+    {
+      "shift_id": "S1-variance-0.5",
+      "relevance_squared": 0.009820443279699921,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000016,
+      "residual_unexposed_norm": 4.8230304383812554e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "variance",
+        "probe_index": 9
+      }
+    },
+    {
+      "shift_id": "S1-relation--1-1.0",
+      "relevance_squared": 0.013741337539464145,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000007,
+      "residual_unexposed_norm": 2.787728152484798e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "relation",
+        "probe_index": 10
+      }
+    },
+    {
+      "shift_id": "S1-mean--1-1.0",
+      "relevance_squared": 0.04376253683272921,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.14966431476338057,
+      "residual_unexposed_norm": 0.19290631598097452,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "mean",
+        "probe_index": 11
+      }
+    },
+    {
+      "shift_id": "S1-relation-+1-1.0",
+      "relevance_squared": 0.008357178883588494,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000009,
+      "residual_unexposed_norm": 2.9895683046506926e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "relation",
+        "probe_index": 12
+      }
+    },
+    {
+      "shift_id": "S1-mean-+1-1.0",
+      "relevance_squared": 0.043762536832729265,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.14966431476338143,
+      "residual_unexposed_norm": 0.19290631598097457,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "mean",
+        "probe_index": 13
+      }
+    },
+    {
+      "shift_id": "S1-variance-1.0",
+      "relevance_squared": 0.03928177311879963,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000013,
+      "residual_unexposed_norm": 9.437916079723832e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S1",
+        "intervention_family": "variance",
+        "probe_index": 14
+      }
+    },
+    {
+      "shift_id": "S2-relation--1-0.25",
+      "relevance_squared": 0.0005652361647570547,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000013,
+      "residual_unexposed_norm": 3.879338400604198e-18,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "relation",
+        "probe_index": 15
+      }
+    },
+    {
+      "shift_id": "S2-mean--1-0.25",
+      "relevance_squared": 0.0008779851951268903,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.010686543038003597,
+      "residual_unexposed_norm": 0.029472064205827812,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "mean",
+        "probe_index": 16
+      }
+    },
+    {
+      "shift_id": "S2-relation-+1-0.25",
+      "relevance_squared": 0.0004927389512466441,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000013,
+      "residual_unexposed_norm": 4.91730808435006e-18,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "relation",
+        "probe_index": 17
+      }
+    },
+    {
+      "shift_id": "S2-mean-+1-0.25",
+      "relevance_squared": 0.000877985195126891,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.01068654303800387,
+      "residual_unexposed_norm": 0.029472064205827816,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "mean",
+        "probe_index": 18
+      }
+    },
+    {
+      "shift_id": "S2-variance-0.25",
+      "relevance_squared": 0.0009003570023965495,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000002,
+      "residual_unexposed_norm": 4.795067205168656e-18,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "variance",
+        "probe_index": 19
+      }
+    },
+    {
+      "shift_id": "S2-relation--1-0.5",
+      "relevance_squared": 0.00241794384608098,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.000000000000001,
+      "residual_unexposed_norm": 7.770031522344854e-18,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "relation",
+        "probe_index": 20
+      }
+    },
+    {
+      "shift_id": "S2-mean--1-0.5",
+      "relevance_squared": 0.0036245322994010055,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.0414183162931302,
+      "residual_unexposed_norm": 0.058944128411655625,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "mean",
+        "probe_index": 21
+      }
+    },
+    {
+      "shift_id": "S2-relation-+1-0.5",
+      "relevance_squared": 0.0018379661379977134,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000016,
+      "residual_unexposed_norm": 1.2556165908918423e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "relation",
+        "probe_index": 22
+      }
+    },
+    {
+      "shift_id": "S2-mean-+1-0.5",
+      "relevance_squared": 0.003624532299401007,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.041418316293130183,
+      "residual_unexposed_norm": 0.058944128411655645,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "mean",
+        "probe_index": 23
+      }
+    },
+    {
+      "shift_id": "S2-variance-0.5",
+      "relevance_squared": 0.003601428009586209,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000002,
+      "residual_unexposed_norm": 9.013887592422956e-18,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "variance",
+        "probe_index": 24
+      }
+    },
+    {
+      "shift_id": "S2-relation--1-1.0",
+      "relevance_squared": 0.011023806961001728,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.000000000000001,
+      "residual_unexposed_norm": 2.5022296277959446e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "relation",
+        "probe_index": 25
+      }
+    },
+    {
+      "shift_id": "S2-mean--1-1.0",
+      "relevance_squared": 0.01629959349989912,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.14736271816073154,
+      "residual_unexposed_norm": 0.11788825682331125,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "mean",
+        "probe_index": 26
+      }
+    },
+    {
+      "shift_id": "S2-relation-+1-1.0",
+      "relevance_squared": 0.006383985296335569,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000016,
+      "residual_unexposed_norm": 1.5666627603019534e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "relation",
+        "probe_index": 27
+      }
+    },
+    {
+      "shift_id": "S2-mean-+1-1.0",
+      "relevance_squared": 0.016299593499899127,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.147362718160732,
+      "residual_unexposed_norm": 0.11788825682331126,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "mean",
+        "probe_index": 28
+      }
+    },
+    {
+      "shift_id": "S2-variance-1.0",
+      "relevance_squared": 0.014405712038344811,
+      "relevant_flag": true,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0000000000000004,
+      "residual_unexposed_norm": 2.47198095326695e-17,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "S2",
+        "intervention_family": "variance",
+        "probe_index": 29
+      }
+    },
+    {
+      "shift_id": "U-emergent-0.25",
+      "relevance_squared": 0.006397681385761115,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.0,
+      "residual_unexposed_norm": 0.079985507348276,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "U",
+        "intervention_family": "emergent",
+        "probe_index": 30
+      }
+    },
+    {
+      "shift_id": "U-emergent-0.5",
+      "relevance_squared": 0.02559072554304446,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.0,
+      "residual_unexposed_norm": 0.159971014696552,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "U",
+        "intervention_family": "emergent",
+        "probe_index": 31
+      }
+    },
+    {
+      "shift_id": "U-emergent-1.0",
+      "relevance_squared": 0.10236290217217783,
+      "relevant_flag": true,
+      "exact_exposed": false,
+      "exposure_fraction": 0.0,
+      "residual_unexposed_norm": 0.319942029393104,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "U",
+        "intervention_family": "emergent",
+        "probe_index": 32
+      }
+    },
+    {
+      "shift_id": "N1-variance",
+      "relevance_squared": 0.0,
+      "relevant_flag": false,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0,
+      "residual_unexposed_norm": 0.0,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "noise",
+        "intervention_family": "variance",
+        "probe_index": 33
+      }
+    },
+    {
+      "shift_id": "N2-variance",
+      "relevance_squared": 0.0,
+      "relevant_flag": false,
+      "exact_exposed": true,
+      "exposure_fraction": 1.0,
+      "residual_unexposed_norm": 0.0,
+      "source_design": "relation_exposed_main",
+      "oracle_metadata_posthoc": {
+        "mechanism": "noise",
+        "intervention_family": "variance",
+        "probe_index": 34
+      }
+    }
+  ],
+  "structural_identifiability": {
+    "identifiable_linear_world_family": {
+      "kernel_observation_dimension": 0,
+      "kernel_target_dimension": 0,
+      "kernel_intersection_dimension": 0,
+      "structural_ambiguity_dimension": 0,
+      "kernel_inclusion": true,
+      "factorization_residual": 0.0,
+      "factorization_exists_numerically": true,
+      "observation_rank": 2,
+      "target_map_rank": 2,
+      "tolerance": 1e-09
+    },
+    "hidden_emergent_world_family": {
+      "kernel_observation_dimension": 2,
+      "kernel_target_dimension": 1,
+      "kernel_intersection_dimension": 1,
+      "structural_ambiguity_dimension": 1,
+      "kernel_inclusion": false,
+      "factorization_residual": 1.4142135623730951,
+      "factorization_exists_numerically": false,
+      "observation_rank": 0,
+      "target_map_rank": 1,
+      "tolerance": 1e-09
+    }
+  },
+  "exact_world_counterexample": {
+    "source_states_identical_exactly": true,
+    "world_plus_source_states": [
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.75,
+            0.5700000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.75,
+            1.0849,
+            0.44190000000000007,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.5700000000000001,
+            0.44190000000000007,
+            0.9413,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.75,
+          0.5700000000000001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      },
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.83,
+            0.5700000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.83,
+            1.2113,
+            0.48750000000000004,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.5700000000000001,
+            0.48750000000000004,
+            0.9413,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.83,
+          0.5700000000000001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      },
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.67,
+            0.5700000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.67,
+            0.9713,
+            0.3963000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.5700000000000001,
+            0.3963000000000001,
+            0.9413,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.67,
+          0.5700000000000001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      },
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.75,
+            0.65,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.75,
+            1.0849,
+            0.5019,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.65,
+            0.5019,
+            1.0389,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.75,
+          0.65,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      },
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.75,
+            0.49000000000000005,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.75,
+            1.0849,
+            0.3819000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.49000000000000005,
+            0.3819000000000001,
+            0.8565,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.75,
+          0.49000000000000005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      }
+    ],
+    "world_minus_source_states": [
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.75,
+            0.5700000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.75,
+            1.0849,
+            0.44190000000000007,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.5700000000000001,
+            0.44190000000000007,
+            0.9413,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.75,
+          0.5700000000000001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      },
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.83,
+            0.5700000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.83,
+            1.2113,
+            0.48750000000000004,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.5700000000000001,
+            0.48750000000000004,
+            0.9413,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.83,
+          0.5700000000000001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      },
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.67,
+            0.5700000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.67,
+            0.9713,
+            0.3963000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.5700000000000001,
+            0.3963000000000001,
+            0.9413,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.67,
+          0.5700000000000001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      },
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.75,
+            0.65,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.75,
+            1.0849,
+            0.5019,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.65,
+            0.5019,
+            1.0389,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.75,
+          0.65,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      },
+      {
+        "second": [
+          [
+            1.0,
+            0.0,
+            0.18,
+            0.07999999999999999,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            1.81,
+            0.75,
+            0.49000000000000005,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.18,
+            0.75,
+            1.0849,
+            0.3819000000000001,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.07999999999999999,
+            0.49000000000000005,
+            0.3819000000000001,
+            0.8565,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.0
+          ],
+          [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.72
+          ]
+        ],
+        "xy": [
+          0.0,
+          1.0,
+          0.75,
+          0.49000000000000005,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "y2": 1.0
+      }
+    ],
+    "source_state_count": 5,
+    "world_plus_target_u_gamma": 0.45,
+    "world_minus_target_u_gamma": -0.45,
+    "q_plus": [
+      0.00016866966850795608,
+      0.000496117648648314,
+      -0.0014774278253603028,
+      -0.0007547170423875273,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.19196521763586244
+    ],
+    "q_minus": [
+      0.00016866966850795608,
+      0.000496117648648314,
+      -0.0014774278253603028,
+      -0.0007547170423875273,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.19196521763586244
+    ],
+    "q_different": true,
+    "q_difference_norm": 0.3839304352717249,
+    "source_optimum": [
+      -0.08920494975787746,
+      0.3159921277956583,
+      0.3897296118967483,
+      0.23817024520578467,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "source_state": {
+      "second": [
+        [
+          1.0,
+          0.0,
+          0.18,
+          0.07999999999999999,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.81,
+          0.75,
+          0.5700000000000001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.18,
+          0.75,
+          1.08746,
+          0.44190000000000007,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.07999999999999999,
+          0.5700000000000001,
+          0.44190000000000007,
+          0.9438600000000001,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.72
+        ]
+      ],
+      "xy": [
+        0.0,
+        1.0,
+        0.75,
+        0.5700000000000001,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "y2": 1.0
+    }
+  },
+  "source_visible_design_unexposed_counterexample": {
+    "design_exposure_rank": 0,
+    "target_response_norm": 0.17027870211435037,
+    "target_response": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -0.17027870211435037
+    ],
+    "description": "a target-relevant direction is not in the chosen source contrast design"
+  },
+  "round3c_intersection": [
+    {
+      "method": "L2",
+      "exposed_response_dimension": 3,
+      "exposed_controlled_dimension": 3,
+      "exposed_blind_dimension": 0,
+      "unexposed_controlled_diagnostic": 1.3204307425568282,
+      "unexposed_blind_diagnostic": 1.3161508600535705,
+      "constraint_object": "parameter/predictor norm",
+      "posthoc_only": true,
+      "tolerance": 1e-09,
+      "exposed_basis_orthogonality": 1.2660339152838159e-15
+    },
+    {
+      "method": "CORAL",
+      "exposed_response_dimension": 3,
+      "exposed_controlled_dimension": 0,
+      "exposed_blind_dimension": 3,
+      "unexposed_controlled_diagnostic": 0.0,
+      "unexposed_blind_diagnostic": 0.0,
+      "constraint_object": "representation covariance differences",
+      "posthoc_only": true,
+      "tolerance": 1e-09,
+      "exposed_basis_orthogonality": 1.2660339152838159e-15
+    },
+    {
+      "method": "IRMV1",
+      "exposed_response_dimension": 3,
+      "exposed_controlled_dimension": 3,
+      "exposed_blind_dimension": 0,
+      "unexposed_controlled_diagnostic": 2.598787933889359e-15,
+      "unexposed_blind_diagnostic": 1.9462329933160688e-18,
+      "constraint_object": "environment-wise radial optimality proxy",
+      "posthoc_only": true,
+      "tolerance": 1e-09,
+      "exposed_basis_orthogonality": 1.2660339152838159e-15
+    },
+    {
+      "method": "VREX",
+      "exposed_response_dimension": 3,
+      "exposed_controlled_dimension": 3,
+      "exposed_blind_dimension": 0,
+      "unexposed_controlled_diagnostic": 1.0895619141071342e-16,
+      "unexposed_blind_diagnostic": 1.0894433117911006e-16,
+      "constraint_object": "environment risk variance",
+      "posthoc_only": true,
+      "tolerance": 1e-09,
+      "exposed_basis_orthogonality": 1.2660339152838159e-15
+    }
+  ],
+  "coordinate_audit": {
+    "predictor_state_transform_invertible": true,
+    "response_gram_max_error": 7.355227538141662e-16,
+    "source_reference_invariant": true
+  },
+  "nonlinear_stress": {
+    "status": "diagnostic_only",
+    "moment_psd": true,
+    "state_dimension": 9,
+    "not_used_for_primary_exposure": true
+  },
+  "rank_tolerance_profile": {
+    "relative": 1e-09,
+    "tested": [
+      1e-10,
+      1e-09,
+      1e-08,
+      1e-07
+    ]
+  },
+  "target_information_used_in_exposure": false,
+  "mechanism_labels_used_in_exposure": false,
+  "cluster_labels_used_in_exposure": false,
+  "regularizer_used_in_exposure": false,
+  "source_reference_invariant": true,
+  "verdict": "3D-DESIGN-EXPOSURE-PASS-STRUCTURAL-PARTIAL"
+}

@@ -1,0 +1,146 @@
+{
+  "family_name": "source_induced",
+  "state_span_rank": 4,
+  "source_contrast_rank": 4,
+  "realizable_rank": 4,
+  "state_span_singular_values": [
+    0.28958364576329004,
+    0.2472766243808555,
+    0.007933865403907753,
+    0.006985479296599498,
+    0.0
+  ],
+  "realization_residuals": [
+    9.885413859190865e-12,
+    1.2448957396827296e-11,
+    1.9685139409983216e-12,
+    1.2782471842150614e-11
+  ],
+  "unrealizable_modes": [],
+  "source_only": true,
+  "target_risk_used": false,
+  "response_operator_used": false,
+  "regularizer_geometry_used": false,
+  "semantic_labels_used": false,
+  "cluster_labels_used": false,
+  "direction_names_are_mechanisms": false,
+  "geometry": {
+    "dim_U": 4,
+    "source_dimension": 275,
+    "response_dimension": 9,
+    "rank_O": 4,
+    "kernel_dimension": 0,
+    "rank_A": 3,
+    "alpha": 0.0,
+    "normalized_alpha": 0.0,
+    "information_floor": 0.0,
+    "ambiguity_diameter": 0.0,
+    "metric": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "tolerance": 1e-09
+  },
+  "tangent_metadata": {
+    "family_name": "source_induced",
+    "tangent_dimension": 4,
+    "directions": [
+      "source_mode_0",
+      "source_mode_1",
+      "source_mode_2",
+      "source_mode_3"
+    ],
+    "magnitude_one_scales": {
+      "source_mode_0": 1.0,
+      "source_mode_1": 1.0,
+      "source_mode_2": 1.0,
+      "source_mode_3": 1.0
+    },
+    "metric": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "coordinate_description": "orthonormal source task-state contrast modes",
+    "canonical_parameterization": false,
+    "source_defined": true,
+    "mechanism_defined": false,
+    "reference_metadata": {
+      "state_span_rank": 4,
+      "realizable_rank": 4,
+      "unrealizable_modes": [],
+      "metric_kind": "source_state_orthonormal"
+    },
+    "finite_difference_step": 1e-05
+  },
+  "source_reference_projector_error": 6.0620263971712334e-15,
+  "source_reference_invariant": true,
+  "duplicate_source_state_span_rank": 4,
+  "duplicate_source_realizable_rank": 4,
+  "independent_source_state_span_rank": 5,
+  "independent_source_realizable_rank": 5,
+  "risk_null_noise_state_span_rank": 5,
+  "risk_null_noise_realizable_rank": 5,
+  "default_exposed_response_rank": 3,
+  "risk_null_noise_exposed_response_rank": 3,
+  "duplicate_does_not_increase_rank": true,
+  "independent_variation_increases_rank": true,
+  "risk_null_noise_can_increase_raw_rank": true,
+  "risk_null_noise_does_not_increase_response_rank": true,
+  "source_only_basis_inputs": [
+    "observed source environments",
+    "source task-complete states",
+    "source design"
+  ],
+  "legacy_geometry_not_used_for_basis": true,
+  "legacy_hidden_u_classification": {
+    "modeled_in_legacy_family": true,
+    "legacy_source_null": true,
+    "legacy_response_active": true,
+    "omitted_from_source_induced_family": true,
+    "omission_is_not_source_null_claim": true
+  }
+}

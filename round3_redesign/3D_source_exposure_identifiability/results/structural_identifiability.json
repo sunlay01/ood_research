@@ -1,0 +1,26 @@
+{
+  "identifiable_linear_world_family": {
+    "kernel_observation_dimension": 0,
+    "kernel_target_dimension": 0,
+    "kernel_intersection_dimension": 0,
+    "structural_ambiguity_dimension": 0,
+    "kernel_inclusion": true,
+    "factorization_residual": 0.0,
+    "factorization_exists_numerically": true,
+    "observation_rank": 2,
+    "target_map_rank": 2,
+    "tolerance": 1e-09
+  },
+  "hidden_emergent_world_family": {
+    "kernel_observation_dimension": 2,
+    "kernel_target_dimension": 1,
+    "kernel_intersection_dimension": 1,
+    "structural_ambiguity_dimension": 1,
+    "kernel_inclusion": false,
+    "factorization_residual": 1.4142135623730951,
+    "factorization_exists_numerically": false,
+    "observation_rank": 0,
+    "target_map_rank": 1,
+    "tolerance": 1e-09
+  }
+}

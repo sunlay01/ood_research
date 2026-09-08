@@ -1,0 +1,5 @@
+shift_id,components,reconstruction_residual,joint_rank,unique_if_direct_sum
+S1-relation--1-0.25+S2-relation--1-0.25,"['S1-relation--1-0.25', 'S2-relation--1-0.25']",3.2180903080467385e-18,5,False
+S1-relation--1-0.25+U-emergent-0.25,"['S1-relation--1-0.25', 'U-emergent-0.25']",7.589415207398531e-19,5,False
+S1-relation--1-0.25+N1-variance,"['S1-relation--1-0.25', 'N1-variance']",7.589415207398531e-19,5,False
+S1-relation--1-0.25+S2-relation--1-0.25+N1-variance,"['S1-relation--1-0.25', 'S2-relation--1-0.25', 'N1-variance']",3.2180903080467385e-18,5,False

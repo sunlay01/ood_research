@@ -1,0 +1,28 @@
+{
+  "gate": "MVP_GATE",
+  "verdict": "PASS",
+  "summary": "The LATENT-001 MVP evidence satisfies the MVP gate. The artifact set contains one seed, ERM plus two materially different regularizers, five emitted semantic projectors per run that pass numerical projector checks, reported cross-fit/oracle/permutation/order diagnostics, and componentwise risk accounting for both covered and unseen targets with numerical closure. A pytest run was attempted but could not start because the read-only sandbox had no usable temporary directory; the verdict is based on direct artifact inspection and read-only Python checks.",
+  "checks": [
+    {
+      "criterion": "1. At least one seed and ERM plus two materially different regularizers run.",
+      "status": "PASS",
+      "evidence": "artifacts/LATENT-001-MVP/config.json lists seeds [0], methods [erm, irmv1, coral], latent_dims [15], and strengths [0.03, 0.3]. artifacts/LATENT-001-MVP/runs.csv contains five runs: seed0-z15-erm-l0, seed0-z15-irmv1-l0.03, seed0-z15-irmv1-l0.3, seed0-z15-coral-l0.03, and seed0-z15-coral-l0.3."
+    },
+    {
+      "criterion": "2. Five projectors are emitted and pass symmetry, idempotence, orthogonality, and support-completeness checks.",
+      "status": "PASS",
+      "evidence": "artifacts/LATENT-001-MVP/projectors contains five .npz projector files, each with projector_task, projector_relation, projector_mean, projector_covariance, and projector_residual. Direct npz inspection found max pairwise orthogonality norm 7.798297772645118e-16 and max support-completeness gap 2.2661406936159527e-15. runs.csv reports max projector_symmetry_error 0.0, max projector_idempotence_error 1.424454646376256e-15, max projector_orthogonality_error 7.798297772645117e-16, and max projector_completeness_error 2.2661406936159527e-15."
+    },
+    {
+      "criterion": "3. Cross-fit semantic recovery, oracle principal angles, permutation control, and order sensitivity are reported.",
+      "status": "PASS",
+      "evidence": "artifacts/LATENT-001-MVP/runs.csv includes crossfit_overlap_* columns, oracle_recovery_* columns, oracle_angle_* columns, permuted_recovery_* columns, and maximum_order_projector_deviation. artifacts/LATENT-001-MVP/semantic_components.csv has 25 component rows across the five runs and reports crossfit_overlap, oracle_recovery, oracle_angle_radians, permuted_recovery, and semantic_status for task, relation, mean, covariance, and residual."
+    },
+    {
+      "criterion": "4. Risk main effects, interactions, Shapley allocation, and closure residual are emitted for covered and unseen targets.",
+      "status": "PASS",
+      "evidence": "artifacts/LATENT-001-MVP/risk_components.csv has 35 rows, seven targets per run, covering covered_interpolation, covered_extrapolation, unseen_relation_axis3, relation_sign_flip, mean_axis1, covariance_axis2, and compound_covered. It includes main_task/main_relation/main_mean/main_covariance/main_residual, all pairwise interaction columns plus interaction_total, shapley_task/shapley_relation/shapley_mean/shapley_covariance/shapley_residual, and accounting_residual. Direct CSV inspection found 30 covered rows, 5 unseen rows, and maximum absolute accounting_residual 6.585443995676954e-16."
+    }
+  ],
+  "blocking_actions": []
+}

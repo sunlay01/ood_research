@@ -1,0 +1,6 @@
+{
+  "status": "diagnostic_only",
+  "moment_psd": true,
+  "state_dimension": 9,
+  "not_used_for_primary_exposure": true
+}

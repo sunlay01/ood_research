@@ -1,0 +1,169 @@
+{
+  "identifiable_linear_world_family": {
+    "dim_U": 2,
+    "source_dimension": 2,
+    "response_dimension": 2,
+    "rank_O": 2,
+    "kernel_dimension": 0,
+    "rank_A": 2,
+    "structural_ambiguity_dimension": 0,
+    "alpha": 0.0,
+    "normalized_alpha": 0.0,
+    "ambiguity_diameter": 0.0,
+    "pseudoinverse_attainment_error": 0.0,
+    "factorization": {
+      "alpha": 0.0,
+      "kernel_dimension": 0,
+      "kernel_action_frobenius": 0.0,
+      "factorization_residual": 0.0,
+      "zero_error": true,
+      "kernel_inclusion": true,
+      "factorization_exists_numerically": true,
+      "rank_observation": 2,
+      "rank_response": 2,
+      "tolerance": 1e-10
+    },
+    "tolerance": 1e-10
+  },
+  "hidden_emergent_world_family": {
+    "dim_U": 2,
+    "source_dimension": 1,
+    "response_dimension": 1,
+    "rank_O": 0,
+    "kernel_dimension": 2,
+    "rank_A": 1,
+    "structural_ambiguity_dimension": 1,
+    "alpha": 1.4142135623730951,
+    "normalized_alpha": 1.0,
+    "ambiguity_diameter": 2.8284271247461903,
+    "pseudoinverse_attainment_error": 0.0,
+    "factorization": {
+      "alpha": 1.4142135623730951,
+      "kernel_dimension": 2,
+      "kernel_action_frobenius": 1.4142135623730951,
+      "factorization_residual": 1.4142135623730951,
+      "zero_error": false,
+      "kernel_inclusion": false,
+      "factorization_exists_numerically": false,
+      "rank_observation": 0,
+      "rank_response": 1,
+      "tolerance": 1e-10
+    },
+    "tolerance": 1e-10
+  },
+  "source_identical_target_different_pair": {
+    "source_states_identical_exactly": true,
+    "source_state_equality_checked_between_distinct_world_records": true,
+    "source_u_gamma_fixed_to_zero_in_both_worlds": true,
+    "q_plus": [
+      0.00011950334156228079,
+      0.00048404253586912486,
+      -0.0016096960787890212,
+      -0.0006048092326190654,
+      0.0,
+      0.0,
+      -0.20315808307081362
+    ],
+    "q_minus": [
+      0.00011950334156228079,
+      0.00048404253586912486,
+      -0.0016096960787890212,
+      -0.0006048092326190654,
+      0.0,
+      0.0,
+      0.20315808307081362
+    ],
+    "q_difference_norm": 0.40631616614162724,
+    "pair_embedding": {
+      "dim_U": 1,
+      "source_dimension": 0,
+      "response_dimension": 7,
+      "rank_O": 0,
+      "kernel_dimension": 1,
+      "rank_A": 1,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 0.20315808307081362,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 0.40631616614162724,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 0.20315808307081362,
+        "kernel_dimension": 1,
+        "kernel_action_frobenius": 0.20315808307081362,
+        "factorization_residual": 0.20315808307081362,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 0,
+        "rank_response": 1,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10
+    },
+    "pair_ratio_to_2alpha": 1.0,
+    "pair_is_extremal_under_declared_embedding": true
+  },
+  "coupled_3a_3d_primary": {
+    "world_metric": {
+      "world_metric": "Euclidean on standardized environment intervention coordinates",
+      "directions": [
+        "S1_relation",
+        "S2_relation",
+        "S1_mean",
+        "S2_mean",
+        "S1_variance",
+        "S2_variance",
+        "N1_variance",
+        "U_emergent"
+      ],
+      "magnitude_one_scales": {
+        "S1_relation": 0.2,
+        "S2_relation": 0.2,
+        "S1_mean": 0.35,
+        "S2_mean": 0.35,
+        "S1_variance": 0.3,
+        "S2_variance": 0.3,
+        "N1_variance": 0.5,
+        "U_emergent": 0.75
+      },
+      "source_metric": "frozen 3A H_S^{-1/2} response norm",
+      "finite_difference_step": 1e-05,
+      "metric_conditional": true,
+      "canonical_mechanism_parameterization_claimed": false
+    },
+    "summary": {
+      "dim_U": 8,
+      "source_dimension": 275,
+      "response_dimension": 9,
+      "rank_O": 7,
+      "kernel_dimension": 1,
+      "rank_A": 5,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 0.319942029393104,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 0.639884058786208,
+      "pseudoinverse_attainment_error": 2.772421885309637e-16,
+      "factorization": {
+        "alpha": 0.319942029393104,
+        "kernel_dimension": 1,
+        "kernel_action_frobenius": 0.319942029393104,
+        "factorization_residual": 0.319942029393104,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 7,
+        "rank_response": 5,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10
+    },
+    "source_u_column_norm": 0.0,
+    "response_u_column_norm": 0.319942029393104,
+    "u_source_null": true,
+    "u_response_active": true,
+    "source_observation_uses_target_risk": false,
+    "source_observation_uses_labels": false,
+    "source_observation_uses_clusters": false,
+    "source_observation_uses_regularizer_geometry": false
+  }
+}

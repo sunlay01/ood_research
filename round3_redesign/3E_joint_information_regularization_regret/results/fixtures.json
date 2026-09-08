@@ -1,0 +1,80 @@
+{
+  "pure_information": {
+    "setting": "pure_information",
+    "total_regret": 2.0,
+    "static_only_regret": 2.0,
+    "adaptive_only_regret": 2.0,
+    "baseline_regret": 2.0,
+    "interaction": 0.0,
+    "information_floor": 2.0,
+    "recoverable_residual_operator_norm": 0.0,
+    "total_status": "hard_case",
+    "static_status": "hard_case",
+    "adaptive_status": "hard_case"
+  },
+  "pure_static": {
+    "setting": "pure_static",
+    "total_regret": 0.866227766016838,
+    "static_only_regret": 0.866227766016838,
+    "adaptive_only_regret": 0.5,
+    "baseline_regret": 0.5,
+    "interaction": 0.0,
+    "information_floor": 0.0,
+    "recoverable_residual_operator_norm": 1.0,
+    "total_status": "secular",
+    "static_status": "secular",
+    "adaptive_status": "hard_case"
+  },
+  "pure_adaptive": {
+    "setting": "pure_adaptive",
+    "total_regret": 0.72,
+    "static_only_regret": 0.5,
+    "adaptive_only_regret": 0.72,
+    "baseline_regret": 0.5,
+    "interaction": 0.0,
+    "information_floor": 0.0,
+    "recoverable_residual_operator_norm": 1.2,
+    "total_status": "hard_case",
+    "static_status": "hard_case",
+    "adaptive_status": "hard_case"
+  },
+  "mixed_failure": {
+    "setting": "mixed_failure",
+    "total_regret": 1.3299500345613116,
+    "static_only_regret": 0.748606797749979,
+    "adaptive_only_regret": 0.9933183517572992,
+    "baseline_regret": 0.5,
+    "interaction": 0.08802488505403339,
+    "information_floor": 0.5,
+    "recoverable_residual_operator_norm": 1.2206555615733703,
+    "total_status": "secular",
+    "static_status": "secular",
+    "adaptive_status": "hard_case"
+  },
+  "zero_steering": {
+    "setting": "zero_steering",
+    "total_regret": 0.5,
+    "static_only_regret": 0.5,
+    "adaptive_only_regret": 0.5,
+    "baseline_regret": 0.5,
+    "interaction": 0.0,
+    "information_floor": 0.0,
+    "recoverable_residual_operator_norm": 1.0,
+    "total_status": "hard_case",
+    "static_status": "hard_case",
+    "adaptive_status": "hard_case"
+  },
+  "recoverable_residual_without_worst_case_increase": {
+    "setting": "recoverable_residual_without_worst_case_increase",
+    "total_regret": 2.0,
+    "static_only_regret": 2.0,
+    "adaptive_only_regret": 2.0,
+    "baseline_regret": 2.0,
+    "interaction": 0.0,
+    "information_floor": 2.0,
+    "recoverable_residual_operator_norm": 1.25,
+    "total_status": "hard_case",
+    "static_status": "hard_case",
+    "adaptive_status": "hard_case"
+  }
+}

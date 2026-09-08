@@ -1,0 +1,22 @@
+{
+  "response_side_orthogonality": {
+    "PO_star_norm": 0.0,
+    "E_P_norm": 0.0,
+    "Airr_Q_norm": 0.0,
+    "Airr_E_star_norm": 0.0,
+    "E_Airr_star_norm": 0.0,
+    "gram_sum_residual": 7.085921277807377e-18
+  },
+  "hidden_adaptive_condition_all_valid": true,
+  "hidden_adaptive_regret_matches_floor": true,
+  "hidden_static_tax_all_valid": true,
+  "hidden_has_positive_steering_hurt": true,
+  "exposed_complete_information": true,
+  "exposed_table_complete": true,
+  "helps_found": true,
+  "same_b_k_different_pi": true,
+  "nonzero_E_minimax_fixture": true,
+  "static_tax_tight_fixture": true,
+  "static_tax_strict_fixture": true,
+  "all_required_checks": true
+}

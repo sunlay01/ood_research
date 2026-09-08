@@ -1,0 +1,8 @@
+{
+  "source_coordinate_alpha_error": 0.0,
+  "world_isometry_alpha_error": 4.440892098500626e-16,
+  "response_isometry_alpha_error": 0.0,
+  "source_coordinate_invariant": true,
+  "world_isometry_invariant": true,
+  "response_isometry_invariant": true
+}

@@ -1,62 +1,143 @@
-# 理论账本
+# 理论账本：正则作用算子、盲区与 OOD 误差记账
 
-> 不把“看起来合理”的叙述写成 theorem。每个编号项都要有准确的假设、量纲/可达性检查和反例义务。
+> 每项均明确结论类型。本文不把一般模板误写为 theorem；已有线性结果与待完成 operator 分析严格分开。
 
-## 0. 问题设置
+## 定义与假设
 
-- **环境集合**：首个探索模型含两个源环境与一个不可见目标环境；正式 theorem 的 coverage 条件仍为 `TBD`。
-- **损失与风险定义**：首个候选对象为平方风险 `R_e(w)=E_e[(w^Tz-y)^2]`。
-- **表示/头部参数化**：`z=Bx`，共享线性表示与 task-specific linear heads。
-- **环境变化机制**：core label mechanism 保持，spurious-label correlation 与 domain mean 改变；目标域包含 sign flip。
-- **可观测信息与不可观测变量**：训练时可观测 source risk/penalty/source moments；target moments 与 target risk 不可用于训练或选参。
+### DEF-001 — 共享任务机制：`definition`
 
-## 1. 定义台账
+环境 `e` 属于同一任务，当它们共享
 
-| ID | 定义 | 依赖 | 是否可估计 | 状态 |
-| --- | --- | --- | --- | --- |
-| DEF-001 | `Ψ(Z,w)=inf_{θ: Φ_θ(X)=Z} Ω(θ,w)`（候选诱导表示正则） | 可实现集合、固定样本/总体定义 | TBD | DRAFT |
-| DEF-002 | `S_{j,k}(λ)=E_k(Z_{λ,j})-E_k(Z_0)`（正则响应） | 特定优化选择规则、`E_k` | TBD | DRAFT |
+\[
+Y=f_\tau(C,\epsilon_Y),
+\]
 
-## 2. 假设台账
+而只改变 nuisance/observation/sampling mechanisms。允许的环境变化为 `I_tau`。共享任务不意味着 `X` 中的任务信息可恢复。
 
-| ID | 假设 | 作用 | 违反时可能发生什么 | 可否弱化 |
-| --- | --- | --- | --- | --- |
-| ASM-001 | 多环境间 core 机制稳定、spurious 机制变化 | 定义 OOD 目标 | `core/spurious` 不可分或不可辨识 | TBD |
-| ASM-002 | 优化解/正则路径可选择且局部可微（仅用于 sensitivity 路线） | 隐函数定理 | 非唯一、bifurcation 或不可微 | TBD |
+### DEF-002 — 可学习 DG 子族：`assumption`
 
-## 3. 命题与证明义务
+`M_tau^DG subset M_tau` 需单独规定：(i) task-state coverage，(ii) observation recoverability，(iii) source observability，(iv) target shift geometry/预算。任何风险 bound 都必须列出所用部分。
 
-| ID | 类型 | 主张 | 精确前提 | 证明义务 | 反例/边界 | 状态 |
-| --- | --- | --- | --- | --- | --- | --- |
-| THM-001 | 候选 | 某正则诱导的 `Ψ` 具有可解释的谱/矩性质 | TBD | 给出可达性、等价变换与最小化解 | 构造同 `Z` 的参数对 | NOT_STARTED |
-| THM-002 | 候选 | `E_k(Z)` 与 target risk 的 exact / local / bound 关系 | TBD | 明确是等式、局部展开还是上界 | support shift、head mismatch | NOT_STARTED |
-| THM-003 | 候选 | 特定正则沿 `λ` 的响应选择性压制 spurious mode | TBD | 求解或符号分析路径 | uniform shrinkage / collapse | NOT_STARTED |
-| ID-004 | exact identity draft | 固定表示与 head、平方损失且环境间 `E[y²]` 相同时，`R_e-R_e' = wᵀ(g_e-g_e') - 1/2 wᵀ(H_e-H_e')w` | 线性 head；二阶矩有限；相同 `E[y²]` | 展开平方风险并核验梯度/Hessian 定义与常数 | 损失非平方、head 随环境改变、`E[y²]` 不同 | ALGEBRA_CHECKED / LITERATURE_UNCHECKED |
-| BND-005 | conditional bound draft | 风险差由 `||w||·||Δg|| + 1/2||w||²·||ΔH||op` 控制 | ID-004 的前提 | Cauchy-Schwarz 与算子范数；把实现中的均方 penalty 常数显式换算 | 正则重标度、只控制 source-source、target coverage 缺失 | LOCAL_DERIVATION / TARGET_STEP_OPEN |
-| NEG-006 | counterexample obligation | 单独 CORAL/Hessian、marginal MMD 或 IRMv1 scalar projection 一般不足以给出分布无关 target-risk bound | 待分别构造最小二维例子 | 给出 penalty 为零/很小而 risk gap 非零/大的显式分布 | 附加充分性、coverage、秩/角度条件可能恢复 bound | EXPERIMENTAL_SIGNAL / PROOF_OPEN |
-| BND-007 | cross-task bound draft | joint domain-task risk 需要 domain discrepancy、task discrepancy、representation sufficiency 与 coverage residual | task-specific heads；目标任务定义待固定 | 明确 task metric、head adaptation protocol 与分解顺序 | unseen task 不在 source task span；label mechanism 任意改变 | NOT_STARTED |
+### DEF-003 — oracle 与风险：`definition`
 
-### DERIVATION-001 — 平方风险的 gradient/Hessian identity
+\[
+R_e^{C,*}=\inf_h R_e(h(C)),\quad
+R_e^{X,*}=\inf_{f\in\mathcal F_X}R_e(f),\quad R_e(f).
+\]
 
-- 日期：2026-09-04
-- 目标：把算法使用的 gradient/Hessian alignment 指标连接到环境风险差。
-- 使用定义/假设：固定 `z` 与 `w`；平方损失；二阶矩有限；比较环境的 `E[y²]` 相同。
-- 推导：写 `M_e=E_e[zzᵀ]`、`c_e=E_e[zy]`，则 `R_e=wᵀM_ew-2wᵀc_e+E_e[y²]`、`g_e=2(M_ew-c_e)`、`H_e=2M_e`。代入即得 ID-004；再用 Cauchy-Schwarz 和算子范数得 BND-005。
-- 结论类型：source-environment `exact equality` 与 `conditional bound`；不是 target-domain theorem。
-- 失败点或未闭合步骤：source penalties 如何控制不可见 target 的 `Δg/ΔH`；正则归一化；task shift 时 head 与 `E[y²]` 的变化。
-- 需要检索或数值检验的地方：同一恒等式/上界是否已被 gradient matching、Hessian alignment、moment alignment 或 transferability 文献明确提出。
+对固定 target 还可报告 signed ERM gap；它不是 causal excess 的替代。
 
-## 4. 推导日志格式
+### DEF-004 — regularizer-induced operator：`definition / per-method obligation`
 
-每次推导追加以下区块，而不是覆写失败尝试：
+对方法 `j` 在明确状态空间 `V_j` 中提取实际 operator `L_{j,S}:V_j -> W_j`。`Omega_j` 只有在给出 relation
+\(\|L_{j,S}v\|\leq\omega_j(v)\) 或 coercive bridge 后才解释为其控制量。`L` 可为线性 operator、局部导数、moment map 或 IPM embedding；后两者不默认有全局线性核空间。
 
-```markdown
-### DERIVATION-XXX — 标题
-- 日期：
-- 目标：
-- 使用定义/假设：
-- 推导：
-- 结论类型：exact equality / conditional theorem / local result / bound / conjecture
-- 失败点或未闭合步骤：
-- 需要检索或数值检验的地方：
-```
+### DEF-005 — harmful, controlled, blind directions：`definition in linear/local setting`
+
+给定 target family 和表示/预测状态的有害集合 `H_{S,T}`，在线性 Hilbert setting 定义
+
+\[
+\mathcal C_j=\mathcal H_{S,T}\cap\overline{\operatorname{range}(L_{j,S}^*)},
+\qquad
+\mathcal B_j\supseteq\mathcal H_{S,T}\cap\ker L_{j,S}.
+\]
+
+任何 source response operator 的核应并入 candidate blind set。该定义依赖 state space、source 和目标几何；不是方法的无条件固有属性。
+
+## 已验证线性基座
+
+### ID-001 / C001 — 部分可观测 linear risk transport：`exact equality`
+
+令
+
+\[
+C\sim N(0,I),\quad U=LC+\xi,\quad
+Y=\beta^TC+\epsilon_Y,\quad A=R_eC+\mu_e+\eta_e,
+\]
+
+并令 `f_w(X)=w_0+w_U^TU+w_A^TA`、`D=(1,C,xi,A)`、
+`b=(-w_0,beta-L^Tw_U,-w_U,-w_A)`、`M_e=E_e[DD^T]`。独立零均值噪声下：
+
+\[
+R_e(w)=\sigma_Y^2+b^TM_eb,\qquad
+R_T(w)-R_S(w)=b^T(M_T-M_S)b.
+\]
+
+证明、两类 exact robust formula 和执行核验见 [C001](claims/C001_linear_intervention_risk.md)。
+
+### ID-002 / C006 — operator-induced quadratic accounting：`exact equality conditional on a projector`
+
+在固定 `P(C)` 的直接/等价 nuisance block 记号中，令 `a=w_A`、`delta` 为 task-observation residual，且
+
+\[
+\Delta R=2\delta^T\Delta M_{CA}a+a^T\Delta M_{AA}a.
+\]
+
+给定由某个已定义的 linear/local operator 导出的正交 projector `P_j`，写
+`a_c=P_ja`、`a_b=(I-P_j)a`。则恒等地：
+
+\[
+\begin{aligned}
+E_j^{\rm ctrl}&=2\delta^T\Delta M_{CA}a_c+a_c^T\Delta M_{AA}a_c,\\
+E_j^{\rm blind}&=2\delta^T\Delta M_{CA}a_b+a_b^T\Delta M_{AA}a_b,\\
+E_j^{\rm interaction}&=a_c^T\Delta M_{AA}a_b+a_b^T\Delta M_{AA}a_c,\\
+\Delta R&=E_j^{\rm ctrl}+E_j^{\rm blind}+E_j^{\rm interaction}.
+\end{aligned}
+\]
+
+这是一条关于 **任意已给 projector** 的代数恒等式，尚不是“某正则控制 `E_ctrl`”的 theorem。下一义务是从 `L_{j,S}` 推导 `P_j`，并给出 `Omega_j -> a_c` 与 target matrix norm 的条件 bridge。若 `P_j` 是事后以 target 风险选取，此式不能称 source-only 分析。
+
+### BND-001 — 受控项的条件界：`conditional bound`
+
+若 `||a_c|| <= q_j(Omega_j(f),S)`，并且目标矩阵块有已声明范数界，则
+
+\[
+|E_j^{\rm ctrl}|
+\leq 2\|\Delta M_{CA}^T\delta\|\,q_j
+{}+\|\Delta M_{AA}\|_{\rm op}q_j^2.
+\]
+
+该界不控制 `E_blind` 或 interaction，也不因 `Omega` 小而自动趋零；`delta`、矩阵几何和 bridge 都是必要条件。
+
+### NEG-001 / C004a — source-unobservable direction：`counterexample`
+
+source response operator 可以在某 nuisance coordinate 上为零，即使另一个 coordinate 在 source 中变化。相同任务机制与 source observations 可对应 target 上巨大风险差。详见 [C004a](claims/C004a_source_unobservability.md)。它限制的是依赖该 source response 的统计量，并不否定已知 nuisance identity 的直接 penalty。
+
+### NEG-002 / C002-IRM — scalar-scale IRMv1 blind component：`counterexample`
+
+在 C001 的标量模型，source ERM 同时达到 standard scalar-scale IRMv1 zero penalty，却对允许 correlation sign-flip 有大 robust causal excess。详见 [C002-IRM](claims/C002_irmv1_blind_direction.md)。它证明该 penalty 的实际 scalar rescaling operator 留下有害盲区；不适用于 full-gradient penalty，也不构成 standalone novelty。
+
+### C010 — ERM--IRMv1 mechanism audit：`exact equality / conditional theorem / counterexample`
+
+对平方风险，ERM 的 operator 仅为 source-mixture stationarity；standard scalar-scale IRMv1 的 operator 是每个环境的 radial response `w^T grad R_e(w)`，不控制 tangent gradient。在线性标量、零均值、共同 nuisance variance、零截距的 relation family，令 `q(r)=q0+q1r+q2r^2` 为未缩放 IRMv1 response，则 `q2=w_A^2`。
+
+若 source quadratic design `V_S=[1,r,r^2]` 满列秩，`kappa_V=sigma_min(V_S)>0`，有
+
+\[
+w_A^2\leq\frac{\sqrt{m\Omega_{\rm IRMv1}}}{2\kappa_V}.
+\]
+
+将此代入 C001，并设 `b_0` 为去除 nuisance coefficient 的 residual，可得
+
+\[
+|R_T-R_S|\leq\|M_T-M_S\|_{\rm op}
+\left(2\|b_0\|A_\Omega+A_\Omega^2\right).
+\]
+
+这是 `conditional theorem`：target geometry、base observation residual 与共同 SCM 是显式前提。零 penalty 加严格 source-fit 条件产生非平凡 U-only predictor，对 relation/mean/covariance nuisance shifts 精确稳定；其 causal excess 仍可为正。两个 source relation 时存在 C002 的 nonzero-nuisance blind branch，故不能推广该正结果。详见 [C010](claims/C010_erm_irmv1_mechanism.md)。
+
+## 待完成的 method-specific bridges
+
+| ID | 方法 | 必须先完成的对象 | 允许的结论 |
+| --- | --- | --- | --- |
+| C007-L2 | L2 | `L` 的 state space、对 `w_A`/effective sensitivity 的 bridge、task-observation shrinkage | selective failure 或有限条件 tradeoff，不称 invariance |
+| C007-G | full gradient | environment gradient-response operator、zero set、source-fit frontier | specific controlled/null directions |
+| C008-CORAL | CORAL | covariance operator、conditional-shift nullspace | moment-controlled component + conditional blind residual |
+| C008-MMD | MMD | RKHS mean embedding/operator 与 target risk bridge | IPM-controlled term + conditional blind residual |
+| C009 | representation | `WB_A` 或 `J_Af` 的坐标不变 state quantity | linear first, then local nonlinear result |
+
+`C010` 已完成 IRMv1 的标量总体审计。它不关闭 vector/nonlinear IRMv1 问题，也不与 C007-G 的 full-gradient operator 合并。
+
+## 记录规则
+
+每项新推导都写入：使用定义/假设、结论类型、完整符号、反例攻击面、文献近邻与可执行核验。不得把 BND-001 的假设当成由任何已有 OOD objective 自动推出的事实。

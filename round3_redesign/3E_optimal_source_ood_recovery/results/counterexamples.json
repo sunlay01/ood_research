@@ -1,0 +1,571 @@
+{
+  "same_structural_dimension_different_alpha": {
+    "small": {
+      "dim_U": 2,
+      "source_dimension": 1,
+      "response_dimension": 1,
+      "rank_O": 1,
+      "kernel_dimension": 1,
+      "rank_A": 1,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 0.2,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 0.4,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 0.2,
+        "kernel_dimension": 1,
+        "kernel_action_frobenius": 0.2,
+        "factorization_residual": 0.2,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 1,
+        "rank_response": 1,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "same_d_struct_small",
+      "response": [
+        [
+          0.0,
+          0.2
+        ]
+      ],
+      "observation": [
+        [
+          1.0,
+          0.0
+        ]
+      ]
+    },
+    "large": {
+      "dim_U": 2,
+      "source_dimension": 1,
+      "response_dimension": 1,
+      "rank_O": 1,
+      "kernel_dimension": 1,
+      "rank_A": 1,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 1.0,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 2.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 1.0,
+        "kernel_dimension": 1,
+        "kernel_action_frobenius": 1.0,
+        "factorization_residual": 1.0,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 1,
+        "rank_response": 1,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "same_d_struct_large",
+      "response": [
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "observation": [
+        [
+          1.0,
+          0.0
+        ]
+      ]
+    }
+  },
+  "different_structural_dimension_same_alpha": {
+    "one": {
+      "dim_U": 3,
+      "source_dimension": 1,
+      "response_dimension": 1,
+      "rank_O": 1,
+      "kernel_dimension": 2,
+      "rank_A": 1,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 1.0,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 2.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 1.0,
+        "kernel_dimension": 2,
+        "kernel_action_frobenius": 1.0,
+        "factorization_residual": 1.0,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 1,
+        "rank_response": 1,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "d_struct_one",
+      "response": [
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ],
+      "observation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "two": {
+      "dim_U": 3,
+      "source_dimension": 1,
+      "response_dimension": 2,
+      "rank_O": 1,
+      "kernel_dimension": 2,
+      "rank_A": 2,
+      "structural_ambiguity_dimension": 2,
+      "alpha": 1.0,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 2.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 1.0,
+        "kernel_dimension": 2,
+        "kernel_action_frobenius": 1.4142135623730951,
+        "factorization_residual": 1.4142135623730951,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 1,
+        "rank_response": 2,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "d_struct_two",
+      "response": [
+        [
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "observation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ]
+      ]
+    }
+  },
+  "same_observation_rank_different_alpha": {
+    "observe_sensitive": {
+      "dim_U": 2,
+      "source_dimension": 1,
+      "response_dimension": 2,
+      "rank_O": 1,
+      "kernel_dimension": 1,
+      "rank_A": 2,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 1.0,
+      "normalized_alpha": 0.1,
+      "ambiguity_diameter": 2.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 1.0,
+        "kernel_dimension": 1,
+        "kernel_action_frobenius": 1.0,
+        "factorization_residual": 1.0,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 1,
+        "rank_response": 2,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "same_rank_sensitive_observed",
+      "response": [
+        [
+          10.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "observation": [
+        [
+          1.0,
+          0.0
+        ]
+      ]
+    },
+    "observe_weak": {
+      "dim_U": 2,
+      "source_dimension": 1,
+      "response_dimension": 2,
+      "rank_O": 1,
+      "kernel_dimension": 1,
+      "rank_A": 2,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 10.0,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 20.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 10.0,
+        "kernel_dimension": 1,
+        "kernel_action_frobenius": 10.0,
+        "factorization_residual": 10.0,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 1,
+        "rank_response": 2,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "same_rank_weak_observed",
+      "response": [
+        [
+          10.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "observation": [
+        [
+          0.0,
+          1.0
+        ]
+      ]
+    }
+  },
+  "more_information_same_alpha": {
+    "before": {
+      "dim_U": 3,
+      "source_dimension": 1,
+      "response_dimension": 3,
+      "rank_O": 1,
+      "kernel_dimension": 2,
+      "rank_A": 3,
+      "structural_ambiguity_dimension": 2,
+      "alpha": 5.0,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 10.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 5.0,
+        "kernel_dimension": 2,
+        "kernel_action_frobenius": 5.385164807134504,
+        "factorization_residual": 5.385164807134504,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 1,
+        "rank_response": 3,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "extra_info_before",
+      "response": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          2.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          5.0
+        ]
+      ],
+      "observation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ]
+      ]
+    },
+    "after": {
+      "dim_U": 3,
+      "source_dimension": 2,
+      "response_dimension": 3,
+      "rank_O": 2,
+      "kernel_dimension": 1,
+      "rank_A": 3,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 5.0,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 10.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 5.0,
+        "kernel_dimension": 1,
+        "kernel_action_frobenius": 5.0,
+        "factorization_residual": 5.0,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 2,
+        "rank_response": 3,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "extra_info_after",
+      "response": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          2.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          5.0
+        ]
+      ],
+      "observation": [
+        [
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0
+        ]
+      ]
+    }
+  },
+  "one_aligned_observation_large_drop": {
+    "before": {
+      "dim_U": 2,
+      "source_dimension": 0,
+      "response_dimension": 2,
+      "rank_O": 0,
+      "kernel_dimension": 2,
+      "rank_A": 2,
+      "structural_ambiguity_dimension": 2,
+      "alpha": 10.0,
+      "normalized_alpha": 1.0,
+      "ambiguity_diameter": 20.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 10.0,
+        "kernel_dimension": 2,
+        "kernel_action_frobenius": 10.04987562112089,
+        "factorization_residual": 10.04987562112089,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 0,
+        "rank_response": 2,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "aligned_before",
+      "response": [
+        [
+          10.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "observation": []
+    },
+    "after": {
+      "dim_U": 2,
+      "source_dimension": 1,
+      "response_dimension": 2,
+      "rank_O": 1,
+      "kernel_dimension": 1,
+      "rank_A": 2,
+      "structural_ambiguity_dimension": 1,
+      "alpha": 1.0,
+      "normalized_alpha": 0.1,
+      "ambiguity_diameter": 2.0,
+      "pseudoinverse_attainment_error": 0.0,
+      "factorization": {
+        "alpha": 1.0,
+        "kernel_dimension": 1,
+        "kernel_action_frobenius": 1.0,
+        "factorization_residual": 1.0,
+        "zero_error": false,
+        "kernel_inclusion": false,
+        "factorization_exists_numerically": false,
+        "rank_observation": 1,
+        "rank_response": 2,
+        "tolerance": 1e-10
+      },
+      "tolerance": 1e-10,
+      "name": "aligned_after",
+      "response": [
+        [
+          10.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0
+        ]
+      ],
+      "observation": [
+        [
+          1.0,
+          0.0
+        ]
+      ]
+    }
+  },
+  "injective_endpoint": {
+    "dim_U": 2,
+    "source_dimension": 2,
+    "response_dimension": 1,
+    "rank_O": 2,
+    "kernel_dimension": 0,
+    "rank_A": 1,
+    "structural_ambiguity_dimension": 0,
+    "alpha": 0.0,
+    "normalized_alpha": 0.0,
+    "ambiguity_diameter": 0.0,
+    "pseudoinverse_attainment_error": 0.0,
+    "factorization": {
+      "alpha": 0.0,
+      "kernel_dimension": 0,
+      "kernel_action_frobenius": 0.0,
+      "factorization_residual": 0.0,
+      "zero_error": true,
+      "kernel_inclusion": true,
+      "factorization_exists_numerically": true,
+      "rank_observation": 2,
+      "rank_response": 1,
+      "tolerance": 1e-10
+    },
+    "tolerance": 1e-10,
+    "name": "injective",
+    "response": [
+      [
+        1.0,
+        2.0
+      ]
+    ],
+    "observation": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ]
+  },
+  "no_information_endpoint": {
+    "dim_U": 2,
+    "source_dimension": 0,
+    "response_dimension": 2,
+    "rank_O": 0,
+    "kernel_dimension": 2,
+    "rank_A": 2,
+    "structural_ambiguity_dimension": 2,
+    "alpha": 2.9999999999999996,
+    "normalized_alpha": 1.0,
+    "ambiguity_diameter": 5.999999999999999,
+    "pseudoinverse_attainment_error": 0.0,
+    "factorization": {
+      "alpha": 2.9999999999999996,
+      "kernel_dimension": 2,
+      "kernel_action_frobenius": 3.605551275463989,
+      "factorization_residual": 3.605551275463989,
+      "zero_error": false,
+      "kernel_inclusion": false,
+      "factorization_exists_numerically": false,
+      "rank_observation": 0,
+      "rank_response": 2,
+      "tolerance": 1e-10
+    },
+    "tolerance": 1e-10,
+    "name": "no_information",
+    "response": [
+      [
+        3.0,
+        0.0
+      ],
+      [
+        0.0,
+        2.0
+      ]
+    ],
+    "observation": []
+  },
+  "zero_response_endpoint": {
+    "dim_U": 2,
+    "source_dimension": 1,
+    "response_dimension": 1,
+    "rank_O": 1,
+    "kernel_dimension": 1,
+    "rank_A": 0,
+    "structural_ambiguity_dimension": 0,
+    "alpha": 0.0,
+    "normalized_alpha": 0.0,
+    "ambiguity_diameter": 0.0,
+    "pseudoinverse_attainment_error": 0.0,
+    "factorization": {
+      "alpha": 0.0,
+      "kernel_dimension": 1,
+      "kernel_action_frobenius": 0.0,
+      "factorization_residual": 0.0,
+      "zero_error": true,
+      "kernel_inclusion": true,
+      "factorization_exists_numerically": true,
+      "rank_observation": 1,
+      "rank_response": 0,
+      "tolerance": 1e-10
+    },
+    "tolerance": 1e-10,
+    "name": "zero_response",
+    "response": [
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "observation": [
+      [
+        1.0,
+        0.0
+      ]
+    ]
+  }
+}

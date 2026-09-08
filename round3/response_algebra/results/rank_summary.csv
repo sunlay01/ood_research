@@ -1,0 +1,12 @@
+quantity,value
+phi_rank,21
+psi_rank,17
+response_rank,17
+residual_frobenius,2.114623095633151e-13
+residual_max_absolute,2.6645352591003757e-15
+exact_within_tolerance,True
+model_blind_dimension,4
+shift_blind_dimension,0
+quotient_dimension,17
+shift_full_visible,True
+model_full_visible,False

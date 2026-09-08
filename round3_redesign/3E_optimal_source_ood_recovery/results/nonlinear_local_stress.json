@@ -1,0 +1,59 @@
+{
+  "status": "LOCAL-TANGENT-DIAGNOSTIC-ONLY",
+  "reference_point": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "observation_jacobian": [
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "response_jacobian": [
+    [
+      1.0,
+      0.0,
+      0.0
+    ],
+    [
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "recovery_summary": {
+    "dim_U": 3,
+    "source_dimension": 2,
+    "response_dimension": 2,
+    "rank_O": 2,
+    "kernel_dimension": 1,
+    "rank_A": 2,
+    "structural_ambiguity_dimension": 0,
+    "alpha": 0.0,
+    "normalized_alpha": 0.0,
+    "ambiguity_diameter": 0.0,
+    "pseudoinverse_attainment_error": 0.0,
+    "factorization": {
+      "alpha": 0.0,
+      "kernel_dimension": 1,
+      "kernel_action_frobenius": 0.0,
+      "factorization_residual": 0.0,
+      "zero_error": true,
+      "kernel_inclusion": true,
+      "factorization_exists_numerically": true,
+      "rank_observation": 2,
+      "rank_response": 2,
+      "tolerance": 1e-10
+    },
+    "tolerance": 1e-10
+  },
+  "global_nonlinear_claim": false
+}

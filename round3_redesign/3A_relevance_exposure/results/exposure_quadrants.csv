@@ -1,0 +1,5 @@
+n_noise,rho,shift,leading_relevance,source_exposure_struct,source_exposure_risk,category
+4,0.8,shortcut-relation,2.108582994564287,1.0000000000000004,0.9999999999999998,exposed-relevant
+4,0.8,target-emergent,0.29349432855779534,0.0,0.0,unexposed-relevant
+4,0.8,stable-predictive-burden,0.0,1.0000000000000004,0.0,exposed-low-relevance
+4,0.8,independent-noise-variance,0.0,0.0,0.0,unexposed-low-relevance

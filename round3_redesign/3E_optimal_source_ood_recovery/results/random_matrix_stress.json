@@ -1,0 +1,267 @@
+{
+  "seed": 20260908,
+  "repeats": 32,
+  "rows": [
+    {
+      "index": 0,
+      "dim_U": 4,
+      "rank_O": 4,
+      "kernel_dimension": 0,
+      "alpha": 0.0,
+      "ambiguity_diameter": 0.0
+    },
+    {
+      "index": 1,
+      "dim_U": 6,
+      "rank_O": 5,
+      "kernel_dimension": 1,
+      "alpha": 2.397837256389159,
+      "ambiguity_diameter": 4.795674512778318
+    },
+    {
+      "index": 2,
+      "dim_U": 7,
+      "rank_O": 3,
+      "kernel_dimension": 4,
+      "alpha": 3.1462439252974606,
+      "ambiguity_diameter": 6.292487850594921
+    },
+    {
+      "index": 3,
+      "dim_U": 5,
+      "rank_O": 1,
+      "kernel_dimension": 4,
+      "alpha": 2.7793383039122377,
+      "ambiguity_diameter": 5.558676607824475
+    },
+    {
+      "index": 4,
+      "dim_U": 5,
+      "rank_O": 5,
+      "kernel_dimension": 0,
+      "alpha": 0.0,
+      "ambiguity_diameter": 0.0
+    },
+    {
+      "index": 5,
+      "dim_U": 7,
+      "rank_O": 1,
+      "kernel_dimension": 6,
+      "alpha": 3.5578541522330696,
+      "ambiguity_diameter": 7.115708304466139
+    },
+    {
+      "index": 6,
+      "dim_U": 3,
+      "rank_O": 1,
+      "kernel_dimension": 2,
+      "alpha": 2.1690517870516093,
+      "ambiguity_diameter": 4.338103574103219
+    },
+    {
+      "index": 7,
+      "dim_U": 4,
+      "rank_O": 3,
+      "kernel_dimension": 1,
+      "alpha": 0.004864240896874011,
+      "ambiguity_diameter": 0.009728481793748023
+    },
+    {
+      "index": 8,
+      "dim_U": 5,
+      "rank_O": 2,
+      "kernel_dimension": 3,
+      "alpha": 2.6674082875581253,
+      "ambiguity_diameter": 5.334816575116251
+    },
+    {
+      "index": 9,
+      "dim_U": 2,
+      "rank_O": 2,
+      "kernel_dimension": 0,
+      "alpha": 0.0,
+      "ambiguity_diameter": 0.0
+    },
+    {
+      "index": 10,
+      "dim_U": 2,
+      "rank_O": 2,
+      "kernel_dimension": 0,
+      "alpha": 0.0,
+      "ambiguity_diameter": 0.0
+    },
+    {
+      "index": 11,
+      "dim_U": 7,
+      "rank_O": 7,
+      "kernel_dimension": 0,
+      "alpha": 0.0,
+      "ambiguity_diameter": 0.0
+    },
+    {
+      "index": 12,
+      "dim_U": 3,
+      "rank_O": 2,
+      "kernel_dimension": 1,
+      "alpha": 1.3961192116341956,
+      "ambiguity_diameter": 2.7922384232683912
+    },
+    {
+      "index": 13,
+      "dim_U": 3,
+      "rank_O": 2,
+      "kernel_dimension": 1,
+      "alpha": 1.2798713161736526,
+      "ambiguity_diameter": 2.559742632347305
+    },
+    {
+      "index": 14,
+      "dim_U": 6,
+      "rank_O": 3,
+      "kernel_dimension": 3,
+      "alpha": 2.171674557009504,
+      "ambiguity_diameter": 4.343349114019008
+    },
+    {
+      "index": 15,
+      "dim_U": 7,
+      "rank_O": 1,
+      "kernel_dimension": 6,
+      "alpha": 3.1000982093385225,
+      "ambiguity_diameter": 6.200196418677045
+    },
+    {
+      "index": 16,
+      "dim_U": 6,
+      "rank_O": 1,
+      "kernel_dimension": 5,
+      "alpha": 3.1793963549106046,
+      "ambiguity_diameter": 6.358792709821209
+    },
+    {
+      "index": 17,
+      "dim_U": 7,
+      "rank_O": 0,
+      "kernel_dimension": 7,
+      "alpha": 4.336474856684295,
+      "ambiguity_diameter": 8.67294971336859
+    },
+    {
+      "index": 18,
+      "dim_U": 7,
+      "rank_O": 4,
+      "kernel_dimension": 3,
+      "alpha": 1.8231873973575154,
+      "ambiguity_diameter": 3.646374794715031
+    },
+    {
+      "index": 19,
+      "dim_U": 2,
+      "rank_O": 1,
+      "kernel_dimension": 1,
+      "alpha": 0.46337117394792177,
+      "ambiguity_diameter": 0.9267423478958435
+    },
+    {
+      "index": 20,
+      "dim_U": 5,
+      "rank_O": 3,
+      "kernel_dimension": 2,
+      "alpha": 1.8827562313433952,
+      "ambiguity_diameter": 3.7655124626867904
+    },
+    {
+      "index": 21,
+      "dim_U": 8,
+      "rank_O": 7,
+      "kernel_dimension": 1,
+      "alpha": 2.670082274568236,
+      "ambiguity_diameter": 5.340164549136472
+    },
+    {
+      "index": 22,
+      "dim_U": 7,
+      "rank_O": 2,
+      "kernel_dimension": 5,
+      "alpha": 2.207804552879887,
+      "ambiguity_diameter": 4.415609105759774
+    },
+    {
+      "index": 23,
+      "dim_U": 5,
+      "rank_O": 4,
+      "kernel_dimension": 1,
+      "alpha": 1.0159015773842979,
+      "ambiguity_diameter": 2.0318031547685957
+    },
+    {
+      "index": 24,
+      "dim_U": 3,
+      "rank_O": 1,
+      "kernel_dimension": 2,
+      "alpha": 1.716489240532409,
+      "ambiguity_diameter": 3.432978481064818
+    },
+    {
+      "index": 25,
+      "dim_U": 3,
+      "rank_O": 0,
+      "kernel_dimension": 3,
+      "alpha": 3.4199979876902713,
+      "ambiguity_diameter": 6.839995975380543
+    },
+    {
+      "index": 26,
+      "dim_U": 5,
+      "rank_O": 1,
+      "kernel_dimension": 4,
+      "alpha": 2.7725245599869983,
+      "ambiguity_diameter": 5.545049119973997
+    },
+    {
+      "index": 27,
+      "dim_U": 4,
+      "rank_O": 1,
+      "kernel_dimension": 3,
+      "alpha": 2.580426778680329,
+      "ambiguity_diameter": 5.160853557360658
+    },
+    {
+      "index": 28,
+      "dim_U": 7,
+      "rank_O": 7,
+      "kernel_dimension": 0,
+      "alpha": 0.0,
+      "ambiguity_diameter": 0.0
+    },
+    {
+      "index": 29,
+      "dim_U": 2,
+      "rank_O": 0,
+      "kernel_dimension": 2,
+      "alpha": 1.984593429189129,
+      "ambiguity_diameter": 3.969186858378258
+    },
+    {
+      "index": 30,
+      "dim_U": 7,
+      "rank_O": 7,
+      "kernel_dimension": 0,
+      "alpha": 0.0,
+      "ambiguity_diameter": 0.0
+    },
+    {
+      "index": 31,
+      "dim_U": 7,
+      "rank_O": 7,
+      "kernel_dimension": 0,
+      "alpha": 0.0,
+      "ambiguity_diameter": 0.0
+    }
+  ],
+  "max_projector_formula_error": 1.3322676295501878e-15,
+  "max_random_unit_pseudoinverse_slack": 2.6489889333261267,
+  "max_adversarial_pair_lower_bound_gap": 8.881784197001252e-16,
+  "max_sampled_estimator_lower_bound_violation": 0.0,
+  "audit_pass": true
+}

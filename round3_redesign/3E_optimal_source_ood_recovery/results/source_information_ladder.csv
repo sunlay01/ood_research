@@ -1,0 +1,7 @@
+design,note,source_observation_count,source_information_design,dim_U,rank_O,kernel_dimension,rank_A,structural_ambiguity_dimension,alpha,normalized_alpha,ambiguity_diameter,change_from_previous
+base_source,one task-complete source observation,1,stacked_task_complete_states,8,7,1,5,1,0.319942029393104,1.0,0.639884058786208,
+duplicate_source,exact duplicate of the base source observation,2,stacked_task_complete_states,8,7,1,5,1,0.319942029393104,1.0,0.639884058786208,0.0
+risk_null_noise_source,additional independent-noise source state,3,stacked_task_complete_states,8,7,1,5,1,0.319942029393104,1.0,0.639884058786208,0.0
+relation_source,additional shortcut-relation source state,4,stacked_task_complete_states,8,7,1,5,1,0.319942029393104,1.0,0.639884058786208,0.0
+u_exposed_source,new source observation that exposes the previously hidden U tangent,5,stacked_task_complete_states,8,8,0,5,0,0.0,0.0,0.0,-0.319942029393104
+full_information_mathematical_endpoint,explicit identity observation; not a claim about an obtainable source design,,mathematical_endpoint,8,8,0,5,0,0.0,0.0,0.0,0.0

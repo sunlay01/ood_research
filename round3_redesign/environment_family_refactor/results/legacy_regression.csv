@@ -1,0 +1,18 @@
+quantity,frozen_old_result,refactored_result,abs_error,rel_error,pass
+tangent_dimension,8,8,0.0,0.0,True
+observation_rows,275,275,0.0,0.0,True
+observation_columns,8,8,0.0,0.0,True
+response_rows,9,9,0.0,0.0,True
+response_columns,8,8,0.0,0.0,True
+rank_O,7,7,0.0,0.0,True
+hidden_information_floor,0.05118145108608892,0.05118145108608892,0.0,0.0,True
+u_exposed_information_floor,0.0,0.0,0.0,0.0,True
+legacy_matrix_hash,ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828,ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828,0.0,0.0,True
+facade_matrix_hash,ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828,ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828,0.0,0.0,True
+family_response_factorization_residual,0.0,4.8871735837982024e-17,4.8871735837982024e-17,4.8871735837982024e-17,True
+legacy_response_factorization_residual,0.0,4.8871735837982024e-17,4.8871735837982024e-17,4.8871735837982024e-17,True
+source_contrast_rank,4,4,0.0,0.0,True
+vrex_large_lambda_metric,True,True,0.0,0.0,True
+3C-B scalar table max error,0.0,2.220446049250313e-15,2.220446049250313e-15,2.220446049250313e-15,True
+3E-B scalar table max error,0.0,2.152683413469969e-16,2.152683413469969e-16,2.152683413469969e-16,True
+CORAL gauge/noncanonical status,fixed-representation + gauge-dependent/induced-degenerate,"{'predictor_status': 'representation-level fixed-gauge conditional', 'gauge_status': 'gauge-dependent/induced-degenerate'}",0.0,0.0,True

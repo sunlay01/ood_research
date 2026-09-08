@@ -1,0 +1,18 @@
+PARTIAL_SIGNAL
+
+**Evidence**
+- The REV1 config specifies 3 seeds, ERM, and six regularized settings, and `metrics.csv` contains the expected 21 rows with finite numeric metrics: 3 seeds × 7 method/strength paths [config.json](/Users/sunlay/Desktop/ood-representation-regularization/artifacts/CMNIST-VIS-001-REV1/config.json:5).
+- Paired ratios and deltas are valid same-seed comparisons: `paired_metrics()` indexes ERM by `seed` and uses `erm.loc[row.seed]` for every regularized row [analyze_cmnist_feature_probe.py](/Users/sunlay/Desktop/ood-representation-regularization/src/ood_repr_reg/analyze_cmnist_feature_probe.py:20). The targeted unit test checks same-seed ERM deltas and ratios directly [test_analyze_cmnist_feature_probe.py](/Users/sunlay/Desktop/ood-representation-regularization/tests/test_analyze_cmnist_feature_probe.py:7).
+- I recomputed `paired_metrics.csv` and `aggregate_summary.csv` from REV1 `metrics.csv`; both matched exactly. I also compared the first run to REV1 and found exact equality on all shared numeric metric columns across all 21 matched rows.
+- The strongest replicated positive pattern is `CORAL λ=1.0`: prediction-color response decreases in all three seeds while latent-color response remains/increases, task signal is retained/slightly higher, and target/balanced accuracy changes are very small positive means [paired_metrics.csv](/Users/sunlay/Desktop/ood-representation-regularization/artifacts/CMNIST-VIS-001-REV1/paired_metrics.csv:7), [paired_metrics.csv](/Users/sunlay/Desktop/ood-representation-regularization/artifacts/CMNIST-VIS-001-REV1/paired_metrics.csv:13), [paired_metrics.csv](/Users/sunlay/Desktop/ood-representation-regularization/artifacts/CMNIST-VIS-001-REV1/paired_metrics.csv:19), [aggregate_summary.csv](/Users/sunlay/Desktop/ood-representation-regularization/artifacts/CMNIST-VIS-001-REV1/aggregate_summary.csv:3).
+- `IRMv1 λ=10.0` is a consistent collapse signal, not a useful invariance signal: target accuracy drops by ~40.3 pp mean, balanced accuracy by ~21.9 pp, task signal ratio falls to ~0.66, and consistency drops sharply [aggregate_summary.csv](/Users/sunlay/Desktop/ood-representation-regularization/artifacts/CMNIST-VIS-001-REV1/aggregate_summary.csv:5).
+- Latent retention, head use, and task collapse are distinguishable in the metric design: latent response, prediction response, probability response, task signal, balanced accuracy, and consistency are separately defined in the preregistration and implemented as separate diagnostics [CMNIST-VIS-001_preregistered.md](/Users/sunlay/Desktop/ood-representation-regularization/docs/experiments/CMNIST-VIS-001_preregistered.md:46), [cmnist_feature_probe.py](/Users/sunlay/Desktop/ood-representation-regularization/src/ood_repr_reg/cmnist_feature_probe.py:265).
+
+**Limitations**
+- I did not rerun training or tests. The read-only sandbox cannot create temp/cache files needed by pytest/Matplotlib.
+- The available pytest cache is consistent with one unrelated failing test, `test_irmv1_has_source_optimal_harmful_nuisance_blind_direction`, but it records 65 cached node ids, not direct evidence for “59 passes.” I therefore do not treat the exact pass count as independently validated.
+- Three seeds and one CMNIST sign-flip shift are insufficient for a general OOD or regularization claim.
+
+**Strongest Supported Conclusion**
+- The data support a narrow exploratory signal that `CORAL λ=1.0` can reduce head-used color response while retaining latent color response and task signal in this setup.
+- The data do not support a general mechanism claim that regularization removes color features or improves OOD behavior. IRMv1 mostly shows degraded target/balanced accuracy, and L2 effects are negligible or mixed.

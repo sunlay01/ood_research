@@ -1,0 +1,20 @@
+{
+  "data_root": "data",
+  "download": false,
+  "probe_size": 500,
+  "probe_seed": 211,
+  "probe_offset": 0,
+  "latent_dim": 32,
+  "top_k": 8,
+  "plot_neurons": 8,
+  "saliency_neurons": 4,
+  "synthesis_neurons": 8,
+  "synthesis_steps": 220,
+  "device": "cpu",
+  "checkpoints": [
+    {"label": "ERM", "file": "seed0-erm-l0.pt"},
+    {"label": "CORAL lambda=1", "file": "seed0-coral-l1.pt"},
+    {"label": "IRMv1 lambda=1", "file": "seed0-irmv1-l1.pt"},
+    {"label": "IRMv1 lambda=10", "file": "seed0-irmv1-l10.pt"}
+  ]
+}

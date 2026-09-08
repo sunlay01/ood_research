@@ -1,0 +1,4219 @@
+{
+  "data": {
+    "feature_dimension": 21,
+    "n_models": 660,
+    "n_shifts": 300
+  },
+  "deferred_questions": [
+    "DEFER-TO-3B: response-order structure",
+    "DEFER-TO-3C: mechanism semantics and blind discovery",
+    "DEFER-TO-LATER: regularizer control"
+  ],
+  "factorization": {
+    "exact_within_tolerance": true,
+    "phi_rank": 21,
+    "psi_rank": 17,
+    "residual_frobenius": 2.114623095633151e-13,
+    "residual_max_absolute": 2.6645352591003757e-15,
+    "response_rank": 17
+  },
+  "family_ranks": {
+    "model": {
+      "CORAL": 17,
+      "ERM": 1,
+      "IRMv1": 3,
+      "L2": 8,
+      "V-REx": 3
+    },
+    "shift": {
+      "compound": 14,
+      "core_covariance": 12,
+      "core_mean": 14,
+      "nuisance_covariance": 9,
+      "nuisance_mean": 9,
+      "observation": 5,
+      "relation": 9,
+      "task": 3
+    }
+  },
+  "groups": {
+    "model": {
+      "CORAL": [
+        4,
+        8,
+        12,
+        16,
+        20,
+        24,
+        28,
+        32,
+        37,
+        41,
+        45,
+        49,
+        53,
+        57,
+        61,
+        65,
+        70,
+        74,
+        78,
+        82,
+        86,
+        90,
+        94,
+        98,
+        103,
+        107,
+        111,
+        115,
+        119,
+        123,
+        127,
+        131,
+        136,
+        140,
+        144,
+        148,
+        152,
+        156,
+        160,
+        164,
+        169,
+        173,
+        177,
+        181,
+        185,
+        189,
+        193,
+        197,
+        202,
+        206,
+        210,
+        214,
+        218,
+        222,
+        226,
+        230,
+        235,
+        239,
+        243,
+        247,
+        251,
+        255,
+        259,
+        263,
+        268,
+        272,
+        276,
+        280,
+        284,
+        288,
+        292,
+        296,
+        301,
+        305,
+        309,
+        313,
+        317,
+        321,
+        325,
+        329,
+        334,
+        338,
+        342,
+        346,
+        350,
+        354,
+        358,
+        362,
+        367,
+        371,
+        375,
+        379,
+        383,
+        387,
+        391,
+        395,
+        400,
+        404,
+        408,
+        412,
+        416,
+        420,
+        424,
+        428,
+        433,
+        437,
+        441,
+        445,
+        449,
+        453,
+        457,
+        461,
+        466,
+        470,
+        474,
+        478,
+        482,
+        486,
+        490,
+        494,
+        499,
+        503,
+        507,
+        511,
+        515,
+        519,
+        523,
+        527,
+        532,
+        536,
+        540,
+        544,
+        548,
+        552,
+        556,
+        560,
+        565,
+        569,
+        573,
+        577,
+        581,
+        585,
+        589,
+        593,
+        598,
+        602,
+        606,
+        610,
+        614,
+        618,
+        622,
+        626,
+        631,
+        635,
+        639,
+        643,
+        647,
+        651,
+        655,
+        659
+      ],
+      "ERM": [
+        0,
+        33,
+        66,
+        99,
+        132,
+        165,
+        198,
+        231,
+        264,
+        297,
+        330,
+        363,
+        396,
+        429,
+        462,
+        495,
+        528,
+        561,
+        594,
+        627
+      ],
+      "IRMv1": [
+        2,
+        6,
+        10,
+        14,
+        18,
+        22,
+        26,
+        30,
+        35,
+        39,
+        43,
+        47,
+        51,
+        55,
+        59,
+        63,
+        68,
+        72,
+        76,
+        80,
+        84,
+        88,
+        92,
+        96,
+        101,
+        105,
+        109,
+        113,
+        117,
+        121,
+        125,
+        129,
+        134,
+        138,
+        142,
+        146,
+        150,
+        154,
+        158,
+        162,
+        167,
+        171,
+        175,
+        179,
+        183,
+        187,
+        191,
+        195,
+        200,
+        204,
+        208,
+        212,
+        216,
+        220,
+        224,
+        228,
+        233,
+        237,
+        241,
+        245,
+        249,
+        253,
+        257,
+        261,
+        266,
+        270,
+        274,
+        278,
+        282,
+        286,
+        290,
+        294,
+        299,
+        303,
+        307,
+        311,
+        315,
+        319,
+        323,
+        327,
+        332,
+        336,
+        340,
+        344,
+        348,
+        352,
+        356,
+        360,
+        365,
+        369,
+        373,
+        377,
+        381,
+        385,
+        389,
+        393,
+        398,
+        402,
+        406,
+        410,
+        414,
+        418,
+        422,
+        426,
+        431,
+        435,
+        439,
+        443,
+        447,
+        451,
+        455,
+        459,
+        464,
+        468,
+        472,
+        476,
+        480,
+        484,
+        488,
+        492,
+        497,
+        501,
+        505,
+        509,
+        513,
+        517,
+        521,
+        525,
+        530,
+        534,
+        538,
+        542,
+        546,
+        550,
+        554,
+        558,
+        563,
+        567,
+        571,
+        575,
+        579,
+        583,
+        587,
+        591,
+        596,
+        600,
+        604,
+        608,
+        612,
+        616,
+        620,
+        624,
+        629,
+        633,
+        637,
+        641,
+        645,
+        649,
+        653,
+        657
+      ],
+      "L2": [
+        1,
+        5,
+        9,
+        13,
+        17,
+        21,
+        25,
+        29,
+        34,
+        38,
+        42,
+        46,
+        50,
+        54,
+        58,
+        62,
+        67,
+        71,
+        75,
+        79,
+        83,
+        87,
+        91,
+        95,
+        100,
+        104,
+        108,
+        112,
+        116,
+        120,
+        124,
+        128,
+        133,
+        137,
+        141,
+        145,
+        149,
+        153,
+        157,
+        161,
+        166,
+        170,
+        174,
+        178,
+        182,
+        186,
+        190,
+        194,
+        199,
+        203,
+        207,
+        211,
+        215,
+        219,
+        223,
+        227,
+        232,
+        236,
+        240,
+        244,
+        248,
+        252,
+        256,
+        260,
+        265,
+        269,
+        273,
+        277,
+        281,
+        285,
+        289,
+        293,
+        298,
+        302,
+        306,
+        310,
+        314,
+        318,
+        322,
+        326,
+        331,
+        335,
+        339,
+        343,
+        347,
+        351,
+        355,
+        359,
+        364,
+        368,
+        372,
+        376,
+        380,
+        384,
+        388,
+        392,
+        397,
+        401,
+        405,
+        409,
+        413,
+        417,
+        421,
+        425,
+        430,
+        434,
+        438,
+        442,
+        446,
+        450,
+        454,
+        458,
+        463,
+        467,
+        471,
+        475,
+        479,
+        483,
+        487,
+        491,
+        496,
+        500,
+        504,
+        508,
+        512,
+        516,
+        520,
+        524,
+        529,
+        533,
+        537,
+        541,
+        545,
+        549,
+        553,
+        557,
+        562,
+        566,
+        570,
+        574,
+        578,
+        582,
+        586,
+        590,
+        595,
+        599,
+        603,
+        607,
+        611,
+        615,
+        619,
+        623,
+        628,
+        632,
+        636,
+        640,
+        644,
+        648,
+        652,
+        656
+      ],
+      "V-REx": [
+        3,
+        7,
+        11,
+        15,
+        19,
+        23,
+        27,
+        31,
+        36,
+        40,
+        44,
+        48,
+        52,
+        56,
+        60,
+        64,
+        69,
+        73,
+        77,
+        81,
+        85,
+        89,
+        93,
+        97,
+        102,
+        106,
+        110,
+        114,
+        118,
+        122,
+        126,
+        130,
+        135,
+        139,
+        143,
+        147,
+        151,
+        155,
+        159,
+        163,
+        168,
+        172,
+        176,
+        180,
+        184,
+        188,
+        192,
+        196,
+        201,
+        205,
+        209,
+        213,
+        217,
+        221,
+        225,
+        229,
+        234,
+        238,
+        242,
+        246,
+        250,
+        254,
+        258,
+        262,
+        267,
+        271,
+        275,
+        279,
+        283,
+        287,
+        291,
+        295,
+        300,
+        304,
+        308,
+        312,
+        316,
+        320,
+        324,
+        328,
+        333,
+        337,
+        341,
+        345,
+        349,
+        353,
+        357,
+        361,
+        366,
+        370,
+        374,
+        378,
+        382,
+        386,
+        390,
+        394,
+        399,
+        403,
+        407,
+        411,
+        415,
+        419,
+        423,
+        427,
+        432,
+        436,
+        440,
+        444,
+        448,
+        452,
+        456,
+        460,
+        465,
+        469,
+        473,
+        477,
+        481,
+        485,
+        489,
+        493,
+        498,
+        502,
+        506,
+        510,
+        514,
+        518,
+        522,
+        526,
+        531,
+        535,
+        539,
+        543,
+        547,
+        551,
+        555,
+        559,
+        564,
+        568,
+        572,
+        576,
+        580,
+        584,
+        588,
+        592,
+        597,
+        601,
+        605,
+        609,
+        613,
+        617,
+        621,
+        625,
+        630,
+        634,
+        638,
+        642,
+        646,
+        650,
+        654,
+        658
+      ]
+    },
+    "shift": {
+      "compound": [
+        14,
+        15,
+        30,
+        31,
+        46,
+        47,
+        62,
+        63,
+        78,
+        79,
+        94,
+        95,
+        110,
+        111,
+        126,
+        127,
+        142,
+        143,
+        158,
+        159,
+        174,
+        175,
+        190,
+        191,
+        206,
+        207,
+        222,
+        223,
+        238,
+        239,
+        254,
+        255,
+        270,
+        271,
+        286,
+        287
+      ],
+      "core_covariance": [
+        2,
+        3,
+        18,
+        19,
+        34,
+        35,
+        50,
+        51,
+        66,
+        67,
+        82,
+        83,
+        98,
+        99,
+        114,
+        115,
+        130,
+        131,
+        146,
+        147,
+        162,
+        163,
+        178,
+        179,
+        194,
+        195,
+        210,
+        211,
+        226,
+        227,
+        242,
+        243,
+        258,
+        259,
+        274,
+        275,
+        290,
+        291
+      ],
+      "core_mean": [
+        0,
+        1,
+        16,
+        17,
+        32,
+        33,
+        48,
+        49,
+        64,
+        65,
+        80,
+        81,
+        96,
+        97,
+        112,
+        113,
+        128,
+        129,
+        144,
+        145,
+        160,
+        161,
+        176,
+        177,
+        192,
+        193,
+        208,
+        209,
+        224,
+        225,
+        240,
+        241,
+        256,
+        257,
+        272,
+        273,
+        288,
+        289
+      ],
+      "nuisance_covariance": [
+        6,
+        7,
+        22,
+        23,
+        38,
+        39,
+        54,
+        55,
+        70,
+        71,
+        86,
+        87,
+        102,
+        103,
+        118,
+        119,
+        134,
+        135,
+        150,
+        151,
+        166,
+        167,
+        182,
+        183,
+        198,
+        199,
+        214,
+        215,
+        230,
+        231,
+        246,
+        247,
+        262,
+        263,
+        278,
+        279,
+        294,
+        295
+      ],
+      "nuisance_mean": [
+        4,
+        5,
+        20,
+        21,
+        36,
+        37,
+        52,
+        53,
+        68,
+        69,
+        84,
+        85,
+        100,
+        101,
+        116,
+        117,
+        132,
+        133,
+        148,
+        149,
+        164,
+        165,
+        180,
+        181,
+        196,
+        197,
+        212,
+        213,
+        228,
+        229,
+        244,
+        245,
+        260,
+        261,
+        276,
+        277,
+        292,
+        293
+      ],
+      "observation": [
+        12,
+        13,
+        28,
+        29,
+        44,
+        45,
+        60,
+        61,
+        76,
+        77,
+        92,
+        93,
+        108,
+        109,
+        124,
+        125,
+        140,
+        141,
+        156,
+        157,
+        172,
+        173,
+        188,
+        189,
+        204,
+        205,
+        220,
+        221,
+        236,
+        237,
+        252,
+        253,
+        268,
+        269,
+        284,
+        285
+      ],
+      "relation": [
+        8,
+        9,
+        24,
+        25,
+        40,
+        41,
+        56,
+        57,
+        72,
+        73,
+        88,
+        89,
+        104,
+        105,
+        120,
+        121,
+        136,
+        137,
+        152,
+        153,
+        168,
+        169,
+        184,
+        185,
+        200,
+        201,
+        216,
+        217,
+        232,
+        233,
+        248,
+        249,
+        264,
+        265,
+        280,
+        281,
+        296,
+        297
+      ],
+      "task": [
+        10,
+        11,
+        26,
+        27,
+        42,
+        43,
+        58,
+        59,
+        74,
+        75,
+        90,
+        91,
+        106,
+        107,
+        122,
+        123,
+        138,
+        139,
+        154,
+        155,
+        170,
+        171,
+        186,
+        187,
+        202,
+        203,
+        218,
+        219,
+        234,
+        235,
+        250,
+        251,
+        266,
+        267,
+        282,
+        283,
+        298,
+        299
+      ]
+    }
+  },
+  "inclusion_residuals": {
+    "model": {
+      "ERM__CORAL": {
+        "first_in_second": 1.9161161404800878e-14,
+        "second_in_first": 0.9701425001453319
+      },
+      "ERM__IRMv1": {
+        "first_in_second": 3.0950893164850226e-11,
+        "second_in_first": 0.816496580927726
+      },
+      "ERM__L2": {
+        "first_in_second": 7.112496359244984e-10,
+        "second_in_first": 0.9354143466934853
+      },
+      "ERM__V-REx": {
+        "first_in_second": 5.7960139719100356e-11,
+        "second_in_first": 0.816496580927726
+      },
+      "IRMv1__CORAL": {
+        "first_in_second": 1.5068395003449908e-10,
+        "second_in_first": 0.9074852129730302
+      },
+      "IRMv1__V-REx": {
+        "first_in_second": 5.284967433450895e-06,
+        "second_in_first": 5.2849674334508936e-06
+      },
+      "L2__CORAL": {
+        "first_in_second": 2.0837251431043967e-08,
+        "second_in_first": 0.7276068751089991
+      },
+      "L2__IRMv1": {
+        "first_in_second": 0.856099720634468,
+        "second_in_first": 0.5364245375208313
+      },
+      "L2__V-REx": {
+        "first_in_second": 0.8560996705341958,
+        "second_in_first": 0.5364243243024652
+      },
+      "V-REx__CORAL": {
+        "first_in_second": 2.2099469670747512e-10,
+        "second_in_first": 0.9074852129730301
+      }
+    },
+    "shift": {
+      "core_covariance__compound": {
+        "first_in_second": 1.1868125117444254e-11,
+        "second_in_first": 0.37796447300922736
+      },
+      "core_covariance__nuisance_covariance": {
+        "first_in_second": 0.5,
+        "second_in_first": 8.124543958413619e-12
+      },
+      "core_covariance__nuisance_mean": {
+        "first_in_second": 0.5,
+        "second_in_first": 8.436045919434029e-12
+      },
+      "core_covariance__observation": {
+        "first_in_second": 0.7637626158259734,
+        "second_in_first": 3.901055999305597e-12
+      },
+      "core_covariance__relation": {
+        "first_in_second": 0.5,
+        "second_in_first": 7.771840952330832e-12
+      },
+      "core_covariance__task": {
+        "first_in_second": 0.9142074096405961,
+        "second_in_first": 0.5857480271986191
+      },
+      "core_mean__compound": {
+        "first_in_second": 5.606990892706422e-11,
+        "second_in_first": 5.606990893869551e-11
+      },
+      "core_mean__core_covariance": {
+        "first_in_second": 0.37796447300922725,
+        "second_in_first": 1.7884887137196827e-11
+      },
+      "core_mean__nuisance_covariance": {
+        "first_in_second": 0.5976143046671968,
+        "second_in_first": 1.592446866464009e-11
+      },
+      "core_mean__nuisance_mean": {
+        "first_in_second": 0.5976143046671968,
+        "second_in_first": 1.6196534754329862e-11
+      },
+      "core_mean__observation": {
+        "first_in_second": 0.8017837257372731,
+        "second_in_first": 1.1452292114338476e-11
+      },
+      "core_mean__relation": {
+        "first_in_second": 0.5976143046671968,
+        "second_in_first": 1.5712284246218723e-11
+      },
+      "core_mean__task": {
+        "first_in_second": 0.923956602286479,
+        "second_in_first": 0.5632469087717653
+      },
+      "nuisance_covariance__compound": {
+        "first_in_second": 1.4638441077769329e-12,
+        "second_in_first": 0.5976143046671971
+      },
+      "nuisance_covariance__observation": {
+        "first_in_second": 0.6666666666666667,
+        "second_in_first": 5.466494616731227e-13
+      },
+      "nuisance_covariance__relation": {
+        "first_in_second": 1.5764055021157868e-12,
+        "second_in_first": 1.5764054857708136e-12
+      },
+      "nuisance_covariance__task": {
+        "first_in_second": 0.8999851857619374,
+        "second_in_first": 0.6556828530416566
+      },
+      "nuisance_mean__compound": {
+        "first_in_second": 1.51934129051417e-12,
+        "second_in_first": 0.5976143046671971
+      },
+      "nuisance_mean__nuisance_covariance": {
+        "first_in_second": 1.7436434232014543e-12,
+        "second_in_first": 1.7436434900085123e-12
+      },
+      "nuisance_mean__observation": {
+        "first_in_second": 0.6666666666666665,
+        "second_in_first": 1.8362759590595084e-13
+      },
+      "nuisance_mean__relation": {
+        "first_in_second": 1.6670118680762174e-12,
+        "second_in_first": 1.6670125703808185e-12
+      },
+      "nuisance_mean__task": {
+        "first_in_second": 0.899985185761936,
+        "second_in_first": 0.6556828530416509
+      },
+      "observation__compound": {
+        "first_in_second": 5.239088882912863e-13,
+        "second_in_first": 0.8017837257372733
+      },
+      "relation__compound": {
+        "first_in_second": 1.2444257735799094e-12,
+        "second_in_first": 0.5976143046671971
+      },
+      "relation__observation": {
+        "first_in_second": 0.6666666666666665,
+        "second_in_first": 7.034311361133834e-13
+      },
+      "relation__task": {
+        "first_in_second": 0.8999851857619515,
+        "second_in_first": 0.6556828530417147
+      },
+      "task__compound": {
+        "first_in_second": 0.5632469087693435,
+        "second_in_first": 0.9239566022861627
+      },
+      "task__observation": {
+        "first_in_second": 0.827197913100344,
+        "second_in_first": 0.900307632125008
+      }
+    }
+  },
+  "incremental_ranks": {
+    "model": [
+      {
+        "group": "CORAL",
+        "incremental_rank": 17,
+        "rank_after": 17,
+        "rank_before": 0
+      },
+      {
+        "group": "ERM",
+        "incremental_rank": 0,
+        "rank_after": 17,
+        "rank_before": 17
+      },
+      {
+        "group": "IRMv1",
+        "incremental_rank": 0,
+        "rank_after": 17,
+        "rank_before": 17
+      },
+      {
+        "group": "L2",
+        "incremental_rank": 0,
+        "rank_after": 17,
+        "rank_before": 17
+      },
+      {
+        "group": "V-REx",
+        "incremental_rank": 0,
+        "rank_after": 17,
+        "rank_before": 17
+      }
+    ],
+    "shift": [
+      {
+        "group": "compound",
+        "incremental_rank": 14,
+        "rank_after": 14,
+        "rank_before": 0
+      },
+      {
+        "group": "core_covariance",
+        "incremental_rank": 0,
+        "rank_after": 14,
+        "rank_before": 14
+      },
+      {
+        "group": "core_mean",
+        "incremental_rank": 0,
+        "rank_after": 14,
+        "rank_before": 14
+      },
+      {
+        "group": "nuisance_covariance",
+        "incremental_rank": 0,
+        "rank_after": 14,
+        "rank_before": 14
+      },
+      {
+        "group": "nuisance_mean",
+        "incremental_rank": 0,
+        "rank_after": 14,
+        "rank_before": 14
+      },
+      {
+        "group": "observation",
+        "incremental_rank": 0,
+        "rank_after": 14,
+        "rank_before": 14
+      },
+      {
+        "group": "relation",
+        "incremental_rank": 0,
+        "rank_after": 14,
+        "rank_before": 14
+      },
+      {
+        "group": "task",
+        "incremental_rank": 3,
+        "rank_after": 17,
+        "rank_before": 14
+      }
+    ]
+  },
+  "intersection_dimensions": {
+    "model": {
+      "ERM__CORAL": 1,
+      "ERM__IRMv1": 1,
+      "ERM__L2": 1,
+      "ERM__V-REx": 1,
+      "IRMv1__CORAL": 3,
+      "IRMv1__V-REx": 1,
+      "L2__CORAL": 7,
+      "L2__IRMv1": 1,
+      "L2__V-REx": 1,
+      "V-REx__CORAL": 3
+    },
+    "shift": {
+      "core_covariance__compound": 12,
+      "core_covariance__nuisance_covariance": 9,
+      "core_covariance__nuisance_mean": 9,
+      "core_covariance__observation": 5,
+      "core_covariance__relation": 9,
+      "core_covariance__task": 0,
+      "core_mean__compound": 14,
+      "core_mean__core_covariance": 12,
+      "core_mean__nuisance_covariance": 9,
+      "core_mean__nuisance_mean": 9,
+      "core_mean__observation": 5,
+      "core_mean__relation": 9,
+      "core_mean__task": 0,
+      "nuisance_covariance__compound": 9,
+      "nuisance_covariance__observation": 5,
+      "nuisance_covariance__relation": 9,
+      "nuisance_covariance__task": 0,
+      "nuisance_mean__compound": 9,
+      "nuisance_mean__nuisance_covariance": 9,
+      "nuisance_mean__observation": 5,
+      "nuisance_mean__relation": 9,
+      "nuisance_mean__task": 0,
+      "observation__compound": 5,
+      "relation__compound": 9,
+      "relation__observation": 5,
+      "relation__task": 0,
+      "task__compound": 0,
+      "task__observation": 0
+    }
+  },
+  "model_geometry": {
+    "axis": "model",
+    "group_ranks": {
+      "CORAL": 17,
+      "ERM": 1,
+      "IRMv1": 3,
+      "L2": 8,
+      "V-REx": 3
+    },
+    "joint_rank": 17,
+    "pairwise": {
+      "ERM__CORAL": {
+        "first_in_second_residual": 1.9161161404800878e-14,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 16,
+        "intersection_dimension": 1,
+        "principal_angles": [
+          0.0
+        ],
+        "second_in_first_residual": 0.9701425001453319
+      },
+      "ERM__IRMv1": {
+        "first_in_second_residual": 3.0950893164850226e-11,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 2,
+        "intersection_dimension": 1,
+        "principal_angles": [
+          0.0
+        ],
+        "second_in_first_residual": 0.816496580927726
+      },
+      "ERM__L2": {
+        "first_in_second_residual": 7.112496359244984e-10,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 7,
+        "intersection_dimension": 1,
+        "principal_angles": [
+          0.0
+        ],
+        "second_in_first_residual": 0.9354143466934853
+      },
+      "ERM__V-REx": {
+        "first_in_second_residual": 5.7960139719100356e-11,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 2,
+        "intersection_dimension": 1,
+        "principal_angles": [
+          0.0
+        ],
+        "second_in_first_residual": 0.816496580927726
+      },
+      "IRMv1__CORAL": {
+        "first_in_second_residual": 1.5068395003449908e-10,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 14,
+        "intersection_dimension": 3,
+        "principal_angles": [
+          0.0,
+          0.0,
+          1.4901161193847656e-08
+        ],
+        "second_in_first_residual": 0.9074852129730302
+      },
+      "IRMv1__V-REx": {
+        "first_in_second_residual": 5.284967433450895e-06,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 1,
+        "principal_angles": [
+          0.0,
+          5.4978015465725955e-06,
+          7.318715597814924e-06
+        ],
+        "second_in_first_residual": 5.2849674334508936e-06
+      },
+      "L2__CORAL": {
+        "first_in_second_residual": 2.0837251431043967e-08,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 9,
+        "intersection_dimension": 7,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4901161193847656e-08,
+          2.1073424255447017e-08,
+          3.6500241499888574e-08
+        ],
+        "second_in_first_residual": 0.7276068751089991
+      },
+      "L2__IRMv1": {
+        "first_in_second_residual": 0.856099720634468,
+        "incremental_first_given_second": 6,
+        "incremental_second_given_first": 1,
+        "intersection_dimension": 1,
+        "principal_angles": [
+          3.942476676500724e-08,
+          2.9823548983125015e-06,
+          1.1920111511038254
+        ],
+        "second_in_first_residual": 0.5364245375208313
+      },
+      "L2__V-REx": {
+        "first_in_second_residual": 0.8560996705341958,
+        "incremental_first_given_second": 6,
+        "incremental_second_given_first": 1,
+        "intersection_dimension": 1,
+        "principal_angles": [
+          0.0,
+          2.1974539866187413e-06,
+          1.192010152427922
+        ],
+        "second_in_first_residual": 0.5364243243024652
+      },
+      "V-REx__CORAL": {
+        "first_in_second_residual": 2.2099469670747512e-10,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 14,
+        "intersection_dimension": 3,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "second_in_first_residual": 0.9074852129730301
+      }
+    }
+  },
+  "principal_angles": {
+    "model": {
+      "ERM__CORAL": [
+        0.0
+      ],
+      "ERM__IRMv1": [
+        0.0
+      ],
+      "ERM__L2": [
+        0.0
+      ],
+      "ERM__V-REx": [
+        0.0
+      ],
+      "IRMv1__CORAL": [
+        0.0,
+        0.0,
+        1.4901161193847656e-08
+      ],
+      "IRMv1__V-REx": [
+        0.0,
+        5.4978015465725955e-06,
+        7.318715597814924e-06
+      ],
+      "L2__CORAL": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4901161193847656e-08,
+        2.1073424255447017e-08,
+        3.6500241499888574e-08
+      ],
+      "L2__IRMv1": [
+        3.942476676500724e-08,
+        2.9823548983125015e-06,
+        1.1920111511038254
+      ],
+      "L2__V-REx": [
+        0.0,
+        2.1974539866187413e-06,
+        1.192010152427922
+      ],
+      "V-REx__CORAL": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "shift": {
+      "core_covariance__compound": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.9802322387695312e-08,
+        2.9802322387695312e-08,
+        3.332000937312528e-08,
+        3.6500241499888574e-08,
+        3.6500241499888574e-08,
+        3.942476676500724e-08,
+        4.712160915387242e-08,
+        5.575503985246929e-08
+      ],
+      "core_covariance__nuisance_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4901161193847656e-08,
+        2.1073424255447017e-08,
+        2.580956827951785e-08,
+        2.9802322387695312e-08,
+        4.2146848510894035e-08
+      ],
+      "core_covariance__nuisance_mean": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.4703483581542975e-08
+      ],
+      "core_covariance__observation": [
+        0.0,
+        3.6500241499888574e-08,
+        3.942476676500724e-08,
+        3.942476676500724e-08,
+        5.16191365590357e-08
+      ],
+      "core_covariance__relation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4901161193847656e-08,
+        2.580956827951785e-08,
+        5.16191365590357e-08
+      ],
+      "core_covariance__task": [
+        0.03472143197994888,
+        0.27799069306597046,
+        1.35176742872641
+      ],
+      "core_mean__compound": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4901161193847656e-08,
+        2.580956827951785e-08,
+        2.9802322387695312e-08,
+        2.9802322387695312e-08,
+        2.9802322387695312e-08,
+        3.332000937312528e-08,
+        3.6500241499888574e-08,
+        4.4703483581542975e-08
+      ],
+      "core_mean__core_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.1073424255447017e-08,
+        2.580956827951785e-08,
+        3.332000937312528e-08,
+        3.332000937312528e-08,
+        5.372690074837192e-08,
+        5.575503985246929e-08,
+        6.143906154658886e-08
+      ],
+      "core_mean__nuisance_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        5.575503985246929e-08
+      ],
+      "core_mean__nuisance_mean": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        4.4703483581542975e-08
+      ],
+      "core_mean__observation": [
+        0.0,
+        3.332000937312528e-08,
+        3.6500241499888574e-08,
+        3.942476676500724e-08,
+        4.2146848510894035e-08
+      ],
+      "core_mean__relation": [
+        0.0,
+        1.4901161193847656e-08,
+        1.4901161193847656e-08,
+        3.332000937312528e-08,
+        3.6500241499888574e-08,
+        3.942476676500724e-08,
+        4.712160915387242e-08,
+        4.712160915387242e-08,
+        5.372690074837192e-08
+      ],
+      "core_mean__task": [
+        0.02092035763463798,
+        0.0816150160572356,
+        1.3333204853271818
+      ],
+      "nuisance_covariance__compound": [
+        0.0,
+        0.0,
+        0.0,
+        2.9802322387695312e-08,
+        3.332000937312528e-08,
+        3.6500241499888574e-08,
+        3.942476676500724e-08,
+        3.942476676500724e-08,
+        6.322027276634106e-08
+      ],
+      "nuisance_covariance__observation": [
+        0.0,
+        3.332000937312528e-08,
+        4.712160915387242e-08,
+        5.372690074837192e-08,
+        5.372690074837192e-08
+      ],
+      "nuisance_covariance__relation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.580956827951785e-08,
+        3.6500241499888574e-08,
+        5.372690074837192e-08
+      ],
+      "nuisance_covariance__task": [
+        0.13096331778143738,
+        0.5895632009482887,
+        1.378758682145621
+      ],
+      "nuisance_mean__compound": [
+        0.0,
+        0.0,
+        2.1073424255447017e-08,
+        2.1073424255447017e-08,
+        3.332000937312528e-08,
+        4.4703483581542975e-08,
+        5.372690074837192e-08,
+        5.575503985246929e-08,
+        6.495265578539184e-08
+      ],
+      "nuisance_mean__nuisance_covariance": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.1073424255447017e-08,
+        3.332000937312528e-08,
+        3.6500241499888574e-08,
+        4.4703483581542975e-08,
+        6.989264130329237e-08
+      ],
+      "nuisance_mean__observation": [
+        0.0,
+        0.0,
+        3.332000937312528e-08,
+        5.372690074837192e-08,
+        6.143906154658886e-08
+      ],
+      "nuisance_mean__relation": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4901161193847656e-08,
+        2.1073424255447017e-08,
+        3.332000937312528e-08
+      ],
+      "nuisance_mean__task": [
+        0.1309633177813515,
+        0.5895632009483665,
+        1.3787586821454296
+      ],
+      "observation__compound": [
+        0.0,
+        3.942476676500724e-08,
+        4.2146848510894035e-08,
+        4.942156062059701e-08,
+        5.771194914292421e-08
+      ],
+      "relation__compound": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.4901161193847656e-08,
+        2.1073424255447017e-08,
+        2.9802322387695312e-08
+      ],
+      "relation__observation": [
+        0.0,
+        0.0,
+        0.0,
+        2.1073424255447017e-08,
+        4.2146848510894035e-08
+      ],
+      "relation__task": [
+        0.13096331778135917,
+        0.5895632009483482,
+        1.378758682146141
+      ],
+      "task__compound": [
+        0.02092035763446284,
+        0.08161501605750661,
+        1.3333204853092095
+      ],
+      "task__observation": [
+        0.5342985229135981,
+        1.1056914467525476,
+        1.4973372655740815
+      ]
+    }
+  },
+  "pure_families": {
+    "family_order": [
+      "core_mean",
+      "core_covariance",
+      "relation",
+      "b",
+      "mu_xi",
+      "sigma_xi",
+      "task"
+    ],
+    "incremental_ranks_lifting": [
+      {
+        "group": "core_mean",
+        "incremental_rank": 4,
+        "rank_after": 4,
+        "rank_before": 0
+      },
+      {
+        "group": "core_covariance",
+        "incremental_rank": 1,
+        "rank_after": 5,
+        "rank_before": 4
+      },
+      {
+        "group": "relation",
+        "incremental_rank": 6,
+        "rank_after": 11,
+        "rank_before": 5
+      },
+      {
+        "group": "b",
+        "incremental_rank": 2,
+        "rank_after": 13,
+        "rank_before": 11
+      },
+      {
+        "group": "mu_xi",
+        "incremental_rank": 0,
+        "rank_after": 13,
+        "rank_before": 13
+      },
+      {
+        "group": "sigma_xi",
+        "incremental_rank": 1,
+        "rank_after": 14,
+        "rank_before": 13
+      },
+      {
+        "group": "task",
+        "incremental_rank": 3,
+        "rank_after": 17,
+        "rank_before": 14
+      }
+    ],
+    "incremental_ranks_response": [
+      {
+        "group": "core_mean",
+        "incremental_rank": 4,
+        "rank_after": 4,
+        "rank_before": 0
+      },
+      {
+        "group": "core_covariance",
+        "incremental_rank": 1,
+        "rank_after": 5,
+        "rank_before": 4
+      },
+      {
+        "group": "relation",
+        "incremental_rank": 6,
+        "rank_after": 11,
+        "rank_before": 5
+      },
+      {
+        "group": "b",
+        "incremental_rank": 2,
+        "rank_after": 13,
+        "rank_before": 11
+      },
+      {
+        "group": "mu_xi",
+        "incremental_rank": 0,
+        "rank_after": 13,
+        "rank_before": 13
+      },
+      {
+        "group": "sigma_xi",
+        "incremental_rank": 1,
+        "rank_after": 14,
+        "rank_before": 13
+      },
+      {
+        "group": "task",
+        "incremental_rank": 3,
+        "rank_after": 17,
+        "rank_before": 14
+      }
+    ],
+    "lifting_geometry": {
+      "axis": "shift",
+      "group_ranks": {
+        "b": 4,
+        "core_covariance": 3,
+        "core_mean": 4,
+        "mu_xi": 4,
+        "relation": 6,
+        "sigma_xi": 3,
+        "task": 3
+      },
+      "joint_rank": 17,
+      "pairwise": {
+        "b__mu_xi": {
+          "first_in_second_residual": 1.290676910707674e-14,
+          "incremental_first_given_second": 0,
+          "incremental_second_given_first": 0,
+          "intersection_dimension": 4,
+          "principal_angles": [
+            0.0,
+            1.4901161193847656e-08,
+            2.1073424255447017e-08,
+            2.9802322387695312e-08
+          ],
+          "second_in_first_residual": 1.2907714162434335e-14
+        },
+        "b__sigma_xi": {
+          "first_in_second_residual": 0.6532928315015107,
+          "incremental_first_given_second": 2,
+          "incremental_second_given_first": 1,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            2.580956827951785e-08,
+            0.9990026254130343
+          ],
+          "second_in_first_residual": 0.4855121333070354
+        },
+        "b__task": {
+          "first_in_second_residual": 0.9891951477451452,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            1.3529248246287768,
+            1.3713602862404701,
+            1.5707963267948155
+          ],
+          "second_in_first_residual": 0.985567207464845
+        },
+        "core_covariance__b": {
+          "first_in_second_residual": 0.9334689186545512,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 4,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            1.153474492217642,
+            1.1996007175220713,
+            1.2660071272662257
+          ],
+          "second_in_first_residual": 0.9505383561806292
+        },
+        "core_covariance__mu_xi": {
+          "first_in_second_residual": 0.9334689186545522,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 4,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            1.1534744922176434,
+            1.1996007175220722,
+            1.2660071272662332
+          ],
+          "second_in_first_residual": 0.9505383561806301
+        },
+        "core_covariance__relation": {
+          "first_in_second_residual": 0.7709679749345518,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 6,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.7268447100911343,
+            0.886816940854542,
+            1.0367175524815724
+          ],
+          "second_in_first_residual": 0.8928582245728276
+        },
+        "core_covariance__sigma_xi": {
+          "first_in_second_residual": 0.9620878378474554,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            1.2261610614093463,
+            1.3025419332905979,
+            1.3726125990747124
+          ],
+          "second_in_first_residual": 0.9620878378474556
+        },
+        "core_covariance__task": {
+          "first_in_second_residual": 0.8304069150753117,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.672248199322893,
+            0.9705117396895229,
+            1.570796326794849
+          ],
+          "second_in_first_residual": 0.8304069150753116
+        },
+        "core_mean__b": {
+          "first_in_second_residual": 0.9004174258421707,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 4,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.8709500814139224,
+            1.0041094221528657,
+            1.3438001951940375,
+            1.51346156330242
+          ],
+          "second_in_first_residual": 0.9004174258421704
+        },
+        "core_mean__core_covariance": {
+          "first_in_second_residual": 0.6396043776508723,
+          "incremental_first_given_second": 2,
+          "incremental_second_given_first": 1,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            0.0,
+            0.92352333141142
+          ],
+          "second_in_first_residual": 0.4605703129963393
+        },
+        "core_mean__mu_xi": {
+          "first_in_second_residual": 0.9004174258421712,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 4,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.8709500814139218,
+            1.0041094221528661,
+            1.3438001951940457,
+            1.5134615633024244
+          ],
+          "second_in_first_residual": 0.9004174258421712
+        },
+        "core_mean__relation": {
+          "first_in_second_residual": 0.8319914562195488,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 6,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.770309947164106,
+            0.862899970013558,
+            1.0129356718467106,
+            1.4563907829048004
+          ],
+          "second_in_first_residual": 0.8915192214126496
+        },
+        "core_mean__sigma_xi": {
+          "first_in_second_residual": 0.9689983794771152,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            1.2180816896752589,
+            1.2913876708401115,
+            1.3481061015420068
+          ],
+          "second_in_first_residual": 0.9584416931869323
+        },
+        "core_mean__task": {
+          "first_in_second_residual": 0.8793863173429083,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.7376277689178374,
+            0.9592598271353755,
+            1.398479948527817
+          ],
+          "second_in_first_residual": 0.8353205333921601
+        },
+        "mu_xi__sigma_xi": {
+          "first_in_second_residual": 0.653292831501511,
+          "incremental_first_given_second": 2,
+          "incremental_second_given_first": 1,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            1.4901161193847656e-08,
+            2.1073424255447017e-08,
+            0.9990026254130354
+          ],
+          "second_in_first_residual": 0.4855121333070358
+        },
+        "mu_xi__task": {
+          "first_in_second_residual": 0.9891951477451448,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            1.3529248246287733,
+            1.3713602862404684,
+            1.5707963267948155
+          ],
+          "second_in_first_residual": 0.9855672074648446
+        },
+        "relation__b": {
+          "first_in_second_residual": 0.6411360374712642,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 2,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            0.0,
+            0.45501593044527805,
+            0.5499897547679968
+          ],
+          "second_in_first_residual": 0.3414427152781731
+        },
+        "relation__mu_xi": {
+          "first_in_second_residual": 0.6411360374712634,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 2,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            2.1073424255447017e-08,
+            2.580956827951785e-08,
+            0.4550159304452735,
+            0.5499897547679916
+          ],
+          "second_in_first_residual": 0.34144271527817033
+        },
+        "relation__sigma_xi": {
+          "first_in_second_residual": 0.7669156005788657,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 1,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            0.0,
+            0.8143716058472265
+          ],
+          "second_in_first_residual": 0.4199036518327557
+        },
+        "relation__task": {
+          "first_in_second_residual": 0.9805888254979271,
+          "incremental_first_given_second": 6,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            1.2007528658502582,
+            1.2492486528978997,
+            1.5707963267947938
+          ],
+          "second_in_first_residual": 0.9607855584795224
+        },
+        "sigma_xi__task": {
+          "first_in_second_residual": 1.0,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            1.5707963267948306,
+            1.5707963267948966,
+            1.5707963267948966
+          ],
+          "second_in_first_residual": 1.0
+        }
+      }
+    },
+    "metadata": {
+      "b": [
+        {
+          "axis_index": 0,
+          "parameter": "b",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 0,
+          "parameter": "b",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "b",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "b",
+          "sign": 1,
+          "step": 0.08
+        }
+      ],
+      "core_covariance": [
+        {
+          "axis_index": 0,
+          "parameter": "sigma_c",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 0,
+          "parameter": "sigma_c",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "sigma_c",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "sigma_c",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 2,
+          "parameter": "sigma_c",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 2,
+          "parameter": "sigma_c",
+          "sign": 1,
+          "step": 0.08
+        }
+      ],
+      "core_mean": [
+        {
+          "axis_index": 0,
+          "parameter": "mu_c",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 0,
+          "parameter": "mu_c",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "mu_c",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "mu_c",
+          "sign": 1,
+          "step": 0.08
+        }
+      ],
+      "mu_xi": [
+        {
+          "axis_index": 0,
+          "parameter": "mu_xi",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 0,
+          "parameter": "mu_xi",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "mu_xi",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "mu_xi",
+          "sign": 1,
+          "step": 0.08
+        }
+      ],
+      "relation": [
+        {
+          "axis_index": 0,
+          "parameter": "gamma",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 0,
+          "parameter": "gamma",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "gamma",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "gamma",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 2,
+          "parameter": "gamma",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 2,
+          "parameter": "gamma",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 3,
+          "parameter": "gamma",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 3,
+          "parameter": "gamma",
+          "sign": 1,
+          "step": 0.08
+        }
+      ],
+      "sigma_xi": [
+        {
+          "axis_index": 0,
+          "parameter": "sigma_xi",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 0,
+          "parameter": "sigma_xi",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "sigma_xi",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "sigma_xi",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 2,
+          "parameter": "sigma_xi",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 2,
+          "parameter": "sigma_xi",
+          "sign": 1,
+          "step": 0.08
+        }
+      ],
+      "task": [
+        {
+          "axis_index": 0,
+          "parameter": "beta",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 0,
+          "parameter": "beta",
+          "sign": 1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "beta",
+          "sign": -1,
+          "step": 0.08
+        },
+        {
+          "axis_index": 1,
+          "parameter": "beta",
+          "sign": 1,
+          "step": 0.08
+        }
+      ]
+    },
+    "response_geometry": {
+      "axis": "shift",
+      "group_ranks": {
+        "b": 4,
+        "core_covariance": 3,
+        "core_mean": 4,
+        "mu_xi": 4,
+        "relation": 6,
+        "sigma_xi": 3,
+        "task": 3
+      },
+      "joint_rank": 17,
+      "pairwise": {
+        "b__mu_xi": {
+          "first_in_second_residual": 1.5234132656973607e-14,
+          "incremental_first_given_second": 0,
+          "incremental_second_given_first": 0,
+          "intersection_dimension": 4,
+          "principal_angles": [
+            0.0,
+            0.0,
+            4.4703483581542975e-08,
+            5.575503985246929e-08
+          ],
+          "second_in_first_residual": 1.5278618889795584e-14
+        },
+        "b__sigma_xi": {
+          "first_in_second_residual": 0.538225377496429,
+          "incremental_first_given_second": 2,
+          "incremental_second_given_first": 1,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            3.332000937312528e-08,
+            0.40980415042070323
+          ],
+          "second_in_first_residual": 0.23003349605705567
+        },
+        "b__task": {
+          "first_in_second_residual": 0.904031263547876,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.6278214396560077,
+            1.29911705744813,
+            1.5081673225160348
+          ],
+          "second_in_first_residual": 0.8696915357159449
+        },
+        "core_covariance__b": {
+          "first_in_second_residual": 0.8791718547434364,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 4,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.6693533804345763,
+            1.3628559543326892,
+            1.4167432689379222
+          ],
+          "second_in_first_residual": 0.910882738133598
+        },
+        "core_covariance__mu_xi": {
+          "first_in_second_residual": 0.8791718547434346,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 4,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.6693533804345725,
+            1.3628559543326804,
+            1.4167432689379156
+          ],
+          "second_in_first_residual": 0.9108827381335967
+        },
+        "core_covariance__relation": {
+          "first_in_second_residual": 0.5905054097570648,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 6,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.0694955110074835,
+            0.6312147579334875,
+            0.9835651026063903
+          ],
+          "second_in_first_residual": 0.8211871403499813
+        },
+        "core_covariance__sigma_xi": {
+          "first_in_second_residual": 0.9129362298574139,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.8180747129058715,
+            1.3908490111518919,
+            1.5545911955571827
+          ],
+          "second_in_first_residual": 0.9129362298574141
+        },
+        "core_covariance__task": {
+          "first_in_second_residual": 0.653614975609643,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.12617712094597208,
+            0.5419882234749418,
+            1.5537675134985012
+          ],
+          "second_in_first_residual": 0.6536149756096428
+        },
+        "core_mean__b": {
+          "first_in_second_residual": 0.751534403353736,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 4,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.10147664857455542,
+            0.7399725636634523,
+            1.1007263445320594,
+            1.5479747454283208
+          ],
+          "second_in_first_residual": 0.7515344033537359
+        },
+        "core_mean__core_covariance": {
+          "first_in_second_residual": 0.589242066766392,
+          "incremental_first_given_second": 2,
+          "incremental_second_given_first": 1,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            2.580956827951785e-08,
+            0.6732859381502958
+          ],
+          "second_in_first_residual": 0.3600115058293354
+        },
+        "core_mean__mu_xi": {
+          "first_in_second_residual": 0.7515344033537347,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 4,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.10147664857454665,
+            0.7399725636634479,
+            1.1007263445320552,
+            1.5479747454283108
+          ],
+          "second_in_first_residual": 0.7515344033537346
+        },
+        "core_mean__relation": {
+          "first_in_second_residual": 0.6027937270794098,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 6,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.08048956023098444,
+            0.3438312942900518,
+            0.8919949857018094,
+            1.02164181295235
+          ],
+          "second_in_first_residual": 0.7586656169030315
+        },
+        "core_mean__sigma_xi": {
+          "first_in_second_residual": 0.8062551400323581,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.15327280475920566,
+            0.8682453005795367,
+            1.4959714174103642
+          ],
+          "second_in_first_residual": 0.7303399672559778
+        },
+        "core_mean__task": {
+          "first_in_second_residual": 0.7613367476593609,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.13523635684476915,
+            0.5816227778066679,
+            1.5325492181683837
+          ],
+          "second_in_first_residual": 0.6629566535217145
+        },
+        "mu_xi__sigma_xi": {
+          "first_in_second_residual": 0.5382253774964286,
+          "incremental_first_given_second": 2,
+          "incremental_second_given_first": 1,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            4.712160915387242e-08,
+            0.4098041504207022
+          ],
+          "second_in_first_residual": 0.2300334960570546
+        },
+        "mu_xi__task": {
+          "first_in_second_residual": 0.904031263547874,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.627821439656003,
+            1.2991170574481141,
+            1.508167322516035
+          ],
+          "second_in_first_residual": 0.8696915357159423
+        },
+        "relation__b": {
+          "first_in_second_residual": 0.680393149015496,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 2,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            3.942476676500724e-08,
+            0.28583482154980044,
+            0.9890945619713384
+          ],
+          "second_in_first_residual": 0.4409107118690066
+        },
+        "relation__mu_xi": {
+          "first_in_second_residual": 0.6803931490154953,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 2,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            5.771194914292421e-08,
+            0.285834821549806,
+            0.9890945619713293
+          ],
+          "second_in_first_residual": 0.44091071186900527
+        },
+        "relation__sigma_xi": {
+          "first_in_second_residual": 0.7415055105617363,
+          "incremental_first_given_second": 4,
+          "incremental_second_given_first": 1,
+          "intersection_dimension": 2,
+          "principal_angles": [
+            0.0,
+            5.960464477539064e-08,
+            0.578529053716987
+          ],
+          "second_in_first_residual": 0.3156910584524725
+        },
+        "relation__task": {
+          "first_in_second_residual": 0.8677687523080448,
+          "incremental_first_given_second": 6,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.2640281720022436,
+            0.7632582890828409,
+            1.4031660157172499
+          ],
+          "second_in_first_residual": 0.7113685507277652
+        },
+        "sigma_xi__task": {
+          "first_in_second_residual": 0.8950505980118555,
+          "incremental_first_given_second": 3,
+          "incremental_second_given_first": 3,
+          "intersection_dimension": 0,
+          "principal_angles": [
+            0.7290190980025143,
+            1.3686816695230362,
+            1.5609724734327346
+          ],
+          "second_in_first_residual": 0.8950505980118552
+        }
+      }
+    },
+    "step": 0.08
+  },
+  "quotient": {
+    "model_blind_dimension": 4,
+    "model_full_visible": false,
+    "phi_rank": 21,
+    "psi_rank": 17,
+    "quotient_dimension": 17,
+    "response_rank": 17,
+    "shift_blind_dimension": 0,
+    "shift_full_visible": true
+  },
+  "rank_profile": [
+    {
+      "phi_rank": 21,
+      "psi_rank": 17,
+      "rank_relative": 1e-12,
+      "response_rank": 17
+    },
+    {
+      "phi_rank": 21,
+      "psi_rank": 17,
+      "rank_relative": 1e-10,
+      "response_rank": 17
+    },
+    {
+      "phi_rank": 21,
+      "psi_rank": 17,
+      "rank_relative": 1e-09,
+      "response_rank": 17
+    },
+    {
+      "phi_rank": 21,
+      "psi_rank": 17,
+      "rank_relative": 1e-08,
+      "response_rank": 17
+    },
+    {
+      "phi_rank": 21,
+      "psi_rank": 17,
+      "rank_relative": 1e-06,
+      "response_rank": 17
+    }
+  ],
+  "scope": "3A-response-space-algebra-only",
+  "shift_geometry": {
+    "axis": "shift",
+    "group_ranks": {
+      "compound": 14,
+      "core_covariance": 12,
+      "core_mean": 14,
+      "nuisance_covariance": 9,
+      "nuisance_mean": 9,
+      "observation": 5,
+      "relation": 9,
+      "task": 3
+    },
+    "joint_rank": 17,
+    "pairwise": {
+      "core_covariance__compound": {
+        "first_in_second_residual": 1.1868125117444254e-11,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 2,
+        "intersection_dimension": 12,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.9802322387695312e-08,
+          2.9802322387695312e-08,
+          3.332000937312528e-08,
+          3.6500241499888574e-08,
+          3.6500241499888574e-08,
+          3.942476676500724e-08,
+          4.712160915387242e-08,
+          5.575503985246929e-08
+        ],
+        "second_in_first_residual": 0.37796447300922736
+      },
+      "core_covariance__nuisance_covariance": {
+        "first_in_second_residual": 0.5,
+        "incremental_first_given_second": 3,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4901161193847656e-08,
+          2.1073424255447017e-08,
+          2.580956827951785e-08,
+          2.9802322387695312e-08,
+          4.2146848510894035e-08
+        ],
+        "second_in_first_residual": 8.124543958413619e-12
+      },
+      "core_covariance__nuisance_mean": {
+        "first_in_second_residual": 0.5,
+        "incremental_first_given_second": 3,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          4.4703483581542975e-08
+        ],
+        "second_in_first_residual": 8.436045919434029e-12
+      },
+      "core_covariance__observation": {
+        "first_in_second_residual": 0.7637626158259734,
+        "incremental_first_given_second": 7,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 5,
+        "principal_angles": [
+          0.0,
+          3.6500241499888574e-08,
+          3.942476676500724e-08,
+          3.942476676500724e-08,
+          5.16191365590357e-08
+        ],
+        "second_in_first_residual": 3.901055999305597e-12
+      },
+      "core_covariance__relation": {
+        "first_in_second_residual": 0.5,
+        "incremental_first_given_second": 3,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4901161193847656e-08,
+          2.580956827951785e-08,
+          5.16191365590357e-08
+        ],
+        "second_in_first_residual": 7.771840952330832e-12
+      },
+      "core_covariance__task": {
+        "first_in_second_residual": 0.9142074096405961,
+        "incremental_first_given_second": 12,
+        "incremental_second_given_first": 3,
+        "intersection_dimension": 0,
+        "principal_angles": [
+          0.03472143197994888,
+          0.27799069306597046,
+          1.35176742872641
+        ],
+        "second_in_first_residual": 0.5857480271986191
+      },
+      "core_mean__compound": {
+        "first_in_second_residual": 5.606990892706422e-11,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 14,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4901161193847656e-08,
+          2.580956827951785e-08,
+          2.9802322387695312e-08,
+          2.9802322387695312e-08,
+          2.9802322387695312e-08,
+          3.332000937312528e-08,
+          3.6500241499888574e-08,
+          4.4703483581542975e-08
+        ],
+        "second_in_first_residual": 5.606990893869551e-11
+      },
+      "core_mean__core_covariance": {
+        "first_in_second_residual": 0.37796447300922725,
+        "incremental_first_given_second": 2,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 12,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.1073424255447017e-08,
+          2.580956827951785e-08,
+          3.332000937312528e-08,
+          3.332000937312528e-08,
+          5.372690074837192e-08,
+          5.575503985246929e-08,
+          6.143906154658886e-08
+        ],
+        "second_in_first_residual": 1.7884887137196827e-11
+      },
+      "core_mean__nuisance_covariance": {
+        "first_in_second_residual": 0.5976143046671968,
+        "incremental_first_given_second": 5,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          5.575503985246929e-08
+        ],
+        "second_in_first_residual": 1.592446866464009e-11
+      },
+      "core_mean__nuisance_mean": {
+        "first_in_second_residual": 0.5976143046671968,
+        "incremental_first_given_second": 5,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          4.4703483581542975e-08
+        ],
+        "second_in_first_residual": 1.6196534754329862e-11
+      },
+      "core_mean__observation": {
+        "first_in_second_residual": 0.8017837257372731,
+        "incremental_first_given_second": 9,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 5,
+        "principal_angles": [
+          0.0,
+          3.332000937312528e-08,
+          3.6500241499888574e-08,
+          3.942476676500724e-08,
+          4.2146848510894035e-08
+        ],
+        "second_in_first_residual": 1.1452292114338476e-11
+      },
+      "core_mean__relation": {
+        "first_in_second_residual": 0.5976143046671968,
+        "incremental_first_given_second": 5,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          1.4901161193847656e-08,
+          1.4901161193847656e-08,
+          3.332000937312528e-08,
+          3.6500241499888574e-08,
+          3.942476676500724e-08,
+          4.712160915387242e-08,
+          4.712160915387242e-08,
+          5.372690074837192e-08
+        ],
+        "second_in_first_residual": 1.5712284246218723e-11
+      },
+      "core_mean__task": {
+        "first_in_second_residual": 0.923956602286479,
+        "incremental_first_given_second": 14,
+        "incremental_second_given_first": 3,
+        "intersection_dimension": 0,
+        "principal_angles": [
+          0.02092035763463798,
+          0.0816150160572356,
+          1.3333204853271818
+        ],
+        "second_in_first_residual": 0.5632469087717653
+      },
+      "nuisance_covariance__compound": {
+        "first_in_second_residual": 1.4638441077769329e-12,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 5,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          2.9802322387695312e-08,
+          3.332000937312528e-08,
+          3.6500241499888574e-08,
+          3.942476676500724e-08,
+          3.942476676500724e-08,
+          6.322027276634106e-08
+        ],
+        "second_in_first_residual": 0.5976143046671971
+      },
+      "nuisance_covariance__observation": {
+        "first_in_second_residual": 0.6666666666666667,
+        "incremental_first_given_second": 4,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 5,
+        "principal_angles": [
+          0.0,
+          3.332000937312528e-08,
+          4.712160915387242e-08,
+          5.372690074837192e-08,
+          5.372690074837192e-08
+        ],
+        "second_in_first_residual": 5.466494616731227e-13
+      },
+      "nuisance_covariance__relation": {
+        "first_in_second_residual": 1.5764055021157868e-12,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.580956827951785e-08,
+          3.6500241499888574e-08,
+          5.372690074837192e-08
+        ],
+        "second_in_first_residual": 1.5764054857708136e-12
+      },
+      "nuisance_covariance__task": {
+        "first_in_second_residual": 0.8999851857619374,
+        "incremental_first_given_second": 9,
+        "incremental_second_given_first": 3,
+        "intersection_dimension": 0,
+        "principal_angles": [
+          0.13096331778143738,
+          0.5895632009482887,
+          1.378758682145621
+        ],
+        "second_in_first_residual": 0.6556828530416566
+      },
+      "nuisance_mean__compound": {
+        "first_in_second_residual": 1.51934129051417e-12,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 5,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          2.1073424255447017e-08,
+          2.1073424255447017e-08,
+          3.332000937312528e-08,
+          4.4703483581542975e-08,
+          5.372690074837192e-08,
+          5.575503985246929e-08,
+          6.495265578539184e-08
+        ],
+        "second_in_first_residual": 0.5976143046671971
+      },
+      "nuisance_mean__nuisance_covariance": {
+        "first_in_second_residual": 1.7436434232014543e-12,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          2.1073424255447017e-08,
+          3.332000937312528e-08,
+          3.6500241499888574e-08,
+          4.4703483581542975e-08,
+          6.989264130329237e-08
+        ],
+        "second_in_first_residual": 1.7436434900085123e-12
+      },
+      "nuisance_mean__observation": {
+        "first_in_second_residual": 0.6666666666666665,
+        "incremental_first_given_second": 4,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 5,
+        "principal_angles": [
+          0.0,
+          0.0,
+          3.332000937312528e-08,
+          5.372690074837192e-08,
+          6.143906154658886e-08
+        ],
+        "second_in_first_residual": 1.8362759590595084e-13
+      },
+      "nuisance_mean__relation": {
+        "first_in_second_residual": 1.6670118680762174e-12,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4901161193847656e-08,
+          2.1073424255447017e-08,
+          3.332000937312528e-08
+        ],
+        "second_in_first_residual": 1.6670125703808185e-12
+      },
+      "nuisance_mean__task": {
+        "first_in_second_residual": 0.899985185761936,
+        "incremental_first_given_second": 9,
+        "incremental_second_given_first": 3,
+        "intersection_dimension": 0,
+        "principal_angles": [
+          0.1309633177813515,
+          0.5895632009483665,
+          1.3787586821454296
+        ],
+        "second_in_first_residual": 0.6556828530416509
+      },
+      "observation__compound": {
+        "first_in_second_residual": 5.239088882912863e-13,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 9,
+        "intersection_dimension": 5,
+        "principal_angles": [
+          0.0,
+          3.942476676500724e-08,
+          4.2146848510894035e-08,
+          4.942156062059701e-08,
+          5.771194914292421e-08
+        ],
+        "second_in_first_residual": 0.8017837257372733
+      },
+      "relation__compound": {
+        "first_in_second_residual": 1.2444257735799094e-12,
+        "incremental_first_given_second": 0,
+        "incremental_second_given_first": 5,
+        "intersection_dimension": 9,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          1.4901161193847656e-08,
+          2.1073424255447017e-08,
+          2.9802322387695312e-08
+        ],
+        "second_in_first_residual": 0.5976143046671971
+      },
+      "relation__observation": {
+        "first_in_second_residual": 0.6666666666666665,
+        "incremental_first_given_second": 4,
+        "incremental_second_given_first": 0,
+        "intersection_dimension": 5,
+        "principal_angles": [
+          0.0,
+          0.0,
+          0.0,
+          2.1073424255447017e-08,
+          4.2146848510894035e-08
+        ],
+        "second_in_first_residual": 7.034311361133834e-13
+      },
+      "relation__task": {
+        "first_in_second_residual": 0.8999851857619515,
+        "incremental_first_given_second": 9,
+        "incremental_second_given_first": 3,
+        "intersection_dimension": 0,
+        "principal_angles": [
+          0.13096331778135917,
+          0.5895632009483482,
+          1.378758682146141
+        ],
+        "second_in_first_residual": 0.6556828530417147
+      },
+      "task__compound": {
+        "first_in_second_residual": 0.5632469087693435,
+        "incremental_first_given_second": 3,
+        "incremental_second_given_first": 14,
+        "intersection_dimension": 0,
+        "principal_angles": [
+          0.02092035763446284,
+          0.08161501605750661,
+          1.3333204853092095
+        ],
+        "second_in_first_residual": 0.9239566022861627
+      },
+      "task__observation": {
+        "first_in_second_residual": 0.827197913100344,
+        "incremental_first_given_second": 3,
+        "incremental_second_given_first": 5,
+        "intersection_dimension": 0,
+        "principal_angles": [
+          0.5342985229135981,
+          1.1056914467525476,
+          1.4973372655740815
+        ],
+        "second_in_first_residual": 0.900307632125008
+      }
+    }
+  },
+  "shift_nullspace": {
+    "coordinate_basis": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.6676760030280102,
+        0.8968887206661623,
+        0.07725208175624544
+      ],
+      [
+        0.0,
+        0.7200000000000043,
+        1.3186481314045333e-15,
+        1.4596833170469896e-15
+      ],
+      [
+        0.0,
+        -4.505047348377719e-16,
+        -1.103305805753682e-15,
+        -2.548271217092933e-16
+      ],
+      [
+        0.0,
+        4.673559343865084e-16,
+        -6.597352031957954e-18,
+        2.8473037604245506e-16
+      ],
+      [
+        0.0,
+        -1.6038905403545218,
+        -0.12658174889830004,
+        -1.1211753443259884
+      ],
+      [
+        0.0,
+        1.1548011890552532,
+        0.09113885920677392,
+        0.8072462479147108
+      ],
+      [
+        0.0,
+        1.965043929364161e-15,
+        9.396705057760881e-16,
+        6.848899675456479e-16
+      ],
+      [
+        0.0,
+        -3.047581474330007e-15,
+        -3.1204665806444574e-15,
+        -1.684474885410475e-15
+      ],
+      [
+        0.0,
+        -1.047031906337739,
+        -0.45662118937400437,
+        -0.03933033902685071
+      ],
+      [
+        0.0,
+        -1.9171014447793332e-16,
+        -0.7071067811865478,
+        2.6009899360907124e-16
+      ],
+      [
+        0.0,
+        4.007724162147841e-15,
+        4.319743898183538e-15,
+        -0.7071067811865459
+      ],
+      [
+        0.0,
+        3.195937535021439e-15,
+        0.5091168824543173,
+        1.292156656395985e-15
+      ],
+      [
+        0.0,
+        -4.621015973629999e-15,
+        -3.4357406386957964e-15,
+        0.5091168824543125
+      ],
+      [
+        0.0,
+        -1.2049830835432225e-15,
+        -1.3052105779432158e-15,
+        -8.315448153146891e-16
+      ],
+      [
+        0.0,
+        2.2682437547312673,
+        0.17901362604087484,
+        1.5855813777441339
+      ],
+      [
+        0.0,
+        -0.667676003028004,
+        -0.8968887206661592,
+        -0.07725208175624375
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      [
+        0.0,
+        -3.301582943767607e-15,
+        -1.0201948654930586e-15,
+        -7.020298038405204e-16
+      ]
+    ],
+    "coordinate_free_columns": [
+      0,
+      17,
+      18,
+      19
+    ],
+    "coordinate_functionals": [
+      {
+        "coefficients": {
+          "dM[0,0]": 1.0
+        },
+        "free_coordinate": "dM[0,0]",
+        "functional": {
+          "coordinate_vector": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "delta_mxx_functional": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "delta_mxy_functional": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "delta_my2_functional": 0.0,
+          "frobenius_norm_mxx": 1.0,
+          "l2_norm_mxy": 0.0
+        }
+      },
+      {
+        "coefficients": {
+          "dM[1,1]": 0.6676760030280102,
+          "dM[2,2]": 0.7200000000000043,
+          "dmXY[0]": 2.2682437547312673,
+          "dmXY[1]": -0.667676003028004,
+          "dmXY[2]": 1.0,
+          "sqrt2*dM[0,1]": -1.6038905403545218,
+          "sqrt2*dM[0,2]": 1.1548011890552532,
+          "sqrt2*dM[1,2]": -1.047031906337739
+        },
+        "free_coordinate": "dmXY[2]",
+        "functional": {
+          "coordinate_vector": [
+            0.0,
+            0.6676760030280102,
+            0.7200000000000043,
+            -4.505047348377719e-16,
+            4.673559343865084e-16,
+            -1.6038905403545218,
+            1.1548011890552532,
+            1.965043929364161e-15,
+            -3.047581474330007e-15,
+            -1.047031906337739,
+            -1.9171014447793332e-16,
+            4.007724162147841e-15,
+            3.195937535021439e-15,
+            -4.621015973629999e-15,
+            -1.2049830835432225e-15,
+            2.2682437547312673,
+            -0.667676003028004,
+            1.0,
+            0.0,
+            0.0,
+            -3.301582943767607e-15
+          ],
+          "delta_mxx_functional": [
+            [
+              0.0,
+              -1.1341218773656383,
+              0.8165677517032578,
+              1.3894958877828573e-15,
+              -2.154965526717244e-15
+            ],
+            [
+              -1.1341218773656383,
+              0.6676760030280102,
+              -0.7403633610900933,
+              -1.355595431825994e-16,
+              2.8338889321799124e-15
+            ],
+            [
+              0.8165677517032578,
+              -0.7403633610900933,
+              0.7200000000000043,
+              2.2598691032622786e-15,
+              -3.2675517309251284e-15
+            ],
+            [
+              1.3894958877828573e-15,
+              -1.355595431825994e-16,
+              2.2598691032622786e-15,
+              -4.505047348377719e-16,
+              -8.520517095884887e-16
+            ],
+            [
+              -2.154965526717244e-15,
+              2.8338889321799124e-15,
+              -3.2675517309251284e-15,
+              -8.520517095884887e-16,
+              4.673559343865084e-16
+            ]
+          ],
+          "delta_mxy_functional": [
+            2.2682437547312673,
+            -0.667676003028004,
+            1.0,
+            0.0,
+            0.0
+          ],
+          "delta_my2_functional": -3.301582943767607e-15,
+          "frobenius_norm_mxx": 2.4426415434096858,
+          "l2_norm_mxy": 2.5672399529254855
+        }
+      },
+      {
+        "coefficients": {
+          "dM[1,1]": 0.8968887206661623,
+          "dmXY[0]": 0.17901362604087484,
+          "dmXY[1]": -0.8968887206661592,
+          "dmXY[3]": 1.0,
+          "sqrt2*dM[0,1]": -0.12658174889830004,
+          "sqrt2*dM[0,2]": 0.09113885920677392,
+          "sqrt2*dM[1,2]": -0.45662118937400437,
+          "sqrt2*dM[1,3]": -0.7071067811865478,
+          "sqrt2*dM[2,3]": 0.5091168824543173
+        },
+        "free_coordinate": "dmXY[3]",
+        "functional": {
+          "coordinate_vector": [
+            0.0,
+            0.8968887206661623,
+            1.3186481314045333e-15,
+            -1.103305805753682e-15,
+            -6.597352031957954e-18,
+            -0.12658174889830004,
+            0.09113885920677392,
+            9.396705057760881e-16,
+            -3.1204665806444574e-15,
+            -0.45662118937400437,
+            -0.7071067811865478,
+            4.319743898183538e-15,
+            0.5091168824543173,
+            -3.4357406386957964e-15,
+            -1.3052105779432158e-15,
+            0.17901362604087484,
+            -0.8968887206661592,
+            0.0,
+            1.0,
+            0.0,
+            -1.0201948654930586e-15
+          ],
+          "delta_mxx_functional": [
+            [
+              0.0,
+              -0.08950681302044074,
+              0.06444490537471584,
+              6.644473867152647e-16,
+              -2.206503079639694e-15
+            ],
+            [
+              -0.08950681302044074,
+              0.8968887206661623,
+              -0.3228799394398252,
+              -0.5000000000000001,
+              3.0545202033947905e-15
+            ],
+            [
+              0.06444490537471584,
+              -0.3228799394398252,
+              1.3186481314045333e-15,
+              0.36000000000000215,
+              -2.4294355040199972e-15
+            ],
+            [
+              6.644473867152647e-16,
+              -0.5000000000000001,
+              0.36000000000000215,
+              -1.103305805753682e-15,
+              -9.229232505400607e-16
+            ],
+            [
+              -2.206503079639694e-15,
+              3.0545202033947905e-15,
+              -2.4294355040199972e-15,
+              -9.229232505400607e-16,
+              -6.597352031957954e-18
+            ]
+          ],
+          "delta_mxy_functional": [
+            0.17901362604087484,
+            -0.8968887206661592,
+            0.0,
+            1.0,
+            0.0
+          ],
+          "delta_my2_functional": -1.0201948654930586e-15,
+          "frobenius_norm_mxx": 1.3403139627173863,
+          "l2_norm_mxy": 1.355158756591449
+        }
+      },
+      {
+        "coefficients": {
+          "dM[1,1]": 0.07725208175624544,
+          "dmXY[0]": 1.5855813777441339,
+          "dmXY[1]": -0.07725208175624375,
+          "dmXY[4]": 1.0,
+          "sqrt2*dM[0,1]": -1.1211753443259884,
+          "sqrt2*dM[0,2]": 0.8072462479147108,
+          "sqrt2*dM[1,2]": -0.03933033902685071,
+          "sqrt2*dM[1,4]": -0.7071067811865459,
+          "sqrt2*dM[2,4]": 0.5091168824543125
+        },
+        "free_coordinate": "dmXY[4]",
+        "functional": {
+          "coordinate_vector": [
+            0.0,
+            0.07725208175624544,
+            1.4596833170469896e-15,
+            -2.548271217092933e-16,
+            2.8473037604245506e-16,
+            -1.1211753443259884,
+            0.8072462479147108,
+            6.848899675456479e-16,
+            -1.684474885410475e-15,
+            -0.03933033902685071,
+            2.6009899360907124e-16,
+            -0.7071067811865459,
+            1.292156656395985e-15,
+            0.5091168824543125,
+            -8.315448153146891e-16,
+            1.5855813777441339,
+            -0.07725208175624375,
+            0.0,
+            0.0,
+            1.0,
+            -7.020298038405204e-16
+          ],
+          "delta_mxx_functional": [
+            [
+              0.0,
+              -0.7927906888720687,
+              0.5708092959878889,
+              4.84290340418162e-16,
+              -1.1911036142121793e-15
+            ],
+            [
+              -0.7927906888720687,
+              0.07725208175624544,
+              -0.027810749432252053,
+              1.8391776216077075e-16,
+              -0.49999999999999883
+            ],
+            [
+              0.5708092959878889,
+              -0.027810749432252053,
+              1.4596833170469896e-15,
+              9.136927340929365e-16,
+              0.35999999999999877
+            ],
+            [
+              4.84290340418162e-16,
+              1.8391776216077075e-16,
+              9.136927340929365e-16,
+              -2.548271217092933e-16,
+              -5.879909777695319e-16
+            ],
+            [
+              -1.1911036142121793e-15,
+              -0.49999999999999883,
+              0.35999999999999877,
+              -5.879909777695319e-16,
+              2.8473037604245506e-16
+            ]
+          ],
+          "delta_mxy_functional": [
+            1.5855813777441339,
+            -0.07725208175624375,
+            0.0,
+            0.0,
+            1.0
+          ],
+          "delta_my2_functional": -7.020298038405204e-16,
+          "frobenius_norm_mxx": 1.6356636014781627,
+          "l2_norm_mxy": 1.8761759484613
+        }
+      }
+    ],
+    "coordinate_labels": [
+      "dM[0,0]",
+      "dM[1,1]",
+      "dM[2,2]",
+      "dM[3,3]",
+      "dM[4,4]",
+      "sqrt2*dM[0,1]",
+      "sqrt2*dM[0,2]",
+      "sqrt2*dM[0,3]",
+      "sqrt2*dM[0,4]",
+      "sqrt2*dM[1,2]",
+      "sqrt2*dM[1,3]",
+      "sqrt2*dM[1,4]",
+      "sqrt2*dM[2,3]",
+      "sqrt2*dM[2,4]",
+      "sqrt2*dM[3,4]",
+      "dmXY[0]",
+      "dmXY[1]",
+      "dmXY[2]",
+      "dmXY[3]",
+      "dmXY[4]",
+      "dmY2"
+    ],
+    "dimension": 4,
+    "max_annihilation_residual": 4.498788038795893e-16,
+    "orthonormal_basis": [
+      [
+        -0.0,
+        -0.0,
+        -0.0,
+        1.0
+      ],
+      [
+        0.30812107015189155,
+        -0.3335829111639822,
+        0.14710374230862733,
+        0.0
+      ],
+      [
+        -0.20802780229893986,
+        -0.19668213520609176,
+        0.14864285927767126,
+        0.0
+      ],
+      [
+        1.611473879962211e-16,
+        3.0333269829846765e-17,
+        -7.809436848108302e-18,
+        0.0
+      ],
+      [
+        6.5396590042122144e-18,
+        -3.4098403192920683e-17,
+        -1.3136161220657176e-16,
+        0.0
+      ],
+      [
+        0.03757897008798663,
+        -0.08756663127081542,
+        -0.4803945199904406,
+        0.0
+      ],
+      [
+        -0.027056858463350757,
+        0.06304797451498718,
+        0.3458840543931171,
+        0.0
+      ],
+      [
+        9.095097810169986e-17,
+        3.0564348635362903e-17,
+        4.1505515361373337e-17,
+        0.0
+      ],
+      [
+        -1.2521554135705097e-16,
+        -1.5379439203707742e-16,
+        2.5732933764975346e-16,
+        0.0
+      ],
+      [
+        0.04743295812483052,
+        0.362992791136393,
+        -0.2208740733623632,
+        0.0
+      ],
+      [
+        -0.3755323041318646,
+        0.1492099840800481,
+        0.0008138896967722299,
+        0.0
+      ],
+      [
+        -0.22616544613026318,
+        -0.3483967763265093,
+        -0.09423644757677757,
+        0.0
+      ],
+      [
+        0.27038325897494253,
+        -0.10743118853763467,
+        -0.0005860005816760873,
+        0.0
+      ],
+      [
+        0.1628391212137895,
+        0.25084567895508664,
+        0.06785024225527996,
+        0.0
+      ],
+      [
+        -5.3631856350860736e-17,
+        -7.123433564838822e-17,
+        6.5110623278991e-17,
+        0.0
+      ],
+      [
+        -0.05314468915844407,
+        0.12383791755451123,
+        0.6793804454601942,
+        0.0
+      ],
+      [
+        -0.30812107015189166,
+        0.3335829111639824,
+        -0.1471037423086267,
+        0.0
+      ],
+      [
+        -0.28892750319297256,
+        -0.27316963223068336,
+        0.20644841566343222,
+        0.0
+      ],
+      [
+        0.5310828776125006,
+        -0.2110147831274778,
+        -0.0011510138474509206,
+        0.0
+      ],
+      [
+        0.31984624125758004,
+        0.49270744616801515,
+        0.1332704622329398,
+        0.0
+      ],
+      [
+        4.751328967189571e-17,
+        3.182030445561971e-16,
+        -8.948039995221121e-16,
+        0.0
+      ]
+    ],
+    "orthonormal_functionals": [
+      {
+        "basis_index": 0,
+        "coefficients": {
+          "dM[1,1]": 0.30812107015189155,
+          "dM[2,2]": -0.20802780229893986,
+          "dmXY[0]": -0.05314468915844407,
+          "dmXY[1]": -0.30812107015189166,
+          "dmXY[2]": -0.28892750319297256,
+          "dmXY[3]": 0.5310828776125006,
+          "dmXY[4]": 0.31984624125758004,
+          "sqrt2*dM[0,1]": 0.03757897008798663,
+          "sqrt2*dM[0,2]": -0.027056858463350757,
+          "sqrt2*dM[1,2]": 0.04743295812483052,
+          "sqrt2*dM[1,3]": -0.3755323041318646,
+          "sqrt2*dM[1,4]": -0.22616544613026318,
+          "sqrt2*dM[2,3]": 0.27038325897494253,
+          "sqrt2*dM[2,4]": 0.1628391212137895
+        },
+        "functional": {
+          "coordinate_vector": [
+            -0.0,
+            0.30812107015189155,
+            -0.20802780229893986,
+            1.611473879962211e-16,
+            6.5396590042122144e-18,
+            0.03757897008798663,
+            -0.027056858463350757,
+            9.095097810169986e-17,
+            -1.2521554135705097e-16,
+            0.04743295812483052,
+            -0.3755323041318646,
+            -0.22616544613026318,
+            0.27038325897494253,
+            0.1628391212137895,
+            -5.3631856350860736e-17,
+            -0.05314468915844407,
+            -0.30812107015189166,
+            -0.28892750319297256,
+            0.5310828776125006,
+            0.31984624125758004,
+            4.751328967189571e-17
+          ],
+          "delta_mxx_functional": [
+            [
+              -0.0,
+              0.026572344579221772,
+              -0.019132088097039947,
+              6.431205337126115e-17,
+              -8.854075840351532e-17
+            ],
+            [
+              0.026572344579221772,
+              0.30812107015189155,
+              0.033540166341805205,
+              -0.26554143880625036,
+              -0.1599231206287899
+            ],
+            [
+              -0.019132088097039947,
+              0.033540166341805205,
+              -0.20802780229893986,
+              0.1911898359405003,
+              0.11514464685272872
+            ],
+            [
+              6.431205337126115e-17,
+              -0.26554143880625036,
+              0.1911898359405003,
+              1.611473879962211e-16,
+              -3.792344931331643e-17
+            ],
+            [
+              -8.854075840351532e-17,
+              -0.1599231206287899,
+              0.11514464685272872,
+              -3.792344931331643e-17,
+              6.5396590042122144e-18
+            ]
+          ],
+          "delta_mxy_functional": [
+            -0.05314468915844407,
+            -0.30812107015189166,
+            -0.28892750319297256,
+            0.5310828776125006,
+            0.31984624125758004
+          ],
+          "delta_my2_functional": 4.751328967189571e-17,
+          "frobenius_norm_mxx": 0.659095823914553,
+          "l2_norm_mxy": 0.7520589703596362
+        }
+      },
+      {
+        "basis_index": 1,
+        "coefficients": {
+          "dM[1,1]": -0.3335829111639822,
+          "dM[2,2]": -0.19668213520609176,
+          "dmXY[0]": 0.12383791755451123,
+          "dmXY[1]": 0.3335829111639824,
+          "dmXY[2]": -0.27316963223068336,
+          "dmXY[3]": -0.2110147831274778,
+          "dmXY[4]": 0.49270744616801515,
+          "sqrt2*dM[0,1]": -0.08756663127081542,
+          "sqrt2*dM[0,2]": 0.06304797451498718,
+          "sqrt2*dM[1,2]": 0.362992791136393,
+          "sqrt2*dM[1,3]": 0.1492099840800481,
+          "sqrt2*dM[1,4]": -0.3483967763265093,
+          "sqrt2*dM[2,3]": -0.10743118853763467,
+          "sqrt2*dM[2,4]": 0.25084567895508664
+        },
+        "functional": {
+          "coordinate_vector": [
+            -0.0,
+            -0.3335829111639822,
+            -0.19668213520609176,
+            3.0333269829846765e-17,
+            -3.4098403192920683e-17,
+            -0.08756663127081542,
+            0.06304797451498718,
+            3.0564348635362903e-17,
+            -1.5379439203707742e-16,
+            0.362992791136393,
+            0.1492099840800481,
+            -0.3483967763265093,
+            -0.10743118853763467,
+            0.25084567895508664,
+            -7.123433564838822e-17,
+            0.12383791755451123,
+            0.3335829111639824,
+            -0.27316963223068336,
+            -0.2110147831274778,
+            0.49270744616801515,
+            3.182030445561971e-16
+          ],
+          "delta_mxx_functional": [
+            [
+              -0.0,
+              -0.06191895877725556,
+              0.044581650319624064,
+              2.1612258182614908e-17,
+              -1.087490575178798e-16
+            ],
+            [
+              -0.06191895877725556,
+              -0.3335829111639822,
+              0.25667466413437556,
+              0.1055073915637388,
+              -0.24635372308400752
+            ],
+            [
+              0.044581650319624064,
+              0.25667466413437556,
+              -0.19668213520609176,
+              -0.07596532192589196,
+              0.1773746806204854
+            ],
+            [
+              2.1612258182614908e-17,
+              0.1055073915637388,
+              -0.07596532192589196,
+              3.0333269829846765e-17,
+              -5.0370281790293926e-17
+            ],
+            [
+              -1.087490575178798e-16,
+              -0.24635372308400752,
+              0.1773746806204854,
+              -5.0370281790293926e-17,
+              -3.4098403192920683e-17
+            ]
+          ],
+          "delta_mxy_functional": [
+            0.12383791755451123,
+            0.3335829111639824,
+            -0.27316963223068336,
+            -0.2110147831274778,
+            0.49270744616801515
+          ],
+          "delta_my2_functional": 3.182030445561971e-16,
+          "frobenius_norm_mxx": 0.7151762701420777,
+          "l2_norm_mxy": 0.6989441341235121
+        }
+      },
+      {
+        "basis_index": 2,
+        "coefficients": {
+          "dM[1,1]": 0.14710374230862733,
+          "dM[2,2]": 0.14864285927767126,
+          "dmXY[0]": 0.6793804454601942,
+          "dmXY[1]": -0.1471037423086267,
+          "dmXY[2]": 0.20644841566343222,
+          "dmXY[3]": -0.0011510138474509206,
+          "dmXY[4]": 0.1332704622329398,
+          "sqrt2*dM[0,1]": -0.4803945199904406,
+          "sqrt2*dM[0,2]": 0.3458840543931171,
+          "sqrt2*dM[1,2]": -0.2208740733623632,
+          "sqrt2*dM[1,3]": 0.0008138896967722299,
+          "sqrt2*dM[1,4]": -0.09423644757677757,
+          "sqrt2*dM[2,3]": -0.0005860005816760873,
+          "sqrt2*dM[2,4]": 0.06785024225527996
+        },
+        "functional": {
+          "coordinate_vector": [
+            -0.0,
+            0.14710374230862733,
+            0.14864285927767126,
+            -7.809436848108302e-18,
+            -1.3136161220657176e-16,
+            -0.4803945199904406,
+            0.3458840543931171,
+            4.1505515361373337e-17,
+            2.5732933764975346e-16,
+            -0.2208740733623632,
+            0.0008138896967722299,
+            -0.09423644757677757,
+            -0.0005860005816760873,
+            0.06785024225527996,
+            6.5110623278991e-17,
+            0.6793804454601942,
+            -0.1471037423086267,
+            0.20644841566343222,
+            -0.0011510138474509206,
+            0.1332704622329398,
+            -8.948039995221121e-16
+          ],
+          "delta_mxx_functional": [
+            [
+              -0.0,
+              -0.33969022273009697,
+              0.24457696036566973,
+              2.9348831368669504e-17,
+              1.819593196503834e-16
+            ],
+            [
+              -0.33969022273009697,
+              0.14710374230862733,
+              -0.156181555062822,
+              0.0005755069237255066,
+              -0.06663523111647
+            ],
+            [
+              0.24457696036566973,
+              -0.156181555062822,
+              0.14864285927767126,
+              -0.0004143649850824226,
+              0.04797736640385848
+            ],
+            [
+              2.9348831368669504e-17,
+              0.0005755069237255066,
+              -0.0004143649850824226,
+              -7.809436848108302e-18,
+              4.604016324785721e-17
+            ],
+            [
+              1.819593196503834e-16,
+              -0.06663523111647,
+              0.04797736640385848,
+              4.604016324785721e-17,
+              -1.3136161220657176e-16
+            ]
+          ],
+          "delta_mxy_functional": [
+            0.6793804454601942,
+            -0.1471037423086267,
+            0.20644841566343222,
+            -0.0011510138474509206,
+            0.1332704622329398
+          ],
+          "delta_my2_functional": -8.948039995221121e-16,
+          "frobenius_norm_mxx": 0.6755881956180887,
+          "l2_norm_mxy": 0.7372791804611699
+        }
+      },
+      {
+        "basis_index": 3,
+        "coefficients": {
+          "dM[0,0]": 1.0
+        },
+        "functional": {
+          "coordinate_vector": [
+            1.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "delta_mxx_functional": [
+            [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ]
+          ],
+          "delta_mxy_functional": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "delta_my2_functional": 0.0,
+          "frobenius_norm_mxx": 1.0,
+          "l2_norm_mxy": 0.0
+        }
+      }
+    ]
+  },
+  "status": "complete",
+  "structural_reachability": {
+    "all_structural_parameters_vary": {
+      "null_dimension": 1,
+      "null_functionals": [
+        {
+          "basis_index": 0,
+          "coefficients": {
+            "dM[0,0]": 1.0
+          },
+          "functional": {
+            "coordinate_vector": [
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "delta_mxx_functional": [
+              [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ]
+            ],
+            "delta_mxy_functional": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "delta_my2_functional": 0.0,
+            "frobenius_norm_mxx": 1.0,
+            "l2_norm_mxy": 0.0
+          }
+        }
+      ],
+      "numerical_rank": 20,
+      "sample_count": 512
+    },
+    "current_design_only_null_dimension": 3,
+    "current_null_intersection_with_all_structural_null": 1,
+    "interpretation": "The current four-dimensional null contains one structural invariant under the beta-varying family and three directions not excited by the finite current probe design; the statement is numerical for the sampled full family.",
+    "task_fixed": {
+      "null_dimension": 7,
+      "numerical_rank": 14,
+      "sample_count": 512
+    }
+  },
+  "tolerance": {
+    "angle_absolute": 1e-08,
+    "rank_relative": 1e-09,
+    "residual_absolute": 1e-09
+  }
+}

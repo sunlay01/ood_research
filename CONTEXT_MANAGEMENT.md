@@ -1,39 +1,60 @@
-# 上下文管理与研究状态
+# 上下文管理
 
-## 当前状态
+## 唯一事实来源
 
-- 项目阶段：0.5 — 已完成一次探索性正则扫描；尚未完成独立的新颖性检索，不能进入论文级验证。
-- 工作性母题：**正则化目标如何诱导表示空间的优化，并影响 OOD 风险？**
-- 当前最小对象：多环境、core/spurious 分解、线性或浅层表示模型。
-- 当前候选方法：ERM、IRMv1、weight decay/L1、谱或低秩正则；它们是比较对象，非承诺都要研究。
-- 当前候选路线：representation risk decomposition、nested oracle error、局部 sensitivity / regularization path。尚未选择主路线。
+长期研究状态只写在仓库内，不以聊天记录为准：
 
-2026-09-04 探索更新：`EXPL-001` 已在统一合成模型上比较 ERM、L1、L2、IRMv1、MMD、CORAL、gradient alignment 与 Hessian alignment。完整复跑逐字节一致；结果只标记为 `EXPLORATORY_SIGNAL`。当前最具体的理论候选是线性平方损失下的 gradient/Hessian risk-difference identity，以及它向 unseen target 扩展时所需的 coverage、task discrepancy 与 sufficiency residual。详见 `docs/experiments/02_exploratory_regularizer_results.md` 与理论 ledger。
+```text
+README.md                                  # 当前中心问题与形式化
+PROJECT_PROMPT_CN.md                       # agent 工作约束
+docs/research/research_state.md            # 短状态与 Claim 队列
+docs/research/open_questions.md            # 未决问题
+docs/theory/00_theory_ledger.md            # 定义、恒等式、条件结果和反例
+docs/research/01_evidence_register.md      # 文献证据
+docs/experiments/00_experiment_ledger.md   # 已授权实验及限制
+docs/decisions/                             # 可追溯路线决定
+```
 
-## 已知证据状态
+开始任何工作前先读 `README.md`、`research_state.md`、`open_questions.md` 和最新 ADR。聊天和附件可提供建议，但不能覆盖这些文件中的已记录事实，除非由 Lead 修改相应记录。
 
-讨论链接中提到 Wu et al. (2020)、Galstyan et al. (2022)、Shui et al.、Moment Alignment (2025)、Lai & Wang (2024) 等线索。这些只是**待核验种子**：不要直接引用、不要依赖其中的年份/结论或“尚无人做过”的判断。
+## 活跃范式
 
-2026-09-04 更新：分享链接中可定位到的 10 篇论文已下载到本地 `papers/pdfs/`，并在 `papers/download_manifest.tsv` 和 `docs/research/01_evidence_register.md` 登记。`VERIFIED` 仅表示论文存在性、元数据、PDF 下载和页数已核验；技术命题、定理和证明质量仍需在后续精读阶段逐页确认。
+活跃主线是：
 
-## 术语约定
+```text
+regularizer Omega_j
+  -> learned source-supervised semantic latent subspaces
+  -> controlled task-preserving shifts
+  -> blind/mixed component causing failure
+  -> component main effects + interactions + remainder error accounting
+```
 
-| 名称 | 约定 |
-| --- | --- |
-| representation / feature / latent space | 对判别网络中的 `z=Φ_θ(x)`，三者默认指学习到的表示；若使用生成模型含义须另行声明。 |
-| environment | 训练或测试分布索引 `e`；必须写清它改变的是何种条件分布。 |
-| core / spurious | 生成机制上的定义，不能仅以“与标签相关”代替；需给出环境变化和可辨识性条件。 |
-| induced representation regularizer | `Ψ(Z,w)=inf_{θ: Φ_θ(X)=Z} Ω(θ,w)` 类型对象；是否可达、有限、可解须证明或列为假设。 |
-| regularization response | `S_{j,k}(λ)=E_k(Z_{λ,j})-E_k(Z_0)`；它是比较量，不自动意味着因果机制。 |
+不是 `Omega_j -> universal certificate`，也不是以 operator/nullspace 或 intervention-risk ANOVA 替代 latent decomposition。Certificate 是盲区与 remainder 被额外假设消除或控制时的子结果。PCA/cluster 不能命名语义；target 不能参与分解或选择。
 
-## 证据标签
+`LATENT-001` 是当前唯一实验主线，冻结合同位于 `docs/experiments/LATENT-001_contract.md`。执行受 `DESIGN_GATE`、`MVP_GATE`、`CODE_GATE`、`RESULT_GATE` 约束；Supervisor 是独立 ephemeral read-only Codex，Lead 不得覆盖其 `VETO`。
 
-- `VERIFIED`：已由原始论文/正式出版页面/可靠元数据核验。
-- `PARTIALLY_VERIFIED`：论文存在已核验，但具体定理或叙述未逐页核验。
-- `UNVERIFIED`：来自聊天、笔记或二手线索，不能作为依据。
-- `CONJECTURE`：本项目提出的可证伪主张。
-- `NEGATIVE_RESULT`：预注册检验未支持主张；保留而不删除。
+## Claim 协作协议
 
-## 上下文压缩规则
+一个 Claim 至少有：
 
-每次完成阶段时更新对应 ledger，而不是只依赖聊天记录。后续会话读取：主提示词、本文件、课题简报、最新决策记录和当前阶段 ledger。若这些文件与聊天记忆矛盾，以带证据、带日期、带来源的仓库记录为准。
+```text
+Statement; status; assumptions; state space and operator;
+controlled/blind definition; theory evidence; counterexample evidence;
+literature collision; executable check; audit decision.
+```
+
+状态只可为 `UNVERIFIED`、`PARTIAL`、`PROVED`、`DISPROVED`、`COLLIDED` 或 `REVISE`。任何 agent 的单次输出只是证据，不直接改变状态。
+
+- Theory：给出精确定义、证明、常数与适用范围。
+- Counterexample：攻击 nullspace、可行前沿、source invisibility、抵消、重参数化和 out-of-family shift。
+- Literature：核对原始结果的 intervention set、观测变量、假设与 theorem scope。
+- Experiment：只实现已有 Claim 的可反驳预测或代数核验。
+- Auditor：检查 claim inflation、符号、oracle 泄漏、未申明假设和实验混淆。
+
+## 文件写入规则
+
+1. 每个结论标为 `definition`、`assumption`、`exact equality`、`conditional theorem`、`bound`、`diagnostic`、`counterexample` 或 `conjecture`。
+2. 一般保留旧记录；用户已明确要求永久删除的错误 `MECH-001/C011` 是例外，不能恢复或引用。
+3. source-only training/selection 不能使用 target risk、target moments 或 target coverage residual；它们可做离线标签或理论 remainder。
+4. `Omega` 小、representation compact、PCA factor 或 cluster 都不是 OOD 机制结论。必须先给出实际 operator 和 risk bridge。
+5. 对每个正向 theorem，同时写明 operator nullspace 或其没有危害的额外条件。

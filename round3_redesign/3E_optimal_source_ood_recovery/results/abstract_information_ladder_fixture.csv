@@ -1,0 +1,6 @@
+design,dim_U,rank_O,kernel_dimension,rank_A,structural_ambiguity_dimension,alpha,normalized_alpha,ambiguity_diameter,change_from_previous
+no_information,3,0,3,3,3,5.0,1.0,10.0,
+first_observation,3,1,2,3,2,5.0,1.0,10.0,0.0
+duplicate_first_observation,3,1,2,3,2,5.0,1.0,10.0,0.0
+second_observation,3,2,1,3,1,5.0,1.0,10.0,0.0
+task_relevant_third_observation,3,3,0,3,0,0.0,0.0,0.0,-5.0

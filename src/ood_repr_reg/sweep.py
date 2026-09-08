@@ -114,6 +114,67 @@ def _effective_rank(z: Tensor) -> tuple[float, float]:
     return float(rank), float(trace)
 
 
+def _cross_fitted_oracle_mse(
+    model: LinearRepresentation,
+    batches: tuple[Batch, ...],
+    *,
+    use_latent: bool,
+    ridge: float,
+) -> float:
+    """Estimate the best task-wise linear head on X or on the fixed Z.
+
+    The two-fold cross-fitting keeps this as an offline diagnostic rather than
+    reusing the evaluation labels to report an in-sample oracle risk.
+    """
+    by_task: dict[int, list[Batch]] = {}
+    for batch in batches:
+        by_task.setdefault(batch.task, []).append(batch)
+    fold_losses = []
+    for task_batches in by_task.values():
+        features = torch.cat(
+            [model.encode(batch.x) if use_latent else batch.x for batch in task_batches]
+        )
+        labels = torch.cat([batch.y for batch in task_batches])
+        for fold in (0, 1):
+            indices = torch.arange(features.shape[0], device=features.device)
+            evaluation = indices[indices % 2 == fold]
+            training = indices[indices % 2 != fold]
+            weights = _ridge_weights(features[training], labels[training, None], ridge)
+            prediction = _ridge_predict(features[evaluation], weights).squeeze(-1)
+            fold_losses.append((prediction - labels[evaluation]).square().mean())
+    return float(torch.stack(fold_losses).mean())
+
+
+def _latent_oracle_metrics(
+    model: LinearRepresentation, bundle: DatasetBundle, ridge: float
+) -> dict[str, float]:
+    source_latent = _cross_fitted_oracle_mse(
+        model, bundle.source_eval, use_latent=True, ridge=ridge
+    )
+    target_latent = _cross_fitted_oracle_mse(
+        model, bundle.target_domain_eval, use_latent=True, ridge=ridge
+    )
+    source_raw = _cross_fitted_oracle_mse(
+        model, bundle.source_eval, use_latent=False, ridge=ridge
+    )
+    target_raw = _cross_fitted_oracle_mse(
+        model, bundle.target_domain_eval, use_latent=False, ridge=ridge
+    )
+    return {
+        "source_latent_oracle_mse": source_latent,
+        "target_latent_oracle_mse": target_latent,
+        "source_raw_oracle_mse": source_raw,
+        "target_raw_oracle_mse": target_raw,
+        "source_head_mismatch_mse": float(_mean_mse(model, bundle.source_eval) - source_latent),
+        "target_head_mismatch_mse": float(
+            _mean_mse(model, bundle.target_domain_eval) - target_latent
+        ),
+        "source_representation_gap_mse": source_latent - source_raw,
+        "target_representation_gap_mse": target_latent - target_raw,
+        "latent_oracle_cross_domain_gap": target_latent - source_latent,
+    }
+
+
 def _representation_metrics(
     model: LinearRepresentation, bundle: DatasetBundle, ridge: float
 ) -> dict[str, float]:
@@ -220,6 +281,7 @@ def _checkpoint_metrics(
         }
         row.update(_representation_metrics(model, bundle, ridge))
         row.update(_all_diagnostic_penalties(model, bundle, mmd_max_samples))
+        row.update(_latent_oracle_metrics(model, bundle, ridge))
         row["own_regularizer"] = 0.0 if method == "erm" else row[f"diagnostic_{method}"]
     model.train()
     return row

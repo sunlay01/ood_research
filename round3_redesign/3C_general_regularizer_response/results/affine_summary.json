@@ -1,0 +1,192 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "method": "L2",
+      "lambda": 0.0,
+      "norm_z0": 1.1447107384917088e-16,
+      "rank_K": 9,
+      "kernel_dimension": 0,
+      "min_local_metric_eigenvalue": 0.9999999999999986,
+      "pi_operator_norm": 0.9345814757997493,
+      "fd_error": 3.682473175010187e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "L2",
+      "lambda": 0.0001,
+      "norm_z0": 2.937454854767399e-05,
+      "rank_K": 9,
+      "kernel_dimension": 0,
+      "min_local_metric_eigenvalue": 1.000019206895289,
+      "pi_operator_norm": 0.9344899744696573,
+      "fd_error": 3.679788124264303e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "L2",
+      "lambda": 0.001,
+      "norm_z0": 0.0002936279532324288,
+      "rank_K": 9,
+      "kernel_dimension": 0,
+      "min_local_metric_eigenvalue": 1.0001920689528794,
+      "pi_operator_norm": 0.9336672606001966,
+      "fd_error": 3.669811479548053e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "L2",
+      "lambda": 0.01,
+      "norm_z0": 0.0029246193951398894,
+      "rank_K": 9,
+      "kernel_dimension": 0,
+      "min_local_metric_eigenvalue": 1.0019206895287789,
+      "pi_operator_norm": 0.9255183738141346,
+      "fd_error": 3.571325139020155e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "L2",
+      "lambda": 0.1,
+      "norm_z0": 0.028165111383536928,
+      "rank_K": 9,
+      "kernel_dimension": 0,
+      "min_local_metric_eigenvalue": 1.0192068952877706,
+      "pi_operator_norm": 0.8511627910806573,
+      "fd_error": 2.7579677249063814e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "IRMV1",
+      "lambda": 0.0,
+      "norm_z0": 1.1447107384917088e-16,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9999999999999986,
+      "pi_operator_norm": 0.9345814757997493,
+      "fd_error": 3.682473175010187e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "IRMV1",
+      "lambda": 0.0001,
+      "norm_z0": 3.671849054164343e-07,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9999999998351157,
+      "pi_operator_norm": 0.9345809004943383,
+      "fd_error": 3.68320818275945e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "IRMV1",
+      "lambda": 0.001,
+      "norm_z0": 3.663482231721637e-06,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9999999835559427,
+      "pi_operator_norm": 0.9345757364573962,
+      "fd_error": 3.6821690959536566e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "IRMV1",
+      "lambda": 0.01,
+      "norm_z0": 3.582408275969782e-05,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9999983986757744,
+      "pi_operator_norm": 0.9345254199842713,
+      "fd_error": 3.6766643860171957e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "IRMV1",
+      "lambda": 0.1,
+      "norm_z0": 0.000297054503863219,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9998731053613791,
+      "pi_operator_norm": 0.9341291392271694,
+      "fd_error": 3.66308203053062e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "VREX",
+      "lambda": 0.0,
+      "norm_z0": 1.1447107384917088e-16,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9999999999999986,
+      "pi_operator_norm": 0.9345814757997493,
+      "fd_error": 3.682473175010187e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "VREX",
+      "lambda": 0.0001,
+      "norm_z0": 5.8909164106171134e-08,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9999998454328719,
+      "pi_operator_norm": 0.9345814114978905,
+      "fd_error": 3.685541572821573e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "VREX",
+      "lambda": 0.001,
+      "norm_z0": 5.890908017886471e-07,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.999998454330782,
+      "pi_operator_norm": 0.9345808334882529,
+      "fd_error": 3.676726281607103e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "VREX",
+      "lambda": 0.01,
+      "norm_z0": 5.8908240922558295e-06,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9999845435136608,
+      "pi_operator_norm": 0.9345751233885181,
+      "fd_error": 3.681890422355275e-10,
+      "status": "PASS"
+    },
+    {
+      "method": "VREX",
+      "lambda": 0.1,
+      "norm_z0": 5.8899850233160535e-05,
+      "rank_K": 3,
+      "kernel_dimension": 6,
+      "min_local_metric_eigenvalue": 0.9998454557169264,
+      "pi_operator_norm": 0.9345250169648858,
+      "fd_error": 3.684485304248966e-10,
+      "status": "PASS"
+    }
+  ],
+  "world_tangent_dimension": 8,
+  "source_observation_shape": [
+    275,
+    8
+  ],
+  "response_shape": [
+    9,
+    8
+  ],
+  "max_fd_error": 3.685541572821573e-10,
+  "valid_row_count": 15,
+  "vrex_invalid_path_audit": {
+    "method": "VREX",
+    "lambda": 10000.0,
+    "valid": false,
+    "min_local_metric_eigenvalue": -2.3832950108900075,
+    "entered_primary_comparison": false
+  },
+  "target_risk_used": false,
+  "semantic_labels_used": false,
+  "cluster_labels_used": false,
+  "regularizer_geometry_used_for_selection": false
+}

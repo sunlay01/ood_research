@@ -1,6 +1,14 @@
 .DS_Store
 __pycache__/
 *.py[cod]
+.lake/
+.lake2/
+*.olean
+*.ilean
+*.trace
+*.c
+*.c.hash
+*.setup.json
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -12,6 +20,9 @@ venv/
 data/
 artifacts/*
 !artifacts/.gitkeep
+# Regenerate this oversized 3B detail payload with run_round3_3b.py; GitHub's
+# regular Git transport rejects blobs larger than 100 MB.
+round3/3B_response_order/results/round3_3b_results.json
 papers/pdfs/*
 !papers/pdfs/.gitkeep
 wandb/

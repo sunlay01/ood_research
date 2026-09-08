@@ -1,0 +1,170 @@
+{
+  "rotation": {
+    "rows": [
+      {
+        "seed": 0,
+        "gram_max_error": 7.25990103971694e-18,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 1,
+        "gram_max_error": 2.7755575615628914e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 2,
+        "gram_max_error": 5.551115123125783e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 3,
+        "gram_max_error": 2.7755575615628914e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 4,
+        "gram_max_error": 1.3877787807814457e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 5,
+        "gram_max_error": 2.0816681711721685e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 6,
+        "gram_max_error": 2.6984517609170236e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 7,
+        "gram_max_error": 1.3877787807814457e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 8,
+        "gram_max_error": 1.734723475976807e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 9,
+        "gram_max_error": 1.3877787807814457e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 10,
+        "gram_max_error": 1.6468031203703922e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 11,
+        "gram_max_error": 2.42861286636753e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 12,
+        "gram_max_error": 1.5328752410058826e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999998
+      },
+      {
+        "seed": 13,
+        "gram_max_error": 1.3877787807814457e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 14,
+        "gram_max_error": 1.2126342242262226e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 15,
+        "gram_max_error": 1.3877787807814457e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 16,
+        "gram_max_error": 6.938893903907228e-18,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 17,
+        "gram_max_error": 1.3877787807814457e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 0.9999999999999999
+      },
+      {
+        "seed": 18,
+        "gram_max_error": 1.3877787807814457e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      },
+      {
+        "seed": 19,
+        "gram_max_error": 1.445082277481813e-17,
+        "assignment_ari": 1.0,
+        "gram_correlation": 1.0
+      }
+    ],
+    "mean_assignment_ari": 1.0
+  },
+  "noise_sweep": [
+    {
+      "n_noise": 0,
+      "ambient_dimension": 5,
+      "response_rank": 5,
+      "module_count": 6,
+      "filtered_null_count": 0
+    },
+    {
+      "n_noise": 4,
+      "ambient_dimension": 9,
+      "response_rank": 5,
+      "module_count": 6,
+      "filtered_null_count": 2
+    },
+    {
+      "n_noise": 16,
+      "ambient_dimension": 21,
+      "response_rank": 5,
+      "module_count": 6,
+      "filtered_null_count": 2
+    },
+    {
+      "n_noise": 64,
+      "ambient_dimension": 69,
+      "response_rank": 5,
+      "module_count": 6,
+      "filtered_null_count": 2
+    },
+    {
+      "n_noise": 256,
+      "ambient_dimension": 261,
+      "response_rank": 5,
+      "module_count": 6,
+      "filtered_null_count": 2
+    }
+  ],
+  "bootstrap": {
+    "mean_pairwise_stability": 0.8301767676767677,
+    "std_pairwise_stability": 0.19555751639316435,
+    "repeats": 64,
+    "uses_mechanism_labels": false
+  }
+}

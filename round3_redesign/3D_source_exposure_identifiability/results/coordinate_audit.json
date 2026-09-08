@@ -1,0 +1,5 @@
+{
+  "predictor_state_transform_invertible": true,
+  "response_gram_max_error": 7.355227538141662e-16,
+  "source_reference_invariant": true
+}

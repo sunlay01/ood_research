@@ -1,0 +1,8 @@
+family,finite_rank,rank_d1,cumulative_le2,cumulative_le3,new_at_2,new_at_3,moment_degree_range
+core_mean,5,2,5,5,3,0,"[2, 2]"
+core_covariance,3,3,3,3,0,0,"[1, 1]"
+relation,7,4,7,7,3,0,"[2, 2]"
+b,5,2,5,5,3,0,"[2, 2]"
+mu_xi,5,2,5,5,3,0,"[2, 2]"
+sigma_xi,3,3,3,3,0,0,"[1, 1]"
+task,3,2,3,3,1,0,"[2, 2]"

@@ -1,0 +1,279 @@
+{
+  "family": {
+    "family_name": "legacy_gaussian_mechanism",
+    "source_defined": false,
+    "mechanism_defined": true,
+    "canonical_parameterization": false,
+    "relation_exposed_source": true,
+    "expose_u_at_source": false,
+    "reference_feature_dimension": 9,
+    "target_only_u_is_modeled": true,
+    "source_observation_uses_target_risk": false
+  },
+  "geometry": {
+    "dim_U": 8,
+    "source_dimension": 275,
+    "response_dimension": 9,
+    "rank_O": 7,
+    "kernel_dimension": 1,
+    "rank_A": 5,
+    "alpha": 0.319942029393104,
+    "normalized_alpha": 1.0,
+    "information_floor": 0.05118145108608892,
+    "ambiguity_diameter": 0.639884058786208,
+    "metric": [
+      [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ]
+    ],
+    "tolerance": 1e-09
+  },
+  "legacy_matrix_hash": "ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828",
+  "compatibility_matrix_hash": "ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828",
+  "three_c_table": {
+    "available": true,
+    "matched_rows": 15,
+    "expected_rows": 15,
+    "max_abs_error": 2.220446049250313e-15,
+    "pass": true
+  },
+  "three_e_table": {
+    "available": true,
+    "matched_rows": 15,
+    "expected_rows": 15,
+    "max_abs_error": 2.152683413469969e-16,
+    "pass": true
+  },
+  "coral_status": {
+    "method": "CORAL",
+    "constraint_object": "representation covariance differences",
+    "predictor_status": "representation-level fixed-gauge conditional",
+    "gauge_status": "gauge-dependent/induced-degenerate",
+    "psd": "True",
+    "restricted_rank": "0",
+    "relevant_kernel_dimension": "5"
+  },
+  "rows": [
+    {
+      "quantity": "tangent_dimension",
+      "frozen_old_result": 8,
+      "refactored_result": 8,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "observation_rows",
+      "frozen_old_result": 275,
+      "refactored_result": 275,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "observation_columns",
+      "frozen_old_result": 8,
+      "refactored_result": 8,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "response_rows",
+      "frozen_old_result": 9,
+      "refactored_result": 9,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "response_columns",
+      "frozen_old_result": 8,
+      "refactored_result": 8,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "rank_O",
+      "frozen_old_result": 7,
+      "refactored_result": 7,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "hidden_information_floor",
+      "frozen_old_result": 0.05118145108608892,
+      "refactored_result": 0.05118145108608892,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "u_exposed_information_floor",
+      "frozen_old_result": 0.0,
+      "refactored_result": 0.0,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "legacy_matrix_hash",
+      "frozen_old_result": "ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828",
+      "refactored_result": "ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828",
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "facade_matrix_hash",
+      "frozen_old_result": "ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828",
+      "refactored_result": "ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828",
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "family_response_factorization_residual",
+      "frozen_old_result": 0.0,
+      "refactored_result": 4.8871735837982024e-17,
+      "abs_error": 4.8871735837982024e-17,
+      "rel_error": 4.8871735837982024e-17,
+      "pass": true
+    },
+    {
+      "quantity": "legacy_response_factorization_residual",
+      "frozen_old_result": 0.0,
+      "refactored_result": 4.8871735837982024e-17,
+      "abs_error": 4.8871735837982024e-17,
+      "rel_error": 4.8871735837982024e-17,
+      "pass": true
+    },
+    {
+      "quantity": "source_contrast_rank",
+      "frozen_old_result": 4,
+      "refactored_result": 4,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "vrex_large_lambda_metric",
+      "frozen_old_result": true,
+      "refactored_result": true,
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    },
+    {
+      "quantity": "3C-B scalar table max error",
+      "frozen_old_result": 0.0,
+      "refactored_result": 2.220446049250313e-15,
+      "abs_error": 2.220446049250313e-15,
+      "rel_error": 2.220446049250313e-15,
+      "pass": true
+    },
+    {
+      "quantity": "3E-B scalar table max error",
+      "frozen_old_result": 0.0,
+      "refactored_result": 2.152683413469969e-16,
+      "abs_error": 2.152683413469969e-16,
+      "rel_error": 2.152683413469969e-16,
+      "pass": true
+    },
+    {
+      "quantity": "CORAL gauge/noncanonical status",
+      "frozen_old_result": "fixed-representation + gauge-dependent/induced-degenerate",
+      "refactored_result": {
+        "predictor_status": "representation-level fixed-gauge conditional",
+        "gauge_status": "gauge-dependent/induced-degenerate"
+      },
+      "abs_error": 0.0,
+      "rel_error": 0.0,
+      "pass": true
+    }
+  ],
+  "pass": true,
+  "frozen_snapshot": {
+    "matrix_hash": "ba982e44ddfd867ba75d4a9f0c10c91e842b1d93255223aa2cda47d1a0b95828",
+    "hidden_information_floor": 0.05118145108608892
+  }
+}

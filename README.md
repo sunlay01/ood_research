@@ -1,145 +1,158 @@
-# OOD Regularization → Representation → Error
+# OOD Regularization Through Semantic Latent Decomposition
 
-一个围绕 OOD / Domain Generalization 理论问题的研究仓库：**不同正则化目标如何改变表示空间，并由此影响跨环境误差？**
+本仓库研究的不是“哪一个 DG 算法在 benchmark 上分数更高”，也不是把一个小的正则值直接叫作 OOD guarantee。核心问题是：
 
-本仓库不是把“某个正则在几个 benchmark 上更好”当作结论，而是把研究拆成可审计的链条：
+\[
+\boxed{
+\text{正则项实际控制什么}
+\;\longrightarrow\;
+\text{因此能适应什么跨域变化}
+\;\longrightarrow\;
+\text{又遗漏什么危险变化}
+\;\longrightarrow\;
+\text{这些部分如何共同决定目标域误差。}
+}
+\]
 
-```text
-正则化目标 Ω  →  参数响应  →  表示空间几何/统计量  →  OOD 误差分量
-```
+第一阶段只做 **cross-domain**，不做 cross-task。上界、certificate 和 worst-case robustness 是这一问题在 blind residual 被消除、界定或估计时的强特例，不是研究中心。
 
-当前的研究假设、而非已验证结论，是：可以把算法自身的正则项视为一个可下降的指标，研究它下降时隐空间到底发生了什么，并进一步判断这些变化能否进入跨域/跨任务误差的上界分析。
+## 当前状态
 
-## 从这里开始
+已完成的是一个可审计的线性基座，而不是论文结论：
 
-1. 阅读 [项目总提示词](PROJECT_PROMPT_CN.md)、[上下文管理](CONTEXT_MANAGEMENT.md) 和 [课题简报](docs/research/00_project_brief.md)。
-2. 先运行 [文献与新颖性闸门](prompts/01_novelty_and_literature_gate.md)，不要先写“新方法”。
-3. 只有取得 `DISTINCT_BUT_RISKY`、`CLEAR_NOVELTY_GAP` 或受限的 `PROBE_AUTHORIZED` 结论，才进入 [理论路线](prompts/02_theory_decomposition.md) 或 [局部实验](prompts/04_local_experiment.md)。
-4. 每个阶段都把可复查证据登记到相应 ledger；没有证据时标记 `UNVERIFIED`，不补造引用。
+- `C001`：部分可观测 Gaussian SCM 的 exact risk-transport identity 与两类预先声明的干预球上的 worst-case formula；
+- `C004a`：source variation 不能观察某个 nuisance direction 的严格构造；
+- `C002-IRM`：standard scalar-scale IRMv1 在该模型中存在 source-optimal、zero-penalty 但对允许 sign-flip 有大目标风险的 blind direction。该现象与 Kamath et al. (2021) 高度接近，只作为负对照；
+- `C010`：在中心化标量 relation family，三条不同 source relation 使 IRMv1 的二次 radial-response design 满秩，从而将 penalty 条件地上界到有效 nuisance coefficient；两条 relation 可以留下 C002 的盲支。target transport 的总体界仍保留 source fit、观测残差与 target geometry；
+- Anchor Regression/DRIG 与当前自由 conditional-relation/moment balls 尚未严格匹配，不能冒称为本框架的正例。
 
-## 当前探索状态
+`LATENT-001` 已在第二次 `CODE_GATE` 被独立 Supervisor `VETO`，因此未获授权运行十 seed 主实验。直接阻断原因是冻结合同要求 source-only lambda selection，但 runner 只枚举强度网格，没有实现和测试可审计的选择路径。MVP 仍提供一个有效负结果：五个 projector 在代数上正交且风险记账闭合，但合法投影顺序的最大偏差约为 `0.4116`，超过 `0.25` 阈值，所以当前 SCM 下应判为 `SEMANTIC_DECOMPOSITION_NOT_IDENTIFIED`，不能把这组 projector 称为唯一语义分解。后续只有重新注册协议或显式重置 Supervisor protocol 后才能启动新一轮。冻结合同见 [LATENT-001](docs/experiments/LATENT-001_contract.md)，停止报告见 [LATENT-001 code-gate stop](docs/experiments/reports/LATENT-001_code_gate_stop.md)。
 
-`EXPL-001` 已用统一合成模型比较 ERM、L1、L2、IRMv1、MMD、CORAL、gradient alignment 和 Hessian alignment。执行结果可逐值复现，但科学解释仍是探索性的。主要结果、统计限制和候选风险上界见 `docs/experiments/02_exploratory_regularizer_results.md`。
+## 形式化对象
 
-## 当前研究计划
+### 任务与环境
 
-导师给出的核心问题被固定为：**针对具体算法，分析其正则项下降时 latent representation 的变化，并把这种变化和跨域/跨任务误差联系起来；若可能，给出误差上界或反例。** 因此本项目不把正则项只当作训练技巧，而是把它当作待解释的机制指标。
+令 `C_tau` 为最小任务相关潜变量，所有同一任务环境共享：
 
-### 1. 研究问题
+\[
+Y=f_\tau(C_\tau,\epsilon_Y).
+\]
 
-给定算法 `j` 的训练目标
+环境可改变 nuisance、观测与抽样机制：
 
-```text
-min_{theta,w} R_S(w(Phi_theta(x))) + lambda * Omega_j(theta,w),
-z = Phi_theta(x),
-```
+\[
+A_e=g_e(C_\tau,Y,\epsilon_A),\qquad
+X_e=r_e(C_\tau,A_e,\epsilon_X),
+\]
 
-我们要回答三个问题：
+但不得修改 `f_tau`。允许的 task-preserving changes 构成 `I_tau`。这只是 task-equivalence class；要获得可学习的 DG 子族，还必须另行声明 task-state coverage、observation recoverability、source diversity 和目标干预几何。共享任务机制本身不蕴含可泛化性。
 
-1. 当 `Omega_j` 在训练中下降时，`z` 中的 core 信息、spurious 信息、domain 信息、秩、方差、环境矩差异和 head sensitivity 分别如何变化？
-2. 这些 latent changes 中，哪些只是塌缩或整体 shrinkage，哪些真正与跨域误差、跨任务误差或 joint domain-task error 有关？
-3. 能否把 `Omega_j` 或它诱导的 representation quantity 写进形式化结论：exact identity、local expansion、conditional upper bound，或者证明某类 `Omega-only bound` 不成立？
+### 风险对象
 
-### 2. 当前证据与暂定判断
+区分三个风险，避免把 ERM、观测 oracle 和真实任务 oracle 混成一个记号：
 
-`EXPL-001` 的作用是生成猜想，不是验证论文结论。当前最重要的经验信号是：
+\[
+R_e^{C,*}=\inf_h R_e(h(C_\tau)),\qquad
+R_e^{X,*}=\inf_{f\in\mathcal F_X}R_e(f),\qquad
+R_e(f).
+\]
 
-- 正则项下降本身不保证目标误差下降。CORAL 和 Hessian alignment 能明显压低 covariance discrepancy，但 cross-domain error 没有随之改善。
-- 只让不同域的边际表示更接近也不够。MMD 降低 domain probe accuracy，但 joint error 方向不稳定。
-- 含标签/风险梯度信息的量更值得推进。Gradient alignment 和 IRMv1 对 cross-domain error 出现更稳定的改善信号，但不能自动推出 cross-task 改善。
-- 强 L1/L2 更像信息压缩或表示塌缩，不适合直接解释为有益 OOD 机制。
-- 跨域项和跨任务项必须分开定义；一个 source-domain regularizer 不能直接替代 task discrepancy。
+ERM 只作比较基线。对方法 `j`，保留 signed quantity
+\(R_T(f_j)-R_T(f_{\rm ERM})\)，必要时再取正部。鲁棒 causal excess 是
+\(\sup_{\iota\in\mathcal I_\tau}[R_\iota(f)-R_\iota^{C,*}]\)，它不能被低退化的常数预测器替代。
 
-### 3. 主理论路线
+## 当前研究接口
 
-当前优先路线是平方损失、线性 head 下的 gradient/Hessian risk-difference identity。固定表示 `z` 和 head `w`，令
-
-```text
-R_e(w) = E_e[(w^T z - y)^2],
-g_e = grad_w R_e(w),
-H_e = grad_w^2 R_e(w).
-```
-
-若两个环境的 `E[y^2]` 相同，则可得候选恒等式：
-
-```text
-R_e(w) - R_e'(w)
-= w^T(g_e - g_e') - 1/2 * w^T(H_e - H_e')w.
-```
-
-由此得到条件上界：
+主线固定为：
 
 ```text
-|R_e(w) - R_e'(w)|
-<= ||w|| * ||g_e - g_e'|| + 1/2 * ||w||^2 * ||H_e - H_e'||_op.
+regularizer
+  -> learned latent semantic subspaces
+  -> controlled task-preserving shifts
+  -> blind/mixed components and failure
+  -> componentwise generalization-error accounting and bound
 ```
 
-这条路线的意义是：gradient alignment 和 Hessian alignment 不只是“看起来合理的指标”，而是可能对应风险差中的两个明确项。下一步必须查重该恒等式和近邻上界是否已被已有 DG、MTL、moment alignment 或 transferability 文献覆盖。
+候选分解为
 
-### 4. 下一轮实验计划
+\[
+\mathcal Z=\mathcal Z_{task}\oplus\mathcal Z_{relation}\oplus
+\mathcal Z_{mean}\oplus\mathcal Z_{covariance}\oplus\mathcal Z_{residual}.
+\]
 
-下一轮不再只问“哪个算法好”，而是围绕可证伪机制跑实验：
+这是需要由 source factorial supervision、cross-fitting、生成机制 oracle recovery、置换负对照和顺序敏感性共同检验的假设。白化只定义度量，PCA、聚类、encoder 坐标和 target 表现都不能命名这些子空间。
 
-| 实验方向 | 要检验的内容 | 失败/转向信号 |
-| --- | --- | --- |
-| combined gradient + Hessian | 两个项一起是否比单独项更稳定地控制 source-source risk gap 和 target error | 下降但误差无改善，或只由 source risk/shrinkage 解释 |
-| coverage sweep | 目标域位于源域 convex hull 内、有限外推、spurious sign flip 时，上界残差如何变化 | 只在某个合成设置有效，无法形成条件定理 |
-| IRMv1 projection counterexample | 构造 IRMv1 scalar penalty 小但完整 gradient discrepancy 大的例子 | 反例失败，说明需要补充 rank/angle 条件 |
-| CORAL/Hessian/MMD negative controls | 检查 marginal/covariance alignment 为零但 label-risk gap 仍大的情形 | 若反例不存在，需要重新审视候选上界 |
-| cross-task protocol | 明确定义 target task 的 head adaptation 和 task discrepancy | domain discrepancy 能解释一切，或 task term 不可估计 |
+## 正则作用算子
 
-这些实验必须先写预注册：生成模型、正则定义、固定项、种子、指标、成功/失败/无结论标准。只有通过 prior-art gate 或受限的 `PROBE_AUTHORIZED`，才升级为正式本地验证。
+对训练目标
 
-### 5. 当前可写成数学命题的候选
+\[
+\hat f_{j,\lambda}\in\arg\min_f\{\widehat R_S(f)+\lambda\Omega_j(f)\},
+\]
 
-- `CONJECTURE`：在平方损失、线性 head、source/target moment coverage 与 bounded head norm 条件下，source risk 加上 gradient/Hessian discrepancy 和 coverage residual 可以上界 target risk。
-- `CONJECTURE`：IRMv1 的 scalar gradient penalty 通常只能控制 `w^T g_e` 投影，不能控制完整环境风险差；需要额外 rank、angle 或一维表示条件。
-- `CONJECTURE`：跨任务误差上界至少需要 task discrepancy、representation sufficiency residual 和 head adaptation protocol，不能只靠 domain regularizer。
-- `NEGATIVE_RESULT`：分布无关的 `target risk <= C * Omega_j` 通常不成立，因为正则可被重标度，且表示塌缩可让 alignment penalty 变小但任务误差不小。
+不预设不同正则都在学习“因果不变性”。每种方法先抽取它在明确状态空间中的 **实际作用算子** `L_{j,S}`：它可以是 moment discrepancy、environment-wise risk/gradient response、局部 Hessian response、marginal IPM、谱放大或参数/表示大小。
 
-### 6. 工作闸门
+`Omega_j` 与 `L_{j,S}` 不自动等价。只有证明或验证桥接关系
 
-1. **文献闸门**：优先查重 gradient/Hessian risk identity、IRMv1 projection gap、moment alignment risk bound。若发现 exact equivalent，停止把恒等式本身作为贡献。
-2. **反例闸门**：先构造最小反例，证明哪些正则项不能单独成为上界。
-3. **验证闸门**：把通过反例筛选的命题转成预注册实验，复跑、统计解释和独立审查后才允许写成 `PASS_LOCAL_SIGNAL`。
-4. **论文闸门**：只有当新颖性、理论义务和实验信号同时站住，才进入论文大纲和正式写作。
+\[
+\|L_{j,S}v\|\leq \omega_j(v)\quad\text{或}\quad
+\|P_jv\|\leq c\,\Omega_j(f)^{1/2}
+\]
 
-## 目录
+后，才允许说该 penalty 控制某个量。
 
-```text
-.
-├── PROJECT_PROMPT_CN.md       # 每次项目工作时的主提示词
-├── CONTEXT_MANAGEMENT.md      # 研究状态、术语和证据纪律
-├── prompts/                   # 可直接复制给 Codex 的阶段性 prompts
-├── docs/
-│   ├── research/               # 课题、检索、文献矩阵与新颖性记录
-│   ├── theory/                 # 定义、假设、定理和证明账本
-│   ├── experiments/            # 预注册、运行和结果验证
-│   └── decisions/              # 可追溯的阶段决策
-├── src/ood_repr_reg/           # 可复现实验代码
-├── configs/                    # 实验配置，提交到 Git
-├── tests/                      # 对度量、数据生成和复现性的测试
-├── notebooks/                  # 仅用于探索；可复现结论必须迁移到 src/ 或 docs/
-└── artifacts/                  # 本地输出，不提交到 Git
-```
+在一个线性、局部线性化或 Hilbert-space setting 中，定义候选受控/盲区：
 
-## 研究顺序与停止条件
+\[
+\mathcal C_j=\mathcal H_{S,T}\cap\overline{\operatorname{range}(L_{j,S}^*)},
+\qquad
+\mathcal B_j\supseteq\mathcal H_{S,T}\cap\ker(L_{j,S}).
+\]
 
-| 阶段 | 目标 | 允许推进的条件 | 主要产物 |
-| --- | --- | --- | --- |
-| 0 | 把母题收敛成可证伪问题 | 能给出对象、机制、可观测量与反例边界 | `research/00_project_brief.md` |
-| 1–2 | 文献与新颖性闸门 | 非 `EXACT_ALREADY_DONE` / `CLOSE_EQUIVALENT` | 证据包、文献矩阵、重叠表 |
-| 3–4 | 理论建模 | 明确可证明的简化模型与假设 | 定义/假设/定理 ledger |
-| 5 | 小型机制实验 | 已通过新颖性闸门或有 `PROBE_AUTHORIZED` | 预注册、代码、结果表 |
-| 6 | 独立审稿闸门 | 证据足以反驳最强替代解释 | `PASS` / `REVISE` / `PIVOT` / `STOP` |
+`H_{S,T}` 是对当前 target family 有害的方向；它还必须扣除 source-unobservable directions。非线性或非二次 penalty 中，这些是局部/诊断定义，不能冒充全局正交分解。
 
-**不满足推进条件就停止、修改问题或转向；不以“再多跑几组”替代机制和新颖性。**
+研究产物必须同时给出：
 
-## 开发约定
+1. `controlled component`：正则直接约束的 shift/model/representation mode；
+2. `blind component`：penalty nullspace、source-unobservable direction 或模型/干预族失配；
+3. `error accounting`：这些部分及统计、coverage、observation remainder 如何进入目标风险。
 
-- 文献结论、定理前提、实验假设、结果解释必须分开记录。
-- `notebooks/` 不承载唯一的研究结论；可复现代码放入 `src/`，配置放入 `configs/`，结果写回实验 ledger。
-- 使用固定随机种子、记录环境/数据版本，并预先声明失败或无结论标准。
-- `artifacts/` 和原始数据不进 Git；仅提交可复现的代码、配置、文档和轻量汇总结果。
+## 误差记账，而非先验 certificate
 
-详见 [Prompt 索引](prompts/README.md)。
+一般形式是待证明或待估计的条件结构：
+
+\[
+R_T(f)=R_S(f)+E^{\rm ctrl}_j(f,T)+E^{\rm blind}_j(f,T)
+{}+E^{\rm interaction}_j(f,T)+E^{\rm stat/obs}_j(f,T).
+\]
+
+只有当某个构造给出 exact transport identity 时，右侧才可称 exact equality。通常目标是建立诸如
+
+\[
+|E^{\rm ctrl}_j(f,T)|\leq \Psi_j(\Omega_j(f),S,T)
+\]
+
+的条件界，并明确 `E_blind` 何时非零、不可由 source-only quantity 识别，或可被独立估计。完整 certificate 只是 `E_blind` 与 remainder 在额外假设下可界定的情况。
+
+在线性平方损失模型中，`C001` 已给出 exact transport。将 nuisance coefficient 按某个正则的 projector 分成 `a=a_ctrl+a_blind` 后，二次型中的 controlled、blind 和 cross terms 给出精确记账；具体定义及符号见 [理论账本](docs/theory/00_theory_ledger.md)。这不是对一般深网络的自动定理。
+
+## 研究计划
+
+1. **冻结高维任务保持 SCM 与 source factorial design**：任务机制固定；source 覆盖 relation、mean、covariance 的前两轴，第三轴作为未见方向。
+2. **学习并审计表示**：统一训练 ERM、L1/L2、IRMv1、MMD、CORAL、shared-head gradient/Hessian alignment。
+3. **source-only 语义分解**：白化后由标签、环境编号和已声明干预类型回归原始语义算子，按固定层级残差化为正交 projectors。
+4. **证伪语义识别**：cross-fit、oracle principal angles、标签置换、投影顺序、bottleneck 与 seed 稳定性缺一不可。
+5. **回答成功与失败**：按预注册阈值判断方法能 OOD 哪类 covered shift，并将失败定位到 operator、source design、semantic mixing、collapse、interaction、optimization 或 out-of-family。
+6. **误差界**：用同一 projectors 精确分解 target transport；只有存在正则算子到分量能量的 bridge 时才给出 Omega-dependent 条件界。
+
+完整计划在 [课题简报](docs/research/00_project_brief.md)，开放问题在 [问题队列](docs/research/open_questions.md)。
+
+## 证据纪律与协作
+
+- 每条结论必须标为 `definition`、`assumption`、`exact equality`、`conditional theorem`、`bound`、`diagnostic`、`counterexample` 或 `conjecture`。
+- “未找到文献”从不等于新颖；每个 Claim 需经过理论、反例、文献和实现审计。
+- target risk、target moments 和 coverage residual 不得用于 source-only training/selection；可作为离线评估或理论 remainder。
+- 旧的 PCA、cross-decomposition 和 certificate-first 路线保留为历史材料，不能被追溯性改写为本主线的支持证据。错误的 `MECH-001/C011` 已永久删除。
+- `LATENT-001` 受四个独立只读 Supervisor gates 约束；Lead 不能越过 `VETO`，同一 gate 最多一次修复。
+
+开始工作前读取 [项目提示词](PROJECT_PROMPT_CN.md)、[上下文管理](CONTEXT_MANAGEMENT.md)、[研究状态](docs/research/research_state.md) 和 [决策记录](docs/decisions/)。

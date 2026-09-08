@@ -1,0 +1,24 @@
+{
+  "experiment_id": "CMNIST-VIS-001",
+  "data_root": "data",
+  "download": true,
+  "seeds": [0, 1, 2],
+  "methods": {
+    "erm": [0.0],
+    "l2": [0.0001, 0.001],
+    "irmv1": [1.0, 10.0],
+    "coral": [0.1, 1.0]
+  },
+  "source_correlations": [0.9, 0.8],
+  "target_correlation": 0.1,
+  "train_per_environment": 2500,
+  "source_eval_per_environment": 500,
+  "target_eval": 1000,
+  "probe_size": 500,
+  "diagnostic_samples": 512,
+  "epochs": 8,
+  "batch_size": 128,
+  "learning_rate": 0.001,
+  "latent_dim": 32,
+  "device": "cpu"
+}

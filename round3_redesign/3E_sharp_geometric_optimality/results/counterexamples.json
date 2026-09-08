@@ -1,0 +1,436 @@
+{
+  "nonzero_E_minimax_optimal": {
+    "alpha": 2.0,
+    "information_floor": 2.0,
+    "adaptive_regret": 2.0,
+    "slack": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.0
+      ]
+    ],
+    "slack_minus_EE_star": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        3.0
+      ]
+    ],
+    "psd_min_gap": 0.0,
+    "condition_holds": true,
+    "recoverable_exact": false,
+    "slack_ratio": 0.25,
+    "support_compatible": true,
+    "A_irreducible": [
+      [
+        2.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "E": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "tolerance": 1e-10,
+    "orthogonality": {
+      "PO_star_norm": 0.0,
+      "E_P_norm": 0.0,
+      "Airr_Q_norm": 0.0,
+      "Airr_E_star_norm": 0.0,
+      "E_Airr_star_norm": 0.0,
+      "gram_sum_residual": 0.0
+    },
+    "total_regret": 2.0,
+    "total_status": "hard_case",
+    "static_tax_lower_bound": 2.0,
+    "static_tax_holds": true,
+    "total_excess": 0.0,
+    "static_tightness_ratio": null,
+    "z0_norm": 0.0,
+    "zero_static": true,
+    "full_minimax_condition": true,
+    "maximizer": [
+      1.0,
+      0.0
+    ]
+  },
+  "E_zero_nonzero_static_not_optimal": {
+    "alpha": 2.0,
+    "information_floor": 2.0,
+    "adaptive_regret": 2.0,
+    "slack": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.0
+      ]
+    ],
+    "slack_minus_EE_star": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.0
+      ]
+    ],
+    "psd_min_gap": 0.0,
+    "condition_holds": true,
+    "recoverable_exact": true,
+    "slack_ratio": 0.0,
+    "support_compatible": true,
+    "A_irreducible": [
+      [
+        2.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "E": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "tolerance": 1e-10,
+    "orthogonality": {
+      "PO_star_norm": 0.0,
+      "E_P_norm": 0.0,
+      "Airr_Q_norm": 0.0,
+      "Airr_E_star_norm": 0.0,
+      "E_Airr_star_norm": 0.0,
+      "gram_sum_residual": 0.0
+    },
+    "total_regret": 3.125,
+    "total_status": "secular",
+    "static_tax_lower_bound": 2.125,
+    "static_tax_holds": true,
+    "total_excess": 1.125,
+    "static_tightness_ratio": 9.0,
+    "z0_norm": 0.5,
+    "zero_static": false,
+    "full_minimax_condition": false,
+    "maximizer": [
+      1.0,
+      0.0
+    ]
+  },
+  "complete_information_nonzero_E_failure": {
+    "alpha": 0.0,
+    "information_floor": 0.0,
+    "adaptive_regret": 0.125,
+    "slack": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "slack_minus_EE_star": [
+      [
+        -0.25,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "psd_min_gap": -0.25,
+    "condition_holds": false,
+    "recoverable_exact": false,
+    "slack_ratio": "inf",
+    "support_compatible": false,
+    "A_irreducible": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "E": [
+      [
+        0.5,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "tolerance": 1e-10,
+    "orthogonality": {
+      "PO_star_norm": 0.0,
+      "E_P_norm": 0.0,
+      "Airr_Q_norm": 0.0,
+      "Airr_E_star_norm": 0.0,
+      "E_Airr_star_norm": 0.0,
+      "gram_sum_residual": 0.0
+    },
+    "total_regret": 0.125,
+    "total_status": "hard_case",
+    "static_tax_lower_bound": 0.0,
+    "static_tax_holds": true,
+    "total_excess": 0.125,
+    "static_tightness_ratio": null,
+    "z0_norm": 0.0,
+    "zero_static": true,
+    "full_minimax_condition": false,
+    "maximizer": [
+      1.0,
+      0.0
+    ]
+  },
+  "static_tax_tight": {
+    "alpha": 2.0,
+    "information_floor": 2.0,
+    "adaptive_regret": 2.0,
+    "slack": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.0
+      ]
+    ],
+    "slack_minus_EE_star": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.0
+      ]
+    ],
+    "psd_min_gap": 0.0,
+    "condition_holds": true,
+    "recoverable_exact": true,
+    "slack_ratio": 0.0,
+    "support_compatible": true,
+    "A_irreducible": [
+      [
+        2.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "E": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "tolerance": 1e-10,
+    "orthogonality": {
+      "PO_star_norm": 0.0,
+      "E_P_norm": 0.0,
+      "Airr_Q_norm": 0.0,
+      "Airr_E_star_norm": 0.0,
+      "E_Airr_star_norm": 0.0,
+      "gram_sum_residual": 0.0
+    },
+    "total_regret": 2.125,
+    "total_status": "hard_case",
+    "static_tax_lower_bound": 2.125,
+    "static_tax_holds": true,
+    "total_excess": 0.125,
+    "static_tightness_ratio": 1.0,
+    "z0_norm": 0.5,
+    "zero_static": false,
+    "full_minimax_condition": false,
+    "maximizer": [
+      1.0,
+      0.0
+    ]
+  },
+  "static_tax_strict": {
+    "alpha": 2.0,
+    "information_floor": 2.0,
+    "adaptive_regret": 2.0,
+    "slack": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.0
+      ]
+    ],
+    "slack_minus_EE_star": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        4.0
+      ]
+    ],
+    "psd_min_gap": 0.0,
+    "condition_holds": true,
+    "recoverable_exact": true,
+    "slack_ratio": 0.0,
+    "support_compatible": true,
+    "A_irreducible": [
+      [
+        2.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "E": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "tolerance": 1e-10,
+    "orthogonality": {
+      "PO_star_norm": 0.0,
+      "E_P_norm": 0.0,
+      "Airr_Q_norm": 0.0,
+      "Airr_E_star_norm": 0.0,
+      "E_Airr_star_norm": 0.0,
+      "gram_sum_residual": 0.0
+    },
+    "total_regret": 3.125,
+    "total_status": "secular",
+    "static_tax_lower_bound": 2.125,
+    "static_tax_holds": true,
+    "total_excess": 1.125,
+    "static_tightness_ratio": 9.0,
+    "z0_norm": 0.5,
+    "zero_static": false,
+    "full_minimax_condition": false,
+    "maximizer": [
+      1.0,
+      0.0
+    ]
+  },
+  "same_b_k_different_pi": {
+    "b": [
+      0.4,
+      -0.2
+    ],
+    "K": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "lambda": 0.5,
+    "B_S_first": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "B_S_second": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        -1.0
+      ]
+    ],
+    "Pi_first": [
+      [
+        1.0,
+        0.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "Pi_second": [
+      [
+        0.0,
+        -1.0
+      ],
+      [
+        1.0,
+        0.0
+      ]
+    ],
+    "frozen_Pi": [
+      [
+        -0.6666666666666666,
+        -0.0
+      ],
+      [
+        -0.0,
+        -0.6666666666666666
+      ]
+    ],
+    "frozen_z0": [
+      -0.13333333333333333,
+      0.06666666666666667
+    ],
+    "same_frozen_pair": true,
+    "different_source_jacobian": true,
+    "different_affine_action": true
+  }
+}

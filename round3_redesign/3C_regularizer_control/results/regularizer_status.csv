@@ -1,0 +1,5 @@
+method,constraint_object,predictor_status,gauge_status,psd,restricted_rank,relevant_kernel_dimension
+L2,parameter/predictor norm,predictor-intrinsic,not-applicable,True,5,0
+CORAL,representation covariance differences,representation-level fixed-gauge conditional,gauge-dependent/induced-degenerate,True,0,5
+IRMV1,environment-wise radial optimality proxy,predictor-intrinsic,not-applicable,True,3,2
+VREX,environment risk variance,predictor-intrinsic,not-applicable,False,3,2

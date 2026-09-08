@@ -1,0 +1,26 @@
+{
+  "family_coordinate_audits": {
+    "legacy_gaussian_mechanism": {
+      "family": "legacy_gaussian_mechanism",
+      "general_invertible_recoding_error": 0.0,
+      "invariant": true,
+      "metric_transported": true,
+      "uncertainty_geometry_changed_without_transport": false
+    },
+    "source_induced": {
+      "family": "source_induced",
+      "general_invertible_recoding_error": 0.0,
+      "invariant": true,
+      "metric_transported": true,
+      "uncertainty_geometry_changed_without_transport": false
+    }
+  },
+  "source_reference_audit": {
+    "rank_reference_0": 4,
+    "rank_reference_last": 4,
+    "projector_error": 6.0620263971712334e-15
+  },
+  "general_invertible_metric_transport_required": true,
+  "untransported_coordinate_change_is_family_metric_change": true,
+  "pass": true
+}

@@ -1,0 +1,16 @@
+{
+  "experiment_id": "LATENT-001-MVP",
+  "methods": ["erm", "irmv1", "coral"],
+  "seeds": [0],
+  "latent_dims": [15],
+  "strengths": [0.03, 0.3],
+  "n_train": 128,
+  "n_semantic": 384,
+  "steps": 220,
+  "learning_rate": 0.02,
+  "intervention_budget": {
+    "relation_budget": 2.0,
+    "mean_budget": 1.6,
+    "covariance_budget": 1.8
+  }
+}

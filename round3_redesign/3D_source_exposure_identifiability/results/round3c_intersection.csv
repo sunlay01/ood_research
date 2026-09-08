@@ -1,0 +1,5 @@
+method,exposed_response_dimension,exposed_controlled_dimension,exposed_blind_dimension,unexposed_controlled_diagnostic,unexposed_blind_diagnostic,posthoc_only
+L2,3,3,0,1.3204307425568282,1.3161508600535705,True
+CORAL,3,0,3,0.0,0.0,True
+IRMV1,3,3,0,2.598787933889359e-15,1.9462329933160688e-18,True
+VREX,3,3,0,1.0895619141071342e-16,1.0894433117911006e-16,True
