@@ -79,7 +79,7 @@ def _mean_metric(rows: list[dict[str, object]], method: str, key: str) -> float:
 def verdict(rows: list[dict[str, object]], comparisons: list[dict[str, object]]) -> tuple[str, dict[str, object]]:
     by_pair = {(row["left_method"], row["right_method"]): row for row in comparisons}
     lr_erm = by_pair.get(("LOCAL_RESPONSE", "ERM"), {})
-    lr_grad = by_pair.get(("LOCAL_RESPONSE", "UNPRECONDITIONED_GRAD_ALIGN"), {})
+    lr_grad = by_pair.get(("LOCAL_RESPONSE", "HEAD_GRADIENT_VARIANCE_SURROGATE"), {})
     lr_random = by_pair.get(("LOCAL_RESPONSE", "RANDOM_METRIC"), {})
     completed_seeds = len({int(row["seed"]) for row in rows if row["method"] == "LOCAL_RESPONSE"})
     source_gap = _mean_metric(rows, "LOCAL_RESPONSE", "worst_source_accuracy") - _mean_metric(
@@ -89,7 +89,7 @@ def verdict(rows: list[dict[str, object]], comparisons: list[dict[str, object]])
         rows, "LOCAL_RESPONSE", "counterfactual_color_response"
     )
     update_lr = _mean_metric(rows, "LOCAL_RESPONSE", "total_update_norm")
-    update_grad = _mean_metric(rows, "UNPRECONDITIONED_GRAD_ALIGN", "total_update_norm")
+    update_grad = _mean_metric(rows, "HEAD_GRADIENT_VARIANCE_SURROGATE", "total_update_norm")
     update_ratio = update_lr / max(update_grad, 1e-12)
     criteria = {
         "no_target_leakage": True,
@@ -125,14 +125,14 @@ def counterexample_rows(rows: list[dict[str, object]]) -> list[dict[str, object]
         by_seed.setdefault(int(row["seed"]), {})[str(row["method"])] = row
     for seed, methods in sorted(by_seed.items()):
         lr = methods.get("LOCAL_RESPONSE")
-        grad = methods.get("UNPRECONDITIONED_GRAD_ALIGN")
+        grad = methods.get("HEAD_GRADIENT_VARIANCE_SURROGATE")
         erm = methods.get("ERM")
         random = methods.get("RANDOM_METRIC")
         if lr and grad:
             if float(lr["local_response_disagreement"]) < float(grad["local_response_disagreement"]) and float(lr["target_accuracy"]) < float(grad["target_accuracy"]):
-                result.append({"seed": seed, "case": "lower_local_response_but_worse_ood", "left": "LOCAL_RESPONSE", "right": "UNPRECONDITIONED_GRAD_ALIGN"})
+                result.append({"seed": seed, "case": "lower_local_response_but_worse_ood", "left": "LOCAL_RESPONSE", "right": "HEAD_GRADIENT_VARIANCE_SURROGATE"})
             if float(lr["counterfactual_color_response"]) < float(grad["counterfactual_color_response"]) and float(lr["target_accuracy"]) < float(grad["target_accuracy"]):
-                result.append({"seed": seed, "case": "lower_color_response_but_worse_accuracy", "left": "LOCAL_RESPONSE", "right": "UNPRECONDITIONED_GRAD_ALIGN"})
+                result.append({"seed": seed, "case": "lower_color_response_but_worse_accuracy", "left": "LOCAL_RESPONSE", "right": "HEAD_GRADIENT_VARIANCE_SURROGATE"})
         if lr and erm:
             if float(lr["local_response_disagreement"]) >= float(erm["local_response_disagreement"]) and float(lr["target_accuracy"]) > float(erm["target_accuracy"]):
                 result.append({"seed": seed, "case": "better_ood_without_lower_local_response", "left": "LOCAL_RESPONSE", "right": "ERM"})

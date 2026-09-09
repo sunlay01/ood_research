@@ -12,7 +12,7 @@ The interpreted primary comparison is now on the official IRMv1 Colored MNIST re
 
 - `ERM`: selected beta `0`, target acc `0.1710`, train acc `0.8754`, pred/color agreement `0.9299`
 - `IRMV1`: selected beta `1e+04`, target acc `0.6686`, train acc `0.6818`, pred/color agreement `0.3653`
-- `UNPRECONDITIONED_GRAD_ALIGN`: selected beta `0.01`, target acc `0.1787`, train acc `0.8767`, pred/color agreement `0.9216`
+- `HEAD_GRADIENT_VARIANCE_SURROGATE`: selected beta `0.01`, target acc `0.1787`, train acc `0.8767`, pred/color agreement `0.9216`
 
 ## D. Paired Comparisons
 

@@ -67,7 +67,11 @@ def test_task3r_live_artifacts_are_removed_and_active_task_replaced():
     assert not (ROOT / "src/ood_repr_reg/task3r_algorithmization").exists()
     assert not (ROOT / "src/ood_repr_reg/run_task3r_algorithmization.py").exists()
     assert not (ROOT / "tests/test_task3r_algorithmization.py").exists()
-    assert "TASK3-CMNIST-LOCAL-RESPONSE" in (ROOT / "active/TASK.md").read_text()
+    active_task = (ROOT / "active/TASK.md").read_text()
+    assert (
+        "TASK3-CMNIST-LOCAL-RESPONSE" in active_task
+        or "TASK3-BASELINE-FIDELITY-RECOVERY" in active_task
+    )
     assert (ROOT / "round3_redesign/task3_applicability").exists()
 
 
@@ -246,7 +250,7 @@ def test_official_protocol_summary_and_verdict_use_official_rows():
     rows = [
         {"seed": 0, "method": "ERM", "target_accuracy": 0.16, "train_accuracy": 0.72, "prediction_color_agreement": 0.98, "penalty_weight": 0.0},
         {"seed": 0, "method": "IRMV1", "target_accuracy": 0.64, "train_accuracy": 0.70, "prediction_color_agreement": 0.55, "penalty_weight": 10000.0},
-        {"seed": 0, "method": "UNPRECONDITIONED_GRAD_ALIGN", "target_accuracy": 0.20, "train_accuracy": 0.71, "prediction_color_agreement": 0.92, "penalty_weight": 0.1},
+        {"seed": 0, "method": "HEAD_GRADIENT_VARIANCE_SURROGATE", "target_accuracy": 0.20, "train_accuracy": 0.71, "prediction_color_agreement": 0.92, "penalty_weight": 0.1},
         {"seed": 0, "method": "LOCAL_RESPONSE", "target_accuracy": 0.21, "train_accuracy": 0.71, "prediction_color_agreement": 0.90, "penalty_weight": 0.1},
         {"seed": 0, "method": "RANDOM_METRIC", "target_accuracy": 0.19, "train_accuracy": 0.71, "prediction_color_agreement": 0.91, "penalty_weight": 0.1},
     ]
@@ -267,7 +271,7 @@ def test_official_task3_source_selection_does_not_use_target_accuracy():
 
 def test_official_response_methods_do_not_claim_irm_loss_rescale():
     rows = [
-        {"seed": 0, "method": "UNPRECONDITIONED_GRAD_ALIGN", "target_accuracy": 0.20, "train_accuracy": 0.80, "prediction_color_agreement": 0.80, "penalty_weight": 0.1, "selected_by_source_rule": True},
+        {"seed": 0, "method": "HEAD_GRADIENT_VARIANCE_SURROGATE", "target_accuracy": 0.20, "train_accuracy": 0.80, "prediction_color_agreement": 0.80, "penalty_weight": 0.1, "selected_by_source_rule": True},
         {"seed": 0, "method": "LOCAL_RESPONSE", "target_accuracy": 0.21, "train_accuracy": 0.80, "prediction_color_agreement": 0.80, "penalty_weight": 0.1, "selected_by_source_rule": True},
     ]
     compact = official_summary(rows)
@@ -277,8 +281,8 @@ def test_official_response_methods_do_not_claim_irm_loss_rescale():
 
 def test_official_summary_parses_csv_boolean_selection_flags():
     rows = [
-        {"seed": 0, "method": "UNPRECONDITIONED_GRAD_ALIGN", "target_accuracy": "0.10", "train_accuracy": "0.70", "prediction_color_agreement": "0.90", "penalty_weight": "0.001", "selected_by_source_rule": "False"},
-        {"seed": 0, "method": "UNPRECONDITIONED_GRAD_ALIGN", "target_accuracy": "0.20", "train_accuracy": "0.80", "prediction_color_agreement": "0.80", "penalty_weight": "0.01", "selected_by_source_rule": "True"},
+        {"seed": 0, "method": "HEAD_GRADIENT_VARIANCE_SURROGATE", "target_accuracy": "0.10", "train_accuracy": "0.70", "prediction_color_agreement": "0.90", "penalty_weight": "0.001", "selected_by_source_rule": "False"},
+        {"seed": 0, "method": "HEAD_GRADIENT_VARIANCE_SURROGATE", "target_accuracy": "0.20", "train_accuracy": "0.80", "prediction_color_agreement": "0.80", "penalty_weight": "0.01", "selected_by_source_rule": "True"},
     ]
     compact = official_summary(rows)
     assert compact["selected_rows"] == 1

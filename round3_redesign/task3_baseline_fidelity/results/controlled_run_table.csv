@@ -1,0 +1,5 @@
+seed,method,steps,examples_per_env,target_examples,label_definition,source_color_flip_probs,target_color_flip_prob,objective_loss,objective_penalty,applied_penalty_weight,rescaled_after_anneal,parameter_delta_norm_last_step,target_accuracy,prediction_color_agreement,target_used_for_training_or_selection
+0,ERM,501,256,512,digit < 5 with 0.25 label noise,"[0.2, 0.1]",0.9,0.2573913037776947,0.0,0.0,False,0.15814027190208435,0.224609375,0.837890625,False
+0,IRMv1,501,256,512,digit < 5 with 0.25 label noise,"[0.2, 0.1]",0.9,0.3502734899520874,0.00016963206871878356,10000.0,True,0.13375669717788696,0.232421875,0.826171875,False
+0,IGA,501,256,512,digit < 5 with 0.25 label noise,"[0.2, 0.1]",0.9,0.7073686122894287,0.00015593611169606447,1000.0,False,0.13551178574562073,0.498046875,0.498046875,False
+0,Fish,501,256,512,digit < 5 with 0.25 label noise,"[0.2, 0.1]",0.9,0.12623584270477295,0.0,0.5,False,0.026278972625732422,0.244140625,0.822265625,False

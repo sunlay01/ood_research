@@ -6,7 +6,7 @@
 
 `V-REx`: variance of source cross-entropy risks.
 
-`UNPRECONDITIONED_GRAD_ALIGN`: mean squared deviation of per-source head gradients from their source mean.
+`HEAD_GRADIENT_VARIANCE_SURROGATE`: mean squared deviation of per-source head gradients from their source mean. NOT A REPRODUCTION OF IGA OR FISH.
 
 `LOCAL_RESPONSE`: the same centered head-gradient disagreement weighted by the stop-gradient inverse damped source head Hessian/Gauss-Newton metric.
 

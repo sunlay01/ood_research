@@ -39,7 +39,7 @@ class OfficialIRMConfig:
     task3_methods: tuple[str, ...] = (
         "ERM",
         "IRMv1",
-        "UNPRECONDITIONED_GRAD_ALIGN",
+        "HEAD_GRADIENT_VARIANCE_SURROGATE",
         "LOCAL_RESPONSE",
     )
     task3_penalty_sample_per_env: int = 512
@@ -251,7 +251,7 @@ def official_response_penalty(
     centered = centered - centered.mean(dim=0, keepdim=True)
     raw = centered.square().sum(dim=1).mean()
     key = method.upper()
-    if key == "UNPRECONDITIONED_GRAD_ALIGN":
+    if key == "HEAD_GRADIENT_VARIANCE_SURROGATE":
         response_norm = centered.square().sum(dim=1).mean().sqrt()
         return raw, {
             "response_penalty_metric": "identity",
@@ -440,7 +440,7 @@ def train_official_task3_method(
         if method_key == "IRMV1":
             train_penalty = torch.stack([item["penalty"] for item in env_metrics]).mean()
             final_diag = {"response_penalty_metric": "official_scalar_scale"}
-        elif method_key in {"UNPRECONDITIONED_GRAD_ALIGN", "LOCAL_RESPONSE", "RANDOM_METRIC"}:
+        elif method_key in {"HEAD_GRADIENT_VARIANCE_SURROGATE", "LOCAL_RESPONSE", "RANDOM_METRIC"}:
             train_penalty, final_diag = official_response_penalty(
                 method_key,
                 model,
@@ -472,7 +472,7 @@ def train_official_task3_method(
     target_eval = _eval_model(model, target_env, device)
     with torch.enable_grad():
         diagnostics = {}
-        for diag_method in ("UNPRECONDITIONED_GRAD_ALIGN", "LOCAL_RESPONSE"):
+        for diag_method in ("HEAD_GRADIENT_VARIANCE_SURROGATE", "LOCAL_RESPONSE"):
             _, diag = official_response_penalty(
                 diag_method,
                 model,
@@ -574,7 +574,7 @@ def official_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
         })
     by_seed_method = {(int(row["seed"]), str(row["method"])): row for row in selected_rows}
     comparisons = []
-    for left, right in [("LOCAL_RESPONSE", "IRMV1"), ("LOCAL_RESPONSE", "UNPRECONDITIONED_GRAD_ALIGN"), ("LOCAL_RESPONSE", "ERM"), ("IRMV1", "ERM")]:
+    for left, right in [("LOCAL_RESPONSE", "IRMV1"), ("LOCAL_RESPONSE", "HEAD_GRADIENT_VARIANCE_SURROGATE"), ("LOCAL_RESPONSE", "ERM"), ("IRMV1", "ERM")]:
         diffs = []
         for seed in sorted({seed for seed, _method in by_seed_method}):
             if (seed, left) in by_seed_method and (seed, right) in by_seed_method:

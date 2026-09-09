@@ -71,7 +71,7 @@
     "task3_methods": [
       "ERM",
       "IRMv1",
-      "UNPRECONDITIONED_GRAD_ALIGN"
+      "HEAD_GRADIENT_VARIANCE_SURROGATE"
     ],
     "task3_response_penalty_weights": [
       0.001,
@@ -104,7 +104,7 @@
       "mean_prediction_color_agreement": 0.3652999997138977
     },
     {
-      "method": "UNPRECONDITIONED_GRAD_ALIGN",
+      "method": "HEAD_GRADIENT_VARIANCE_SURROGATE",
       "n": 1,
       "mean_selected_penalty_weight": 0.01,
       "mean_target_accuracy": 0.17870000004768372,

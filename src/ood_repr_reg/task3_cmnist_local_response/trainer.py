@@ -72,7 +72,7 @@ class Task3Config:
         "ERM",
         "IRMv1",
         "V-REx",
-        "UNPRECONDITIONED_GRAD_ALIGN",
+        "HEAD_GRADIENT_VARIANCE_SURROGATE",
         "LOCAL_RESPONSE",
         "RANDOM_METRIC",
     )
@@ -131,7 +131,7 @@ def default_config(profile: str = "main") -> Task3Config:
             official_irm_steps=3,
             official_irm_penalty_anneal_iters=1,
             official_irm_hidden_dim=16,
-            primary_methods=("ERM", "UNPRECONDITIONED_GRAD_ALIGN", "LOCAL_RESPONSE", "RANDOM_METRIC"),
+            primary_methods=("ERM", "HEAD_GRADIENT_VARIANCE_SURROGATE", "LOCAL_RESPONSE", "RANDOM_METRIC"),
         )
     if profile != "main":
         raise ValueError(f"unknown profile: {profile}")
@@ -632,11 +632,11 @@ def run_experiment(config: Task3Config, output: Path) -> dict[str, Any]:
     completed = {(int(row["seed"]), str(row["method"])) for row in run_rows}
     comparison_pairs = [
         ("LOCAL_RESPONSE", "ERM"),
-        ("LOCAL_RESPONSE", "UNPRECONDITIONED_GRAD_ALIGN"),
+        ("LOCAL_RESPONSE", "HEAD_GRADIENT_VARIANCE_SURROGATE"),
         ("LOCAL_RESPONSE", "RANDOM_METRIC"),
         ("LOCAL_RESPONSE", "IRMv1"),
         ("LOCAL_RESPONSE", "V-REx"),
-        ("UNPRECONDITIONED_GRAD_ALIGN", "ERM"),
+        ("HEAD_GRADIENT_VARIANCE_SURROGATE", "ERM"),
     ]
     for seed in config.seeds:
         data = build_data(config, seed)

@@ -1,0 +1,124 @@
+{
+  "controlled_config": {
+    "examples_per_env": 256,
+    "steps": 501,
+    "target_examples": 512
+  },
+  "equivalence": {
+    "custom_surrogate_notice": {
+      "method_label": "HEAD_GRADIENT_VARIANCE_SURROGATE",
+      "not_a_reproduction_of_iga_or_fish": true,
+      "why_not_fish": "no inner clone, no sequential domain updates, no carried inner optimizer state, and no outer interpolation/meta-update",
+      "why_not_iga": "uses head-only gradients and earlier Task3 used a fixed penalty subset, while DomainBed IGA aligns full-network gradients over minibatches"
+    },
+    "erm_loss_matches_domainbed_formula": true,
+    "fish_default_meta_lr": 0.5,
+    "fish_inner_optimizer_state_carried": true,
+    "fish_parameter_changed": true,
+    "iga_default_penalty_weight": 1000,
+    "iga_full_network_parameter_names": [
+      "features.0.weight",
+      "features.0.bias",
+      "head.weight",
+      "head.bias"
+    ],
+    "iga_head_only_surrogate_differs": true,
+    "iga_penalty_finite": true,
+    "iga_uses_full_network_parameters": true,
+    "irm_penalty_finite": true,
+    "irm_post_anneal_penalty_weight": 10000.0,
+    "irm_post_anneal_rescaled": true,
+    "irm_pre_anneal_penalty_weight": 1.0,
+    "irm_pre_anneal_rescaled": false,
+    "learner_side_source_contains_target_reference": false
+  },
+  "excluded_methods": [
+    "LOCAL_RESPONSE",
+    "RANDOM_METRIC",
+    "SHUFFLED_LOCAL_RESPONSE",
+    "RESP2"
+  ],
+  "fidelity_failures": [],
+  "git_commit_before_run": "46293c977153d2b68f2751d46708827de056fc93",
+  "identity_status": {
+    "ERM": "pinned_and_controlled",
+    "Fish": "native_completed",
+    "IGA": "native_completed",
+    "IRMv1": "recovered"
+  },
+  "irmv1_recovery": {
+    "best_erm_target_accuracy": 0.16786666,
+    "best_irmv1_target_accuracy": 0.6669667,
+    "irmv1_advantage_over_erm": 0.49910004,
+    "passed": true,
+    "thresholds": {
+      "erm_target_accuracy_max": 0.45,
+      "irmv1_advantage_min": 0.05,
+      "irmv1_target_accuracy_min": 0.55
+    }
+  },
+  "native_status": {
+    "domainbed_fish": "completed",
+    "domainbed_iga": "completed",
+    "facebook_irm": "completed,completed"
+  },
+  "python_version": "3.13.13",
+  "run_unix_time": 1788981959.350795,
+  "runner_name": "ood_repr_reg.run_task3_baseline_fidelity",
+  "target_leakage_detected": false,
+  "task3_scientific_verdict": "NOT YET RUN",
+  "task_id": "TASK3-BASELINE-FIDELITY-RECOVERY",
+  "torch_version": "2.12.1",
+  "upstream_manifest": {
+    "domainbed": {
+      "authority_files": "domainbed/algorithms.py; domainbed/hparams_registry.py; domainbed/datasets.py",
+      "checked_out_commit": "b93c22a1cfc3b2428398272c1a116c8de1f4139e",
+      "commit": "b93c22a1cfc3b2428398272c1a116c8de1f4139e",
+      "local_dir": "artifacts/baseline_fidelity/upstreams/DomainBed",
+      "local_path": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/DomainBed",
+      "pinned_commit_matches": true,
+      "present": true,
+      "repo": "facebookresearch/DomainBed",
+      "url": "https://github.com/facebookresearch/DomainBed.git"
+    },
+    "facebook_irm": {
+      "authority_files": "code/colored_mnist/main.py",
+      "checked_out_commit": "fc185d0f828a98f57030ba3647efc7394d1be95a",
+      "commit": "fc185d0f828a98f57030ba3647efc7394d1be95a",
+      "local_dir": "artifacts/baseline_fidelity/upstreams/InvariantRiskMinimization",
+      "local_path": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/InvariantRiskMinimization",
+      "pinned_commit_matches": true,
+      "present": true,
+      "repo": "facebookresearch/InvariantRiskMinimization",
+      "url": "https://github.com/facebookresearch/InvariantRiskMinimization.git"
+    },
+    "fish_author": {
+      "authority_files": "README.md; src/main.py; src/utils.py",
+      "checked_out_commit": "333efa24572d99da0a4107ab9cc4af93a915d2a9",
+      "commit": "333efa24572d99da0a4107ab9cc4af93a915d2a9",
+      "local_dir": "artifacts/baseline_fidelity/upstreams/fish",
+      "local_path": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/fish",
+      "pinned_commit_matches": true,
+      "present": true,
+      "repo": "YugeTen/fish",
+      "url": "https://github.com/YugeTen/fish.git"
+    },
+    "fish_author_cmnist_status": {
+      "reason": "Pinned YugeTen/fish native benchmark is not Colored MNIST; DomainBed Fish is the CMNIST fallback authority.",
+      "used_for_native_cmnist": false
+    },
+    "fishr_optional": {
+      "authority_files": "optional only; not used by this gate",
+      "checked_out_commit": null,
+      "commit": "7b8fdf1e0b15226ded9b58efd37698e74e616ab7",
+      "local_dir": "artifacts/baseline_fidelity/upstreams/fishr",
+      "local_path": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/fishr",
+      "pinned_commit_matches": false,
+      "present": false,
+      "repo": "alexrame/fishr",
+      "url": "https://github.com/alexrame/fishr.git"
+    }
+  },
+  "verdict": "BASELINE-FIDELITY-PASS",
+  "working_tree_status_before_run": "M active/CONTEXT.md\n M active/STATE_DELTA.md\n M active/TASK.md\n M round3_redesign/task3_cmnist_local_response/method_definitions.md\n M round3_redesign/task3_cmnist_local_response/preregistered_design.json\n M round3_redesign/task3_cmnist_local_response/prior_art_exact_object.md\n M round3_redesign/task3_cmnist_local_response/results/official_protocol_candidate_grid.csv\n M round3_redesign/task3_cmnist_local_response/results/official_protocol_method_summary.csv\n M round3_redesign/task3_cmnist_local_response/results/official_protocol_run_table.csv\n M round3_redesign/task3_cmnist_local_response/results/official_protocol_summary.json\n M round3_redesign/task3_cmnist_local_response/results/summary.json\n M round3_redesign/task3_cmnist_local_response/task3_cmnist_report.md\n M src/ood_repr_reg/run_task3_cmnist_local_response.py\n M src/ood_repr_reg/task3_cmnist_local_response/evaluation.py\n M src/ood_repr_reg/task3_cmnist_local_response/official_irm_reference.py\n M src/ood_repr_reg/task3_cmnist_local_response/penalties.py\n M src/ood_repr_reg/task3_cmnist_local_response/trainer.py\n M tests/test_project_state.py\n M tests/test_task3_cmnist_local_response.py\n?? round3_redesign/task3_baseline_fidelity/\n?? src/ood_repr_reg/run_task3_baseline_fidelity.py\n?? src/ood_repr_reg/task3_baseline_fidelity/\n?? tests/test_baseline_fidelity.py"
+}

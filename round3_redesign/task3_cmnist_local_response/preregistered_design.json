@@ -84,7 +84,7 @@
       "ERM",
       "IRMv1",
       "V-REx",
-      "UNPRECONDITIONED_GRAD_ALIGN",
+      "HEAD_GRADIENT_VARIANCE_SURROGATE",
       "LOCAL_RESPONSE",
       "RANDOM_METRIC"
     ],
@@ -103,7 +103,7 @@
   "methods": [
     "ERM",
     "IRMv1",
-    "UNPRECONDITIONED_GRAD_ALIGN"
+    "HEAD_GRADIENT_VARIANCE_SURROGATE"
   ],
   "controls": [
     "SHUFFLED_LOCAL_RESPONSE"
@@ -137,7 +137,7 @@
     "declared_methods": [
       "ERM",
       "IRMv1",
-      "UNPRECONDITIONED_GRAD_ALIGN"
+      "HEAD_GRADIENT_VARIANCE_SURROGATE"
     ],
     "response_methods_use_irm_loss_rescale": false,
     "l2_regularizer_weight": 0.001
@@ -175,9 +175,9 @@
       "end-to-end representation training",
       "all 10 primary seeds completed",
       "LOCAL_RESPONSE mean OOD accuracy >= ERM + 0.02",
-      "LOCAL_RESPONSE mean OOD accuracy >= UNPRECONDITIONED_GRAD_ALIGN + 0.01",
+      "LOCAL_RESPONSE mean OOD accuracy >= HEAD_GRADIENT_VARIANCE_SURROGATE + 0.01",
       "LOCAL_RESPONSE beats ERM on at least 7/10 seeds",
-      "LOCAL_RESPONSE beats GRAD_ALIGN on at least 7/10 seeds",
+      "LOCAL_RESPONSE beats HEAD_GRADIENT_VARIANCE_SURROGATE on at least 7/10 seeds",
       "worst-source validation accuracy not degraded by more than 0.01 vs ERM",
       "real curvature metric beats matched random metric",
       "color sensitivity or another preregistered mechanism diagnostic moves in predicted direction",

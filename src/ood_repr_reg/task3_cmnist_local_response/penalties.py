@@ -15,7 +15,7 @@ METHODS = (
     "ERM",
     "IRMv1",
     "V-REx",
-    "UNPRECONDITIONED_GRAD_ALIGN",
+    "HEAD_GRADIENT_VARIANCE_SURROGATE",
     "LOCAL_RESPONSE",
     "RANDOM_METRIC",
     "SHUFFLED_LOCAL_RESPONSE",
@@ -78,7 +78,7 @@ def task3_penalty(
         return irmv1_penalty(model, batches), {}
     if key == "V-REX":
         return vrex_penalty(model, batches), {}
-    if key == "UNPRECONDITIONED_GRAD_ALIGN":
+    if key == "HEAD_GRADIENT_VARIANCE_SURROGATE":
         penalty, diagnostic = local_response_penalty(
             model, batches, epsilon=epsilon, metric_kind="identity"
         )

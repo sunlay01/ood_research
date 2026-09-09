@@ -122,7 +122,7 @@ def _official_config_from_task3(
         task3_methods=methods or (
             "ERM",
             "IRMv1",
-            "UNPRECONDITIONED_GRAD_ALIGN",
+            "HEAD_GRADIENT_VARIANCE_SURROGATE",
             "LOCAL_RESPONSE",
             "RANDOM_METRIC",
         ),
@@ -136,7 +136,7 @@ def _official_config_from_task3(
 def _official_verdict(summary: dict[str, Any], baseline_gate: dict[str, Any]) -> tuple[str, dict[str, Any]]:
     pairs = {(row["left_method"], row["right_method"]): row for row in summary["paired_comparisons"]}
     lr_erm = pairs.get(("LOCAL_RESPONSE", "ERM"), {})
-    lr_grad = pairs.get(("LOCAL_RESPONSE", "UNPRECONDITIONED_GRAD_ALIGN"), {})
+    lr_grad = pairs.get(("LOCAL_RESPONSE", "HEAD_GRADIENT_VARIANCE_SURROGATE"), {})
     lr_random = pairs.get(("LOCAL_RESPONSE", "RANDOM_METRIC"), {})
     lr_seeds = next((row["n"] for row in summary["method_summary"] if row["method"] == "LOCAL_RESPONSE"), 0)
     criteria = {
@@ -300,7 +300,7 @@ def _write_preregistration(
         primary_methods = list(official_methods or (
             "ERM",
             "IRMv1",
-            "UNPRECONDITIONED_GRAD_ALIGN",
+            "HEAD_GRADIENT_VARIANCE_SURROGATE",
             "LOCAL_RESPONSE",
             "RANDOM_METRIC",
         ))
@@ -369,9 +369,9 @@ def _write_preregistration(
                 "end-to-end representation training",
                 "all 10 primary seeds completed",
                 "LOCAL_RESPONSE mean OOD accuracy >= ERM + 0.02",
-                "LOCAL_RESPONSE mean OOD accuracy >= UNPRECONDITIONED_GRAD_ALIGN + 0.01",
+                "LOCAL_RESPONSE mean OOD accuracy >= HEAD_GRADIENT_VARIANCE_SURROGATE + 0.01",
                 "LOCAL_RESPONSE beats ERM on at least 7/10 seeds",
-                "LOCAL_RESPONSE beats GRAD_ALIGN on at least 7/10 seeds",
+                "LOCAL_RESPONSE beats HEAD_GRADIENT_VARIANCE_SURROGATE on at least 7/10 seeds",
                 "worst-source validation accuracy not degraded by more than 0.01 vs ERM",
                 "real curvature metric beats matched random metric",
                 "color sensitivity or another preregistered mechanism diagnostic moves in predicted direction",
@@ -415,7 +415,7 @@ Task3R runtime/source artifact remains? `{cleanup['task3r_artifact_remains']}`
 | paper | exact equation/object | same as our proposed object? | equivalent only under assumptions? | different? | implementation implication | novelty implication |
 |---|---|---:|---:|---:|---|---|
 | MLDG, Li et al. 2018, https://arxiv.org/abs/1710.03463 | meta-train/meta-test objective; first-order variants involve gradient alignment across domains | no | no exact inverse-H metric found in this bounded audit | yes | include only if faithful compact implementation is added; otherwise do not relabel GRAD/LR as MLDG | `RELATED-BUT-DIFFERENT` |
-| Fish, Shi et al. 2021, https://arxiv.org/abs/2104.09937 | inter-domain gradient matching / gradient dot-product style update | no | related first-order gradient matching | yes | GRAD_ALIGN is a neutral baseline, not automatically Fish | `RELATED-BUT-DIFFERENT` |
+| Fish, Shi et al. 2021, https://arxiv.org/abs/2104.09937 | inter-domain gradient matching / gradient dot-product style update | no | related first-order gradient matching | yes | HEAD_GRADIENT_VARIANCE_SURROGATE is a neutral baseline, not automatically Fish | `RELATED-BUT-DIFFERENT` |
 | Fishr, Rame et al. 2021, https://arxiv.org/abs/2109.02934 | domain-level gradient variance matching; connects gradient variance to Fisher/Hessian motivation | no | related through Fisher/gradient-variance geometry | yes | do not call LOCAL_RESPONSE Fishr; use as strong related baseline family | `RELATED-BUT-DIFFERENT` |
 | Hessian Alignment / classifier-head Hessian analyses, e.g. https://arxiv.org/abs/2308.11778 | Hessian/gradient structure for DG/generalization analysis | unresolved exact implementation match | possible only after equation-level comparison | yes in this bounded audit | no novelty claim; record as closest Hessian-geometry neighbor | `UNRESOLVED` |
 | Moment/curvature alignment family | moment or Hessian matching rather than inverse-H gradient-disagreement penalty | no | no | yes | keep internal name `LOCAL_RESPONSE` | `NO-EXACT-MATCH-FOUND` for this exact object within the bounded checked set |
@@ -450,7 +450,7 @@ Before the primary comparison is interpreted, `baseline_recovery_gate.json` must
 
 `V-REx`: variance of source cross-entropy risks.
 
-`UNPRECONDITIONED_GRAD_ALIGN`: mean squared deviation of per-source head gradients from their source mean.
+`HEAD_GRADIENT_VARIANCE_SURROGATE`: mean squared deviation of per-source head gradients from their source mean. NOT A REPRODUCTION OF IGA OR FISH.
 
 `LOCAL_RESPONSE`: the same centered head-gradient disagreement weighted by the stop-gradient inverse damped source head Hessian/Gauss-Newton metric.
 
@@ -562,7 +562,7 @@ The full candidate grid is written to `candidate_grid_evaluation.csv` after sour
 
 ## H. Curvature Increment
 
-The primary increment is `LOCAL_RESPONSE - UNPRECONDITIONED_GRAD_ALIGN`; see `paired_comparisons.csv` and `run_table.csv` for paired seed rows.
+The primary increment is `LOCAL_RESPONSE - HEAD_GRADIENT_VARIANCE_SURROGATE`; see `paired_comparisons.csv` and `run_table.csv` for paired seed rows.
 
 ## I. Mechanism
 
@@ -649,12 +649,12 @@ def main() -> None:
     parser.add_argument(
         "--official-response-betas",
         default=None,
-        help="Comma-separated beta grid for official GRAD_ALIGN/LOCAL_RESPONSE/RANDOM_METRIC; defaults to Task 3 beta_grid.",
+        help="Comma-separated beta grid for official HEAD_GRADIENT_VARIANCE_SURROGATE/LOCAL_RESPONSE/RANDOM_METRIC; defaults to Task 3 beta_grid.",
     )
     parser.add_argument(
         "--official-primary-methods",
         default=None,
-        help="Comma-separated official primary methods; useful for bounded audits such as ERM,IRMv1,UNPRECONDITIONED_GRAD_ALIGN.",
+        help="Comma-separated official primary methods; useful for bounded audits such as ERM,IRMv1,HEAD_GRADIENT_VARIANCE_SURROGATE.",
     )
     args = parser.parse_args()
     config = default_config(args.profile)
@@ -670,7 +670,7 @@ def main() -> None:
         (
             "ERM",
             "IRMv1",
-            "UNPRECONDITIONED_GRAD_ALIGN",
+            "HEAD_GRADIENT_VARIANCE_SURROGATE",
             "LOCAL_RESPONSE",
             "RANDOM_METRIC",
         ),

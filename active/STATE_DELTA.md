@@ -1,19 +1,21 @@
-# Proposed State Delta: TASK3-CMNIST-LOCAL-RESPONSE
+# Proposed State Delta: TASK3-BASELINE-FIDELITY-RECOVERY
 
 state_write_authorized: false
 
-official reversed-color protocol restored: true
+baseline fidelity verdict: `BASELINE-FIDELITY-PASS`
 
-baseline recovery verdict: `True`
+Task 3 scientific verdict: `NOT YET RUN`
 
-new Task 3 official-protocol pilot verdict: `TASK3-CMNIST-PARTIAL`
+baseline-fidelity prerequisite satisfied: `true`
 
-Task 3 should close: `false`
+Task 3 local-response experiment must be rerun before any scientific verdict: `true`
 
-larger benchmark justified: `false until the official-protocol comparison completes all 10 preregistered seeds`
+Proposed result ID: `R-TASK3-BASELINE-FIDELITY`
+
+Evidence path: `round3_redesign/task3_baseline_fidelity/results/baseline_fidelity_summary.json`
 
 Proposed CURRENT_STATE.md wording:
 
 ```text
-Task 3 CMNIST local-response geometry has been repaired to use the official IRMv1 Colored MNIST reversed-color protocol for baseline recovery and pilot comparison. Current verdict: TASK3-CMNIST-PARTIAL. The pilot is protocol-valid but not yet a 10-seed scientific verdict.
+Task 3 baseline fidelity gate verdict: BASELINE-FIDELITY-PASS. The gate audits pinned ERM, IRMv1, IGA, and Fish identities. Task 3 scientific verdict is NOT YET RUN and requires a separate rerun of the local-response experiment after this prerequisite.
 ```
