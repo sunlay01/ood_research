@@ -75,8 +75,8 @@ Executed validation commands:
 
 ```text
 python scripts/check_project_state.py                  # ok=true, 0 errors
-PYTHONPATH=src pytest -q tests/test_project_state.py   # 4 passed
-PYTHONPATH=src pytest -q                               # 263 passed
+PYTHONPATH=src pytest -q tests/test_project_state.py   # 5 passed
+PYTHONPATH=src pytest -q                               # 264 passed
 ```
 
 The checker validates required files, JSON registries, unique theorem and

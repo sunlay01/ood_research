@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Iterable
@@ -117,6 +118,17 @@ def _path_exists(path: str, base: Path = ROOT) -> bool:
     return (ROOT / path).exists()
 
 
+def _tracked_paths_matching(pattern: str) -> list[str]:
+    """Return git-tracked paths matching a repository-relative glob pattern."""
+    try:
+        output = subprocess.check_output(
+            ["git", "ls-files"], cwd=ROOT, text=True,
+        )
+    except Exception:
+        return []
+    return [path for path in output.splitlines() if Path(path).match(pattern)]
+
+
 def _check_path_references(errors: list[str]) -> None:
     for doc in [
         "CURRENT_STATE.md",
@@ -138,8 +150,22 @@ def _check_path_references(errors: list[str]) -> None:
                 if ref and not _path_exists(str(ref)):
                     errors.append(f"dead result artifact path {row.get('id')}: {ref}")
 
-    for row in _load_json("docs/state/FILE_STATUS.json"):
+    _check_file_status_records(_load_json("docs/state/FILE_STATUS.json"), errors)
+
+
+def _check_file_status_records(records: list[dict[str, object]], errors: list[str]) -> None:
+    for row in records:
         ref = str(row.get("path_or_glob", ""))
+        if row.get("status") == "DO_NOT_RESTORE":
+            if "*" in ref:
+                tracked_matches = _tracked_paths_matching(ref)
+            elif (ROOT / ref).exists() and _tracked_paths_matching(ref):
+                tracked_matches = [ref]
+            else:
+                tracked_matches = []
+            if tracked_matches and not row.get("historical_git_only"):
+                errors.append(f"forbidden do-not-restore tracked path exists: {ref}")
+            continue
         if row.get("historical_git_only"):
             continue
         if not ref or ref.endswith("/**"):

@@ -1,10 +1,21 @@
 import json
+import importlib.util
 import subprocess
 import sys
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _state_checker_module():
+    spec = importlib.util.spec_from_file_location(
+        "check_project_state", ROOT / "scripts/check_project_state.py"
+    )
+    module = importlib.util.module_from_spec(spec)
+    assert spec.loader is not None
+    spec.loader.exec_module(module)
+    return module
 
 
 def test_project_state_checker_passes():
@@ -69,3 +80,23 @@ def test_file_status_marks_history_default_read_false_and_deleted_material_prote
     assert mech["status"] == "DO_NOT_RESTORE"
     assert mech["do_not_restore"] is True
     assert mech["do_not_reference"] is True
+
+
+def test_do_not_restore_glob_absence_is_success_and_tracked_presence_fails(monkeypatch):
+    checker = _state_checker_module()
+    records = [{
+        "path_or_glob": "artifacts/MECH-001*",
+        "status": "DO_NOT_RESTORE",
+        "default_read": False,
+        "do_not_restore": True,
+        "do_not_reference": True,
+    }]
+
+    errors: list[str] = []
+    monkeypatch.setattr(checker, "_tracked_paths_matching", lambda pattern: [])
+    checker._check_file_status_records(records, errors)
+    assert errors == []
+
+    monkeypatch.setattr(checker, "_tracked_paths_matching", lambda pattern: ["artifacts/MECH-001"])
+    checker._check_file_status_records(records, errors)
+    assert errors == ["forbidden do-not-restore tracked path exists: artifacts/MECH-001*"]
