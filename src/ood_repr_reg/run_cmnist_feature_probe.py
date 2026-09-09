@@ -45,12 +45,20 @@ def _build_data(config: dict, seed: int) -> tuple[
 
     n_train = int(config["train_per_environment"])
     train_environments = []
+    label_noise = float(config.get("label_noise", 0.0))
     for env, correlation in enumerate(config["source_correlations"]):
         gray, digit = deterministic_subset(
             train_gray, train_digit, n=n_train, seed=seed + 101, offset=env * n_train
         )
         train_environments.append(
-            make_environment(gray, digit, correlation=correlation, env=env, seed=seed + env * 17)
+            make_environment(
+                gray,
+                digit,
+                correlation=correlation,
+                env=env,
+                seed=seed + env * 17,
+                label_noise=label_noise,
+            )
         )
 
     n_source = int(config["source_eval_per_environment"])
@@ -63,7 +71,12 @@ def _build_data(config: dict, seed: int) -> tuple[
         offset += n_source
         source_environments.append(
             make_environment(
-                gray, digit, correlation=correlation, env=env, seed=seed + 1000 + env * 17
+                gray,
+                digit,
+                correlation=correlation,
+                env=env,
+                seed=seed + 1000 + env * 17,
+                label_noise=label_noise,
             )
         )
 
@@ -81,6 +94,7 @@ def _build_data(config: dict, seed: int) -> tuple[
         correlation=float(config["target_correlation"]),
         env=len(source_environments),
         seed=seed + 2000,
+        label_noise=label_noise,
     )
     probe_gray, probe_digit = deterministic_subset(
         test_gray,

@@ -1,9 +1,11 @@
 {
   "task_id": "TASK3-CMNIST-LOCAL-RESPONSE",
-  "written_unix_time": 1788968631.522601,
+  "written_unix_time": 1788977672.2713962,
   "status": "PREREGISTERED_BEFORE_NEW_LOCAL_RESPONSE_TARGET_OUTCOMES",
-  "code_commit_before_experiment": "03d58aefd99a601fa173039bc46de93d9c65e247",
-  "working_tree_status_before_experiment": "M  active/CONTEXT.md\nM  active/STATE_DELTA.md\nM  active/TASK.md\nA  round3_redesign/task3_cmnist_local_response/baseline_fidelity.md\nA  round3_redesign/task3_cmnist_local_response/cleanup_report.md\nA  round3_redesign/task3_cmnist_local_response/limitations.md\nA  round3_redesign/task3_cmnist_local_response/mechanism_interpretation.md\nA  round3_redesign/task3_cmnist_local_response/method_definitions.md\nA  round3_redesign/task3_cmnist_local_response/preregistered_design.json\nA  round3_redesign/task3_cmnist_local_response/prior_art_exact_object.md\nA  round3_redesign/task3_cmnist_local_response/provenance.md\nA  round3_redesign/task3_cmnist_local_response/results/counterexamples.csv\nA  round3_redesign/task3_cmnist_local_response/results/dynamics.csv\nA  round3_redesign/task3_cmnist_local_response/results/environment_shuffle_control.csv\nA  round3_redesign/task3_cmnist_local_response/results/hyperparameter_selection.csv\nA  round3_redesign/task3_cmnist_local_response/results/mechanism_diagnostics.csv\nA  round3_redesign/task3_cmnist_local_response/results/paired_comparisons.csv\nA  round3_redesign/task3_cmnist_local_response/results/random_metric_control.csv\nA  round3_redesign/task3_cmnist_local_response/results/run_table.csv\nA  round3_redesign/task3_cmnist_local_response/results/seed_summary.csv\nA  round3_redesign/task3_cmnist_local_response/results/summary.json\nA  round3_redesign/task3_cmnist_local_response/results/tiny_batch_sanity.json\nA  round3_redesign/task3_cmnist_local_response/task3_cmnist_report.md\nD  round3_redesign/task3r_algorithmization/approximation_options.md\nD  round3_redesign/task3r_algorithmization/preregistered_algorithm_probe.json\nD  round3_redesign/task3r_algorithmization/prior_work_bridge.md\nD  round3_redesign/task3r_algorithmization/results/ablation_rows.csv\nD  round3_redesign/task3r_algorithmization/results/exact_probe_rows.csv\nD  round3_redesign/task3r_algorithmization/results/summary.json\nD  round3_redesign/task3r_algorithmization/source_only_estimability.md\nD  round3_redesign/task3r_algorithmization/task3r_report.md\nD  round3_redesign/task3r_algorithmization/theory_to_objective.md\nA  src/ood_repr_reg/run_task3_cmnist_local_response.py\nD  src/ood_repr_reg/run_task3r_algorithmization.py\nA  src/ood_repr_reg/task3_cmnist_local_response/__init__.py\nA  src/ood_repr_reg/task3_cmnist_local_response/curvature.py\nA  src/ood_repr_reg/task3_cmnist_local_response/diagnostics.py\nA  src/ood_repr_reg/task3_cmnist_local_response/evaluation.py\nA  src/ood_repr_reg/task3_cmnist_local_response/penalties.py\nAM src/ood_repr_reg/task3_cmnist_local_response/trainer.py\nD  src/ood_repr_reg/task3r_algorithmization/__init__.py\nD  src/ood_repr_reg/task3r_algorithmization/core.py\nD  src/ood_repr_reg/task3r_algorithmization/experiment.py\nM  tests/test_project_state.py\nA  tests/test_task3_cmnist_local_response.py\nD  tests/test_task3r_algorithmization.py",
+  "primary_protocol": "official_colored_mnist_reversed_color_mlp",
+  "primary_protocol_note": "interpreted primary pilot uses the official reversed-color MLP protocol; legacy CNN Task 3 path is not interpreted in this run",
+  "code_commit_before_experiment": "9c2db126a254e57796535a87ca45f3d5d8b6d9cb",
+  "working_tree_status_before_experiment": "M active/STATE_DELTA.md\n M round3_redesign/task3_cmnist_local_response/baseline_fidelity.md\n M round3_redesign/task3_cmnist_local_response/preregistered_design.json\n M round3_redesign/task3_cmnist_local_response/provenance.md\n D round3_redesign/task3_cmnist_local_response/results/counterexamples.csv\n D round3_redesign/task3_cmnist_local_response/results/dynamics.csv\n D round3_redesign/task3_cmnist_local_response/results/environment_shuffle_control.csv\n D round3_redesign/task3_cmnist_local_response/results/hyperparameter_selection.csv\n D round3_redesign/task3_cmnist_local_response/results/mechanism_diagnostics.csv\n D round3_redesign/task3_cmnist_local_response/results/paired_comparisons.csv\n D round3_redesign/task3_cmnist_local_response/results/random_metric_control.csv\n D round3_redesign/task3_cmnist_local_response/results/run_table.csv\n D round3_redesign/task3_cmnist_local_response/results/seed_summary.csv\n M round3_redesign/task3_cmnist_local_response/results/summary.json\n M round3_redesign/task3_cmnist_local_response/results/tiny_batch_sanity.json\n M round3_redesign/task3_cmnist_local_response/task3_cmnist_report.md\n M src/ood_repr_reg/cmnist_feature_probe.py\n M src/ood_repr_reg/run_cmnist_feature_probe.py\n M src/ood_repr_reg/run_task3_cmnist_local_response.py\n M src/ood_repr_reg/task3_cmnist_local_response/trainer.py\n M tests/test_task3_cmnist_local_response.py\n?? round3_redesign/task3_cmnist_local_response/results/baseline_recovery.csv\n?? round3_redesign/task3_cmnist_local_response/results/baseline_recovery_gate.json\n?? round3_redesign/task3_cmnist_local_response/results/official_protocol_candidate_grid.csv\n?? round3_redesign/task3_cmnist_local_response/results/official_protocol_method_summary.csv\n?? round3_redesign/task3_cmnist_local_response/results/official_protocol_paired_comparisons.csv\n?? round3_redesign/task3_cmnist_local_response/results/official_protocol_run_table.csv\n?? round3_redesign/task3_cmnist_local_response/results/official_protocol_summary.json\n?? src/ood_repr_reg/task3_cmnist_local_response/official_irm_reference.py",
   "profile": "main",
   "data_config": {
     "experiment_id": "TASK3-CMNIST-LOCAL-RESPONSE",
@@ -34,12 +36,13 @@
       0.8
     ],
     "target_correlation": 0.1,
-    "train_per_environment": 512,
-    "source_eval_per_environment": 400,
-    "target_eval": 700,
-    "probe_size": 300,
-    "diagnostic_samples": 96,
-    "epochs": 4,
+    "label_noise": 0.25,
+    "train_per_environment": 2500,
+    "source_eval_per_environment": 500,
+    "target_eval": 1000,
+    "probe_size": 500,
+    "diagnostic_samples": 512,
+    "epochs": 8,
     "batch_size": 128,
     "learning_rate": 0.001,
     "latent_dim": 32,
@@ -48,8 +51,23 @@
       0.001,
       0.01,
       0.1,
-      1.0
+      1.0,
+      10.0
     ],
+    "baseline_recovery_seeds": [
+      0
+    ],
+    "baseline_recovery_irmv1_betas": [
+      10000.0
+    ],
+    "baseline_recovery_min_target_accuracy": 0.55,
+    "baseline_recovery_max_erm_target_accuracy": 0.45,
+    "baseline_recovery_min_irmv1_advantage": 0.05,
+    "baseline_recovery_protocol": "official_irm_colored_mnist",
+    "official_irm_steps": 501,
+    "official_irm_penalty_anneal_iters": 100,
+    "official_irm_penalty_weight": 10000.0,
+    "official_irm_hidden_dim": 256,
     "damping_epsilon": 0.01,
     "damping_ablations": [
       0.001,
@@ -80,15 +98,12 @@
       "worst_source_degradation": -0.01
     }
   },
-  "architecture": "existing SmallCMNISTCNN from cmnist_feature_probe.py",
-  "optimizer": "Adam, same learning-rate family as current CMNIST probe",
+  "architecture": "official IRMv1 Colored MNIST 2-channel 14x14 MLP",
+  "optimizer": "Adam with official IRMv1 learning-rate, L2, penalty anneal, and post-anneal whole-loss rescaling",
   "methods": [
     "ERM",
     "IRMv1",
-    "V-REx",
-    "UNPRECONDITIONED_GRAD_ALIGN",
-    "LOCAL_RESPONSE",
-    "RANDOM_METRIC"
+    "UNPRECONDITIONED_GRAD_ALIGN"
   ],
   "controls": [
     "SHUFFLED_LOCAL_RESPONSE"
@@ -97,8 +112,52 @@
     0.001,
     0.01,
     0.1,
-    1.0
+    1.0,
+    10.0
   ],
+  "official_protocol_primary": {
+    "enabled": true,
+    "label_noise": 0.25,
+    "train_color_flip_probs": [
+      0.2,
+      0.1
+    ],
+    "target_color_flip_prob": 0.9,
+    "steps": 501,
+    "hidden_dim": 256,
+    "penalty_anneal_iters": 100,
+    "irmv1_penalty_weight": 10000.0,
+    "response_beta_grid": [
+      0.001,
+      0.01,
+      0.1,
+      1.0,
+      10.0
+    ],
+    "declared_methods": [
+      "ERM",
+      "IRMv1",
+      "UNPRECONDITIONED_GRAD_ALIGN"
+    ],
+    "response_methods_use_irm_loss_rescale": false,
+    "l2_regularizer_weight": 0.001
+  },
+  "baseline_recovery_gate": {
+    "purpose": "verify that the classic reversed-color CMNIST protocol recovers a non-trivial IRMv1 baseline before interpreting Task 3 method comparisons",
+    "seeds": [
+      0
+    ],
+    "reference_protocol": "official_irm_colored_mnist",
+    "official_irm_steps": 501,
+    "official_irm_penalty_anneal_iters": 100,
+    "official_irm_penalty_weight": 10000.0,
+    "official_irm_hidden_dim": 256,
+    "minimum_target_accuracy": 0.55,
+    "maximum_erm_target_accuracy": 0.45,
+    "minimum_irmv1_advantage_over_erm": 0.05,
+    "label_noise": 0.25,
+    "must_pass_before_primary_comparison": true
+  },
   "damping": {
     "primary_epsilon": 0.01,
     "stability_ablations": [
@@ -131,5 +190,5 @@
     ]
   },
   "interpretation_ceiling": "No exact A_rec/E/slack, causal, finite-sample, universal DG, or broad benchmark claim.",
-  "preregistered_design_hash": "52b1554540c995db771a5dd436327a37b7802ccd669939932b6172bef3d92dd4"
+  "preregistered_design_hash": "d7247badc7f881f122b43bb579721f440a59796e2ebf378365d52cfcd6330821"
 }

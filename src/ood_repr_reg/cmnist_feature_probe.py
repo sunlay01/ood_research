@@ -21,6 +21,7 @@ class ColoredEnvironment:
     color: Tensor
     correlation: float
     env: int
+    label_noise: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -85,11 +86,17 @@ def make_environment(
     correlation: float,
     env: int,
     seed: int,
+    label_noise: float = 0.0,
 ) -> ColoredEnvironment:
     if not 0.0 <= correlation <= 1.0:
         raise ValueError("correlation must be in [0, 1]")
+    if not 0.0 <= label_noise <= 1.0:
+        raise ValueError("label_noise must be in [0, 1]")
     y = (digit >= 5).long()
     generator = torch.Generator().manual_seed(seed)
+    if label_noise > 0.0:
+        flips = torch.rand(y.shape[0], generator=generator) < label_noise
+        y = torch.where(flips, 1 - y, y)
     agrees = torch.rand(y.shape[0], generator=generator) < correlation
     color = torch.where(agrees, y, 1 - y)
     return ColoredEnvironment(
@@ -99,6 +106,7 @@ def make_environment(
         color=color,
         correlation=correlation,
         env=env,
+        label_noise=label_noise,
     )
 
 

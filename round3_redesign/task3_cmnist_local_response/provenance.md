@@ -1,10 +1,10 @@
 # Provenance
 
-code commit before experiment: `03d58aefd99a601fa173039bc46de93d9c65e247`
+code commit before experiment: `9c2db126a254e57796535a87ca45f3d5d8b6d9cb`
 
 working tree dirty before experiment: `True`
 
-preregistered design hash: `52b1554540c995db771a5dd436327a37b7802ccd669939932b6172bef3d92dd4`
+preregistered design hash: `d7247badc7f881f122b43bb579721f440a59796e2ebf378365d52cfcd6330821`
 
 runner command: `PYTHONPATH=src python -m ood_repr_reg.run_task3_cmnist_local_response --profile main`
 

@@ -2,18 +2,18 @@
 
 state_write_authorized: false
 
-discarded Task3R Gaussian branch deleted: true
+official reversed-color protocol restored: true
 
-new Task3 CMNIST verdict: `TASK3-CMNIST-FAIL`
+baseline recovery verdict: `True`
 
-Task 3 should close: `true`
+new Task 3 official-protocol pilot verdict: `TASK3-CMNIST-PARTIAL`
 
-larger benchmark justified: `false`
+Task 3 should close: `false`
 
-prior-art equivalence changes novelty interpretation: `no novelty claim made; bounded audit found related but not promoted exact equivalence`
+larger benchmark justified: `false until the official-protocol comparison completes all 10 preregistered seeds`
 
 Proposed CURRENT_STATE.md wording:
 
 ```text
-Task 3 CMNIST local-response geometry has been run as an isolated end-to-end CMNIST audit. Verdict: TASK3-CMNIST-FAIL. It tests whether curvature-aware head-gradient disagreement adds source-only algorithmic value beyond unpreconditioned gradient alignment and standard DG baselines; it does not identify A_rec/E/rho_slack or establish a target-risk theorem.
+Task 3 CMNIST local-response geometry has been repaired to use the official IRMv1 Colored MNIST reversed-color protocol for baseline recovery and pilot comparison. Current verdict: TASK3-CMNIST-PARTIAL. The pilot is protocol-valid but not yet a 10-seed scientific verdict.
 ```

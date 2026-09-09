@@ -1,80 +1,36 @@
 # Task 3 CMNIST Local Response Report
 
-## A. Question
+## A. Protocol Repair
 
-Does curvature-aware local response geometry add algorithmic value on end-to-end CMNIST?
+The interpreted primary comparison is now on the official IRMv1 Colored MNIST reversed-color protocol: 25% label noise, train color-flip probabilities 0.2/0.1, target color-flip probability 0.9, 2-channel 14x14 MLP, BCE-with-logits, L2 weight penalty 0.001, penalty annealing, and whole-loss rescaling after anneal.
 
-## B. Cleanup
+## B. Baseline Recovery Gate
 
-The discarded Gaussian Task3R implementation/results were removed from live source and result paths. `round3_redesign/task3_applicability/` was retained as historical diagnostic only.
+`passed=true`; ERM target accuracy `0.1710`; IRMv1 target accuracy `0.6686`; IRMv1 advantage `0.4976`.
 
-## C. Prior Art
+## C. Official-Protocol Pilot
 
-The exact object audit is in `prior_art_exact_object.md`. The run uses neutral internal names and makes no algorithmic novelty claim.
+- `ERM`: selected beta `0`, target acc `0.1710`, train acc `0.8754`, pred/color agreement `0.9299`
+- `IRMV1`: selected beta `1e+04`, target acc `0.6686`, train acc `0.6818`, pred/color agreement `0.3653`
+- `UNPRECONDITIONED_GRAD_ALIGN`: selected beta `0.01`, target acc `0.1787`, train acc `0.8767`, pred/color agreement `0.9216`
 
-## D. Benchmark
+## D. Paired Comparisons
 
-The run uses the existing CMNIST generator, binary digit label, source correlations, target correlation, `SmallCMNISTCNN`, Adam optimizer family, and counterfactual color probe. Profile: `main`.
+- `IRMV1` vs `ERM`: mean target-acc diff `0.4976`, wins `1/1`
 
-## E. Methods
+## E. Verdict
 
-- `ERM`: mean target acc `0.1136`, mean worst-source acc `0.8070`, mean color response `0.515479`
-- `IRMv1`: mean target acc `0.1136`, mean worst-source acc `0.8070`, mean color response `0.515499`
-- `LOCAL_RESPONSE`: mean target acc `0.1233`, mean worst-source acc `0.8078`, mean color response `0.372375`
-- `RANDOM_METRIC`: mean target acc `0.1196`, mean worst-source acc `0.8065`, mean color response `0.206458`
-- `SHUFFLED_LOCAL_RESPONSE`: mean target acc `0.1251`, mean worst-source acc `0.8045`, mean color response `0.440863`
-- `UNPRECONDITIONED_GRAD_ALIGN`: mean target acc `0.1136`, mean worst-source acc `0.8070`, mean color response `0.515399`
-- `V-REx`: mean target acc `0.1136`, mean worst-source acc `0.8070`, mean color response `0.515470`
-
-## F. Source-Only Selection
-
-Beta and checkpoint are selected by worst-source validation accuracy with mean-source validation as tie-breaker. `target_leakage_detected=false`.
-
-## G. Main OOD Results
-
-- `LOCAL_RESPONSE` vs `ERM`: mean diff `0.0097`, wins `2/10`, 95% CI `[0.0000, 0.0283]`
-- `LOCAL_RESPONSE` vs `UNPRECONDITIONED_GRAD_ALIGN`: mean diff `0.0097`, wins `2/10`, 95% CI `[0.0000, 0.0283]`
-- `LOCAL_RESPONSE` vs `RANDOM_METRIC`: mean diff `0.0037`, wins `2/10`, 95% CI `[-0.0146, 0.0267]`
-- `LOCAL_RESPONSE` vs `IRMv1`: mean diff `0.0097`, wins `2/10`, 95% CI `[0.0000, 0.0283]`
-- `LOCAL_RESPONSE` vs `V-REx`: mean diff `0.0097`, wins `2/10`, 95% CI `[0.0000, 0.0283]`
-- `UNPRECONDITIONED_GRAD_ALIGN` vs `ERM`: mean diff `0.0000`, wins `0/10`, 95% CI `[0.0000, 0.0000]`
-
-## H. Curvature Increment
-
-The primary increment is `LOCAL_RESPONSE - UNPRECONDITIONED_GRAD_ALIGN`; see `paired_comparisons.csv` and `run_table.csv` for paired seed rows.
-
-## I. Mechanism
-
-Mechanism diagnostics include raw gradient disagreement, local-response disagreement, response-vector norm, damped curvature spectrum, update norms, and counterfactual color response.
-
-## J. Controls
-
-Random metric control rows are in `random_metric_control.csv`; shuffled environment-control rows are in `environment_shuffle_control.csv`.
-
-## K. Counterexamples
-
-Strongest detected counterexamples are recorded in `counterexamples.csv`; count `9`.
-
-## L. Relation to Frozen Theory
-
-This experiment tests the lower-level source-risk metric insight. It does not estimate `A_rec`, optimize `E`, validate spectral slack for neural networks, or claim target-risk lower bounds.
-
-## M. Verdict
-
-`TASK3-CMNIST-FAIL`
+`TASK3-CMNIST-PARTIAL`
 
 Criteria:
 
-- `no_target_leakage`: `true`
-- `end_to_end_representation_training`: `true`
-- `all_10_primary_seeds_completed`: `true`
+- `baseline_recovery_passed`: `true`
+- `official_reversed_color_protocol`: `true`
+- `all_10_primary_seeds_completed`: `false`
 - `mean_ood_vs_erm_ge_2pp`: `false`
 - `mean_ood_vs_grad_ge_1pp`: `false`
 - `seed_wins_vs_erm_ge_7`: `false`
 - `seed_wins_vs_grad_ge_7`: `false`
-- `worst_source_degradation_within_1pp`: `true`
 - `real_metric_beats_random_metric`: `false`
-- `color_or_mechanism_predicted_direction`: `true`
-- `not_explained_by_update_norm`: `true`
 
-Historical reopen: none.
+This is an official-protocol pilot, not a paper-level success claim. Historical reopen: none.

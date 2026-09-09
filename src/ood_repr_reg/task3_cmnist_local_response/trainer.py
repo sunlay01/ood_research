@@ -29,6 +29,7 @@ from ..cmnist_feature_probe import (
     seed_everything,
 )
 from .evaluation import SelectionScore, comparison_row, counterexample_rows, select_source_only, verdict
+from .official_irm_reference import OfficialIRMConfig, run_official_reference
 from .penalties import diagnostic_penalties, mean_source_loss, task3_penalty
 
 
@@ -42,17 +43,28 @@ class Task3Config:
     control_seeds: tuple[int, ...] = tuple(range(5))
     source_correlations: tuple[float, float] = (0.9, 0.8)
     target_correlation: float = 0.1
-    train_per_environment: int = 512
-    source_eval_per_environment: int = 400
-    target_eval: int = 700
-    probe_size: int = 300
-    diagnostic_samples: int = 96
-    epochs: int = 4
+    label_noise: float = 0.25
+    train_per_environment: int = 2500
+    source_eval_per_environment: int = 500
+    target_eval: int = 1000
+    probe_size: int = 500
+    diagnostic_samples: int = 512
+    epochs: int = 8
     batch_size: int = 128
     learning_rate: float = 1e-3
     latent_dim: int = 32
     device: str = "cpu"
-    beta_grid: tuple[float, ...] = (1e-3, 1e-2, 1e-1, 1.0)
+    beta_grid: tuple[float, ...] = (1e-3, 1e-2, 1e-1, 1.0, 10.0)
+    baseline_recovery_seeds: tuple[int, ...] = (0,)
+    baseline_recovery_irmv1_betas: tuple[float, ...] = (10000.0,)
+    baseline_recovery_min_target_accuracy: float = 0.55
+    baseline_recovery_max_erm_target_accuracy: float = 0.45
+    baseline_recovery_min_irmv1_advantage: float = 0.05
+    baseline_recovery_protocol: str = "official_irm_colored_mnist"
+    official_irm_steps: int = 501
+    official_irm_penalty_anneal_iters: int = 100
+    official_irm_penalty_weight: float = 10000.0
+    official_irm_hidden_dim: int = 256
     damping_epsilon: float = 1e-2
     damping_ablations: tuple[float, ...] = (1e-3, 1e-1)
     checkpoint_fractions: tuple[float, ...] = (0.10, 0.25, 0.50, 0.75, 1.00)
@@ -112,6 +124,13 @@ def default_config(profile: str = "main") -> Task3Config:
             epochs=1,
             batch_size=48,
             beta_grid=(1e-2,),
+            baseline_recovery_irmv1_betas=(1.0,),
+            baseline_recovery_min_target_accuracy=0.0,
+            baseline_recovery_max_erm_target_accuracy=1.0,
+            baseline_recovery_min_irmv1_advantage=-1.0,
+            official_irm_steps=3,
+            official_irm_penalty_anneal_iters=1,
+            official_irm_hidden_dim=16,
             primary_methods=("ERM", "UNPRECONDITIONED_GRAD_ALIGN", "LOCAL_RESPONSE", "RANDOM_METRIC"),
         )
     if profile != "main":
@@ -138,7 +157,14 @@ def build_data(config: Task3Config, seed: int) -> DataBundle:
             seed=seed + 101,
             offset=env * config.train_per_environment,
         )
-        train_environments.append(make_environment(gray, digit, correlation=correlation, env=env, seed=seed + env * 17))
+        train_environments.append(make_environment(
+            gray,
+            digit,
+            correlation=correlation,
+            env=env,
+            seed=seed + env * 17,
+            label_noise=config.label_noise,
+        ))
     source_environments = []
     offset = 0
     for env, correlation in enumerate(config.source_correlations):
@@ -150,7 +176,14 @@ def build_data(config: Task3Config, seed: int) -> DataBundle:
             offset=offset,
         )
         offset += config.source_eval_per_environment
-        source_environments.append(make_environment(gray, digit, correlation=correlation, env=env, seed=seed + 1000 + env * 17))
+        source_environments.append(make_environment(
+            gray,
+            digit,
+            correlation=correlation,
+            env=env,
+            seed=seed + 1000 + env * 17,
+            label_noise=config.label_noise,
+        ))
     target_gray, target_digit = deterministic_subset(
         test_gray, test_digit, n=config.target_eval, seed=seed + 211, offset=offset
     )
@@ -161,7 +194,14 @@ def build_data(config: Task3Config, seed: int) -> DataBundle:
     return DataBundle(
         train=tuple(train_environments),
         source_eval=tuple(source_environments),
-        target=make_environment(target_gray, target_digit, correlation=config.target_correlation, env=2, seed=seed + 2000),
+        target=make_environment(
+            target_gray,
+            target_digit,
+            correlation=config.target_correlation,
+            env=2,
+            seed=seed + 2000,
+            label_noise=config.label_noise,
+        ),
         probe=make_counterfactual_probe(probe_gray, probe_digit),
     )
 
@@ -197,6 +237,95 @@ def _source_accuracies(
 def _target_loss(model: SmallCMNISTCNN, environment: ColoredEnvironment, device: torch.device) -> float:
     logits = model(environment.x.to(device))
     return float(F.cross_entropy(logits, environment.y.to(device)).detach().cpu())
+
+
+@torch.no_grad()
+def _target_color_audit(
+    model: SmallCMNISTCNN,
+    environment: ColoredEnvironment,
+    device: torch.device,
+) -> dict[str, float]:
+    logits = model(environment.x.to(device))
+    pred = logits.argmax(dim=1).cpu()
+    return {
+        "target_accuracy": float((pred == environment.y).float().mean()),
+        "target_color_label_accuracy": float((environment.color == environment.y).float().mean()),
+        "target_inverse_color_label_accuracy": float(((1 - environment.color) == environment.y).float().mean()),
+        "prediction_color_agreement": float((pred == environment.color).float().mean()),
+        "prediction_inverse_color_agreement": float((pred == 1 - environment.color).float().mean()),
+    }
+
+
+def baseline_recovery_rows(config: Task3Config) -> list[dict[str, Any]]:
+    """Run the official-protocol CMNIST ERM/IRMv1 sanity gate.
+
+    This is deliberately separate from source-only hyperparameter selection. It
+    asks whether a faithful reversed-color IRMv1 baseline is recoverable before
+    Task 3 method comparisons are interpreted.
+    """
+    if config.baseline_recovery_protocol != "official_irm_colored_mnist":
+        raise ValueError(f"unknown baseline recovery protocol: {config.baseline_recovery_protocol}")
+    reference = OfficialIRMConfig(
+        data_root=config.data_root,
+        download=config.download,
+        seeds=config.baseline_recovery_seeds,
+        hidden_dim=config.official_irm_hidden_dim,
+        learning_rate=config.learning_rate,
+        penalty_anneal_iters=config.official_irm_penalty_anneal_iters,
+        penalty_weight=config.official_irm_penalty_weight,
+        steps=config.official_irm_steps,
+        label_noise=config.label_noise,
+        device=config.device,
+    )
+    return run_official_reference(reference)
+
+
+def summarize_baseline_recovery(config: Task3Config, rows: list[dict[str, Any]]) -> dict[str, Any]:
+    irm_rows = [row for row in rows if str(row["method"]).upper() == "IRMV1"]
+    erm_rows = [row for row in rows if str(row["method"]).upper() == "ERM"]
+    best_irm = max(irm_rows, key=lambda row: float(row["target_accuracy"])) if irm_rows else None
+    best_erm = max(erm_rows, key=lambda row: float(row["target_accuracy"])) if erm_rows else None
+    best_target = float(best_irm["target_accuracy"]) if best_irm else float("nan")
+    erm_target = float(best_erm["target_accuracy"]) if best_erm else float("nan")
+    advantage = best_target - erm_target
+    representative = rows[0] if rows else {}
+    passed = bool(
+        best_irm is not None
+        and best_erm is not None
+        and best_target >= config.baseline_recovery_min_target_accuracy
+        and erm_target <= config.baseline_recovery_max_erm_target_accuracy
+        and advantage >= config.baseline_recovery_min_irmv1_advantage
+    )
+    return {
+        "gate": "CMNIST_BASELINE_RECOVERY",
+        "passed": passed,
+        "threshold_target_accuracy": config.baseline_recovery_min_target_accuracy,
+        "max_allowed_erm_target_accuracy": config.baseline_recovery_max_erm_target_accuracy,
+        "minimum_irmv1_advantage_over_erm": config.baseline_recovery_min_irmv1_advantage,
+        "best_irmv1_target_accuracy": best_target,
+        "best_irmv1_beta": float(best_irm.get("beta", best_irm.get("penalty_weight"))) if best_irm else None,
+        "best_irmv1_penalty_weight": float(best_irm.get("penalty_weight", best_irm.get("beta"))) if best_irm else None,
+        "best_irmv1_prediction_color_agreement": float(best_irm["prediction_color_agreement"]) if best_irm else None,
+        "best_erm_target_accuracy": erm_target,
+        "best_irmv1_target_advantage_over_erm": advantage,
+        "protocol": {
+            "official_train_examples_per_environment": representative.get("train_examples_per_environment"),
+            "official_target_examples": representative.get("target_examples"),
+            "source_environment_count": representative.get("source_environment_count"),
+            "task3_cnn_train_per_environment_not_used_by_gate": config.train_per_environment,
+            "task3_cnn_epochs_not_used_by_gate": config.epochs,
+            "label_noise": config.label_noise,
+            "baseline_recovery_protocol": config.baseline_recovery_protocol,
+            "train_color_flip_probs": representative.get("train_color_flip_probs"),
+            "target_color_flip_prob": representative.get("target_color_flip_prob"),
+            "official_irm_steps": config.official_irm_steps,
+            "official_irm_penalty_anneal_iters": config.official_irm_penalty_anneal_iters,
+            "official_irm_penalty_weight": config.official_irm_penalty_weight,
+            "official_irm_hidden_dim": config.official_irm_hidden_dim,
+            "irmv1_betas": list(config.baseline_recovery_irmv1_betas),
+            "seeds": list(config.baseline_recovery_seeds),
+        },
+    }
 
 
 def _fixed_diagnostic_batches(
@@ -444,21 +573,80 @@ def _write_csv(path: Path, rows: list[dict[str, Any]]) -> None:
         writer.writerows(rows)
 
 
+def _read_csv(path: Path) -> list[dict[str, Any]]:
+    if not path.exists() or path.stat().st_size == 0:
+        return []
+    with path.open(newline="", encoding="utf-8") as handle:
+        return list(csv.DictReader(handle))
+
+
+def _flush_primary_rows(
+    results: Path,
+    *,
+    run_rows: list[dict[str, Any]],
+    method_summary: list[dict[str, Any]],
+    selection_rows: list[dict[str, Any]],
+    candidate_grid_rows: list[dict[str, Any]],
+    dynamics_rows: list[dict[str, Any]],
+    comparison_rows: list[dict[str, Any]],
+    counterexamples: list[dict[str, Any]],
+) -> None:
+    _write_csv(results / "run_table.csv", run_rows)
+    _write_csv(results / "seed_summary.csv", method_summary)
+    _write_csv(results / "hyperparameter_selection.csv", selection_rows)
+    _write_csv(results / "candidate_grid_evaluation.csv", candidate_grid_rows)
+    _write_csv(results / "dynamics.csv", dynamics_rows)
+    _write_csv(results / "mechanism_diagnostics.csv", run_rows)
+    _write_csv(results / "random_metric_control.csv", [row for row in run_rows if row["method"] == "RANDOM_METRIC"])
+    _write_csv(results / "environment_shuffle_control.csv", [row for row in run_rows if row["method"] == "SHUFFLED_LOCAL_RESPONSE"])
+    _write_csv(results / "paired_comparisons.csv", comparison_rows)
+    _write_csv(results / "counterexamples.csv", counterexamples)
+
+
+def _summarize_methods(run_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    method_summary = []
+    for method in sorted({str(row["method"]) for row in run_rows}):
+        values = [row for row in run_rows if row["method"] == method]
+        method_summary.append({
+            "method": method,
+            "n": len(values),
+            "mean_target_accuracy": float(np.mean([float(row["target_accuracy"]) for row in values])),
+            "mean_worst_source_accuracy": float(np.mean([float(row["worst_source_accuracy"]) for row in values])),
+            "mean_counterfactual_color_response": float(np.mean([float(row["counterfactual_color_response"]) for row in values])),
+            "mean_local_response_disagreement": float(np.mean([float(row["local_response_disagreement"]) for row in values])),
+            "mean_raw_gradient_disagreement": float(np.mean([float(row["raw_gradient_disagreement"]) for row in values])),
+        })
+    return method_summary
+
+
 def run_experiment(config: Task3Config, output: Path) -> dict[str, Any]:
     started = time.time()
     output.mkdir(parents=True, exist_ok=True)
     results = output / "results"
     results.mkdir(exist_ok=True)
     device = _device(config.device)
-    run_rows: list[dict[str, Any]] = []
-    selection_rows: list[dict[str, Any]] = []
-    dynamics_rows: list[dict[str, Any]] = []
+    run_rows: list[dict[str, Any]] = _read_csv(results / "run_table.csv")
+    selection_rows: list[dict[str, Any]] = _read_csv(results / "hyperparameter_selection.csv")
+    dynamics_rows: list[dict[str, Any]] = _read_csv(results / "dynamics.csv")
+    candidate_grid_rows: list[dict[str, Any]] = _read_csv(results / "candidate_grid_evaluation.csv")
+    completed = {(int(row["seed"]), str(row["method"])) for row in run_rows}
+    comparison_pairs = [
+        ("LOCAL_RESPONSE", "ERM"),
+        ("LOCAL_RESPONSE", "UNPRECONDITIONED_GRAD_ALIGN"),
+        ("LOCAL_RESPONSE", "RANDOM_METRIC"),
+        ("LOCAL_RESPONSE", "IRMv1"),
+        ("LOCAL_RESPONSE", "V-REx"),
+        ("UNPRECONDITIONED_GRAD_ALIGN", "ERM"),
+    ]
     for seed in config.seeds:
         data = build_data(config, seed)
         methods = list(config.primary_methods)
         if seed in config.control_seeds:
             methods.extend(config.control_methods)
         for method in methods:
+            if (int(seed), method) in completed:
+                print(f"seed={seed} method={method} status=resume-skip", flush=True)
+                continue
             candidates = []
             for beta in _betas_for_method(config, method):
                 candidate = train_candidate(data, config, seed=seed, method=method, beta=float(beta))
@@ -478,47 +666,64 @@ def run_experiment(config: Task3Config, output: Path) -> dict[str, Any]:
                     and int(row["checkpoint_step"]) == selected.selection_score.checkpoint_step
                 ):
                     row["selected_by_source_rule"] = True
+            for candidate in candidates:
+                grid_row, _ = evaluate_candidate(candidate, data, config)
+                grid_row["selected_by_source_rule"] = candidate is selected
+                grid_row["evaluation_role"] = "posthoc_candidate_grid_after_source_selection"
+                candidate_grid_rows.append(grid_row)
             run_row, method_dynamics = evaluate_candidate(selected, data, config)
             run_rows.append(run_row)
+            completed.add((int(seed), method))
             dynamics_rows.extend(method_dynamics)
+            method_summary = _summarize_methods(run_rows)
+            comparison_rows = [comparison_row(run_rows, left, right) for left, right in comparison_pairs]
+            counterexamples = counterexample_rows(run_rows)
+            _flush_primary_rows(
+                results,
+                run_rows=run_rows,
+                method_summary=method_summary,
+                selection_rows=selection_rows,
+                candidate_grid_rows=candidate_grid_rows,
+                dynamics_rows=dynamics_rows,
+                comparison_rows=comparison_rows,
+                counterexamples=counterexamples,
+            )
+            progress_summary = {
+                "experiment_id": config.experiment_id,
+                "profile": config.profile,
+                "primary_run_status": "IN_PROGRESS",
+                "completed_seed_method_rows": len(run_rows),
+                "expected_seed_method_rows": len(config.seeds) * len(config.primary_methods)
+                + len([seed for seed in config.seeds if seed in config.control_seeds]) * len(config.control_methods),
+                "config": config.to_json_dict(),
+                "method_summary": method_summary,
+                "paired_comparisons": comparison_rows,
+                "python": platform.python_version(),
+                "torch": torch.__version__,
+                "device": str(device),
+                "wall_seconds": time.time() - started,
+            }
+            (results / "summary.json").write_text(json.dumps(progress_summary, indent=2), encoding="utf-8")
             print(
                 f"seed={seed} method={method} beta={selected.beta:g} "
                 f"source={run_row['mean_source_accuracy']:.3f} target={run_row['target_accuracy']:.3f}"
+                f" progress={len(run_rows)}/{progress_summary['expected_seed_method_rows']}",
+                flush=True,
             )
-    comparison_pairs = [
-        ("LOCAL_RESPONSE", "ERM"),
-        ("LOCAL_RESPONSE", "UNPRECONDITIONED_GRAD_ALIGN"),
-        ("LOCAL_RESPONSE", "RANDOM_METRIC"),
-        ("LOCAL_RESPONSE", "IRMv1"),
-        ("LOCAL_RESPONSE", "V-REx"),
-        ("UNPRECONDITIONED_GRAD_ALIGN", "ERM"),
-    ]
     comparison_rows = [comparison_row(run_rows, left, right) for left, right in comparison_pairs]
     verdict_label, criteria = verdict(run_rows, comparison_rows)
     counterexamples = counterexample_rows(run_rows)
-    method_summary = []
-    for method in sorted({str(row["method"]) for row in run_rows}):
-        values = [row for row in run_rows if row["method"] == method]
-        method_summary.append({
-            "method": method,
-            "n": len(values),
-            "mean_target_accuracy": float(np.mean([float(row["target_accuracy"]) for row in values])),
-            "mean_worst_source_accuracy": float(np.mean([float(row["worst_source_accuracy"]) for row in values])),
-            "mean_counterfactual_color_response": float(np.mean([float(row["counterfactual_color_response"]) for row in values])),
-            "mean_local_response_disagreement": float(np.mean([float(row["local_response_disagreement"]) for row in values])),
-            "mean_raw_gradient_disagreement": float(np.mean([float(row["raw_gradient_disagreement"]) for row in values])),
-        })
-    random_rows = [row for row in run_rows if row["method"] == "RANDOM_METRIC"]
-    shuffle_rows = [row for row in run_rows if row["method"] == "SHUFFLED_LOCAL_RESPONSE"]
-    _write_csv(results / "run_table.csv", run_rows)
-    _write_csv(results / "seed_summary.csv", method_summary)
-    _write_csv(results / "hyperparameter_selection.csv", selection_rows)
-    _write_csv(results / "dynamics.csv", dynamics_rows)
-    _write_csv(results / "mechanism_diagnostics.csv", run_rows)
-    _write_csv(results / "random_metric_control.csv", random_rows)
-    _write_csv(results / "environment_shuffle_control.csv", shuffle_rows)
-    _write_csv(results / "paired_comparisons.csv", comparison_rows)
-    _write_csv(results / "counterexamples.csv", counterexamples)
+    method_summary = _summarize_methods(run_rows)
+    _flush_primary_rows(
+        results,
+        run_rows=run_rows,
+        method_summary=method_summary,
+        selection_rows=selection_rows,
+        candidate_grid_rows=candidate_grid_rows,
+        dynamics_rows=dynamics_rows,
+        comparison_rows=comparison_rows,
+        counterexamples=counterexamples,
+    )
     summary = {
         "experiment_id": config.experiment_id,
         "profile": config.profile,
@@ -527,6 +732,7 @@ def run_experiment(config: Task3Config, output: Path) -> dict[str, Any]:
         "config": config.to_json_dict(),
         "method_summary": method_summary,
         "paired_comparisons": comparison_rows,
+        "candidate_grid_rows": len(candidate_grid_rows),
         "counterexample_count": len(counterexamples),
         "target_leakage_detected": False,
         "preregistered_before_target_outcomes": True,

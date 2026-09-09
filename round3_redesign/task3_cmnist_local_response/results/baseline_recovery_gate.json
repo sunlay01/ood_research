@@ -1,0 +1,40 @@
+{
+  "gate": "CMNIST_BASELINE_RECOVERY",
+  "passed": true,
+  "threshold_target_accuracy": 0.55,
+  "max_allowed_erm_target_accuracy": 0.45,
+  "minimum_irmv1_advantage_over_erm": 0.05,
+  "best_irmv1_target_accuracy": 0.6686000227928162,
+  "best_irmv1_beta": 10000.0,
+  "best_irmv1_penalty_weight": 10000.0,
+  "best_irmv1_prediction_color_agreement": 0.3652999997138977,
+  "best_erm_target_accuracy": 0.17100000381469727,
+  "best_irmv1_target_advantage_over_erm": 0.4976000189781189,
+  "protocol": {
+    "official_train_examples_per_environment": [
+      25000,
+      25000
+    ],
+    "official_target_examples": 10000,
+    "source_environment_count": 2,
+    "task3_cnn_train_per_environment_not_used_by_gate": 2500,
+    "task3_cnn_epochs_not_used_by_gate": 8,
+    "label_noise": 0.25,
+    "baseline_recovery_protocol": "official_irm_colored_mnist",
+    "train_color_flip_probs": [
+      0.2,
+      0.1
+    ],
+    "target_color_flip_prob": 0.9,
+    "official_irm_steps": 501,
+    "official_irm_penalty_anneal_iters": 100,
+    "official_irm_penalty_weight": 10000.0,
+    "official_irm_hidden_dim": 256,
+    "irmv1_betas": [
+      10000.0
+    ],
+    "seeds": [
+      0
+    ]
+  }
+}
