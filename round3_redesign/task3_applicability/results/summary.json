@@ -1,0 +1,32 @@
+{
+  "verdict": "TASK3-APPLICABILITY-PARTIAL",
+  "logic_audit": {
+    "passes": true,
+    "forbidden_feature_count": 0,
+    "forbidden_features": [],
+    "missing_design_fields": [],
+    "features_built_before_outcomes_required": true,
+    "target_outcomes_are_offline_labels_only": true
+  },
+  "feature_row_count": 238,
+  "target_outcome_row_count": 5208,
+  "joined_valid_row_count": 4260,
+  "grouped_cv_keeps_training_runs_together": true,
+  "ranking_row_count": 8,
+  "predictive_row_count": 16,
+  "baseline_comparison_row_count": 6,
+  "null_control_row_count": 6,
+  "counterexample_count": 3,
+  "primary_increment": "B3_minus_B1",
+  "secondary_increment": "B2_minus_B1",
+  "target_outcomes_used_for_feature_construction": false,
+  "target_outcomes_used_for_selection": false,
+  "canonical_state_edited": false,
+  "order_trace": [
+    "preregistration_written",
+    "source_only_runs_materialized",
+    "features_written",
+    "held_out_target_outcomes_generated",
+    "evaluation_written"
+  ]
+}

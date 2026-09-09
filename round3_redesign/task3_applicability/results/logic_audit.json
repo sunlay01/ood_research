@@ -1,0 +1,8 @@
+{
+  "passes": true,
+  "forbidden_feature_count": 0,
+  "forbidden_features": [],
+  "missing_design_fields": [],
+  "features_built_before_outcomes_required": true,
+  "target_outcomes_are_offline_labels_only": true
+}
