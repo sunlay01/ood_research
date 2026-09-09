@@ -11,6 +11,7 @@ import argparse
 import csv
 import json
 import platform
+import re
 import subprocess
 from dataclasses import dataclass
 from datetime import datetime, timezone
@@ -29,6 +30,9 @@ from .environment_family import (
     source_induced_audit,
 )
 from .environment_family.base import Role
+from .environment_family.legacy_gaussian import LegacyGaussianFamily
+from .environment_family.source_induced import EnvironmentParameterization, parameter_jacobian
+from .round3r_3b_benchmark import ModuleEnvironment
 from .round3r_3e_c_spectral import slack_ratio
 from .run_algorithm_mechanism import DEFAULT_OUTPUT as TASK1_DEFAULT_OUTPUT
 from .run_algorithm_mechanism import run as run_task1
@@ -223,6 +227,63 @@ class ToyUnitIntervalFamily:
         return float(reference.value), float(1.0 - reference.value)
 
 
+def _legacy_zero_variance_boundary_audit() -> dict[str, object]:
+    base = ModuleEnvironment(
+        shortcut_rhos=(0.75, 0.57),
+        shortcut_means=(0.18, 0.08),
+        shortcut_variances=(0.0, 0.61),
+        n_noise=4,
+    )
+    family = LegacyGaussianFamily(base=base)
+    negative, positive = family.legal_step_interval(base, "S1_variance", role="source")
+    derivative, diagnostic = family_directional_derivative(
+        family, base, "S1_variance",
+        lambda env: np.array([env.shortcut_variances[0]]),
+        1e-3, role="source",
+    )
+    expected = family.tangent_spec(base).scales[family.tangent_spec(base).index("S1_variance")]
+    return {
+        "case": "legacy_gaussian_zero_variance",
+        "negative_radius": negative,
+        "positive_radius": positive,
+        "scheme": diagnostic.scheme,
+        "derivative": float(derivative[0]),
+        "expected": float(expected),
+        "pass": bool(
+            negative == 0.0 and np.isinf(positive)
+            and diagnostic.scheme == "forward_second_order"
+            and abs(float(derivative[0]) - float(expected)) < 1e-10
+        ),
+        "diagnostic": diagnostic.as_dict(),
+    }
+
+
+def _source_induced_parameter_boundary_audit() -> dict[str, object]:
+    base = ModuleEnvironment(
+        shortcut_rhos=(0.75, 0.57),
+        shortcut_means=(0.18, 0.08),
+        shortcut_variances=(0.0, 0.61),
+        n_noise=4,
+    )
+    parameters = EnvironmentParameterization(len(base.shortcut_rhos), base.n_noise)
+    jacobian, diagnostics = parameter_jacobian(base, parameters, 1e-6, return_diagnostics=True)
+    s1 = next(row for row in diagnostics if row["parameter"] == "variance_1")
+    return {
+        "case": "source_induced_parameter_jacobian_zero_variance",
+        "jacobian_shape": list(jacobian.shape),
+        "variance_1_scheme": s1["scheme"],
+        "variance_1_legal_minus": s1["legal_minus"],
+        "variance_1_legal_plus": s1["legal_plus"],
+        "finite": bool(np.all(np.isfinite(jacobian))),
+        "pass": bool(
+            np.all(np.isfinite(jacobian))
+            and s1["scheme"] == "forward_second_order"
+            and not s1["legal_minus"]
+            and s1["legal_plus"]
+        ),
+    }
+
+
 def r3_boundary_audit() -> dict[str, object]:
     family = ToyUnitIntervalFamily()
     calls: list[float] = []
@@ -250,8 +311,55 @@ def r3_boundary_audit() -> dict[str, object]:
             "abs_error": abs(float(derivative[0]) - expected[name]),
             **diagnostic.as_dict(),
         })
-    passed = all(row["abs_error"] < 1e-10 for row in rows) and all(0.0 <= value <= 1.0 for value in calls)
-    return {"status": "REPAIR-PASS" if passed else "REPAIR-FAIL", "rows": rows, "evaluations": calls}
+    legacy = _legacy_zero_variance_boundary_audit()
+    source = _source_induced_parameter_boundary_audit()
+    passed = (
+        all(row["abs_error"] < 1e-10 for row in rows)
+        and all(0.0 <= value <= 1.0 for value in calls)
+        and legacy["pass"] and source["pass"]
+    )
+    return {
+        "status": "REPAIR-PASS" if passed else "REPAIR-FAIL",
+        "rows": rows,
+        "evaluations": calls,
+        "legacy_zero_variance": legacy,
+        "source_induced_parameter_jacobian": source,
+    }
+
+
+def _parse_pytest_counts(output: str) -> dict[str, int]:
+    counts = {"tests_passed": 0, "tests_failed": 0, "tests_skipped": 0, "warnings": 0}
+    for key, pattern in (
+        ("tests_passed", r"(\d+) passed"),
+        ("tests_failed", r"(\d+) failed"),
+        ("tests_skipped", r"(\d+) skipped"),
+        ("warnings", r"(\d+) warnings?"),
+    ):
+        matches = re.findall(pattern, output)
+        if matches:
+            counts[key] = int(matches[-1])
+    return counts
+
+
+def _run_recorded_command(name: str, command: str, *, cwd: Path = ROOT) -> dict[str, object]:
+    completed = subprocess.run(
+        command, cwd=cwd, shell=True, text=True,
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+    )
+    output = completed.stdout or ""
+    record: dict[str, object] = {
+        "name": name,
+        "command": command,
+        "cwd": str(cwd),
+        "returncode": completed.returncode,
+        "passed": completed.returncode == 0,
+        "output_tail": output[-4000:],
+    }
+    if "pytest" in command:
+        record.update(_parse_pytest_counts(output))
+    if "lake build" in command:
+        record["lean_build_passed"] = completed.returncode == 0
+    return record
 
 
 def _copy_rows(source: Path, target: Path, transform: Callable[[dict[str, str]], dict[str, object]] | None = None) -> list[dict[str, object]]:
@@ -294,10 +402,13 @@ def _natural_task2_cases(rows: list[dict[str, object]]) -> dict[str, object]:
 def _write_docs(output: Path, results: Path, summary: dict[str, object]) -> None:
     status = summary["overall_verdict"]
     header = (
-        f"git_commit_before_repair: `{summary['git_commit_before_repair']}`\n"
-        f"git_commit_after_repair: `{summary['git_commit_after_repair']}`\n"
+        f"repair_baseline_commit: `{summary['repair_baseline_commit']}`\n"
+        f"code_base_commit: `{summary['code_base_commit']}`\n"
+        f"artifact_commit: `{summary['artifact_commit']}`\n"
+        f"working_tree_dirty_when_generated: `{summary['working_tree_dirty_when_generated']}`\n"
         f"task1_runner: `{summary['task1_runner']}`\n"
         f"task2_runner: `{summary['task2_runner']}`\n"
+        f"regression_commands_recorded: `{summary['regression_commands_recorded']}`\n"
         f"date: `{summary['date']}`\n"
         f"python_version: `{summary['python_version']}`\n"
         f"config_ids: `{', '.join(summary['config_ids'])}`\n\n"
@@ -324,14 +435,16 @@ def _write_docs(output: Path, results: Path, summary: dict[str, object]) -> None
 def run(
     output: Path = DEFAULT_OUTPUT,
     *,
-    refresh_task1: bool = False,
+    refresh_task1: bool = True,
+    record_regressions: bool = False,
     cmnist: bool = True,
     seeds: tuple[int, ...] = (0, 1, 2, 3, 4),
 ) -> dict[str, object]:
     output.mkdir(parents=True, exist_ok=True)
     results = output / "results"
     results.mkdir(exist_ok=True)
-    before = _git_commit()
+    code_base_commit = _git_commit()
+    dirty_at_generation_start = _git_dirty()
 
     r1 = r1_slack_audit()
     r2 = r2_family_provenance()
@@ -389,7 +502,19 @@ def run(
         "task1_rows": len(actual),
         "task2_rows": len(theorem),
         "joint_rows": len(joint),
+        "recorded_commands": [],
     }
+
+    if record_regressions:
+        commands = [
+            ("repair_evidence_gate", "PYTHONPATH=src pytest -q tests/test_repair_evidence_gate.py"),
+            ("task1_task2", "PYTHONPATH=src pytest -q tests/test_algorithm_mechanism.py tests/test_sharp_optimality.py"),
+            ("full_repository", "PYTHONPATH=src pytest -q"),
+            ("lean_build", "source ../scripts/lean_env.sh && lake build"),
+        ]
+        for name, command in commands:
+            cwd = ROOT / "formalization" if name == "lean_build" else ROOT
+            regression_status["recorded_commands"].append(_run_recorded_command(name, command, cwd=cwd))
     _write_json(results / "regression_status.json", regression_status)
 
     task1_ok = (
@@ -408,19 +533,27 @@ def run(
     r_pass = all(item == "REPAIR-PASS" for item in (r1["status"], r2["status"], r3["status"]))
     task1_status = "TASK1-EVIDENCE-SUPPORT" if task1_ok else "TASK1-EVIDENCE-PARTIAL"
     task2_status = "TASK2-EVIDENCE-SUPPORT" if task2_support else ("TASK2-EVIDENCE-PARTIAL" if task2_correct else "TASK2-EVIDENCE-FAIL")
-    if r_pass and task1_ok and task2_support:
+    regressions_ok = (
+        not record_regressions
+        or all(bool(row["passed"]) for row in regression_status["recorded_commands"])
+    )
+    if r_pass and task1_ok and task2_support and regressions_ok:
         overall = "REPAIR-EVIDENCE-PASS"
-    elif r1["status"] == "REPAIR-FAIL" or r2["status"] == "REPAIR-FAIL" or r3["status"] == "REPAIR-FAIL" or task2_status == "TASK2-EVIDENCE-FAIL":
+    elif r1["status"] == "REPAIR-FAIL" or r2["status"] == "REPAIR-FAIL" or r3["status"] == "REPAIR-FAIL" or task2_status == "TASK2-EVIDENCE-FAIL" or not regressions_ok:
         overall = "REPAIR-EVIDENCE-FAIL"
     else:
         overall = "REPAIR-EVIDENCE-PARTIAL"
 
     summary = {
-        "git_commit_before_repair": before,
-        "git_commit_after_repair": _git_commit(),
-        "git_dirty_after_repair": _git_dirty(),
+        "repair_baseline_commit": "da48363055869cc6af72c6122b733cbb2dedada8",
+        "code_base_commit": code_base_commit,
+        "artifact_commit": "see git log -- round3_redesign/repair_evidence_gate/results/repair_status.json",
+        "working_tree_dirty_when_generated": dirty_at_generation_start,
+        "git_dirty_after_generation": _git_dirty(),
         "task1_runner": "ood_repr_reg.run_algorithm_mechanism",
         "task2_runner": "ood_repr_reg.run_sharp_optimality",
+        "task1_refreshed_post_repair": bool(refresh_task1),
+        "regression_commands_recorded": bool(record_regressions),
         "date": datetime.now(timezone.utc).isoformat(),
         "python_version": platform.python_version(),
         "config_ids": ["legacy_hidden_u_primary", "source_induced_comparison"],
@@ -433,6 +566,7 @@ def run(
         "readiness": "READY-FOR-TASK-3" if overall == "REPAIR-EVIDENCE-PASS" else "NOT-READY-FOR-TASK-3",
         "task1_summary_source": str(task1_results / "summary.json"),
         "task2_regenerated_output": str(task2_output),
+        "regression_status_source": str(results / "regression_status.json"),
         "task1_row_count": len(actual),
         "task2_row_count": len(theorem),
         "task1_task2_joint_row_count": len(joint),
@@ -449,13 +583,20 @@ def run(
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
-    parser.add_argument("--refresh-task1", action="store_true")
+    parser.add_argument("--reuse-task1", dest="refresh_task1", action="store_false")
+    parser.add_argument("--refresh-task1", dest="refresh_task1", action="store_true")
+    parser.set_defaults(refresh_task1=True)
+    parser.add_argument("--record-regressions", action="store_true")
     parser.add_argument("--no-cmnist", action="store_true")
     parser.add_argument("--seeds", default="0,1,2,3,4")
     args = parser.parse_args()
     seeds = tuple(int(value) for value in args.seeds.split(",") if value)
     print(json.dumps(
-        run(args.output, refresh_task1=args.refresh_task1, cmnist=not args.no_cmnist, seeds=seeds),
+        run(
+            args.output, refresh_task1=args.refresh_task1,
+            record_regressions=args.record_regressions,
+            cmnist=not args.no_cmnist, seeds=seeds,
+        ),
         indent=2, default=_jsonable,
     ))
 

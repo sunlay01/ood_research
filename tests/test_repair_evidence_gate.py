@@ -6,6 +6,9 @@ from ood_repr_reg.algorithm_mechanism.adapters import gaussian_input
 from ood_repr_reg.algorithm_mechanism.audits import evaluate_input
 from ood_repr_reg.corrected_geometry_snapshot import corrected_snapshot_audit
 from ood_repr_reg.environment_family.finite_difference import family_directional_derivative
+from ood_repr_reg.environment_family.legacy_gaussian import LegacyGaussianFamily
+from ood_repr_reg.environment_family.source_induced import EnvironmentParameterization, parameter_jacobian
+from ood_repr_reg.round3r_3b_benchmark import ModuleEnvironment
 from ood_repr_reg.round3r_3e_c_benchmarks import primary_hidden_u_world
 from ood_repr_reg.round3r_3e_c_spectral import slack_ratio
 from ood_repr_reg.round3r_3e_joint_regret import shifted_ball_maximum
@@ -59,6 +62,44 @@ def test_r3_boundary_finite_difference_no_illegal_evaluations():
         "central", "forward_second_order", "backward_second_order",
     }
     assert all(0.0 <= value <= 1.0 for value in audit["evaluations"])
+    assert audit["legacy_zero_variance"]["pass"]
+    assert audit["source_induced_parameter_jacobian"]["pass"]
+
+
+def test_legacy_gaussian_variance_boundary_allows_forward_difference():
+    base = ModuleEnvironment(
+        shortcut_rhos=(0.75, 0.57),
+        shortcut_means=(0.18, 0.08),
+        shortcut_variances=(0.0, 0.61),
+        n_noise=4,
+    )
+    family = LegacyGaussianFamily(base=base)
+    negative, positive = family.legal_step_interval(base, "S1_variance", role="source")
+    assert negative == 0.0
+    assert np.isinf(positive)
+    derivative, diagnostic = family_directional_derivative(
+        family, base, "S1_variance",
+        lambda env: np.array([env.shortcut_variances[0]]),
+        1e-3, role="source",
+    )
+    assert diagnostic.scheme == "forward_second_order"
+    assert np.isclose(float(derivative[0]), 0.30)
+
+
+def test_source_induced_parameter_jacobian_is_boundary_safe_at_zero_variance():
+    base = ModuleEnvironment(
+        shortcut_rhos=(0.75, 0.57),
+        shortcut_means=(0.18, 0.08),
+        shortcut_variances=(0.0, 0.61),
+        n_noise=4,
+    )
+    params = EnvironmentParameterization(len(base.shortcut_rhos), base.n_noise)
+    jacobian, diagnostics = parameter_jacobian(base, params, 1e-6, return_diagnostics=True)
+    variance_1 = next(row for row in diagnostics if row["parameter"] == "variance_1")
+    assert np.all(np.isfinite(jacobian))
+    assert variance_1["scheme"] == "forward_second_order"
+    assert variance_1["legal_plus"]
+    assert not variance_1["legal_minus"]
 
 
 def test_toy_family_derivatives_at_interior_and_boundaries():

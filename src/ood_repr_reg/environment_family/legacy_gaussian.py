@@ -107,11 +107,11 @@ class LegacyGaussianFamily:
             index = int(family[1:]) - 1
             if parameter == "variance":
                 value = float(reference.shortcut_variances[index])
-                return value / scale, value / scale
+                return value / scale, float("inf")
             return float("inf"), float("inf")
         if coordinate == "N1_variance":
             value = float(reference.noise_variances[0])
-            return value / scale, value / scale
+            return value / scale, float("inf")
         if coordinate == "U_emergent":
             return float("inf"), float("inf")
         raise ValueError(f"unknown tangent direction: {coordinate}")

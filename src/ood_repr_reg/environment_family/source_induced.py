@@ -93,18 +93,78 @@ def source_state_basis(
     return vectors[:, :rank], singular, rank
 
 
+def _parameter_lower_bound_indices(parameters: EnvironmentParameterization) -> tuple[int, ...]:
+    names = parameters.names
+    constrained_names = (
+        *(f"variance_{i + 1}" for i in range(parameters.shortcut_count)),
+        *(f"noise_variance_{i + 1}" for i in range(parameters.noise_count)),
+        "c_noise_variance", "u_noise_variance",
+    )
+    return tuple(names.index(name) for name in constrained_names)
+
+
+def _parameter_step_radii(theta: Array, index: int,
+                          lower_bound_indices: tuple[int, ...]) -> tuple[float, float]:
+    if index in lower_bound_indices:
+        return max(0.0, float(theta[index])), float("inf")
+    return float("inf"), float("inf")
+
+
 def parameter_jacobian(reference: ModuleEnvironment, parameters: EnvironmentParameterization,
-                       step: float = 1e-6) -> Array:
+                       step: float = 1e-6, *,
+                       return_diagnostics: bool = False) -> Array | tuple[Array, list[dict[str, object]]]:
     if step <= 0.0:
         raise ValueError("step must be positive")
     theta = parameters.vector(reference)
+    base = task_state(environment_state(reference))
+    constrained = _parameter_lower_bound_indices(parameters)
     columns: list[Array] = []
+    diagnostics: list[dict[str, object]] = []
     for index in range(theta.size):
-        direction = np.zeros_like(theta); direction[index] = step
-        plus = task_state(environment_state(parameters.from_vector(reference, theta + direction)))
-        minus = task_state(environment_state(parameters.from_vector(reference, theta - direction)))
-        columns.append((plus - minus) / (2.0 * step))
-    return np.column_stack(columns) if columns else np.zeros((task_state(environment_state(reference)).size, 0))
+        negative, positive = _parameter_step_radii(theta, index, constrained)
+        h = float(step)
+        direction = np.zeros_like(theta)
+        if negative >= h and positive >= h:
+            scheme = "central"
+            direction[index] = h
+            plus = task_state(environment_state(parameters.from_vector(reference, theta + direction)))
+            minus = task_state(environment_state(parameters.from_vector(reference, theta - direction)))
+            column = (plus - minus) / (2.0 * h)
+        elif negative > 0.0 and positive > 0.0:
+            h = min(h, negative, positive) * 0.5
+            scheme = "central_shrunk"
+            direction[index] = h
+            plus = task_state(environment_state(parameters.from_vector(reference, theta + direction)))
+            minus = task_state(environment_state(parameters.from_vector(reference, theta - direction)))
+            column = (plus - minus) / (2.0 * h)
+        elif positive > 0.0:
+            h = min(h, positive / 2.0) * 0.5 if np.isfinite(positive) else h
+            scheme = "forward_second_order"
+            direction[index] = h
+            first = task_state(environment_state(parameters.from_vector(reference, theta + direction)))
+            second = task_state(environment_state(parameters.from_vector(reference, theta + 2.0 * direction)))
+            column = (-3.0 * base + 4.0 * first - second) / (2.0 * h)
+        elif negative > 0.0:
+            h = min(h, negative / 2.0) * 0.5 if np.isfinite(negative) else h
+            scheme = "backward_second_order"
+            direction[index] = h
+            first = task_state(environment_state(parameters.from_vector(reference, theta - direction)))
+            second = task_state(environment_state(parameters.from_vector(reference, theta - 2.0 * direction)))
+            column = (3.0 * base - 4.0 * first + second) / (2.0 * h)
+        else:
+            raise ValueError(f"no legal finite-difference step for parameter {parameters.names[index]!r}")
+        columns.append(column)
+        diagnostics.append({
+            "parameter": parameters.names[index],
+            "requested_step": float(step),
+            "used_step": float(h),
+            "scheme": scheme,
+            "legal_plus": bool(positive >= h),
+            "legal_minus": bool(negative >= h),
+            "distance_to_boundary": {"negative": float(negative), "positive": float(positive)},
+        })
+    result = np.column_stack(columns) if columns else np.zeros((base.size, 0))
+    return (result, diagnostics) if return_diagnostics else result
 
 
 @dataclass(frozen=True)
@@ -188,12 +248,7 @@ class SourceInducedFamily:
         theta = self.parameterization.vector(reference)
         delta = np.asarray(self.pullbacks[:, index], dtype=float)
         names = self.parameterization.names
-        constrained_names = (
-            *(f"variance_{i + 1}" for i in range(self.parameterization.shortcut_count)),
-            *(f"noise_variance_{i + 1}" for i in range(self.parameterization.noise_count)),
-            "c_noise_variance", "u_noise_variance",
-        )
-        constrained = [names.index(name) for name in constrained_names]
+        constrained = _parameter_lower_bound_indices(self.parameterization)
         negative = positive = float("inf")
         for position in constrained:
             value, slope = float(theta[position]), float(delta[position])

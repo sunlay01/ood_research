@@ -129,10 +129,10 @@ def test_main_benchmark_has_no_semantic_or_target_selection_dependency():
     assert result["regularizer_geometry_used_for_selection"] is False
 
 
-def test_joint_runner_excess_is_relative_to_information_floor():
+def test_joint_runner_excess_is_relative_to_information_floor(tmp_path):
     from ood_repr_reg.run_round3r_3e_joint import run
 
-    output = run()
+    output = run(output=tmp_path / "joint_regret")
     import json
     summary = json.loads((output / "results" / "summary.json").read_text())
     floor = summary["information_floor"]

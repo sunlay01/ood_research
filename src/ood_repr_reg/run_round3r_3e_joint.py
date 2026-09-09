@@ -80,7 +80,7 @@ def _family_provenance(geometry, family) -> dict[str, object]:
     }
 
 
-def run(*, family=None):
+def run(*, family=None, output: Path | None = None):
     if family is None:
         geometry = coupled_primary_geometry()
         exposed_observation = u_exposed_observation(geometry)
@@ -140,11 +140,14 @@ def run(*, family=None):
         information_floor = metric_information_floor(
             geometry.response, geometry.observation, geometry.spec.metric,
         )
-    output = (
-        root / "round3_redesign" / "3E_joint_information_regularization_regret"
-        if family is None else
-        root / "round3_redesign" / "environment_family_refactor" / "family_joint_regret"
-    )
+    if output is None:
+        output = (
+            root / "round3_redesign" / "3E_joint_information_regularization_regret"
+            if family is None else
+            root / "round3_redesign" / "environment_family_refactor" / "family_joint_regret"
+        )
+    else:
+        output = Path(output)
     results = output / "results"
     results.mkdir(parents=True, exist_ok=True)
     pieces = decompose_response(geometry.response, geometry.observation)
