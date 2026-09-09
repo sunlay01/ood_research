@@ -1,20 +1,24 @@
-# Proposed State Delta: TASK3-APPLICABILITY
+# Proposed State Delta: TASK3R-ALGORITHMIZATION
 
 state_write_authorized: false
 
-## Proposed Result IDs
+## Proposed Result ID
 
-- `R-TASK3-APPLICABILITY`: `TASK3-APPLICABILITY-PARTIAL`, artifacts under `round3_redesign/task3_applicability/`.
+- `R-TASK3R-ALGORITHM`: `TASK3R-ALGORITHM-PARTIAL`; exact Gaussian source-only probe under `round3_redesign/task3r_algorithmization/`.
 
-## Proposed Decision Changes
+## Proposed Decisions
 
-- Close Task 3: `true`.
-- Next task if closed: `Task 4 ex-ante helps/hurts prediction from local source/family geometry`.
+- Task 3R closes as an exact controlled probe: `true`.
+- Previous Task 3 applicability remains diagnostic only: `true`.
+- Gaussian H1-H4 gate passed: `false`.
+- Broader CMNIST or large-benchmark algorithm testing justified now: `false`.
 
-## Proposed CURRENT_STATE Wording
+## Proposed CURRENT_STATE wording
 
-Task 3 applicability has been run as an isolated finite held-out behavior audit. It produced `238` per-run feature rows and `5208` target outcome rows. Verdict: `TASK3-APPLICABILITY-PARTIAL`. The result is evidence about finite Gaussian/CMNIST frozen-head behavior only, not a target-risk lower bound, causal identification result, finite-sample guarantee, semantic recovery result, or universal DG theorem.
+`Task 3R tested one exact source-only leave-one-source-domain-out response-matching prototype. The implementation and IFT audit were valid, but the preregistered Gaussian gate passed=false; verdict TASK3R-ALGORITHM-PARTIAL. No CMNIST or broader benchmark was run.`
 
 ## Do Not Apply Automatically
 
-Canonical state was not edited by Task 3. Apply this delta only after human review.
+Canonical state and registries were not edited.
+
+Historical reopen: none.

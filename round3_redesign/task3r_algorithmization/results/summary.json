@@ -1,0 +1,168 @@
+{
+  "task_id": "TASK3R-ALGORITHMIZATION",
+  "verdict": "TASK3R-ALGORITHM-PARTIAL",
+  "prior_work_equivalence_label": "SPECIAL-CASE",
+  "verdict_capped_by_equivalence": true,
+  "gaussian_gate_pass": false,
+  "cmnist_run": false,
+  "cmnist_stop_reason": "preregistered Gaussian H1-H4 gate failed",
+  "optimizer_stable": true,
+  "ift_ok": true,
+  "max_ift_fd_relative_error": 2.481925182923634e-11,
+  "passing_primary_configurations": 0,
+  "required_passing_primary_configurations": 2,
+  "H4_source_information": true,
+  "configuration_results": [
+    {
+      "config_id": "gaussian_primary_1",
+      "H1_response": false,
+      "H2_held_out": false,
+      "H3_direction": true,
+      "response_relative_reduction": -1.0,
+      "response_baseline_zero": true,
+      "held_out_risk_improvement": 1.4564551836793171e-07,
+      "held_out_risk_improvement_vs_mldg": 3.667272375773578e-07,
+      "random_control_improvement": -0.0005410753970244708,
+      "source_risk_degradation": 6.958628612219186e-08,
+      "source_risk_ok": true,
+      "method_means": {
+        "ERM": {
+          "estimated_E": 0.0,
+          "oracle_E": 0.0001136782860732921,
+          "target_risk": 0.2702250978785122,
+          "source_risk": 0.2707505010315488
+        },
+        "PSEUDO_RESPONSE": {
+          "estimated_E": 0.0003079946263803676,
+          "oracle_E": 0.00034849761681634455,
+          "target_risk": 0.2702249522329938,
+          "source_risk": 0.2707505706178349
+        },
+        "MLDG_LOCAL": {
+          "estimated_E": 1.5057882244633304e-05,
+          "oracle_E": 0.00010494601532789829,
+          "target_risk": 0.2702253189602314,
+          "source_risk": 0.270750508557811
+        },
+        "NO_RESPONSE": {
+          "estimated_E": 0.00018910859421209544,
+          "oracle_E": 0.0002413730939006202,
+          "target_risk": 0.2702248882962178,
+          "source_risk": 0.2707505285046944
+        },
+        "RANDOM_RESPONSE": {
+          "estimated_E": 0.031176378869339785,
+          "oracle_E": 0.03124674321197317,
+          "target_risk": 0.27076617327553665,
+          "source_risk": 0.27128992462988766
+        }
+      }
+    },
+    {
+      "config_id": "gaussian_primary_2",
+      "H1_response": false,
+      "H2_held_out": false,
+      "H3_direction": true,
+      "response_relative_reduction": -1.0,
+      "response_baseline_zero": true,
+      "held_out_risk_improvement": 1.8289034797724923e-07,
+      "held_out_risk_improvement_vs_mldg": 2.549608465463038e-07,
+      "random_control_improvement": -3.7645702764821376e-05,
+      "source_risk_degradation": 2.7462590368454443e-08,
+      "source_risk_ok": true,
+      "method_means": {
+        "ERM": {
+          "estimated_E": 0.0,
+          "oracle_E": 0.00010324171185704557,
+          "target_risk": 0.3321628010128317,
+          "source_risk": 0.33252582786954604
+        },
+        "PSEUDO_RESPONSE": {
+          "estimated_E": 0.00018862808532849095,
+          "oracle_E": 0.0002491255593767632,
+          "target_risk": 0.3321626181224837,
+          "source_risk": 0.3325258553321364
+        },
+        "MLDG_LOCAL": {
+          "estimated_E": 1.2827134849279642e-05,
+          "oracle_E": 9.841206181618602e-05,
+          "target_risk": 0.33216287308333026,
+          "source_risk": 0.3325258317764412
+        },
+        "NO_RESPONSE": {
+          "estimated_E": 0.00018389916044059073,
+          "oracle_E": 0.00024052991577545627,
+          "target_risk": 0.332162613098441,
+          "source_risk": 0.3325258539007777
+        },
+        "RANDOM_RESPONSE": {
+          "estimated_E": 0.008181978027341488,
+          "oracle_E": 0.008253654927149336,
+          "target_risk": 0.3322004467155965,
+          "source_risk": 0.3325630459334683
+        }
+      }
+    },
+    {
+      "config_id": "gaussian_reduced_exposure",
+      "H1_response": false,
+      "H2_held_out": false,
+      "H3_direction": false,
+      "response_relative_reduction": -1.0,
+      "response_baseline_zero": true,
+      "held_out_risk_improvement": -1.6182119382257554e-06,
+      "held_out_risk_improvement_vs_mldg": -1.4915839874340975e-07,
+      "random_control_improvement": -2.3676031561725708e-05,
+      "source_risk_degradation": 2.0807848544190932e-06,
+      "source_risk_ok": true,
+      "method_means": {
+        "ERM": {
+          "estimated_E": 0.0,
+          "oracle_E": 0.00015683051582744724,
+          "target_risk": 0.2702277979980383,
+          "source_risk": 0.2709450004545604
+        },
+        "PSEUDO_RESPONSE": {
+          "estimated_E": 0.0014950958966067115,
+          "oracle_E": 0.0015232488316854595,
+          "target_risk": 0.27022941620997654,
+          "source_risk": 0.2709470812394148
+        },
+        "MLDG_LOCAL": {
+          "estimated_E": 3.970167680143769e-05,
+          "oracle_E": 0.00014007632491324037,
+          "target_risk": 0.2702292670515778,
+          "source_risk": 0.2709451140438034
+        },
+        "NO_RESPONSE": {
+          "estimated_E": 0.0015052829843965946,
+          "oracle_E": 0.0015302603995201104,
+          "target_risk": 0.27022949029558285,
+          "source_risk": 0.2709471329326842
+        },
+        "RANDOM_RESPONSE": {
+          "estimated_E": 0.0057216011919401615,
+          "oracle_E": 0.005735282028167525,
+          "target_risk": 0.27025147402960004,
+          "source_risk": 0.2709686080542499
+        }
+      }
+    }
+  ],
+  "bottleneck": "Exact source-only mechanism is valid, but the preregistered held-out Gaussian gate did not pass.",
+  "target_leakage_detected": false,
+  "pi_free_shortcut_used": false,
+  "approximation_fidelity": "not_applicable_exact_quadratic",
+  "row_count": 120,
+  "ablation_row_count": 15,
+  "selected_betas": {
+    "gaussian_primary_1": 1.0,
+    "gaussian_primary_2": 0.1,
+    "gaussian_reduced_exposure": 0.1
+  },
+  "git_commit": "87d05330a77dcfc2fb8dd1f98c45a99790f25c68",
+  "python_version": "3.13.13",
+  "runner": "ood_repr_reg.run_task3r_algorithmization",
+  "preregistration_path": "round3_redesign/task3r_algorithmization/preregistered_algorithm_probe.json",
+  "preregistration_written_before_outcomes": true
+}

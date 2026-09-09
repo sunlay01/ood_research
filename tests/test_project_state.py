@@ -30,7 +30,9 @@ def test_project_state_checker_passes():
     assert completed.returncode == 0, completed.stdout
     result = json.loads(completed.stdout)
     assert result["ok"]
-    assert result["boot_context"]["file_count"] == 2
+    # Active task context is included when a task is in progress; the two
+    # canonical files remain mandatory in every boot context.
+    assert result["boot_context"]["file_count"] in (2, 4)
     assert result["boot_context"]["line_count"] < 600
 
 
