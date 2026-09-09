@@ -10,7 +10,7 @@
   "expected_audit_row_count": 220,
   "full_coverage_pass": true,
   "cmnist_scope": "frozen_representation_empirical_squared_loss",
-  "operator_snapshot_source": "/Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/algorithm_mechanism/results/operator_snapshots.npz",
+  "operator_snapshot_source": "/Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/repair_evidence_gate/task1_regenerated/results/operator_snapshots.npz",
   "metric": "Euclidean after declared family-metric whitening",
   "lean_status": "LEAN-PARTIAL",
   "target_risk_lower_bound_claimed": false,
