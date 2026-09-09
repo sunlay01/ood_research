@@ -1,0 +1,191 @@
+[
+  {
+    "path_or_glob": "AGENTS.md",
+    "status": "AUTHORITATIVE",
+    "default_read": true,
+    "reason": "Mandatory agent boot protocol.",
+    "canonical_replacement": null,
+    "reopen_conditions": "Always read first."
+  },
+  {
+    "path_or_glob": "CURRENT_STATE.md",
+    "status": "AUTHORITATIVE",
+    "default_read": true,
+    "reason": "Unique concise current research state.",
+    "canonical_replacement": null,
+    "reopen_conditions": "Always read after AGENTS.md."
+  },
+  {
+    "path_or_glob": "docs/state/THEOREM_REGISTRY.md",
+    "status": "AUTHORITATIVE",
+    "default_read": false,
+    "reason": "Open only referenced theorem entries.",
+    "canonical_replacement": null,
+    "reopen_conditions": "Referenced by CURRENT_STATE.md or active task."
+  },
+  {
+    "path_or_glob": "docs/state/RESULT_REGISTRY.json",
+    "status": "AUTHORITATIVE",
+    "default_read": false,
+    "reason": "Open only referenced result entries.",
+    "canonical_replacement": null,
+    "reopen_conditions": "Referenced by CURRENT_STATE.md or active task."
+  },
+  {
+    "path_or_glob": "docs/state/DECISION_LOG.md",
+    "status": "AUTHORITATIVE",
+    "default_read": false,
+    "reason": "Open only referenced decisions.",
+    "canonical_replacement": null,
+    "reopen_conditions": "Referenced by CURRENT_STATE.md or active task."
+  },
+  {
+    "path_or_glob": "docs/state/FILE_STATUS.json",
+    "status": "AUTHORITATIVE",
+    "default_read": false,
+    "reason": "File classification registry.",
+    "canonical_replacement": null,
+    "reopen_conditions": "Needed for historical reopen or validation."
+  },
+  {
+    "path_or_glob": "README.md",
+    "status": "ACTIVE",
+    "default_read": false,
+    "reason": "Landing page only; not current-state authority.",
+    "canonical_replacement": "CURRENT_STATE.md",
+    "reopen_conditions": "Human landing-page editing."
+  },
+  {
+    "path_or_glob": "CONTEXT_MANAGEMENT.md",
+    "status": "DO_NOT_READ_BY_DEFAULT",
+    "default_read": false,
+    "reason": "Compatibility pointer to AGENTS.md.",
+    "canonical_replacement": "AGENTS.md",
+    "reopen_conditions": "Compatibility docs update."
+  },
+  {
+    "path_or_glob": "PROJECT_PROMPT_CN.md",
+    "status": "DO_NOT_READ_BY_DEFAULT",
+    "default_read": false,
+    "reason": "Stable collaboration policy only; current state comes from CURRENT_STATE.md.",
+    "canonical_replacement": "CURRENT_STATE.md",
+    "reopen_conditions": "Prompt-policy update."
+  },
+  {
+    "path_or_glob": "docs/research/research_state.md",
+    "status": "DO_NOT_READ_BY_DEFAULT",
+    "default_read": false,
+    "reason": "Compatibility path retained for old references.",
+    "canonical_replacement": "CURRENT_STATE.md",
+    "reopen_conditions": "Backward compatibility maintenance only."
+  },
+  {
+    "path_or_glob": "docs/research/open_questions.md",
+    "status": "ACTIVE",
+    "default_read": false,
+    "reason": "Current queue only; open when planning research tasks.",
+    "canonical_replacement": null,
+    "reopen_conditions": "Referenced by CURRENT_STATE.md or active task."
+  },
+  {
+    "path_or_glob": "active/**",
+    "status": "ACTIVE",
+    "default_read": true,
+    "reason": "Read active/TASK.md and active/CONTEXT.md only if they exist.",
+    "canonical_replacement": null,
+    "reopen_conditions": "An explicit active task exists."
+  },
+  {
+    "path_or_glob": "round1/**",
+    "status": "HISTORICAL",
+    "default_read": false,
+    "reason": "Historical research generation.",
+    "canonical_replacement": "CURRENT_STATE.md",
+    "reopen_conditions": "Explicit historical comparison or registry provenance."
+  },
+  {
+    "path_or_glob": "round2/**",
+    "status": "HISTORICAL",
+    "default_read": false,
+    "reason": "Historical quotient-style formulations.",
+    "canonical_replacement": "docs/state/THEOREM_REGISTRY.md",
+    "reopen_conditions": "Explicit historical comparison or regression contradiction."
+  },
+  {
+    "path_or_glob": "round3/**",
+    "status": "HISTORICAL",
+    "default_read": false,
+    "reason": "Historical pre-redesign Round-3 material.",
+    "canonical_replacement": "CURRENT_STATE.md",
+    "reopen_conditions": "Explicit historical comparison or registry provenance."
+  },
+  {
+    "path_or_glob": "round3_redesign/**",
+    "status": "FROZEN_EVIDENCE",
+    "default_read": false,
+    "reason": "Frozen evidence corpus; not default context.",
+    "canonical_replacement": "docs/state/RESULT_REGISTRY.json",
+    "reopen_conditions": "Registry artifact pointer, regression contradiction, or active task dependency."
+  },
+  {
+    "path_or_glob": "round3_redesign/repair_evidence_gate/results/repair_status.json",
+    "status": "FROZEN_EVIDENCE",
+    "default_read": false,
+    "reason": "Canonical repair-gate result artifact.",
+    "canonical_replacement": "docs/state/RESULT_REGISTRY.json",
+    "reopen_conditions": "Validate repair status result entry."
+  },
+  {
+    "path_or_glob": "round3_redesign/repair_evidence_gate/results/regression_status.json",
+    "status": "FROZEN_EVIDENCE",
+    "default_read": false,
+    "reason": "Canonical test and Lean result artifact.",
+    "canonical_replacement": "docs/state/RESULT_REGISTRY.json",
+    "reopen_conditions": "Validate regression result entries."
+  },
+  {
+    "path_or_glob": "round3_redesign/repair_evidence_gate/results/family_provenance.json",
+    "status": "FROZEN_EVIDENCE",
+    "default_read": false,
+    "reason": "Canonical family-provenance artifact.",
+    "canonical_replacement": "docs/state/RESULT_REGISTRY.json",
+    "reopen_conditions": "Validate family result entries."
+  },
+  {
+    "path_or_glob": "round3_redesign/repair_evidence_gate/results/task1_summary.json",
+    "status": "FROZEN_EVIDENCE",
+    "default_read": false,
+    "reason": "Canonical Task 1 summary artifact.",
+    "canonical_replacement": "docs/state/RESULT_REGISTRY.json",
+    "reopen_conditions": "Validate Task 1 result entry."
+  },
+  {
+    "path_or_glob": "round3_redesign/repair_evidence_gate/results/task2_summary.json",
+    "status": "FROZEN_EVIDENCE",
+    "default_read": false,
+    "reason": "Canonical Task 2 summary artifact.",
+    "canonical_replacement": "docs/state/RESULT_REGISTRY.json",
+    "reopen_conditions": "Validate Task 2 result entry."
+  },
+  {
+    "path_or_glob": "MECH-001/C011",
+    "status": "DO_NOT_RESTORE",
+    "default_read": false,
+    "reason": "Deleted erroneous material; only policy marker retained.",
+    "canonical_replacement": null,
+    "reopen_conditions": "none unless user explicitly revokes policy",
+    "do_not_restore": true,
+    "do_not_reference": true,
+    "historical_git_only": true
+  },
+  {
+    "path_or_glob": "artifacts/MECH-001*",
+    "status": "DO_NOT_RESTORE",
+    "default_read": false,
+    "reason": "Do not use deleted MECH-001/C011 material as current evidence.",
+    "canonical_replacement": null,
+    "reopen_conditions": "none unless user explicitly revokes policy",
+    "do_not_restore": true,
+    "do_not_reference": true
+  }
+]

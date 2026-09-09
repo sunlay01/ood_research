@@ -1,0 +1,135 @@
+[
+  {
+    "id": "R-REPAIR-GATE",
+    "status": "FROZEN",
+    "system": "repair_evidence_gate",
+    "scope": "post-repair authoritative evidence gate",
+    "metric": "not applicable",
+    "values": {
+      "overall_verdict": "REPAIR-EVIDENCE-PASS",
+      "readiness": "READY-FOR-TASK-3",
+      "R1": "REPAIR-PASS",
+      "R2": "REPAIR-PASS",
+      "R3": "REPAIR-PASS",
+      "task1_refreshed_post_repair": true
+    },
+    "interpretation_level": "frozen_scientific_evidence",
+    "artifact_path": "round3_redesign/repair_evidence_gate/results/repair_status.json",
+    "source_commit": "9715f535dc7f5ab06a2b7ec01f3026d9705719c8",
+    "validation": "Recorded by repair evidence gate after Task 1 and Task 2 reruns.",
+    "caveats": "This closes the repair gate; it does not execute Task 3."
+  },
+  {
+    "id": "R-PYTEST-FULL",
+    "status": "FROZEN",
+    "system": "pytest",
+    "scope": "full repository regression at repair evidence refresh",
+    "metric": "test count",
+    "values": {"tests_passed": 259, "tests_failed": 0, "tests_skipped": 0, "warnings": 0},
+    "interpretation_level": "implementation_identity",
+    "artifact_path": "round3_redesign/repair_evidence_gate/results/regression_status.json",
+    "source_commit": "9715f535dc7f5ab06a2b7ec01f3026d9705719c8",
+    "validation": "Recorded command `PYTHONPATH=src pytest -q` returned 0.",
+    "caveats": "Passing tests do not by themselves establish top-level scientific novelty."
+  },
+  {
+    "id": "R-LEAN-BUILD",
+    "status": "FROZEN",
+    "system": "Lean/lake",
+    "scope": "shared formalization workspace build",
+    "metric": "build status",
+    "values": {"lake_build": "success"},
+    "interpretation_level": "implementation_identity",
+    "artifact_path": "round3_redesign/repair_evidence_gate/results/regression_status.json",
+    "source_commit": "9715f535dc7f5ab06a2b7ec01f3026d9705719c8",
+    "validation": "Recorded `lake build` returned 0.",
+    "caveats": "Lean status remains partial for APIs not formalized in the shared core."
+  },
+  {
+    "id": "R-TASK1-MECHANISM",
+    "status": "FROZEN",
+    "system": "algorithm_mechanism",
+    "scope": "Gaussian and five-seed CMNIST source-side mechanism audit",
+    "metric": "local IFT reconstruction error",
+    "values": {
+      "row_count": 220,
+      "verdict": "ALGORITHM-MECHANISM-PASS",
+      "max_pi_reconstruction_relative_error": 3.396285345773631e-10
+    },
+    "interpretation_level": "implementation_identity",
+    "artifact_path": "round3_redesign/repair_evidence_gate/results/task1_summary.json",
+    "supporting_artifact_paths": [
+      "round3_redesign/repair_evidence_gate/task1_regenerated/results/summary.json",
+      "round3_redesign/repair_evidence_gate/results/task1_actual_mechanism.csv"
+    ],
+    "source_commit": "9715f535dc7f5ab06a2b7ec01f3026d9705719c8",
+    "validation": "Task 1 was rerun post-repair and copied into the evidence gate results.",
+    "caveats": "The reconstruction error validates the local identity, not a universal mechanism interpretation."
+  },
+  {
+    "id": "R-TASK2-SHARP",
+    "status": "FROZEN",
+    "system": "sharp_optimality",
+    "scope": "Gaussian and CMNIST family-conditional sharp optimality audit",
+    "metric": "corrected affine response decomposition",
+    "values": {
+      "row_count": 220,
+      "verdict": "SHARP-OPTIMALITY-PASS",
+      "corrected_snapshot_pass": true,
+      "coordinate_invariance_pass": true,
+      "cross_operator_audit_pass": true,
+      "counterexamples_pass": true,
+      "natural_nonzero_E_inside_slack_count": 9
+    },
+    "interpretation_level": "benchmark_observation",
+    "artifact_path": "round3_redesign/repair_evidence_gate/results/task2_summary.json",
+    "supporting_artifact_paths": [
+      "round3_redesign/repair_evidence_gate/results/task2_theorem_audit.csv",
+      "round3_redesign/repair_evidence_gate/results/task2_spectral_rows.csv",
+      "round3_redesign/repair_evidence_gate/results/task2_natural_cases.json"
+    ],
+    "source_commit": "9715f535dc7f5ab06a2b7ec01f3026d9705719c8",
+    "validation": "Task 2 was rerun from the Task 1 post-repair operator snapshot.",
+    "caveats": "Family-conditional affine result only; not a target-risk lower bound."
+  },
+  {
+    "id": "R-LEGACY-HIDDEN-U",
+    "status": "FROZEN",
+    "system": "environment_family",
+    "scope": "legacy Gaussian hidden-U benchmark",
+    "metric": "Euclidean standardized 8D tangent",
+    "values": {
+      "dimension": 8,
+      "rank_O_S": 7,
+      "dim_ker_O_S": 1,
+      "rank_A_irr": 1,
+      "information_floor": 0.05118145108608892
+    },
+    "interpretation_level": "synthetic_geometry",
+    "artifact_path": "round3_redesign/repair_evidence_gate/results/family_provenance.json",
+    "source_commit": "9715f535dc7f5ab06a2b7ec01f3026d9705719c8",
+    "validation": "Rebuilt through family provenance audit as `legacy_hidden_u_primary`.",
+    "caveats": "Do not combine with source-induced narrative; this is one declared family."
+  },
+  {
+    "id": "R-SOURCE-INDUCED",
+    "status": "FROZEN",
+    "system": "environment_family",
+    "scope": "source-induced comparison family",
+    "metric": "realized source-state Gram metric",
+    "values": {
+      "dimension": 4,
+      "rank_O_S": 4,
+      "dim_ker_O_S": 0,
+      "rank_A_irr": 0,
+      "information_floor": 0.0,
+      "retained_modes": [0, 1, 2, 3],
+      "realized_metric_deviation": 2.413011604656758e-15
+    },
+    "interpretation_level": "synthetic_geometry",
+    "artifact_path": "round3_redesign/repair_evidence_gate/results/family_provenance.json",
+    "source_commit": "9715f535dc7f5ab06a2b7ec01f3026d9705719c8",
+    "validation": "Rebuilt through family provenance audit as `source_induced_comparison`.",
+    "caveats": "Smaller information floor means smaller uncertainty family, not greater robustness."
+  }
+]
