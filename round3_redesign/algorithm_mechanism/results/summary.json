@@ -1,0 +1,17 @@
+{
+  "verdict": "ALGORITHM-MECHANISM-PASS",
+  "record_count": 48,
+  "error_count": 0,
+  "errors": [],
+  "max_pi_reconstruction_relative_error": 1.0953793723943732e-10,
+  "max_component_total_relative_error": 3.1313322518327823e-10,
+  "corrected_geometry_snapshot_count": 48,
+  "operator_snapshot_count": 48,
+  "corrected_geometry_snapshots_pass": true,
+  "learner_side_target_response_used": false,
+  "semantic_or_cluster_used": false,
+  "coral_status": "NONCANONICAL-PREDICTOR-RESPONSE",
+  "cmnist_scope": "frozen_representation_empirical_squared_loss",
+  "theorem_status": "exact_local_identity",
+  "lean_status": "LEAN-PARTIAL"
+}

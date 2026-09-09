@@ -24,7 +24,11 @@ def response_side_orthogonality(response: Array, observation: Array,
     o = np.asarray(observation, dtype=float)
     p, q = parts["P"], parts["Q"]
     irr, rec = parts["A_irreducible"], parts["A_recoverable"]
-    e = rec if adaptive is None else rec + np.asarray(adaptive, dtype=float)
+    # ``adaptive`` is the already assembled policy residual ``E``.  Earlier
+    # callers passed ``Pi O`` and assembled it here; the new canonical API
+    # passes ``E`` explicitly.  Keeping one convention prevents A_rec from
+    # being counted twice in post-hoc audits.
+    e = rec if adaptive is None else np.asarray(adaptive, dtype=float)
     return {
         "PO_star_norm": float(operator_norm(p @ o.T)),
         "E_P_norm": float(operator_norm(e @ p)),
