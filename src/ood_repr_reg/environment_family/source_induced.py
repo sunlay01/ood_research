@@ -123,6 +123,7 @@ class SourceInducedFamily:
     realizable_rank: int
     unrealizable_modes: tuple[str, ...]
     parameterization: EnvironmentParameterization
+    source_reference_index: int = 0
     realization_tolerance: float = 1e-8
     finite_difference_step: float = 1e-5
     _spec: TangentSpec | None = field(default=None, repr=False, compare=False)
@@ -180,6 +181,28 @@ class SourceInducedFamily:
             reference, theta + float(signed_step) * self.pullbacks[:, index]
         )
 
+    def legal_step_interval(self, reference: Environment, coordinate: str,
+                            role: Role) -> tuple[float, float]:
+        del role
+        index = self.tangent_spec(self.base).index(coordinate)
+        theta = self.parameterization.vector(reference)
+        delta = np.asarray(self.pullbacks[:, index], dtype=float)
+        names = self.parameterization.names
+        constrained_names = (
+            *(f"variance_{i + 1}" for i in range(self.parameterization.shortcut_count)),
+            *(f"noise_variance_{i + 1}" for i in range(self.parameterization.noise_count)),
+            "c_noise_variance", "u_noise_variance",
+        )
+        constrained = [names.index(name) for name in constrained_names]
+        negative = positive = float("inf")
+        for position in constrained:
+            value, slope = float(theta[position]), float(delta[position])
+            if slope > 0.0:
+                negative = min(negative, value / slope)
+            elif slope < 0.0:
+                positive = min(positive, value / (-slope))
+        return max(0.0, negative), max(0.0, positive)
+
     def metadata(self) -> dict[str, object]:
         return {
             "family_name": "source_induced",
@@ -197,6 +220,7 @@ class SourceInducedFamily:
             "realizable_rank": self.realizable_rank,
             "unrealizable_modes": list(self.unrealizable_modes),
             "realization_residuals": list(self.realization_residuals),
+            "source_reference_index": self.source_reference_index,
             "source_environment_count": len(self.observed_source_environments),
             "target_risk_used": False,
             "response_operator_used": False,
@@ -260,6 +284,7 @@ def build_source_induced_family(
         realization_residuals=tuple(residuals), state_span_singular_values=singular,
         state_span_rank=rank, realizable_rank=len(pullback_columns),
         unrealizable_modes=tuple(unrealizable), parameterization=parameters,
+        source_reference_index=reference_index,
         realization_tolerance=realization_tolerance, finite_difference_step=1e-5,
     )
 

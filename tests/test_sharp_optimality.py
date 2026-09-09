@@ -62,10 +62,23 @@ def test_metric_transport_and_cross_operator_identities():
 
 
 def test_slack_support_is_not_reclassified_by_recoverable_scale():
-    # S = diag(0, 1): the second response coordinate is its support.  The
-    # support classification must not disappear when E is scaled up.
+    # S = diag(0, 1): a component in the first coordinate is a genuine
+    # zero-slack spill and must remain incompatible at every scale.
     irreducible = np.array([[1.0], [0.0]])
-    small = slack_ratio(irreducible, np.array([[0.0], [0.1]]))
-    large = slack_ratio(irreducible, np.array([[0.0], [1e8]]))
-    assert small["support_compatible"]
-    assert large["support_compatible"]
+    for magnitude in (1e-10, 1.0, 1e10):
+        spill = slack_ratio(irreducible, np.array([[magnitude], [0.0]]))
+        assert not spill["support_compatible"]
+        assert np.isinf(spill["rho_slack"])
+    compatible = slack_ratio(irreducible, np.array([[0.0], [2.0]]))
+    assert compatible["support_compatible"]
+    assert np.isclose(compatible["rho_slack"], 4.0)
+
+
+def test_slack_support_transition_uses_relative_scale():
+    irreducible = np.array([[1.0], [0.0]])
+    # The support residual is compared against the magnitude of E, so a
+    # genuine spill is not rescued by making E very large or very small.
+    for magnitude in (1e-10, 1.0, 1e10):
+        result = slack_ratio(irreducible, np.array([[magnitude], [magnitude]]))
+        assert not result["support_compatible"]
+        assert result["support_residual"] >= result["support_threshold"]

@@ -32,6 +32,7 @@ from .source_induced import (
     source_induced_audit,
 )
 from .invariance_audit import failure_classification, family_coordinate_audit, source_span_projector
+from .finite_difference import IllegalFiniteDifferenceStep, FiniteDifferenceDiagnostic, family_directional_derivative
 
 __all__ = [
     "EnvironmentFamily", "FamilyTaskGeometry", "TangentSpec",
@@ -44,4 +45,5 @@ __all__ = [
     "SourceInducedFamily", "build_source_induced_family", "source_induced_family",
     "source_state_basis", "source_state_contrasts", "source_induced_audit",
     "failure_classification", "family_coordinate_audit", "source_span_projector",
+    "IllegalFiniteDifferenceStep", "FiniteDifferenceDiagnostic", "family_directional_derivative",
 ]

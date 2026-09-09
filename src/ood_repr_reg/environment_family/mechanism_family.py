@@ -39,6 +39,10 @@ class MechanismFamily:
                 *, role: Role) -> Environment:
         return self.delegate.perturb(reference, coordinate, signed_step, role=role)
 
+    def legal_step_interval(self, reference: Environment, coordinate: str,
+                            role: Role) -> tuple[float, float]:
+        return self.delegate.legal_step_interval(reference, coordinate, role=role)
+
     def metadata(self) -> dict[str, object]:
         return {
             **self.delegate.metadata(),

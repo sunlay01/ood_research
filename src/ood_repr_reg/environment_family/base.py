@@ -103,6 +103,15 @@ class EnvironmentFamily(Protocol):
     ) -> Environment:
         ...
 
+    def legal_step_interval(
+        self,
+        reference: Environment,
+        coordinate: str,
+        role: Role,
+    ) -> tuple[float, float]:
+        """Return legal magnitudes for negative and positive perturbations."""
+        ...
+
     def metadata(self) -> dict[str, object]:
         ...
 

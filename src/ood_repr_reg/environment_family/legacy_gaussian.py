@@ -96,6 +96,26 @@ class LegacyGaussianFamily:
             return value.updated(u_gamma=value.u_gamma + scale) if active else value
         raise ValueError(f"unknown tangent direction: {coordinate}")
 
+    def legal_step_interval(self, reference: Environment, coordinate: str,
+                            role: Role) -> tuple[float, float]:
+        """Return signed-coordinate radii before a variance reaches zero."""
+        del role
+        spec = self.tangent_spec(reference)
+        scale = spec.scales[spec.index(coordinate)]
+        if coordinate.startswith("S"):
+            family, parameter = coordinate.split("_", maxsplit=1)
+            index = int(family[1:]) - 1
+            if parameter == "variance":
+                value = float(reference.shortcut_variances[index])
+                return value / scale, value / scale
+            return float("inf"), float("inf")
+        if coordinate == "N1_variance":
+            value = float(reference.noise_variances[0])
+            return value / scale, value / scale
+        if coordinate == "U_emergent":
+            return float("inf"), float("inf")
+        raise ValueError(f"unknown tangent direction: {coordinate}")
+
     def metadata(self) -> dict[str, object]:
         return {
             "family_name": "legacy_gaussian_mechanism",

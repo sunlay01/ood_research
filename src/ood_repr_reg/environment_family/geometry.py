@@ -8,6 +8,7 @@ from ..round3r_3b_benchmark import environment_state, source_optimum
 from ..round3r_3d_exposure import response_operator
 from ..round3r_3d_state import state_difference, task_state
 from .base import Environment, EnvironmentFamily, FamilyTaskGeometry, TangentSpec
+from .finite_difference import family_directional_derivative
 
 Array = np.ndarray
 
@@ -16,26 +17,30 @@ def source_observation_operator(family: EnvironmentFamily,
                                 environments: tuple[Environment, ...],
                                 spec: TangentSpec | None = None,
                                 *, step: float | None = None,
-                                reference: Environment | None = None) -> Array:
+                                reference: Environment | None = None,
+                                return_diagnostics: bool = False) -> Array | tuple[Array, list[dict[str, object]]]:
     reference = family.reference_environment() if reference is None else reference
     tangent = family.tangent_spec(reference) if spec is None else spec
     h = tangent.finite_difference_step if step is None else float(step)
     if h <= 0.0:
         raise ValueError("step must be positive")
     blocks: list[Array] = []
+    diagnostics: list[dict[str, object]] = []
     for environment in environments:
         if tangent.dimension == 0:
             blocks.append(np.zeros((task_state(environment_state(environment)).size, 0)))
             continue
         columns = []
         for direction in tangent.directions:
-            plus = task_state(environment_state(family.perturb(
-                environment, direction, h, role="source")))
-            minus = task_state(environment_state(family.perturb(
-                environment, direction, -h, role="source")))
-            columns.append((plus - minus) / (2.0 * h))
+            derivative, diagnostic = family_directional_derivative(
+                family, environment, direction,
+                lambda value: task_state(environment_state(value)), h, role="source",
+            )
+            columns.append(derivative)
+            diagnostics.append({"role": "source", "environment_index": len(blocks), **diagnostic.as_dict()})
         blocks.append(np.column_stack(columns))
-    return np.vstack(blocks) if blocks else np.zeros((0, tangent.dimension))
+    result = np.vstack(blocks) if blocks else np.zeros((0, tangent.dimension))
+    return (result, diagnostics) if return_diagnostics else result
 
 
 def response_operator_for_family(
@@ -46,24 +51,25 @@ def response_operator_for_family(
     *,
     step: float | None = None,
     reference: Environment | None = None,
-) -> Array:
+    return_diagnostics: bool = False,
+) -> Array | tuple[Array, list[dict[str, object]]]:
     reference = family.reference_environment() if reference is None else reference
     tangent = family.tangent_spec(reference) if spec is None else spec
     h = tangent.finite_difference_step if step is None else float(step)
     if h <= 0.0:
         raise ValueError("step must be positive")
     columns = []
+    diagnostics: list[dict[str, object]] = []
     for direction in tangent.directions:
-        plus = response_operator(
-            source_state, source_optimum,
-            environment_state(family.perturb(reference, direction, h, role="target")),
+        derivative, diagnostic = family_directional_derivative(
+            family, reference, direction,
+            lambda value: response_operator(source_state, source_optimum, environment_state(value)),
+            h, role="target",
         )
-        minus = response_operator(
-            source_state, source_optimum,
-            environment_state(family.perturb(reference, direction, -h, role="target")),
-        )
-        columns.append((plus - minus) / (2.0 * h))
-    return np.column_stack(columns) if columns else np.zeros((source_optimum.size, 0))
+        columns.append(derivative)
+        diagnostics.append({"role": "target", **diagnostic.as_dict()})
+    result = np.column_stack(columns) if columns else np.zeros((source_optimum.size, 0))
+    return (result, diagnostics) if return_diagnostics else result
 
 
 def build_task_geometry(

@@ -94,18 +94,33 @@ def slack_ratio(irreducible: Array, recoverable: Array, tolerance: float = 1e-10
     support = values > tolerance * slack_scale
     null = vectors[:, ~support]
     ee = (e @ e.T + (e @ e.T).T) / 2.0
-    compatibility_residual = float(np.linalg.norm(null.T @ e)) if null.shape[1] else 0.0
-    compatible = compatibility_residual <= tolerance * max(1.0, np.linalg.norm(ee))
+    # ``null.T @ E`` is linear in E, while ``E E.T`` is quadratic.  Comparing
+    # the former with a tolerance scaled by the latter makes support
+    # compatibility depend on the arbitrary magnitude of E.  Use a relative
+    # operator-scale test instead; this is both dimensionally consistent and
+    # invariant under common rescaling of a genuine support violation.
+    compatibility_residual = float(np.linalg.norm(null.T @ e, ord=2)) if null.shape[1] else 0.0
+    support_scale = max(1.0, float(np.linalg.norm(e, ord=2)))
+    support_threshold = float(tolerance) * support_scale
+    compatible = compatibility_residual < support_threshold
     if not compatible:
         ratio = float("inf")
+        reason = "zero_slack_support_violation"
     elif not np.any(support):
         ratio = 0.0 if operator_norm(e) <= tolerance else float("inf")
+        reason = "zero_slack_support_empty" if ratio == 0.0 else "zero_slack_support_violation"
     else:
         inv_root = vectors[:, support] @ np.diag(1.0 / np.sqrt(values[support])) @ vectors[:, support].T
         ratio = float(operator_norm(inv_root @ e) ** 2)
+        reason = "support_compatible"
     return {
         "ratio": ratio,
+        "rho_slack": ratio,
         "support_compatible": bool(compatible),
+        "support_residual": compatibility_residual,
+        "support_scale": support_scale,
+        "support_threshold": support_threshold,
+        "rho_reason": reason,
         "compatibility_residual": compatibility_residual,
         "tolerance": float(tolerance),
     }

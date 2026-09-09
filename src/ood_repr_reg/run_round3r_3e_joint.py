@@ -37,6 +37,49 @@ def _jsonable(value):
     return value
 
 
+def _family_provenance(geometry, family) -> dict[str, object]:
+    """Build row-level provenance without inferring semantics from matrices."""
+    if family is None:
+        family_object = geometry.family
+        family_name = "legacy_gaussian_mechanism"
+        construction = "legacy Gaussian mechanism family via WorldTangentSpec facade"
+        config_id = "legacy_hidden_u_coupled_3a_3d_v1"
+        role = "legacy_hidden_u_primary"
+        primary = True
+    else:
+        family_object = family
+        family_name = geometry.spec.family_name
+        construction = "source-induced family from source task-state contrasts"
+        config_id = "source_induced_family_coupled_v1"
+        role = "source_induced_comparison"
+        primary = False
+    family_metadata = family_object.metadata() if family_object is not None else {}
+    spec_metadata = geometry.spec.metadata()
+    reference = getattr(geometry, "reference", getattr(geometry, "base", None))
+    return {
+        "git_commit": "runtime_recorded_by_evidence_runner",
+        "runner_name": "ood_repr_reg.run_round3r_3e_joint",
+        "config_id": config_id,
+        "benchmark_role": role,
+        "coupled_3a_3d_primary": primary,
+        "family_name": family_name,
+        "family_construction": construction,
+        "family_dimension": int(geometry.spec.dimension),
+        "tangent_direction_names": list(geometry.spec.directions),
+        "tangent_metric_definition": "Euclidean standardized tangent metric" if family is None else spec_metadata.get("coordinate_description", "declared family metric"),
+        "reference_environment": "unavailable" if reference is None else repr(reference),
+        "source_reference_index": family_metadata.get("source_reference_index", 0),
+        "rank_O_S": int(np.linalg.matrix_rank(geometry.observation, tol=1e-9)),
+        "dim_ker_O_S": int(geometry.observation.shape[1] - np.linalg.matrix_rank(geometry.observation, tol=1e-9)),
+        "rank_A_irr": None,
+        "information_floor": None,
+        "family_metadata": family_metadata,
+        "retained_mode_indices": family_metadata.get("retained_mode_indices"),
+        "realization_residuals": family_metadata.get("realization_residuals"),
+        "realized_metric_deviation": family_metadata.get("realized_metric_identity_error"),
+    }
+
+
 def run(*, family=None):
     if family is None:
         geometry = coupled_primary_geometry()
@@ -48,6 +91,7 @@ def run(*, family=None):
         geometry = build_task_geometry(family)
         exposed_observation = None
         benchmark = main_benchmark(family=family, family_geometry=geometry)
+    provenance = _family_provenance(geometry, family)
     rows = []
     audits = []
     for item in benchmark["audits"]:
@@ -71,7 +115,13 @@ def run(*, family=None):
                 world_whiten(item["tangent"], geometry.spec.metric)
             )
         independent = independent_shifted_ball_maximum(item["z0"], independent_response, starts=24)
-        rows.append({"setting": "coupled_3a_3d_primary", "method": item["method"], "lambda": item["lambda"],
+        from .round3r_3e_c_spectral import decompose_response
+        pieces = decompose_response(geometry.response, geometry.observation)
+        row_provenance = dict(provenance)
+        row_provenance["rank_A_irr"] = int(np.linalg.matrix_rank(pieces["A_irreducible"], tol=1e-9))
+        row_provenance["information_floor"] = float(affine["information_floor"])
+        rows.append({"setting": "coupled_3a_3d_primary" if family is None else "source_induced_comparison",
+                     "method": item["method"], "lambda": item["lambda"], **row_provenance,
                      "information_floor": affine["information_floor"], "affine_total_regret": affine["total_regret"],
                      "total_excess": max(0.0, affine["total_regret"] - affine["information_floor"]),
                      "static_only_regret": affine["static_only_regret"],
@@ -97,8 +147,11 @@ def run(*, family=None):
     )
     results = output / "results"
     results.mkdir(parents=True, exist_ok=True)
+    pieces = decompose_response(geometry.response, geometry.observation)
+    provenance["rank_A_irr"] = int(np.linalg.matrix_rank(pieces["A_irreducible"], tol=1e-9))
+    provenance["information_floor"] = float(information_floor)
     summary = {
-        "status": "complete", "coupled_3a_3d_primary": True,
+        "status": "complete", **provenance,
         "world_metric": geometry.spec.metadata(),
         "world_tangent_dimension": geometry.spec.dimension,
         "source_observation_shape": list(geometry.observation.shape),
@@ -174,16 +227,21 @@ def _report(summary: dict[str, object], rows: list[dict[str, object]]) -> str:
     max_fd = float(summary["max_fd_error"])
     exposed_floor = summary["u_exposed_information_floor"]
     exposed_text = "n/a" if exposed_floor is None else f"{float(exposed_floor):.10g}"
+    primary_text = (
+        "The primary benchmark is the legacy Gaussian hidden-U design."
+        if summary.get("benchmark_role") == "legacy_hidden_u_primary" else
+        "This is a source-induced family comparison; it is not the legacy hidden-U primary benchmark."
+    )
     return f"""# 3E-B Joint Information-Regularization Affine Regret
 
 ## Verdict
 
 `3E-B-JOINT-AFFINE-PASS`
 
-The primary pair is the coupled 3A/3D tangent.  3A supplies the response
-metric and 3D supplies the source observation operator.  The source-hidden
-emergent `U` direction is retained in the primary benchmark; a U-exposed
-observation is a separately labelled information intervention.
+{primary_text} 3A supplies the response metric and 3D supplies the source
+observation operator.  The source-hidden emergent `U` direction is retained
+only in the legacy primary benchmark; a U-exposed observation is a separately
+labelled information intervention.
 
 ## Exact finite-dimensional object
 
@@ -197,6 +255,8 @@ it is not target-risk excess.
 ## Numerical audit
 
 - methods and valid lambdas: {len(rows)}
+- family/config: `{summary['family_name']}` / `{summary['config_id']}`
+- benchmark role: `{summary['benchmark_role']}`
 - coupled world tangent: `{summary['world_tangent_dimension']}D`
 - source observation shape: `{tuple(summary['source_observation_shape'])}`
 - primary hidden-U floor: `{summary['u_hidden_information_floor']:.10g}`

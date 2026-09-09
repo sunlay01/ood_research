@@ -1,0 +1,91 @@
+{
+  "status": "REPAIR-PASS",
+  "records": [
+    {
+      "config_id": "legacy_hidden_u_primary",
+      "family_name": "legacy_gaussian_mechanism",
+      "benchmark_role": "hidden-U primary",
+      "family_construction": "Gaussian mechanism-family local relation/mean/variance chart",
+      "family_dimension": 8,
+      "direction_names": [
+        "S1_relation",
+        "S2_relation",
+        "S1_mean",
+        "S2_mean",
+        "S1_variance",
+        "S2_variance",
+        "N1_variance",
+        "U_emergent"
+      ],
+      "metric_definition": "declared tangent metric",
+      "reference_environment": "ModuleEnvironment(shortcut_rhos=(0.75, 0.57), shortcut_means=(0.18, 0.08), shortcut_variances=(0.49, 0.61), n_noise=4, noise_means=array([0., 0., 0., 0.]), noise_variances=array([1., 1., 1., 1.]), c_noise_variance=0.81, u_gamma=0.0, u_noise_variance=0.72)",
+      "source_reference_index": 0,
+      "A_shape": [
+        9,
+        8
+      ],
+      "O_S_shape": [
+        275,
+        8
+      ],
+      "rank_O_S": 7,
+      "dim_ker_O_S": 1,
+      "rank_A": 5,
+      "rank_A_irr": 1,
+      "information_floor": 0.05118145108608892,
+      "target_risk_used": false,
+      "response_operator_used_in_family_construction": false,
+      "semantic_labels_used": false,
+      "cluster_labels_used": false
+    },
+    {
+      "config_id": "source_induced_comparison",
+      "family_name": "source_induced",
+      "benchmark_role": "source-induced comparison",
+      "family_construction": "legally realized source task-state contrast modes; metric is the realized source-state Gram matrix",
+      "family_dimension": 4,
+      "direction_names": [
+        "source_mode_0",
+        "source_mode_1",
+        "source_mode_2",
+        "source_mode_3"
+      ],
+      "metric_definition": "declared tangent metric",
+      "reference_environment": "ModuleEnvironment(shortcut_rhos=(0.75, 0.57), shortcut_means=(0.18, 0.08), shortcut_variances=(0.49, 0.61), n_noise=4, noise_means=array([0., 0., 0., 0.]), noise_variances=array([1., 1., 1., 1.]), c_noise_variance=0.81, u_gamma=0.0, u_noise_variance=0.72)",
+      "source_reference_index": 0,
+      "A_shape": [
+        9,
+        4
+      ],
+      "O_S_shape": [
+        275,
+        4
+      ],
+      "rank_O_S": 4,
+      "dim_ker_O_S": 0,
+      "rank_A": 3,
+      "rank_A_irr": 0,
+      "information_floor": 0.0,
+      "target_risk_used": false,
+      "response_operator_used_in_family_construction": false,
+      "semantic_labels_used": false,
+      "cluster_labels_used": false,
+      "retained_modes": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "realization_residuals": [
+        9.885413859190865e-12,
+        1.2448957396827296e-11,
+        1.9685139409983216e-12,
+        1.2782471842150614e-11
+      ],
+      "realized_metric_deviation": 2.413011604656758e-15,
+      "state_span_rank": 4,
+      "realizable_rank": 4,
+      "unrealizable_modes": []
+    }
+  ]
+}
