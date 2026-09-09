@@ -1,24 +1,19 @@
-# Proposed State Delta: TASK3R-ALGORITHMIZATION
+# Proposed State Delta: TASK3-CMNIST-LOCAL-RESPONSE
 
 state_write_authorized: false
 
-## Proposed Result ID
+discarded Task3R Gaussian branch deleted: true
 
-- `R-TASK3R-ALGORITHM`: `TASK3R-ALGORITHM-PARTIAL`; exact Gaussian source-only probe under `round3_redesign/task3r_algorithmization/`.
+new Task3 CMNIST verdict: `TASK3-CMNIST-FAIL`
 
-## Proposed Decisions
+Task 3 should close: `true`
 
-- Task 3R closes as an exact controlled probe: `true`.
-- Previous Task 3 applicability remains diagnostic only: `true`.
-- Gaussian H1-H4 gate passed: `false`.
-- Broader CMNIST or large-benchmark algorithm testing justified now: `false`.
+larger benchmark justified: `false`
 
-## Proposed CURRENT_STATE wording
+prior-art equivalence changes novelty interpretation: `no novelty claim made; bounded audit found related but not promoted exact equivalence`
 
-`Task 3R tested one exact source-only leave-one-source-domain-out response-matching prototype. The implementation and IFT audit were valid, but the preregistered Gaussian gate passed=false; verdict TASK3R-ALGORITHM-PARTIAL. No CMNIST or broader benchmark was run.`
+Proposed CURRENT_STATE.md wording:
 
-## Do Not Apply Automatically
-
-Canonical state and registries were not edited.
-
-Historical reopen: none.
+```text
+Task 3 CMNIST local-response geometry has been run as an isolated end-to-end CMNIST audit. Verdict: TASK3-CMNIST-FAIL. It tests whether curvature-aware head-gradient disagreement adds source-only algorithmic value beyond unpreconditioned gradient alignment and standard DG baselines; it does not identify A_rec/E/rho_slack or establish a target-risk theorem.
+```

@@ -33,6 +33,8 @@ def test_project_state_checker_passes():
     # Active task context is included when a task is in progress; the two
     # canonical files remain mandatory in every boot context.
     assert result["boot_context"]["file_count"] in (2, 4)
+    if result["boot_context"]["file_count"] == 4:
+        assert "TASK3-CMNIST-LOCAL-RESPONSE" in (ROOT / "active/TASK.md").read_text(encoding="utf-8")
     assert result["boot_context"]["line_count"] < 600
 
 

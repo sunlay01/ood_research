@@ -1,0 +1,235 @@
+{
+  "experiment_id": "TASK3-CMNIST-LOCAL-RESPONSE",
+  "profile": "main",
+  "verdict": "TASK3-CMNIST-FAIL",
+  "criteria": {
+    "no_target_leakage": true,
+    "end_to_end_representation_training": true,
+    "all_10_primary_seeds_completed": true,
+    "mean_ood_vs_erm_ge_2pp": false,
+    "mean_ood_vs_grad_ge_1pp": false,
+    "seed_wins_vs_erm_ge_7": false,
+    "seed_wins_vs_grad_ge_7": false,
+    "worst_source_degradation_within_1pp": true,
+    "real_metric_beats_random_metric": false,
+    "color_or_mechanism_predicted_direction": true,
+    "not_explained_by_update_norm": true
+  },
+  "config": {
+    "experiment_id": "TASK3-CMNIST-LOCAL-RESPONSE",
+    "profile": "main",
+    "data_root": "data",
+    "download": true,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "control_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_correlations": [
+      0.9,
+      0.8
+    ],
+    "target_correlation": 0.1,
+    "train_per_environment": 512,
+    "source_eval_per_environment": 400,
+    "target_eval": 700,
+    "probe_size": 300,
+    "diagnostic_samples": 96,
+    "epochs": 4,
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "latent_dim": 32,
+    "device": "cpu",
+    "beta_grid": [
+      0.001,
+      0.01,
+      0.1,
+      1.0
+    ],
+    "damping_epsilon": 0.01,
+    "damping_ablations": [
+      0.001,
+      0.1
+    ],
+    "checkpoint_fractions": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "primary_methods": [
+      "ERM",
+      "IRMv1",
+      "V-REx",
+      "UNPRECONDITIONED_GRAD_ALIGN",
+      "LOCAL_RESPONSE",
+      "RANDOM_METRIC"
+    ],
+    "control_methods": [
+      "SHUFFLED_LOCAL_RESPONSE"
+    ],
+    "support_thresholds": {
+      "mean_ood_vs_erm": 0.02,
+      "mean_ood_vs_grad": 0.01,
+      "seed_wins": 7,
+      "worst_source_degradation": -0.01
+    }
+  },
+  "method_summary": [
+    {
+      "method": "ERM",
+      "n": 10,
+      "mean_target_accuracy": 0.11357142850756645,
+      "mean_worst_source_accuracy": 0.8070000052452088,
+      "mean_counterfactual_color_response": 0.5154789059655741,
+      "mean_local_response_disagreement": 0.04171112161129713,
+      "mean_raw_gradient_disagreement": 0.021297540407977066
+    },
+    {
+      "method": "IRMv1",
+      "n": 10,
+      "mean_target_accuracy": 0.11357142850756645,
+      "mean_worst_source_accuracy": 0.8070000052452088,
+      "mean_counterfactual_color_response": 0.5154988574213348,
+      "mean_local_response_disagreement": 0.041713965497910975,
+      "mean_raw_gradient_disagreement": 0.021299205961986444
+    },
+    {
+      "method": "LOCAL_RESPONSE",
+      "n": 10,
+      "mean_target_accuracy": 0.12328571304678917,
+      "mean_worst_source_accuracy": 0.807750004529953,
+      "mean_counterfactual_color_response": 0.3723747184616514,
+      "mean_local_response_disagreement": 0.042764076218009,
+      "mean_raw_gradient_disagreement": 0.014345881293411366
+    },
+    {
+      "method": "RANDOM_METRIC",
+      "n": 10,
+      "mean_target_accuracy": 0.11957142800092697,
+      "mean_worst_source_accuracy": 0.8065000057220459,
+      "mean_counterfactual_color_response": 0.20645795287564397,
+      "mean_local_response_disagreement": 0.03702377751469612,
+      "mean_raw_gradient_disagreement": 0.007908567510185094
+    },
+    {
+      "method": "SHUFFLED_LOCAL_RESPONSE",
+      "n": 5,
+      "mean_target_accuracy": 0.12514285743236542,
+      "mean_worst_source_accuracy": 0.8045000076293946,
+      "mean_counterfactual_color_response": 0.4408630151068792,
+      "mean_local_response_disagreement": 0.043264197930693624,
+      "mean_raw_gradient_disagreement": 0.01689965169643983
+    },
+    {
+      "method": "UNPRECONDITIONED_GRAD_ALIGN",
+      "n": 10,
+      "mean_target_accuracy": 0.11357142850756645,
+      "mean_worst_source_accuracy": 0.8070000052452088,
+      "mean_counterfactual_color_response": 0.5153989506536163,
+      "mean_local_response_disagreement": 0.04171630814671516,
+      "mean_raw_gradient_disagreement": 0.021289864266873338
+    },
+    {
+      "method": "V-REx",
+      "n": 10,
+      "mean_target_accuracy": 0.11357142850756645,
+      "mean_worst_source_accuracy": 0.8070000052452088,
+      "mean_counterfactual_color_response": 0.5154703343752771,
+      "mean_local_response_disagreement": 0.041710991971194745,
+      "mean_raw_gradient_disagreement": 0.021298115636454895
+    }
+  ],
+  "paired_comparisons": [
+    {
+      "left_method": "LOCAL_RESPONSE",
+      "right_method": "ERM",
+      "n_pairs": 10,
+      "mean_difference": 0.009714284539222717,
+      "std_difference": 0.029244452473523544,
+      "median_difference": 0.0,
+      "seed_wins": 2,
+      "ci95_low": 0.0,
+      "ci95_high": 0.028285712003707886
+    },
+    {
+      "left_method": "LOCAL_RESPONSE",
+      "right_method": "UNPRECONDITIONED_GRAD_ALIGN",
+      "n_pairs": 10,
+      "mean_difference": 0.009714284539222717,
+      "std_difference": 0.029244452473523544,
+      "median_difference": 0.0,
+      "seed_wins": 2,
+      "ci95_low": 0.0,
+      "ci95_high": 0.028285712003707886
+    },
+    {
+      "left_method": "LOCAL_RESPONSE",
+      "right_method": "RANDOM_METRIC",
+      "n_pairs": 10,
+      "mean_difference": 0.003714285045862198,
+      "std_difference": 0.03612901792845184,
+      "median_difference": 0.0,
+      "seed_wins": 2,
+      "ci95_low": -0.014571426808834076,
+      "ci95_high": 0.026714284718036652
+    },
+    {
+      "left_method": "LOCAL_RESPONSE",
+      "right_method": "IRMv1",
+      "n_pairs": 10,
+      "mean_difference": 0.009714284539222717,
+      "std_difference": 0.029244452473523544,
+      "median_difference": 0.0,
+      "seed_wins": 2,
+      "ci95_low": 0.0,
+      "ci95_high": 0.028285712003707886
+    },
+    {
+      "left_method": "LOCAL_RESPONSE",
+      "right_method": "V-REx",
+      "n_pairs": 10,
+      "mean_difference": 0.009714284539222717,
+      "std_difference": 0.029244452473523544,
+      "median_difference": 0.0,
+      "seed_wins": 2,
+      "ci95_low": 0.0,
+      "ci95_high": 0.028285712003707886
+    },
+    {
+      "left_method": "UNPRECONDITIONED_GRAD_ALIGN",
+      "right_method": "ERM",
+      "n_pairs": 10,
+      "mean_difference": 0.0,
+      "std_difference": 0.0,
+      "median_difference": 0.0,
+      "seed_wins": 0,
+      "ci95_low": 0.0,
+      "ci95_high": 0.0
+    }
+  ],
+  "counterexample_count": 9,
+  "target_leakage_detected": false,
+  "preregistered_before_target_outcomes": true,
+  "end_to_end_representation_training": true,
+  "cmnist_protocol_reused": true,
+  "python": "3.13.13",
+  "torch": "2.12.1",
+  "device": "cpu",
+  "wall_seconds": 320.161128282547
+}

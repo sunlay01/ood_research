@@ -1,0 +1,17 @@
+{
+  "local_response_finite": true,
+  "autograd_gradients_finite": true,
+  "encoder_parameters_changed": true,
+  "diagnostics": {
+    "raw_gradient_disagreement": 0.0009601566125638783,
+    "local_response_disagreement": 0.07445194572210312,
+    "response_vector_norm": 21.09320640563965,
+    "hessian_min_eigenvalue": 8.236108810057402e-05,
+    "hessian_max_eigenvalue": 0.5396844524864391,
+    "damped_condition_number": 6552.662973896259,
+    "damping": 8.2369530134163e-05,
+    "curvature_object": "linear-head cross-entropy Gauss-Newton/Hessian + trace damping",
+    "random_trace_relative_error": 0.0,
+    "random_fro_relative_error": 0.0
+  }
+}

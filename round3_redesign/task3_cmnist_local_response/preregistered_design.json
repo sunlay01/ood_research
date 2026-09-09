@@ -1,0 +1,135 @@
+{
+  "task_id": "TASK3-CMNIST-LOCAL-RESPONSE",
+  "written_unix_time": 1788968631.522601,
+  "status": "PREREGISTERED_BEFORE_NEW_LOCAL_RESPONSE_TARGET_OUTCOMES",
+  "code_commit_before_experiment": "03d58aefd99a601fa173039bc46de93d9c65e247",
+  "working_tree_status_before_experiment": "M  active/CONTEXT.md\nM  active/STATE_DELTA.md\nM  active/TASK.md\nA  round3_redesign/task3_cmnist_local_response/baseline_fidelity.md\nA  round3_redesign/task3_cmnist_local_response/cleanup_report.md\nA  round3_redesign/task3_cmnist_local_response/limitations.md\nA  round3_redesign/task3_cmnist_local_response/mechanism_interpretation.md\nA  round3_redesign/task3_cmnist_local_response/method_definitions.md\nA  round3_redesign/task3_cmnist_local_response/preregistered_design.json\nA  round3_redesign/task3_cmnist_local_response/prior_art_exact_object.md\nA  round3_redesign/task3_cmnist_local_response/provenance.md\nA  round3_redesign/task3_cmnist_local_response/results/counterexamples.csv\nA  round3_redesign/task3_cmnist_local_response/results/dynamics.csv\nA  round3_redesign/task3_cmnist_local_response/results/environment_shuffle_control.csv\nA  round3_redesign/task3_cmnist_local_response/results/hyperparameter_selection.csv\nA  round3_redesign/task3_cmnist_local_response/results/mechanism_diagnostics.csv\nA  round3_redesign/task3_cmnist_local_response/results/paired_comparisons.csv\nA  round3_redesign/task3_cmnist_local_response/results/random_metric_control.csv\nA  round3_redesign/task3_cmnist_local_response/results/run_table.csv\nA  round3_redesign/task3_cmnist_local_response/results/seed_summary.csv\nA  round3_redesign/task3_cmnist_local_response/results/summary.json\nA  round3_redesign/task3_cmnist_local_response/results/tiny_batch_sanity.json\nA  round3_redesign/task3_cmnist_local_response/task3_cmnist_report.md\nD  round3_redesign/task3r_algorithmization/approximation_options.md\nD  round3_redesign/task3r_algorithmization/preregistered_algorithm_probe.json\nD  round3_redesign/task3r_algorithmization/prior_work_bridge.md\nD  round3_redesign/task3r_algorithmization/results/ablation_rows.csv\nD  round3_redesign/task3r_algorithmization/results/exact_probe_rows.csv\nD  round3_redesign/task3r_algorithmization/results/summary.json\nD  round3_redesign/task3r_algorithmization/source_only_estimability.md\nD  round3_redesign/task3r_algorithmization/task3r_report.md\nD  round3_redesign/task3r_algorithmization/theory_to_objective.md\nA  src/ood_repr_reg/run_task3_cmnist_local_response.py\nD  src/ood_repr_reg/run_task3r_algorithmization.py\nA  src/ood_repr_reg/task3_cmnist_local_response/__init__.py\nA  src/ood_repr_reg/task3_cmnist_local_response/curvature.py\nA  src/ood_repr_reg/task3_cmnist_local_response/diagnostics.py\nA  src/ood_repr_reg/task3_cmnist_local_response/evaluation.py\nA  src/ood_repr_reg/task3_cmnist_local_response/penalties.py\nAM src/ood_repr_reg/task3_cmnist_local_response/trainer.py\nD  src/ood_repr_reg/task3r_algorithmization/__init__.py\nD  src/ood_repr_reg/task3r_algorithmization/core.py\nD  src/ood_repr_reg/task3r_algorithmization/experiment.py\nM  tests/test_project_state.py\nA  tests/test_task3_cmnist_local_response.py\nD  tests/test_task3r_algorithmization.py",
+  "profile": "main",
+  "data_config": {
+    "experiment_id": "TASK3-CMNIST-LOCAL-RESPONSE",
+    "profile": "main",
+    "data_root": "data",
+    "download": true,
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "control_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_correlations": [
+      0.9,
+      0.8
+    ],
+    "target_correlation": 0.1,
+    "train_per_environment": 512,
+    "source_eval_per_environment": 400,
+    "target_eval": 700,
+    "probe_size": 300,
+    "diagnostic_samples": 96,
+    "epochs": 4,
+    "batch_size": 128,
+    "learning_rate": 0.001,
+    "latent_dim": 32,
+    "device": "cpu",
+    "beta_grid": [
+      0.001,
+      0.01,
+      0.1,
+      1.0
+    ],
+    "damping_epsilon": 0.01,
+    "damping_ablations": [
+      0.001,
+      0.1
+    ],
+    "checkpoint_fractions": [
+      0.1,
+      0.25,
+      0.5,
+      0.75,
+      1.0
+    ],
+    "primary_methods": [
+      "ERM",
+      "IRMv1",
+      "V-REx",
+      "UNPRECONDITIONED_GRAD_ALIGN",
+      "LOCAL_RESPONSE",
+      "RANDOM_METRIC"
+    ],
+    "control_methods": [
+      "SHUFFLED_LOCAL_RESPONSE"
+    ],
+    "support_thresholds": {
+      "mean_ood_vs_erm": 0.02,
+      "mean_ood_vs_grad": 0.01,
+      "seed_wins": 7,
+      "worst_source_degradation": -0.01
+    }
+  },
+  "architecture": "existing SmallCMNISTCNN from cmnist_feature_probe.py",
+  "optimizer": "Adam, same learning-rate family as current CMNIST probe",
+  "methods": [
+    "ERM",
+    "IRMv1",
+    "V-REx",
+    "UNPRECONDITIONED_GRAD_ALIGN",
+    "LOCAL_RESPONSE",
+    "RANDOM_METRIC"
+  ],
+  "controls": [
+    "SHUFFLED_LOCAL_RESPONSE"
+  ],
+  "beta_grid": [
+    0.001,
+    0.01,
+    0.1,
+    1.0
+  ],
+  "damping": {
+    "primary_epsilon": 0.01,
+    "stability_ablations": [
+      0.001,
+      0.1
+    ],
+    "formula": "mu = epsilon * max(trace(H)/d, 1e-8)",
+    "inverse_metric_policy": "stop-gradient through damped inverse metric"
+  },
+  "source_only_selection_rule": "maximize worst-source validation accuracy, tie-break by mean-source validation accuracy and later checkpoint",
+  "target_leakage_policy": "target accuracy/loss are evaluation-only and cannot select beta/checkpoint/method/architecture/duration/batches/ablations",
+  "success_gate": {
+    "support_requires": [
+      "no target leakage",
+      "end-to-end representation training",
+      "all 10 primary seeds completed",
+      "LOCAL_RESPONSE mean OOD accuracy >= ERM + 0.02",
+      "LOCAL_RESPONSE mean OOD accuracy >= UNPRECONDITIONED_GRAD_ALIGN + 0.01",
+      "LOCAL_RESPONSE beats ERM on at least 7/10 seeds",
+      "LOCAL_RESPONSE beats GRAD_ALIGN on at least 7/10 seeds",
+      "worst-source validation accuracy not degraded by more than 0.01 vs ERM",
+      "real curvature metric beats matched random metric",
+      "color sensitivity or another preregistered mechanism diagnostic moves in predicted direction",
+      "benefit is not explained by larger effective update norm"
+    ],
+    "allowed_verdicts": [
+      "TASK3-CMNIST-SUPPORT",
+      "TASK3-CMNIST-PARTIAL",
+      "TASK3-CMNIST-FAIL"
+    ]
+  },
+  "interpretation_ceiling": "No exact A_rec/E/slack, causal, finite-sample, universal DG, or broad benchmark claim.",
+  "preregistered_design_hash": "52b1554540c995db771a5dd436327a37b7802ccd669939932b6172bef3d92dd4"
+}
