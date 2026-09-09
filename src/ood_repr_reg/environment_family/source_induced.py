@@ -115,6 +115,8 @@ class SourceInducedFamily:
     observed_source_environments: tuple[ModuleEnvironment, ...]
     mode_vectors: Array
     pullbacks: Array
+    retained_mode_indices: tuple[int, ...]
+    realized_state_gram: Array
     realization_residuals: tuple[float, ...]
     state_span_singular_values: Array
     state_span_rank: int
@@ -133,21 +135,29 @@ class SourceInducedFamily:
         return self.observed_source_environments
 
     def tangent_spec(self, reference: Environment | None = None) -> TangentSpec:
-        del reference
+        if reference is not None and reference != self.base:
+            raise ValueError("source-induced tangent is defined only at its source reference")
         if self._spec is None:
-            directions = tuple(f"source_mode_{i}" for i in range(self.realizable_rank))
+            directions = tuple(f"source_mode_{i}" for i in self.retained_mode_indices)
             self_spec = TangentSpec(
                 directions=directions, scales=tuple(1.0 for _ in directions),
-                metric=np.eye(self.realizable_rank),
+                metric=self.realized_state_gram,
                 family_name="source_induced",
-                coordinate_description="orthonormal source task-state contrast modes",
+                coordinate_description=(
+                    "legally realized source task-state contrast modes; metric is "
+                    "the realized source-state Gram matrix"
+                ),
                 canonical_parameterization=False, source_defined=True,
                 mechanism_defined=False,
                 reference_metadata={
                     "state_span_rank": self.state_span_rank,
                     "realizable_rank": self.realizable_rank,
                     "unrealizable_modes": list(self.unrealizable_modes),
-                    "metric_kind": "source_state_orthonormal",
+                    "retained_mode_indices": list(self.retained_mode_indices),
+                    "metric_kind": "realized_source_state_gram",
+                    "realized_metric_identity_error": float(np.linalg.norm(
+                        self.realized_state_gram - np.eye(self.realizable_rank)
+                    )),
                 },
                 finite_difference_step=self.finite_difference_step,
             )
@@ -157,7 +167,14 @@ class SourceInducedFamily:
     def perturb(self, reference: Environment, coordinate: str, signed_step: float,
                 *, role: Role) -> ModuleEnvironment:
         del role
-        index = self.tangent_spec(reference).index(coordinate)
+        if (reference.dimension != self.base.dimension or reference.n_noise != self.base.n_noise
+                or len(reference.shortcut_rhos) != len(self.base.shortcut_rhos)):
+            raise ValueError("source-induced perturbation requires a compatible registered environment")
+        # The chart is defined at ``base`` but the same legal parameter
+        # displacement is applied to each registered source environment.  It
+        # therefore preserves source-design offsets while differentiating the
+        # stacked source observation.
+        index = self.tangent_spec(self.base).index(coordinate)
         theta = self.parameterization.vector(reference)
         return self.parameterization.from_vector(
             reference, theta + float(signed_step) * self.pullbacks[:, index]
@@ -169,7 +186,12 @@ class SourceInducedFamily:
             "source_defined": True,
             "mechanism_defined": False,
             "canonical_parameterization": False,
-            "metric_kind": "source_state_orthonormal",
+            "metric_kind": "realized_source_state_gram",
+            "realized_metric": self.realized_state_gram.tolist(),
+            "realized_metric_identity_error": float(np.linalg.norm(
+                self.realized_state_gram - np.eye(self.realizable_rank)
+            )),
+            "retained_mode_indices": list(self.retained_mode_indices),
             "state_span_rank": self.state_span_rank,
             "source_contrast_rank": self.state_span_rank,
             "realizable_rank": self.realizable_rank,
@@ -203,7 +225,10 @@ def build_source_induced_family(
         raise ValueError("source-induced family requires at least one source environment")
     if not 0 <= reference_index < len(environments):
         raise ValueError("reference_index is out of range")
-    base = environments[reference_index] if base is None else base
+    reference = environments[reference_index]
+    if base is not None and base != reference:
+        raise ValueError("base must equal source_environments[reference_index]; tangent transport is not implicit")
+    base = reference
     if any(environment.dimension != base.dimension or environment.n_noise != base.n_noise
            or len(environment.shortcut_rhos) != len(base.shortcut_rhos)
            for environment in environments):
@@ -212,6 +237,7 @@ def build_source_induced_family(
     parameters = EnvironmentParameterization(len(base.shortcut_rhos), base.n_noise)
     jacobian = parameter_jacobian(base, parameters, jacobian_step)
     pullback_columns: list[Array] = []
+    retained_indices: list[int] = []
     residuals: list[float] = []
     unrealizable: list[str] = []
     for index in range(rank):
@@ -221,12 +247,16 @@ def build_source_induced_family(
         residuals.append(residual)
         if residual <= realization_tolerance * max(1.0, np.linalg.norm(mode)):
             pullback_columns.append(pullback)
+            retained_indices.append(index)
         else:
             unrealizable.append(f"source_mode_{index}")
     pullbacks = np.column_stack(pullback_columns) if pullback_columns else np.zeros((jacobian.shape[1], 0))
+    realized = jacobian @ pullbacks
+    realized_gram = realized.T @ realized
     return SourceInducedFamily(
         base=base, observed_source_environments=environments,
         mode_vectors=modes, pullbacks=pullbacks,
+        retained_mode_indices=tuple(retained_indices), realized_state_gram=realized_gram,
         realization_residuals=tuple(residuals), state_span_singular_values=singular,
         state_span_rank=rank, realizable_rank=len(pullback_columns),
         unrealizable_modes=tuple(unrealizable), parameterization=parameters,
@@ -244,6 +274,9 @@ def source_induced_audit(family: SourceInducedFamily) -> dict[str, object]:
         "state_span_singular_values": family.state_span_singular_values,
         "realization_residuals": family.realization_residuals,
         "unrealizable_modes": family.unrealizable_modes,
+        "retained_mode_indices": family.retained_mode_indices,
+        "realized_metric": spec.metric,
+        "realized_metric_identity_error": float(np.linalg.norm(spec.metric - np.eye(spec.dimension))),
         "source_only": True,
         "target_risk_used": False,
         "response_operator_used": False,

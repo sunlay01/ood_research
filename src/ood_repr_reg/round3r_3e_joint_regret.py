@@ -97,14 +97,18 @@ def independent_shifted_ball_maximum(offset: Array, linear_map: Array,
     points.extend([rng.normal(size=b.shape[1]) for _ in range(max(0, starts - 1))])
     points = [point / max(1.0, np.linalg.norm(point)) for point in points]
     values = []
+    failures = 0
     for point in points:
         result = minimize(lambda u: -0.5 * np.linalg.norm(c + b @ u) ** 2, point,
                           method="SLSQP", constraints={"type": "ineq", "fun": lambda u: 1.0 - u @ u},
                           options={"ftol": 1e-12, "maxiter": 2000})
-        if result.success or result.x @ result.x <= 1.0 + 1e-7:
+        if result.success and np.isfinite(result.fun) and result.x @ result.x <= 1.0 + 1e-7:
             values.append(-float(result.fun))
+        else:
+            failures += 1
     return {"available": True, "value": max(values) if values else float("nan"),
-            "starts": len(points), "successful": len(values)}
+            "starts": len(points), "successful": len(values), "failed": failures,
+            "all_starts_succeeded": failures == 0}
 
 
 def information_floor(response: Array, observation: Array, tolerance: float = 1e-10) -> float:

@@ -29,7 +29,7 @@
   "decomposition_residual_max": 2.1209674454514003e-15,
   "families": [
     {
-      "family": "source_induced",
+      "family": "declared_source_target_coupled_correlation",
       "directions": [
         "rho_source_1",
         "rho_source_2"
@@ -44,7 +44,10 @@
       "unit_scales": {
         "rho_source_1": 1.0,
         "rho_source_2": 1.0
-      }
+      },
+      "world_semantics": "declared_source_target_coupling",
+      "source_induced": false,
+      "central_difference_requires_interior_step": true
     },
     {
       "family": "mechanism_defined_hidden",
@@ -64,7 +67,10 @@
         "rho_source_1": 1.0,
         "rho_source_2": 1.0,
         "rho_hidden": 1.0
-      }
+      },
+      "world_semantics": "declared_source_target_coupling",
+      "source_induced": false,
+      "central_difference_requires_interior_step": true
     },
     {
       "family": "mechanism_defined_exposed",
@@ -84,7 +90,10 @@
         "rho_source_1": 1.0,
         "rho_source_2": 1.0,
         "rho_hidden": 1.0
-      }
+      },
+      "world_semantics": "declared_source_target_coupling",
+      "source_induced": false,
+      "central_difference_requires_interior_step": true
     },
     {
       "family": "irrelevant_source_diversity",
@@ -106,7 +115,10 @@
         "rho_source_2": 1.0,
         "rho_hidden": 1.0,
         "brightness_nuisance": 1.0
-      }
+      },
+      "world_semantics": "declared_source_target_coupling",
+      "source_induced": false,
+      "central_difference_requires_interior_step": true
     }
   ],
   "world_metric": "Euclidean on declared CMNIST correlation/nuisance tangent",

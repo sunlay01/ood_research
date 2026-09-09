@@ -120,15 +120,18 @@ def nonlinear_environment_state(environment: ModuleEnvironment,
     means[1 : 1 + q] = environment.shortcut_means
     means[1 + q : 1 + q + environment.n_noise] = environment.noise_means
     means[-1] = 0.0
+    # Build every linear Y loading before forming the common covariance.
+    # The quadratic shortcut term is uncorrelated with Y, but it does not
+    # remove the rho_j Y contribution to Var(S_j), Cov(C, S_j), or Cov(U, S_j).
     loading = np.zeros(p)
     loading[0] = 1.0
+    loading[1 : 1 + q] = environment.shortcut_rhos
     loading[-1] = environment.u_gamma
     covariance = np.outer(loading, loading)
     covariance[0, 0] += environment.c_noise_variance
     # E[(Y^2-1)^2] = 2 and E[Y(Y^2-1)] = 0 for Y~N(0,1).
     for index, (rho, alpha, variance) in enumerate(zip(environment.shortcut_rhos, alphas, environment.shortcut_variances)):
         coordinate = 1 + index
-        loading[coordinate] = rho
         covariance[coordinate, coordinate] += 2.0 * alpha * alpha + variance
     offset = 1 + q
     covariance[offset : offset + environment.n_noise, offset : offset + environment.n_noise] += np.diag(environment.noise_variances)
@@ -136,10 +139,7 @@ def nonlinear_environment_state(environment: ModuleEnvironment,
     for index in range(q):
         for other in range(q):
             if index != other:
-                covariance[1 + index, 1 + other] = (
-                    environment.shortcut_rhos[index] * environment.shortcut_rhos[other]
-                    + 2.0 * alphas[index] * alphas[other]
-                )
+                covariance[1 + index, 1 + other] += 2.0 * alphas[index] * alphas[other]
     # The linear C and U loadings retain their covariance with Y; the
     # quadratic term has zero covariance with Y and hence does not enter xy.
     second = np.zeros((p + 1, p + 1))

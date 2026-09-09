@@ -39,7 +39,7 @@ def _write_csv(path: Path, rows: list[dict[str, object]]) -> None:
 
 def _families() -> tuple[CMNISTFamily, ...]:
     return (
-        CMNISTFamily("source_induced", directions=("rho_source_1", "rho_source_2")),
+        CMNISTFamily("declared_source_target_coupled_correlation", directions=("rho_source_1", "rho_source_2")),
         CMNISTFamily("mechanism_defined_hidden", hidden_exposed=False),
         CMNISTFamily("mechanism_defined_exposed", hidden_exposed=True),
         CMNISTFamily("irrelevant_source_diversity", directions=("rho_source_1", "rho_source_2", "rho_hidden", "brightness_nuisance")),

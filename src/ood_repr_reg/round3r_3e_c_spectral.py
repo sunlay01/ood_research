@@ -88,8 +88,10 @@ def slack_ratio(irreducible: Array, recoverable: Array, tolerance: float = 1e-10
     slack = (alpha * alpha) * np.eye(irr.shape[0]) - gram
     slack = (slack + slack.T) / 2.0
     values, vectors = np.linalg.eigh(slack)
-    scale = max(1.0, alpha * alpha, operator_norm(e) ** 2)
-    support = values > tolerance * scale
+    # The range/null split belongs to S alone.  Scaling E must not change
+    # which eigenvectors are deemed slack support.
+    slack_scale = max(1.0, float(np.max(np.abs(values))) if values.size else 0.0)
+    support = values > tolerance * slack_scale
     null = vectors[:, ~support]
     ee = (e @ e.T + (e @ e.T).T) / 2.0
     compatibility_residual = float(np.linalg.norm(null.T @ e)) if null.shape[1] else 0.0

@@ -102,6 +102,20 @@ def test_nonlinear_stress_state_is_psd_and_has_exact_dimensions():
     assert np.min(np.linalg.eigvalsh(state.second)) > -1e-10
 
 
+def test_nonlinear_shortcut_moments_retain_linear_loading_and_quadratic_variance():
+    env = ModuleEnvironment(n_noise=1, shortcut_rhos=(0.7, 0.4),
+                            shortcut_variances=(0.5, 0.6), shortcut_means=(0.0, 0.0))
+    alphas = (0.1, -0.05)
+    state = nonlinear_environment_state(env, alphas)
+    covariance = state.second[1:, 1:]
+    for index, (rho, alpha, noise) in enumerate(zip(env.shortcut_rhos, alphas, env.shortcut_variances)):
+        shortcut = 1 + index
+        assert np.isclose(covariance[shortcut, shortcut], rho * rho + 2 * alpha * alpha + noise)
+        assert np.isclose(covariance[0, shortcut], rho)
+        assert np.isclose(covariance[-1, shortcut], env.u_gamma * rho)
+        assert np.isclose(state.xy[1 + shortcut], rho)
+
+
 def test_subspace_diagnostics_obey_rank_identities():
     first = np.array([[1.0, 0.0], [0.0, 1.0], [0.0, 0.0]])
     second = np.array([[1.0, 0.0], [0.0, 0.0], [0.0, 1.0]])

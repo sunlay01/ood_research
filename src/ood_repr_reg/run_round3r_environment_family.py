@@ -12,6 +12,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import json
+import argparse
 from dataclasses import asdict, is_dataclass
 from pathlib import Path
 from typing import Any
@@ -399,7 +400,10 @@ def family_comparison(legacy=None, source_induced=None) -> tuple[list[dict[str, 
         )
         geometry_rows.append({
             "family": label, "tangent_dimension": geometry.spec.dimension,
-            "metric": "source_state_orthonormal" if geometry.spec.source_defined else "Euclidean standardized coordinates",
+            "metric": (
+                "realized_source_state_gram"
+                if geometry.spec.source_defined else "Euclidean standardized coordinates"
+            ),
             "rank_O": summary["rank_O"], "rank_A": summary["rank_A"],
             "kernel_dimension": summary["kernel_dimension"],
             "information_floor": summary["information_floor"],
@@ -584,8 +588,8 @@ may increase raw state rank without adding a response direction.
 
 No target risk, `A`, `Pi`, semantic label, cluster, or downstream regularizer
 quantity is read while the source-induced basis is constructed.  The
-source-induced metric is explicitly source-state orthonormal and therefore
-metric-dependent.
+source-induced metric is the realized source-state Gram metric and is therefore
+metric-dependent; it is not silently treated as an identity metric.
 
 ## Cross-family geometry
 
@@ -640,9 +644,17 @@ estimability, deep-network identifiability, or a universal DG theorem.
 
 
 def main() -> None:
+    parser = argparse.ArgumentParser(description="Run the environment-family refactor audit.")
+    parser.add_argument(
+        "--output", type=Path,
+        default=Path("round3_redesign/environment_family_refactor"),
+        help="directory for this audit; use a new directory to preserve historical artifacts",
+    )
+    args = parser.parse_args()
     result = run()
-    root = Path(__file__).resolve().parents[2]
-    output = root / "round3_redesign" / "environment_family_refactor"
+    output = args.output
+    if not output.is_absolute():
+        output = Path(__file__).resolve().parents[2] / output
     results = output / "results"
     results.mkdir(parents=True, exist_ok=True)
     summary = {

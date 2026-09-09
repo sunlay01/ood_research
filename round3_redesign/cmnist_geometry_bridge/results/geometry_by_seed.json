@@ -1,7 +1,7 @@
 [
   {
     "seed": 0,
-    "family": "source_induced",
+    "family": "declared_source_target_coupled_correlation",
     "feature_dimension": 21,
     "source_accuracy": 0.921999990940094,
     "target_accuracy": 0.6399999856948853,
@@ -333,7 +333,7 @@
   },
   {
     "seed": 1,
-    "family": "source_induced",
+    "family": "declared_source_target_coupled_correlation",
     "feature_dimension": 27,
     "source_accuracy": 0.9360000193119049,
     "target_accuracy": 0.7229999899864197,
@@ -713,7 +713,7 @@
   },
   {
     "seed": 2,
-    "family": "source_induced",
+    "family": "declared_source_target_coupled_correlation",
     "feature_dimension": 24,
     "source_accuracy": 0.9239999949932098,
     "target_accuracy": 0.7099999785423279,
@@ -1069,7 +1069,7 @@
   },
   {
     "seed": 3,
-    "family": "source_induced",
+    "family": "declared_source_target_coupled_correlation",
     "feature_dimension": 24,
     "source_accuracy": 0.9110000133514404,
     "target_accuracy": 0.593999981880188,
@@ -1425,7 +1425,7 @@
   },
   {
     "seed": 4,
-    "family": "source_induced",
+    "family": "declared_source_target_coupled_correlation",
     "feature_dimension": 17,
     "source_accuracy": 0.93299999833107,
     "target_accuracy": 0.6430000066757202,

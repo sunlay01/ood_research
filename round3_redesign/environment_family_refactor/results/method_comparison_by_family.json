@@ -1923,7 +1923,7 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 1.96261557335472e-17,
-    "pi_O_operator_norm": 1.0254527262691011,
+    "pi_O_operator_norm": 1.025452726269102,
     "recoverable_residual_operator_norm": 3.0885392555144457e-12,
     "affine_regret": 2.551112556212925e-28,
     "information_floor": 0.0,
@@ -2064,11 +2064,11 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 0.0029246193951398196,
-    "pi_O_operator_norm": 1.0140523081598312,
-    "recoverable_residual_operator_norm": 0.011621251757012747,
-    "affine_regret": 8.841211981794064e-05,
+    "pi_O_operator_norm": 1.0140523081598323,
+    "recoverable_residual_operator_norm": 0.01162125175701272,
+    "affine_regret": 8.841211981794049e-05,
     "information_floor": 0.0,
-    "method_excess": 8.841211981794064e-05,
+    "method_excess": 8.841211981794049e-05,
     "fd_error": 2.220216621655869e-08,
     "target_risk_used": false,
     "semantic_labels_used": false,
@@ -2143,13 +2143,13 @@
     ],
     "E": [
       [
-        4.05327816514439e-05,
+        4.0532781651444116e-05,
         7.456911411956712e-05,
         0.0005150317813165314,
         -0.0016152187704540494
       ],
       [
-        -0.0010242033080979374,
+        -0.0010242033080979096,
         0.0003271076335083674,
         0.0020484928032266647,
         -0.0036239158497627932
@@ -2161,10 +2161,10 @@
         0.009909503731409641
       ],
       [
-        -0.0006068683484407311,
+        -0.0006068683484407294,
         0.0005569198599307823,
-        -0.003411063468717168,
-        -0.004562740416828359
+        -0.0034110634687171126,
+        -0.004562740416828304
       ],
       [
         0.0,
@@ -2205,11 +2205,11 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 0.028165111383536858,
-    "pi_O_operator_norm": 0.9217936459797651,
-    "recoverable_residual_operator_norm": 0.10574382275738695,
-    "affine_regret": 0.007382277598601738,
+    "pi_O_operator_norm": 0.9217936459797657,
+    "recoverable_residual_operator_norm": 0.10574382275738707,
+    "affine_regret": 0.007382277598601751,
     "information_floor": 0.0,
-    "method_excess": 0.007382277598601738,
+    "method_excess": 0.007382277598601751,
     "fd_error": 1.723597952807449e-08,
     "target_risk_used": false,
     "semantic_labels_used": false,
@@ -2284,27 +2284,27 @@
     ],
     "E": [
       [
-        0.00030732010111127715,
+        0.00030732010111127824,
         0.0007143680698174521,
-        0.004651266004684025,
-        -0.014350305574704243
+        0.0046512660046840355,
+        -0.014350305574704264
       ],
       [
-        -0.009891941750896971,
+        -0.009891941750896943,
         0.002978301687865014,
-        0.018989162536553583,
-        -0.03287405040321434
+        0.01898916253655361,
+        -0.032874050403214394
       ],
       [
         -0.007522271190891706,
-        -0.002146678851504477,
-        -0.007987376011257749,
-        0.09021013449720428
+        -0.0021466788515044632,
+        -0.00798737601125779,
+        0.09021013449720439
       ],
       [
-        -0.005675962890757824,
-        0.005355160635980322,
-        -0.03206096368642403,
+        -0.0056759628907578205,
+        0.005355160635980294,
+        -0.03206096368642397,
         -0.04160147896023331
       ],
       [
@@ -2346,7 +2346,7 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 1.96261557335472e-17,
-    "pi_O_operator_norm": 1.0254527262691011,
+    "pi_O_operator_norm": 1.025452726269102,
     "recoverable_residual_operator_norm": 3.0885392555144457e-12,
     "affine_regret": 2.551112556212925e-28,
     "information_floor": 0.0,
@@ -2487,7 +2487,7 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 3.582408275963566e-05,
-    "pi_O_operator_norm": 1.0253402788008896,
+    "pi_O_operator_norm": 1.0253402788008905,
     "recoverable_residual_operator_norm": 0.0001556583056258419,
     "affine_regret": 1.794193883315141e-08,
     "information_floor": 0.0,
@@ -2628,7 +2628,7 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 0.0002970545038632187,
-    "pi_O_operator_norm": 1.0244253445384721,
+    "pi_O_operator_norm": 1.0244253445384734,
     "recoverable_residual_operator_norm": 0.0013124090333753204,
     "affine_regret": 1.260510405499983e-06,
     "information_floor": 0.0,
@@ -2769,7 +2769,7 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 1.96261557335472e-17,
-    "pi_O_operator_norm": 1.0254527262691011,
+    "pi_O_operator_norm": 1.025452726269102,
     "recoverable_residual_operator_norm": 3.0885392555144457e-12,
     "affine_regret": 2.551112556212925e-28,
     "information_floor": 0.0,
@@ -2910,7 +2910,7 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 5.890824092330206e-06,
-    "pi_O_operator_norm": 1.0254473466107328,
+    "pi_O_operator_norm": 1.0254473466107337,
     "recoverable_residual_operator_norm": 1.4153428770564379e-05,
     "affine_regret": 1.6115445485731334e-10,
     "information_floor": 0.0,
@@ -3051,7 +3051,7 @@
     "valid": true,
     "status": "PASS",
     "z0_norm": 5.88998502331875e-05,
-    "pi_O_operator_norm": 1.0253989749796824,
+    "pi_O_operator_norm": 1.025398974979683,
     "recoverable_residual_operator_norm": 0.0001415110714657942,
     "affine_regret": 1.6109842047505822e-08,
     "information_floor": 0.0,

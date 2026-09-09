@@ -67,6 +67,9 @@ class TangentSpec:
             "family_name": self.family_name,
             "tangent_dimension": self.dimension,
             "directions": list(self.directions),
+            "physical_scale_per_unit_coordinate": dict(zip(self.directions, self.scales, strict=True)),
+            # Historical spelling retained for readers of old snapshots.  It
+            # means exactly the physical scale above, not a metric assertion.
             "magnitude_one_scales": dict(zip(self.directions, self.scales, strict=True)),
             "metric": self.metric.tolist(),
             "coordinate_description": self.coordinate_description,

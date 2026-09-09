@@ -294,7 +294,9 @@
       "available": true,
       "value": 0.0511814510860954,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -592,7 +594,9 @@
       "available": true,
       "value": 0.051181451517563786,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -890,7 +894,9 @@
       "available": true,
       "value": 0.0511814941947948,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -1188,7 +1194,9 @@
       "available": true,
       "value": 0.05118572792939139,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -1486,7 +1494,9 @@
       "available": true,
       "value": 0.051579156265818306,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -1784,7 +1794,9 @@
       "available": true,
       "value": 0.0511814510860954,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -2082,7 +2094,9 @@
       "available": true,
       "value": 0.05118145108616436,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -2380,7 +2394,9 @@
       "available": true,
       "value": 0.05118145109283389,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -2678,7 +2694,9 @@
       "available": true,
       "value": 0.05118145172777675,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -2976,7 +2994,9 @@
       "available": true,
       "value": 0.05118149520685639,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -3274,7 +3294,9 @@
       "available": true,
       "value": 0.0511814510860954,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -3572,7 +3594,9 @@
       "available": true,
       "value": 0.05118145108609853,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -3870,7 +3894,9 @@
       "available": true,
       "value": 0.051181451086270695,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -4168,7 +4194,9 @@
       "available": true,
       "value": 0.051181451103448274,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   },
   {
@@ -4466,7 +4494,9 @@
       "available": true,
       "value": 0.05118145282068967,
       "starts": 24,
-      "successful": 24
+      "successful": 24,
+      "failed": 0,
+      "all_starts_succeeded": true
     }
   }
 ]

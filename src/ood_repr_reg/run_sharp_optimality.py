@@ -21,7 +21,9 @@ from .sharp_optimality.geometry import affine_policy_audit, response_parts, tran
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUTPUT = ROOT / "round3_redesign" / "sharp_optimality"
 DEFAULT_SNAPSHOTS = ROOT / "round3_redesign" / "algorithm_mechanism" / "results" / "operator_snapshots.npz"
-GRID = (("l2", 0.0), ("l2", 0.01), ("irmv1", 0.01), ("vrex", 0.01))
+GRID = (("l2", 0.0), ("l2", 0.001), ("l2", 0.01), ("l2", 0.1),
+        ("irmv1", 0.001), ("irmv1", 0.01), ("irmv1", 0.1),
+        ("vrex", 0.001), ("vrex", 0.01), ("vrex", 0.1))
 
 
 def _json(value):
@@ -191,8 +193,12 @@ def run(output: Path = DEFAULT_OUTPUT, *, cmnist: bool = True,
                                                  download=config["download"])
         gray, digit = deterministic_subset(gray_all, digit_all,
                                            n=int(config.get("bridge_bank_size", 1200)), seed=3711)
-        families = (CMNISTFamily("mechanism_defined_hidden"),
-                    CMNISTFamily("mechanism_defined_exposed", hidden_exposed=True))
+        families = (
+            CMNISTFamily("declared_source_target_coupled_correlation", directions=("rho_source_1", "rho_source_2")),
+            CMNISTFamily("mechanism_defined_hidden"),
+            CMNISTFamily("mechanism_defined_exposed", hidden_exposed=True),
+            CMNISTFamily("irrelevant_source_diversity", directions=("rho_source_1", "rho_source_2", "brightness_nuisance")),
+        )
         for seed in seeds:
             train, _, _, _ = _build_data(config, seed)
             model, _ = train_model(train, method="erm", strength=0.0,
@@ -249,11 +255,14 @@ def run(output: Path = DEFAULT_OUTPUT, *, cmnist: bool = True,
         and not fixtures["same_norm_different_placement_bad"]["condition_holds"]
         and all(name in fixtures for name in required_fixtures)
     )
-    verdict = "SHARP-OPTIMALITY-PASS" if not errors and snapshot_ok and coordinate_ok and cross_ok and fixtures_ok else "SHARP-OPTIMALITY-PARTIAL"
+    expected_rows = (2 * len(GRID)) + (len(seeds) * 4 * len(GRID)) if cmnist else 2 * len(GRID)
+    coverage_ok = len(audits) == expected_rows and not errors
+    verdict = "SHARP-OPTIMALITY-PASS" if coverage_ok and snapshot_ok and coordinate_ok and cross_ok and fixtures_ok else "SHARP-OPTIMALITY-PARTIAL"
     summary = {
         "verdict": verdict, "audit_row_count": len(audits), "error_count": len(errors), "errors": errors,
         "corrected_snapshot_pass": snapshot_ok, "coordinate_invariance_pass": coordinate_ok,
         "cross_operator_audit_pass": cross_ok, "counterexamples_pass": fixtures_ok,
+        "expected_audit_row_count": expected_rows, "full_coverage_pass": coverage_ok,
         "cmnist_scope": "frozen_representation_empirical_squared_loss" if cmnist else "not_run",
         "operator_snapshot_source": str(snapshot_path) if use_snapshots else "regenerated_from_frozen_bridge",
         "metric": "Euclidean after declared family-metric whitening", "lean_status": "LEAN-PARTIAL",

@@ -77,6 +77,8 @@ def test_source_reference_duplicate_and_independent_variation_audits():
     assert independent.state_span_rank > duplicate.state_span_rank
     with np.testing.assert_raises(ValueError):
         build_source_induced_family(environments, reference_index=len(environments))
+    with np.testing.assert_raises(ValueError):
+        build_source_induced_family(environments, base=family.base.updated(u_gamma=0.1))
 
 
 def test_family_metric_transport_and_coordinate_audits():

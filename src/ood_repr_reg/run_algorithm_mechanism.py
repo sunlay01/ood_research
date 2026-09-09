@@ -57,7 +57,8 @@ def _docs(output: Path, summary: dict[str, object]) -> None:
             f"error is `{summary['max_component_total_relative_error']:.3e}`. "
             f"The corrected geometry snapshot audit passed for all {summary['corrected_geometry_snapshot_count']} rows. "
             "Exact IFT totals are compared with independently differentiated components and static-path finite differences. "
-            "`A`, `E`, and affine regret are strictly post-hoc diagnostics.\n"
+            "All four forcing/filtering counterfactuals are expanded at the shared ERM source solution and are evaluated with "
+            "the post-hoc task residual E=A_rec+Pi O. `A`, `E`, and affine regret are unavailable to learner-side construction.\n"
         ),
     }
     for name, text in docs.items():
@@ -81,7 +82,9 @@ def run(output: Path = DEFAULT_OUTPUT, *, cmnist: bool = True, seeds: tuple[int,
         operator_snapshots[f"{prefix}__z0"] = np.asarray(item.response_offset)
     errors: list[dict[str, object]] = []
     worlds = (primary_hidden_u_world(), primary_u_exposed_world())
-    grid = (("l2", 0.0), ("l2", 0.01), ("irmv1", 0.01), ("vrex", 0.01))
+    grid = (("l2", 0.0),) + tuple(
+        (method, lam) for method in ("l2", "irmv1", "vrex") for lam in (0.001, 0.01, 0.1)
+    )
     for world in worlds:
         for method, lam in grid:
             try:
@@ -102,7 +105,12 @@ def run(output: Path = DEFAULT_OUTPUT, *, cmnist: bool = True, seeds: tuple[int,
         device = torch.device(config.get("device", "cpu"))
         gray_all, digit_all = load_mnist_tensors(ROOT / config["data_root"], train=True, download=config["download"])
         gray, digit = deterministic_subset(gray_all, digit_all, n=int(config.get("bridge_bank_size", 1200)), seed=3711)
-        families = (CMNISTFamily("mechanism_defined_hidden"), CMNISTFamily("mechanism_defined_exposed", hidden_exposed=True))
+        families = (
+            CMNISTFamily("declared_source_target_coupled_correlation", directions=("rho_source_1", "rho_source_2")),
+            CMNISTFamily("mechanism_defined_hidden"),
+            CMNISTFamily("mechanism_defined_exposed", hidden_exposed=True),
+            CMNISTFamily("irrelevant_source_diversity", directions=("rho_source_1", "rho_source_2", "brightness_nuisance")),
+        )
         for seed in seeds:
             train, _, _, _ = _build_data(config, seed)
             model, _ = train_model(train, method="erm", strength=0.0, latent_dim=int(config["latent_dim"]), epochs=int(config["epochs"]), batch_size=int(config["batch_size"]), learning_rate=float(config["learning_rate"]), seed=seed, device=device)
@@ -127,8 +135,26 @@ def run(output: Path = DEFAULT_OUTPUT, *, cmnist: bool = True, seeds: tuple[int,
         one, two, three = scalar_rows(record)
         if "seed" in record: one["seed"] = two["seed"] = three["seed"] = record["seed"]
         exact.append(one); objects.append(two); counter.append(three)
-        for index, value in enumerate(np.linalg.svd(record["PiO"], compute_uv=False)):
-            mode_rows.append({"setting": record["setting"], "method": record["method"], "lambda": record["lambda"], "mode": index, "PiO_singular_value": float(value)})
+        observation = np.asarray(record["observation"])
+        _, singular, vh = np.linalg.svd(observation, full_matrices=False)
+        rank = int(np.sum(singular > 1e-9 * singular[0])) if singular.size and singular[0] > 0 else 0
+        policies = {"actual": np.asarray(record["PiO"]), **{
+            key: np.asarray(record["common"][f"{key}_response"])
+            for key in ("Pi00", "PiC0", "Pi0K", "PiCK")
+        }}
+        for index, mode in enumerate(vh[:rank]):
+            target = np.asarray(record["A_recoverable"]) @ mode
+            source_visible_norm = float(np.linalg.norm(observation @ mode))
+            for policy, adaptive in policies.items():
+                predicted = adaptive @ mode
+                residual = target + predicted
+                mode_rows.append({
+                    "setting": record["setting"], "method": record["method"], "lambda": record["lambda"],
+                    "mode": index, "policy": policy, "source_visible_norm": source_visible_norm,
+                    "A_recoverable_norm": float(np.linalg.norm(target)), "PiO_mode_norm": float(np.linalg.norm(predicted)),
+                    "E_mode_norm": float(np.linalg.norm(residual)),
+                    "alignment_with_negative_Arec": float((-target) @ predicted / max(np.linalg.norm(target) * np.linalg.norm(predicted), 1e-12)),
+                })
     _write_csv(results / "exact_reconstruction.csv", exact); _write_csv(results / "mechanism_objects.csv", objects)
     _write_csv(results / "counterfactual_residuals.csv", counter); _write_csv(results / "static_path_rows.csv", [{k: (json.dumps(v, default=_json) if isinstance(v, np.ndarray) else v) for k, v in row.items() if k not in {"weights", "predicted", "finite_difference"}} for row in static_rows]); _write_csv(results / "per_mode_rows.csv", mode_rows)
     (results / "corrected_geometry_snapshots.json").write_text(json.dumps(snapshots, indent=2, default=_json))
@@ -136,8 +162,23 @@ def run(output: Path = DEFAULT_OUTPUT, *, cmnist: bool = True, seeds: tuple[int,
     max_pi_error = max((r["learner"]["pi_reconstruction_relative_error"] for r in records), default=float("inf"))
     max_total_error = max((max(r["learner"]["total_H_relative_error"], r["learner"]["total_B_relative_error"]) for r in records), default=float("inf"))
     snapshots_pass = bool(snapshots) and all(bool(row["passes"]) for row in snapshots)
-    verdict = "ALGORITHM-MECHANISM-PASS" if records and not errors and snapshots_pass and max_pi_error < 2e-4 and max_total_error < 2e-4 else "ALGORITHM-MECHANISM-PARTIAL"
-    summary = {"verdict": verdict, "record_count": len(records), "error_count": len(errors), "errors": errors, "max_pi_reconstruction_relative_error": max_pi_error, "max_component_total_relative_error": max_total_error, "corrected_geometry_snapshot_count": len(snapshots), "operator_snapshot_count": len(operator_snapshots) // 4, "corrected_geometry_snapshots_pass": snapshots_pass, "learner_side_target_response_used": False, "semantic_or_cluster_used": False, "coral_status": "NONCANONICAL-PREDICTOR-RESPONSE", "cmnist_scope": "frozen_representation_empirical_squared_loss" if cmnist else "not_run", "theorem_status": "exact_local_identity", "lean_status": "LEAN-PARTIAL"}
+    static_ok = all(float(row["relative_error"]) < 5e-2 for row in static_rows)
+    stable_attribution: list[dict[str, object]] = []
+    for setting in sorted({str(row["setting"]) for row in counter}):
+        for method, lam in (("L2", 0.001), ("L2", 0.01), ("L2", 0.1), ("IRMV1", 0.001), ("IRMV1", 0.01), ("IRMV1", 0.1), ("VREX", 0.001), ("VREX", 0.01), ("VREX", 0.1)):
+            values = [float(row["ECK_operator_norm"]) - float(row["E00_operator_norm"])
+                      for row in counter if row["setting"] == setting and row["method"] == method and row["lambda"] == lam]
+            if values and min(abs(value) for value in values) > 1e-7 and (all(value > 0 for value in values) or all(value < 0 for value in values)):
+                stable_attribution.append({"setting": setting, "method": method, "lambda": lam,
+                                           "direction": "hurts" if values[0] > 0 else "helps", "count": len(values),
+                                           "mean_E_change": float(np.mean(values))})
+    expected = len(worlds) * len(grid) + (len(seeds) * 4 * len(grid) if cmnist else 0)
+    full_coverage = len(records) == expected and not errors
+    verdict = "ALGORITHM-MECHANISM-PASS" if (
+        full_coverage and snapshots_pass and max_pi_error < 2e-4 and max_total_error < 2e-4
+        and static_ok and bool(stable_attribution)
+    ) else "ALGORITHM-MECHANISM-PARTIAL"
+    summary = {"verdict": verdict, "record_count": len(records), "expected_record_count": expected, "full_family_lambda_coverage": full_coverage, "error_count": len(errors), "errors": errors, "max_pi_reconstruction_relative_error": max_pi_error, "max_component_total_relative_error": max_total_error, "static_path_pass": static_ok, "stable_task_residual_attributions": stable_attribution, "common_base": "shared_ERM_source_solution", "counterfactual_quantity": "E=A_recoverable+Pi O", "corrected_geometry_snapshot_count": len(snapshots), "operator_snapshot_count": len(operator_snapshots) // 4, "corrected_geometry_snapshots_pass": snapshots_pass, "learner_side_target_response_used": False, "semantic_or_cluster_used": False, "coral_status": "NONCANONICAL-PREDICTOR-RESPONSE", "cmnist_scope": "frozen_representation_empirical_squared_loss" if cmnist else "not_run", "theorem_status": "exact_local_identity", "lean_status": "LEAN-PARTIAL"}
     (results / "summary.json").write_text(json.dumps(summary, indent=2, default=_json)); _docs(output, summary)
     return summary
 

@@ -17,7 +17,7 @@ def evaluate_input(item: MechanismInput, *, derivative_step: float = 2e-5) -> di
         observed_total_h=item.observed_total_h, observed_total_b=item.observed_total_b,
     )
     common = common_base_attribution(
-        item.weights, item.state, item.lam, item.risk_gradient, item.penalty_gradient,
+        item.common_base_weights, item.state, item.lam, item.risk_gradient, item.penalty_gradient,
         derivative_step=derivative_step,
     )
     learner = mechanism_row(mechanism, item.observation)
@@ -26,18 +26,27 @@ def evaluate_input(item: MechanismInput, *, derivative_step: float = 2e-5) -> di
         item.response_offset, item.response, item.observation, item.response_adaptive,
     )
     parts = response_parts(item.response, item.observation, item.response_adaptive)
+    # Counterfactual Pi maps are constructed entirely from source quantities at
+    # the shared ERM base.  Only their conversion to E is post-hoc.
+    for key in ("Pi00", "PiC0", "Pi0K", "PiCK"):
+        adaptive = np.asarray(item.response_transform) @ np.asarray(common[key]) @ np.asarray(item.observation)
+        common[f"{key}_response"] = adaptive
+        common[f"E_{key[2:]}"] = np.asarray(parts["A_recoverable"]) + adaptive
     return {
         "setting": item.setting, "method": item.method, "lambda": item.lam,
         "weights": item.weights, "H_R": mechanism.H_R, "B_R": mechanism.B_R,
         "g": mechanism.g, "K": mechanism.K, "C": mechanism.C,
         "Pi": mechanism.pi, "Pi_reconstructed": mechanism.reconstructed_pi,
-        "PiO": item.response_adaptive, "E": parts["E"],
+        "observation": np.asarray(item.observation),
+        "PiO": item.response_adaptive, "E": parts["E"], "A_recoverable": parts["A_recoverable"],
         "common": common, "learner": learner, "sharp": sharp,
         "l2_exact": {
             "g_equals_weights": bool(np.allclose(mechanism.g, item.weights, atol=2e-6)) if item.method == "L2" else None,
             "K_equals_identity": bool(np.allclose(mechanism.K, np.eye(item.weights.size), atol=2e-6)) if item.method == "L2" else None,
             "C_is_zero": bool(np.linalg.norm(mechanism.C) <= 2e-6) if item.method == "L2" else None,
         },
+        "common_base_kind": "ERM_source_solution",
+        "common_base_difference_norm": float(np.linalg.norm(item.weights - item.common_base_weights)),
         "target_used_by_learner": False,
         "semantic_or_cluster_used_by_learner": False,
     }
@@ -65,17 +74,22 @@ def scalar_rows(record: dict[str, object]) -> tuple[dict[str, object], dict[str,
     }
     objects = {
         **base, "g_norm": float(np.linalg.norm(record["g"])),
-        "K_norm": float(np.linalg.norm(record["K"])), "C_norm": float(np.linalg.norm(record["C"])),
-        "Pi_norm": float(np.linalg.norm(record["Pi"])),
+        "K_operator_norm": learner["K_operator_norm"], "C_operator_norm": learner["C_operator_norm"],
+        "Pi_operator_norm": learner["pi_operator_norm"],
         **{f"l2_{key}": value for key, value in record["l2_exact"].items()},
     }
     counter = {
         **base,
+        "common_base_kind": record["common_base_kind"],
         "Pi00_norm": float(np.linalg.norm(common["Pi00"])), "PiC0_norm": float(np.linalg.norm(common["PiC0"])),
         "Pi0K_norm": float(np.linalg.norm(common["Pi0K"])), "PiCK_norm": float(np.linalg.norm(common["PiCK"])),
         "sensing_norm": float(np.linalg.norm(common["sensing"])),
         "filtering_norm": float(np.linalg.norm(common["filtering"])),
         "interaction_norm": float(np.linalg.norm(common["interaction"])),
+        "E00_operator_norm": float(np.linalg.svd(common["E_00"], compute_uv=False)[0]),
+        "EC0_operator_norm": float(np.linalg.svd(common["E_C0"], compute_uv=False)[0]),
+        "E0K_operator_norm": float(np.linalg.svd(common["E_0K"], compute_uv=False)[0]),
+        "ECK_operator_norm": float(np.linalg.svd(common["E_CK"], compute_uv=False)[0]),
         "symmetric_identity_residual": common["symmetric_identity_residual"],
     }
     return exact, objects, counter

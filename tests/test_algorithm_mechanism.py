@@ -25,6 +25,9 @@ def test_irm_and_vrex_exact_component_reconstructions_hold():
         assert record["learner"]["total_H_relative_error"] < 1e-5
         assert record["learner"]["total_B_relative_error"] < 1e-5
         assert record["common"]["symmetric_identity_residual"] < 1e-10
+        for key in ("00", "C0", "0K", "CK"):
+            expected = record["A_recoverable"] + record["common"][f"Pi{key}_response"]
+            assert np.allclose(record["common"][f"E_{key}"], expected)
 
 
 def test_static_path_and_source_factorization_are_source_only():
@@ -37,6 +40,10 @@ def test_static_path_and_source_factorization_are_source_only():
     assert record["target_used_by_learner"] is False
     assert record["semantic_or_cluster_used_by_learner"] is False
     assert np.linalg.norm(record["E"]) > 0.0
+    assert record["common_base_kind"] == "ERM_source_solution"
+    assert record["common_base_difference_norm"] > 1e-8
+    # This is an operator norm, not a Frobenius norm of I.
+    assert np.isclose(record["learner"]["K_operator_norm"], 1.0)
 
 
 def test_positive_local_metric_is_not_rejected_by_zero_initial_reduction():

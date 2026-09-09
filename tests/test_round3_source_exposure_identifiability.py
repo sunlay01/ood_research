@@ -1,6 +1,7 @@
 import numpy as np
 
 from ood_repr_reg.round3r_3b_benchmark import ModuleEnvironment, environment_state, source_design, source_optimum
+from ood_repr_reg.round3r_3b_geometry import GeometryTolerance
 from ood_repr_reg.round3r_3c_benchmark import make_benchmark
 from ood_repr_reg.round3r_3d_counterexamples import design_unexposed_but_source_visible, source_identical_target_different
 from ood_repr_reg.round3r_3d_designs import source_design_ladder
@@ -130,3 +131,16 @@ def test_tolerance_profile_and_nonlinear_boundary_are_diagnostic():
     result = run()
     assert result["rank_tolerance_profile"]["tested"]
     assert result["verdict"] == "3D-DESIGN-EXPOSURE-PASS-STRUCTURAL-PARTIAL"
+
+
+def test_typed_rank_tolerance_changes_near_degenerate_source_and_response_ranks():
+    states = (np.zeros(2), np.array([1.0, 0.0]), np.array([0.0, 1e-8]))
+    loose = GeometryTolerance(rank_relative=1e-6)
+    strict = GeometryTolerance(rank_relative=1e-12)
+    loose_span = source_design_span(states, tolerance=loose)
+    strict_span = source_design_span(states, tolerance=strict)
+    assert loose_span["rank"] == 1
+    assert strict_span["rank"] == 2
+    response = np.eye(2)
+    assert exposed_response_basis(loose_span["contrasts"], response, loose)["rank"] == 1
+    assert exposed_response_basis(strict_span["contrasts"], response, strict)["rank"] == 2

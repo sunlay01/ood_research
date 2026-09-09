@@ -30,22 +30,22 @@ residual `||A-A_irreducible-A_recoverable||` over method rows is
 
 | family | method | mean ||z0|| | mean ||Pi O|| | mean ||E|| | mean affine regret | mean FD error |
 |---|---|---:|---:|---:|---:|---:|
+| declared_source_target_coupled_correlation | ERM | 0 | 2.6957 | 11.009 | 62.692 | 4.37e-06 |
+| declared_source_target_coupled_correlation | L2 | 0.66495 | 2.8853 | 11.137 | 65.213 | 2.81e-06 |
+| declared_source_target_coupled_correlation | IRMV1 | 0.012063 | 2.7041 | 11.01 | 62.778 | 3.93e-06 |
+| declared_source_target_coupled_correlation | VREX | 0.0013271 | 2.6815 | 11.003 | 62.642 | 3.94e-06 |
 | irrelevant_source_diversity | ERM | 0 | 3.3934 | 11.147 | 90.739 | 6.94e-05 |
-| irrelevant_source_diversity | L2 | 0.66495 | 3.3642 | 11.289 | 93.583 | 0.000125 |
-| irrelevant_source_diversity | IRMV1 | 0.012063 | 3.3962 | 11.148 | 90.825 | 0.000352 |
-| irrelevant_source_diversity | VREX | 0.0013271 | 3.3879 | 11.142 | 90.699 | 0.000333 |
+| irrelevant_source_diversity | L2 | 0.66495 | 3.3642 | 11.289 | 93.583 | 6.55e-05 |
+| irrelevant_source_diversity | IRMV1 | 0.012063 | 3.3962 | 11.148 | 90.825 | 6.91e-05 |
+| irrelevant_source_diversity | VREX | 0.0013271 | 3.3879 | 11.142 | 90.699 | 6.96e-05 |
 | mechanism_defined_exposed | ERM | 0 | 4.6691 | 13.395 | 100.57 | 1.45e-05 |
-| mechanism_defined_exposed | L2 | 0.66495 | 4.9975 | 13.64 | 105.06 | 7.27e-05 |
-| mechanism_defined_exposed | IRMV1 | 0.012063 | 4.6503 | 13.392 | 100.63 | 0.000339 |
-| mechanism_defined_exposed | VREX | 0.0013271 | 4.6436 | 13.383 | 100.43 | 0.000288 |
+| mechanism_defined_exposed | L2 | 0.66495 | 4.9975 | 13.64 | 105.06 | 9.31e-06 |
+| mechanism_defined_exposed | IRMV1 | 0.012063 | 4.6503 | 13.392 | 100.63 | 1.47e-05 |
+| mechanism_defined_exposed | VREX | 0.0013271 | 4.6436 | 13.383 | 100.43 | 1.42e-05 |
 | mechanism_defined_hidden | ERM | 0 | 2.6957 | 11.009 | 89.189 | 4.37e-06 |
-| mechanism_defined_hidden | L2 | 0.66495 | 2.8853 | 11.137 | 91.898 | 0.000112 |
-| mechanism_defined_hidden | IRMV1 | 0.012063 | 2.7041 | 11.01 | 89.291 | 0.000501 |
-| mechanism_defined_hidden | VREX | 0.0013271 | 2.6815 | 11.003 | 89.151 | 0.00034 |
-| source_induced | ERM | 0 | 2.6957 | 11.009 | 62.692 | 4.37e-06 |
-| source_induced | L2 | 0.66495 | 2.8853 | 11.137 | 65.213 | 0.000112 |
-| source_induced | IRMV1 | 0.012063 | 2.7041 | 11.01 | 62.778 | 0.000501 |
-| source_induced | VREX | 0.0013271 | 2.6815 | 11.003 | 62.642 | 0.00034 |
+| mechanism_defined_hidden | L2 | 0.66495 | 2.8853 | 11.137 | 91.898 | 2.81e-06 |
+| mechanism_defined_hidden | IRMV1 | 0.012063 | 2.7041 | 11.01 | 89.291 | 3.93e-06 |
+| mechanism_defined_hidden | VREX | 0.0013271 | 2.6815 | 11.003 | 89.151 | 3.94e-06 |
 
 All target accuracy values are post-hoc context only. The source state and
 operator construction read no target risk, semantic label, cluster label or

@@ -7,6 +7,7 @@ from ood_repr_reg.sharp_optimality.geometry import (
     response_parts,
     transported_coordinate_audit,
 )
+from ood_repr_reg.round3r_3e_c_spectral import slack_ratio
 
 
 def test_corrected_residual_uses_recoverable_response_at_full_observation():
@@ -58,3 +59,13 @@ def test_metric_transport_and_cross_operator_identities():
         np.zeros(2), response, observation, pi_o, np.eye(2), np.diag([0.7, 1.3])
     )
     assert coordinate["pass"]
+
+
+def test_slack_support_is_not_reclassified_by_recoverable_scale():
+    # S = diag(0, 1): the second response coordinate is its support.  The
+    # support classification must not disappear when E is scaled up.
+    irreducible = np.array([[1.0], [0.0]])
+    small = slack_ratio(irreducible, np.array([[0.0], [0.1]]))
+    large = slack_ratio(irreducible, np.array([[0.0], [1e8]]))
+    assert small["support_compatible"]
+    assert large["support_compatible"]

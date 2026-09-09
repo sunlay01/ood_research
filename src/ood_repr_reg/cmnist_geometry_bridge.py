@@ -30,7 +30,13 @@ class RepresentationBank:
 
 @dataclass(frozen=True)
 class CMNISTFamily:
-    """Low-dimensional declared CMNIST environment family."""
+    """Low-dimensional declared CMNIST environment family.
+
+    ``rho_source_*`` coordinates are not inferred from source data.  In the
+    default bridge they are explicitly declared to co-vary with the target
+    color mechanism, so this is a *source-target coupled* family.  The name
+    is retained as user supplied metadata for backwards-compatible snapshots.
+    """
 
     name: str
     source_rhos: tuple[float, float] = (0.9, 0.8)
@@ -57,12 +63,54 @@ class CMNISTFamily:
             "hidden_source_exposed": self.hidden_exposed,
             "target_labels_used_for_construction": False,
             "unit_scales": {direction: 1.0 for direction in self.directions},
+            "world_semantics": "declared_source_target_coupling",
+            "source_induced": False,
+            "central_difference_requires_interior_step": True,
         }
 
+    def _theta(self, theta: Array) -> Array:
+        value = np.asarray(theta, dtype=float)
+        if value.shape != (self.dimension,):
+            raise ValueError("CMNIST tangent coordinate has incompatible shape")
+        return value
+
+    def legal_step_radius(self, theta: Array | None = None, coordinate: int | str | None = None) -> float:
+        """Largest symmetric finite-difference radius preserving all rhos in (0,1)."""
+        value = np.zeros(self.dimension) if theta is None else self._theta(theta)
+        if coordinate is None:
+            return min(self.legal_step_radius(value, index) for index in range(self.dimension))
+        index = self.directions.index(coordinate) if isinstance(coordinate, str) else int(coordinate)
+        if not 0 <= index < self.dimension:
+            raise IndexError("CMNIST tangent coordinate is out of range")
+        direction = np.zeros(self.dimension); direction[index] = 1.0
+        # Evaluate the affine probability maps directly, before their public
+        # methods reject an illegal point.
+        source_slopes = np.zeros(2)
+        name = self.directions[index]
+        if name == "rho_source_1": source_slopes[0] = 1.0
+        if name == "rho_source_2": source_slopes[1] = 1.0
+        if name == "rho_hidden" and self.hidden_exposed: source_slopes[:] = 1.0
+        target_slope = 1.0 if name.startswith("rho_") else 0.0
+        source_values = np.asarray(self.source_rhos_at(value), dtype=float)
+        target_value = self.target_rho_at(value)
+        radii = []
+        for probability, slope in zip(source_values, source_slopes, strict=True):
+            if slope:
+                radii.append(min(probability, 1.0 - probability) / abs(slope))
+        if target_slope:
+            radii.append(min(target_value, 1.0 - target_value) / abs(target_slope))
+        return float(min(radii)) if radii else float("inf")
+
+    def validate_central_step(self, theta: Array, coordinate: int, step: float) -> None:
+        if step <= 0.0 or step >= self.legal_step_radius(theta, coordinate):
+            raise ValueError("CMNIST central finite-difference step leaves the declared interior family")
+
     def source_rhos_at(self, theta: Array) -> tuple[float, float]:
-        theta = np.asarray(theta, dtype=float)
+        theta = self._theta(theta)
         result = np.asarray(self.source_rhos, dtype=float)
-        result += theta[:2]
+        for index, direction in enumerate(self.directions):
+            if direction == "rho_source_1": result[0] += theta[index]
+            elif direction == "rho_source_2": result[1] += theta[index]
         if self.hidden_exposed and "rho_hidden" in self.directions:
             result += theta[self.directions.index("rho_hidden")]
         if np.any((result <= 0) | (result >= 1)):
@@ -70,7 +118,7 @@ class CMNISTFamily:
         return float(result[0]), float(result[1])
 
     def target_rho_at(self, theta: Array) -> float:
-        theta = np.asarray(theta, dtype=float)
+        theta = self._theta(theta)
         value = self.target_rho
         for index, direction in enumerate(self.directions):
             if direction.startswith("rho_"):
@@ -172,6 +220,7 @@ def source_observation(bank: RepresentationBank, family: CMNISTFamily, theta: Ar
     theta = np.zeros(family.dimension) if theta is None else np.asarray(theta, dtype=float)
     columns = []
     for index in range(family.dimension):
+        family.validate_central_step(theta, index, step)
         direction = np.zeros(family.dimension)
         direction[index] = step
         columns.append((source_state_stack(bank, family, theta + direction)
@@ -222,15 +271,24 @@ def head_from_state(vector: Array, dimension: int, *, method: str = "erm", lam: 
         matrix = np.mean([s[0] for s in states], axis=0)
         cross = np.mean([s[1] for s in states], axis=0)
         return np.linalg.solve(matrix, cross)
-    from scipy.optimize import minimize
+    from scipy.optimize import minimize, root
     matrix = np.mean([s[0] for s in states], axis=0)
     cross = np.mean([s[1] for s in states], axis=0)
     start = np.linalg.solve(matrix, cross)
     result = minimize(lambda w: value_grad(w), start, jac=True, method="BFGS",
-                      options={"gtol": 1e-10, "maxiter": 1000})
-    if not result.success and np.linalg.norm(value_grad(result.x)[1]) > 2e-7:
-        raise RuntimeError(f"head optimization failed: {result.message}")
-    return np.asarray(result.x, dtype=float)
+                      options={"gtol": 1e-12, "maxiter": 2000})
+    # BFGS can stop with a precision-loss status on the shallow V-REx paths
+    # even when it has located the intended local branch.  Refine that branch
+    # by its source-only first-order condition before using it in an IFT or
+    # lambda-path finite-difference audit.
+    refined = root(lambda w: value_grad(w)[1], np.asarray(result.x, dtype=float),
+                   method="hybr", options={"xtol": 1e-11, "maxfev": 10000})
+    candidate = np.asarray(refined.x if refined.success else result.x, dtype=float)
+    residual = float(np.linalg.norm(value_grad(candidate)[1]))
+    if residual > 2e-9:
+        detail = refined.message if not refined.success else result.message
+        raise RuntimeError(f"head optimization failed to reach stationarity: {detail}")
+    return candidate
 
 
 def head_objective_gradient(w: Array, state: Array, dimension: int, method: str, lam: float) -> Array:
@@ -372,6 +430,7 @@ def method_row(bank: RepresentationBank, family: CMNISTFamily, method: str, lam:
     for step in steps:
         cols = []
         for index in range(family.dimension):
+            family.validate_central_step(zero, index, step)
             direction = np.zeros(family.dimension); direction[index] = step
             wp = head_from_state(source_state_stack(bank, family, direction), p, method=method, lam=lam)
             wm = head_from_state(source_state_stack(bank, family, -direction), p, method=method, lam=lam)
@@ -419,6 +478,7 @@ def method_row(bank: RepresentationBank, family: CMNISTFamily, method: str, lam:
 def response_operator(bank: RepresentationBank, family: CMNISTFamily, Hsqrt: Array, step: float) -> Array:
     columns = []
     for index in range(family.dimension):
+        family.validate_central_step(np.zeros(family.dimension), index, step)
         direction = np.zeros(family.dimension); direction[index] = step
         mp, cp, _ = target_state(bank, family, direction)
         mm, cm, _ = target_state(bank, family, -direction)

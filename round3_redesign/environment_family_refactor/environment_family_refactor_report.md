@@ -42,8 +42,8 @@ may increase raw state rank without adding a response direction.
 
 No target risk, `A`, `Pi`, semantic label, cluster, or downstream regularizer
 quantity is read while the source-induced basis is constructed.  The
-source-induced metric is explicitly source-state orthonormal and therefore
-metric-dependent.
+source-induced metric is the realized source-state Gram metric and is therefore
+metric-dependent; it is not silently treated as an identity metric.
 
 ## Cross-family geometry
 

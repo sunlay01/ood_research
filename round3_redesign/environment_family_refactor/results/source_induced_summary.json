@@ -17,6 +17,39 @@
     1.2782471842150614e-11
   ],
   "unrealizable_modes": [],
+  "retained_mode_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "realized_metric": [
+    [
+      1.0000000000000007,
+      -2.8957684774372217e-16,
+      -1.8041124150158794e-16,
+      8.326672684688674e-17
+    ],
+    [
+      -2.8957684774372217e-16,
+      0.9999999999999996,
+      -5.828670879282072e-16,
+      -2.7755575615628914e-17
+    ],
+    [
+      -1.8041124150158794e-16,
+      -5.828670879282072e-16,
+      0.9999999999999988,
+      4.163336342344337e-16
+    ],
+    [
+      8.326672684688674e-17,
+      -2.7755575615628914e-17,
+      4.163336342344337e-16,
+      0.9999999999999984
+    ]
+  ],
+  "realized_metric_identity_error": 2.413011604656758e-15,
   "source_only": true,
   "target_risk_used": false,
   "response_operator_used": false,
@@ -37,28 +70,28 @@
     "ambiguity_diameter": 0.0,
     "metric": [
       [
-        1.0,
-        0.0,
-        0.0,
-        0.0
+        1.0000000000000007,
+        -2.8957684774372217e-16,
+        -1.8041124150158794e-16,
+        8.326672684688674e-17
       ],
       [
-        0.0,
-        1.0,
-        0.0,
-        0.0
+        -2.8957684774372217e-16,
+        0.9999999999999996,
+        -5.828670879282072e-16,
+        -2.7755575615628914e-17
       ],
       [
-        0.0,
-        0.0,
-        1.0,
-        0.0
+        -1.8041124150158794e-16,
+        -5.828670879282072e-16,
+        0.9999999999999988,
+        4.163336342344337e-16
       ],
       [
-        0.0,
-        0.0,
-        0.0,
-        1.0
+        8.326672684688674e-17,
+        -2.7755575615628914e-17,
+        4.163336342344337e-16,
+        0.9999999999999984
       ]
     ],
     "tolerance": 1e-09
@@ -72,6 +105,12 @@
       "source_mode_2",
       "source_mode_3"
     ],
+    "physical_scale_per_unit_coordinate": {
+      "source_mode_0": 1.0,
+      "source_mode_1": 1.0,
+      "source_mode_2": 1.0,
+      "source_mode_3": 1.0
+    },
     "magnitude_one_scales": {
       "source_mode_0": 1.0,
       "source_mode_1": 1.0,
@@ -80,31 +119,31 @@
     },
     "metric": [
       [
-        1.0,
-        0.0,
-        0.0,
-        0.0
+        1.0000000000000007,
+        -2.8957684774372217e-16,
+        -1.8041124150158794e-16,
+        8.326672684688674e-17
       ],
       [
-        0.0,
-        1.0,
-        0.0,
-        0.0
+        -2.8957684774372217e-16,
+        0.9999999999999996,
+        -5.828670879282072e-16,
+        -2.7755575615628914e-17
       ],
       [
-        0.0,
-        0.0,
-        1.0,
-        0.0
+        -1.8041124150158794e-16,
+        -5.828670879282072e-16,
+        0.9999999999999988,
+        4.163336342344337e-16
       ],
       [
-        0.0,
-        0.0,
-        0.0,
-        1.0
+        8.326672684688674e-17,
+        -2.7755575615628914e-17,
+        4.163336342344337e-16,
+        0.9999999999999984
       ]
     ],
-    "coordinate_description": "orthonormal source task-state contrast modes",
+    "coordinate_description": "legally realized source task-state contrast modes; metric is the realized source-state Gram matrix",
     "canonical_parameterization": false,
     "source_defined": true,
     "mechanism_defined": false,
@@ -112,7 +151,14 @@
       "state_span_rank": 4,
       "realizable_rank": 4,
       "unrealizable_modes": [],
-      "metric_kind": "source_state_orthonormal"
+      "retained_mode_indices": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "metric_kind": "realized_source_state_gram",
+      "realized_metric_identity_error": 2.413011604656758e-15
     },
     "finite_difference_step": 1e-05
   },

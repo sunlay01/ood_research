@@ -37,6 +37,7 @@ class MechanismInput:
     method: str
     lam: float
     weights: Array
+    common_base_weights: Array
     state: Array
     observation: Array
     observed_pi: Array
@@ -45,6 +46,7 @@ class MechanismInput:
     response: Array
     response_adaptive: Array
     response_offset: Array
+    response_transform: Array
     risk_gradient: object
     penalty_gradient: object
     solver: object
@@ -79,10 +81,11 @@ def gaussian_input(world: LegalWorld, method: str, lam: float) -> MechanismInput
 
     return MechanismInput(
         setting=world.name, method=method.upper(), lam=float(lam), weights=affine.weights,
+        common_base_weights=benchmark.optimum,
         state=state, observation=world.observation, observed_pi=observed_pi,
         observed_total_h=observed_total_h, observed_total_b=observed_total_b,
         response=world.response, response_adaptive=affine.tangent,
-        response_offset=affine.z0, risk_gradient=risk_gradient,
+        response_offset=affine.z0, response_transform=h_root, risk_gradient=risk_gradient,
         penalty_gradient=penalty_gradient, solver=solver, source_dimension=p,
     )
 
@@ -119,10 +122,11 @@ def cmnist_input(bank: RepresentationBank, family: CMNISTFamily, method: str,
     geometry = build_geometry(bank, family)
     return MechanismInput(
         setting=family.name, method=method.upper(), lam=float(lam), weights=weights,
+        common_base_weights=erm,
         state=state, observation=observation, observed_pi=observed_pi,
         observed_total_h=dw, observed_total_b=dy,
         response=np.asarray(geometry["A"]), response_adaptive=h_root @ observed_pi @ observation,
-        response_offset=h_root @ (weights - erm), risk_gradient=risk_gradient,
+        response_offset=h_root @ (weights - erm), response_transform=h_root, risk_gradient=risk_gradient,
         penalty_gradient=penalty_gradient, solver=solver, source_dimension=p,
     )
 

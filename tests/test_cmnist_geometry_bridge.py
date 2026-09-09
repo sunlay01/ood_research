@@ -35,6 +35,14 @@ def test_family_is_explicit_and_source_hidden_direction_is_legal():
     assert f.dimension == 3
     assert f.source_rhos_at(np.array([0.0, 0.0, 0.01])) == f.source_rhos
     assert f.target_rho_at(np.array([0.0, 0.0, 0.01])) != f.target_rho
+    assert f.metadata()["world_semantics"] == "declared_source_target_coupling"
+
+
+def test_central_difference_rejects_correlation_boundary_crossing():
+    f = CMNISTFamily("mechanism_defined_hidden", target_rho=0.9999)
+    assert f.legal_step_radius(np.zeros(f.dimension), "rho_hidden") < 1e-3
+    with np.testing.assert_raises(ValueError):
+        f.validate_central_step(np.zeros(f.dimension), 2, 1e-3)
 
 
 def test_source_observation_does_not_use_target_response():
