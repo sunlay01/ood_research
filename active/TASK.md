@@ -1,34 +1,51 @@
-# TASK3-CMNIST-CPU-MINIMAL
+# TASK3-CMNIST-COUNTERFACTUAL-DIAGNOSTIC-PORT
 
-task_id: `TASK3-CMNIST-CPU-MINIMAL`
+task_id: `TASK3-CMNIST-COUNTERFACTUAL-DIAGNOSTIC-PORT`
 
-goal: `Run a CPU-only ColoredMNIST proof-of-concept comparing GRAD identity-metric head-gradient disagreement with LOCAL_RESPONSE inverse-Hessian-metric head-gradient disagreement.`
+goal: `Port counterfactual color diagnostics onto the corrected CPU-minimal ColoredMNIST ERM/IRMv1 runs and decompose the observed target-accuracy gap into representation content versus final-head color usage.`
 
 state_write_authorized: false
 
-Task 3 scientific status: NOT YET DECIDED
+scientific_status: diagnostic / evidence-cleanup only
+
+allowed methods:
+
+- `ERM`
+- `IRMv1`
+
+primary seeds:
+
+- `10`
+- `11`
+- `12`
+- `13`
+- `14`
 
 allowed files:
 
 - `active/TASK.md`
 - `active/CONTEXT.md`
 - `active/STATE_DELTA.md`
-- `configs/task3_cmnist_cpu_minimal.json`
-- `src/ood_repr_reg/task3_cmnist_cpu_minimal/`
-- `src/ood_repr_reg/run_task3_cmnist_cpu_minimal.py`
-- `tests/test_task3_cmnist_cpu_minimal.py`
-- `round3_redesign/task3_cmnist_cpu_minimal/`
+- `src/ood_repr_reg/task3_cmnist_counterfactual_audit/`
+- `src/ood_repr_reg/run_task3_cmnist_counterfactual_audit.py`
+- `tests/test_task3_cmnist_counterfactual_audit.py`
+- `round3_redesign/task3_cmnist_counterfactual_audit/`
 
-Stage A gate:
+hard constraints:
 
-- Run only `ERM` and `IRMv1` on seeds `0,1,2`.
-- Continue only if IRMv1 mean target accuracy is at least `0.50`, ERM mean target accuracy is at most `0.35`, and IRMv1 minus ERM is at least `0.20`.
+- Use `configs/task3_cmnist_cpu_minimal.json` as the single source of truth.
+- Use corrected CPU-minimal `build_task3_data`, `build_model_from_config`, and `train_one_method` only.
+- If checkpoints are absent, reconstruct only ERM/IRMv1 seeds `10..14` and reconcile against existing corrected `main_runs.csv` with `1e-6` tolerance.
+- Build counterfactuals from held-out target images after training; original target color is not used for intervention construction.
+- Do not add or evaluate GRAD, LOCAL_RESPONSE, IGA, Fish, Fishr, V-REx, CORAL, MLDG, new objectives, hyperparameter sweeps, or target tuning.
+- Do not modify `CURRENT_STATE.md` or canonical state registries.
 
-Stage B methods:
+completion verdict enum:
 
-- `ERM`
-- `IRMv1`
-- `GRAD`
-- `LOCAL_RESPONSE`
+- `REPRESENTATION-DOMINANT`
+- `HEAD-USAGE-DOMINANT`
+- `MIXED-DECOMPOSITION`
+- `DESCRIPTIVE-INCONCLUSIVE`
+- `AUDIT-INVALID`
 
-Historical reopen: none.
+Historical reopen: old CMNIST diagnostic code may be read for mathematical reference only; old empirical results/checkpoints are not evidence for this task.

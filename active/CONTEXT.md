@@ -1,23 +1,29 @@
-# TASK3-CMNIST-CPU-MINIMAL Context
+# TASK3-CMNIST-COUNTERFACTUAL-DIAGNOSTIC-PORT Context
 
-Current task:
+Current diagnostic question:
 
-- Run a CPU-only minimal ColoredMNIST proof-of-concept for `I` versus damped detached `H^-1` on the same head-gradient disagreement.
+- In the corrected CPU-minimal ColoredMNIST pipeline, ERM target accuracy is near `0.11` and IRMv1 target accuracy is near `0.67` on seeds `10..14`.
+- This task asks what differs between those trained models: encoder representation content, final-head use of color, or both.
 
-Required context:
+Required source of truth:
 
-1. Frozen 3A-3E theory is NOT reopened.
-2. Old `task3_baseline_fidelity` is diagnostic history only.
-3. Facebook native IRM anchor is ERM approximately `0.168` and IRMv1 approximately `0.667` target accuracy.
-4. Current task is a CPU-minimal proof-of-concept.
-5. `GRAD` is our own controlled ablation, not IGA/Fish/Fishr.
-6. Only `I` versus `H^-1` is being tested.
+- Corrected CPU-minimal config: `configs/task3_cmnist_cpu_minimal.json`.
+- Corrected data/model/trainer package: `src/ood_repr_reg/task3_cmnist_cpu_minimal/`.
+- Corrected reference run table: `round3_redesign/task3_cmnist_cpu_minimal/results/main_runs.csv`.
 
-Implementation constraints:
+Runtime path:
 
-- No beta grid.
-- No checkpoint selection.
-- No target-based tuning.
-- No DomainBed, IGA, Fish, Fishr, V-REx, CORAL, MLDG, random metric, shuffled local response, RESP2, `A_rec`, `E`, or `rho_slack` estimator.
+- Reconstruct final `ERM` and `IRMv1` models for seeds `10..14` only if exact checkpoints are absent.
+- Reconciliation must match existing source/target/color-agreement metrics with tolerance `1e-6`.
+- Diagnostics use the full held-out target split post-hoc and never use target metrics for training or selection.
 
-Historical reopen: none.
+Forbidden interpretation:
+
+- No causality claim.
+- No source-identifiability claim.
+- No new objective or algorithm claim.
+- No frozen theory validation.
+- No novelty claim.
+- No restoration of old CMNIST empirical results.
+
+Historical reopen: old CMNIST feature-probe code may be inspected for formulas only; old data construction, training, checkpoints, and results are not runtime inputs.
