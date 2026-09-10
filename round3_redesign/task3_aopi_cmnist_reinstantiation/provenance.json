@@ -1,0 +1,377 @@
+{
+  "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+  "device": "cpu",
+  "git_head": "a973719211fd85517a7cb978dcd0d7ea5826be04",
+  "git_status": "M active/CONTEXT.md\n M active/TASK.md\n M tests/test_project_state.py\n?? round3_redesign/task3_aopi_cmnist_reinstantiation/\n?? src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation.py\n?? src/ood_repr_reg/task3_aopi_cmnist_reinstantiation/\n?? tests/test_task3_aopi_cmnist_reinstantiation.py",
+  "head_references": [
+    {
+      "checkpoint_parameter_hash": "95f1074beb6fc9c80d06a0c71afc44d587326e03e1ed67412aff4f48f274f231",
+      "encoder_parameter_hash": "ea6f6d6650d4434564915353b3b89d737abecd4d2fde6faf800ba89f0c65a3dc",
+      "head_initial_displacement_norm": 0.6121034207793906,
+      "method": "ERM",
+      "pi_condition_number": 181.5683490663781,
+      "pi_damping": 9.486623157005171e-11,
+      "seed": 10,
+      "source_reference_gradient_norm": 5.172775800971942e-07
+    },
+    {
+      "checkpoint_parameter_hash": "9592151bc0c643ba60b2e256de21f7428174f3501c07700db7af1827957d2c03",
+      "encoder_parameter_hash": "30af97777fd0244a4630b7df7b4d4288634093ab0c9633eae61c737913c7fe61",
+      "head_initial_displacement_norm": 1.7657289787340218,
+      "method": "IRMv1",
+      "pi_condition_number": 523899736.25393814,
+      "pi_damping": 4.134572870962431e-11,
+      "seed": 10,
+      "source_reference_gradient_norm": 5.6483277006187324e-05
+    },
+    {
+      "checkpoint_parameter_hash": "d15637c76d1a6091dcc26dea09ca8d2af5adbbdc3923f7913b3ff6874e4457bf",
+      "encoder_parameter_hash": "eceda87e71ef522fc46204a7be6c181e6dab70943c00e1e852da1665321b7abb",
+      "head_initial_displacement_norm": 0.508901415800127,
+      "method": "ERM",
+      "pi_condition_number": 178.44781522244372,
+      "pi_damping": 9.516853933425201e-11,
+      "seed": 11,
+      "source_reference_gradient_norm": 4.743845217034917e-08
+    },
+    {
+      "checkpoint_parameter_hash": "54ace10ecacfd5ee582aa77f12a3ff8de0a19db2e2b73418d4f33d8503dd6beb",
+      "encoder_parameter_hash": "604b60c44e4ab6c86c1436d63ef4072af0d7a74b587158150e7f7b9aa6bb2bcf",
+      "head_initial_displacement_norm": 2.4886627277290247,
+      "method": "IRMv1",
+      "pi_condition_number": 588773.2116973638,
+      "pi_damping": 1.805710958035574e-11,
+      "seed": 11,
+      "source_reference_gradient_norm": 3.6652174950401037e-06
+    },
+    {
+      "checkpoint_parameter_hash": "ebdbddef472294a5d2077a86067da571645beb135771aeeee6e9cf1216fbcb17",
+      "encoder_parameter_hash": "2910a46066f04dd202d99674666b164ed34a669f8cb96c85eee7c73f75e84849",
+      "head_initial_displacement_norm": 0.5128842304436966,
+      "method": "ERM",
+      "pi_condition_number": 162.83822602366487,
+      "pi_damping": 9.192748600314871e-11,
+      "seed": 12,
+      "source_reference_gradient_norm": 1.7068230139467024e-07
+    },
+    {
+      "checkpoint_parameter_hash": "c26734ed612841b8f286121937558a310627badeeb9e2dd95ed02648347eb48e",
+      "encoder_parameter_hash": "cca9dc37636e0e7c22b842244f937d126000719e9cecd0746e7af2f244d329ef",
+      "head_initial_displacement_norm": 2.207067821339351,
+      "method": "IRMv1",
+      "pi_condition_number": 783225.3286818838,
+      "pi_damping": 2.4158688142341145e-11,
+      "seed": 12,
+      "source_reference_gradient_norm": 4.105196035883706e-06
+    },
+    {
+      "checkpoint_parameter_hash": "10d844cfa548a66b0429a163fa4efd2a111f62e16a50e073289f857bddf3b9f1",
+      "encoder_parameter_hash": "6ea3ac64e925582b80bfc142b5c87835af64c3366b6876518b6d1378051e343d",
+      "head_initial_displacement_norm": 0.4433230267210546,
+      "method": "ERM",
+      "pi_condition_number": 169.05095214777742,
+      "pi_damping": 9.18833754746296e-11,
+      "seed": 13,
+      "source_reference_gradient_norm": 1.5700623736589058e-07
+    },
+    {
+      "checkpoint_parameter_hash": "e2f5b8447bf18162c3d4d0e964db2cdabe1b49134265169e295d807f28a886a6",
+      "encoder_parameter_hash": "972c4d22ac00ef2a2d67b489dae18d9d190ea53f1eb21181f2d86313cc3e0985",
+      "head_initial_displacement_norm": 1.8192518503855937,
+      "method": "IRMv1",
+      "pi_condition_number": 1092645.2401371798,
+      "pi_damping": 3.119717738374913e-11,
+      "seed": 13,
+      "source_reference_gradient_norm": 1.4329758721600924e-06
+    },
+    {
+      "checkpoint_parameter_hash": "790a4b10f34104da3071fcef32683206a2cdfce5ecf06e3053db0cbf3a57eff4",
+      "encoder_parameter_hash": "481c27d9287f28893663bfdccf013117dbb0466ab9285fff39eaa8ec034d4897",
+      "head_initial_displacement_norm": 0.4518940889562834,
+      "method": "ERM",
+      "pi_condition_number": 160.22673648115895,
+      "pi_damping": 8.765218588898286e-11,
+      "seed": 14,
+      "source_reference_gradient_norm": 9.051949538154593e-08
+    },
+    {
+      "checkpoint_parameter_hash": "10dd406fe9d06996afc90e72f0ff57f11fd3d454f18da01ee9c1a483ed0f81ed",
+      "encoder_parameter_hash": "f5103d55b01097a928a7c3b372aabf2d8b7df86892dba7bb066cfce707e02da8",
+      "head_initial_displacement_norm": 2.0504128944931095,
+      "method": "IRMv1",
+      "pi_condition_number": 478023.52342888457,
+      "pi_damping": 1.4845864063141407e-11,
+      "seed": 14,
+      "source_reference_gradient_norm": 2.2128472537288733e-05
+    }
+  ],
+  "input_verification": {
+    "erm_target_acc_mean": 0.10979999899864197,
+    "irmv1_target_acc_mean": 0.6691400051116944,
+    "manifest_rows": [
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_10_ERM.pt",
+        "checkpoint_sha256": "a864f25cf3bbb9d829cf437dc13b469d5e22b16b7b51dd0fdd84a5cc15bc5cfb",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "ea6f6d6650d4434564915353b3b89d737abecd4d2fde6faf800ba89f0c65a3dc",
+        "final_prediction_color_agreement": 0.9955999851226807,
+        "final_source_env0_acc": 0.8026000261306763,
+        "final_source_env1_acc": 0.8975600004196167,
+        "final_source_mean_acc": 0.8500800132751465,
+        "final_target_acc": 0.10639999806880951,
+        "method": "ERM",
+        "parameter_hash": "95f1074beb6fc9c80d06a0c71afc44d587326e03e1ed67412aff4f48f274f231",
+        "seed": 10
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_10_IRMv1.pt",
+        "checkpoint_sha256": "d381b6725db4cbd157cccbced992113acf09a6511e408a8184bbb8a4bd7cdf91",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "30af97777fd0244a4630b7df7b4d4288634093ab0c9633eae61c737913c7fe61",
+        "final_prediction_color_agreement": 0.37279999256134033,
+        "final_source_env0_acc": 0.6144000291824341,
+        "final_source_env1_acc": 0.6080800294876099,
+        "final_source_mean_acc": 0.611240029335022,
+        "final_target_acc": 0.6539999842643738,
+        "method": "IRMv1",
+        "parameter_hash": "9592151bc0c643ba60b2e256de21f7428174f3501c07700db7af1827957d2c03",
+        "seed": 10
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_11_ERM.pt",
+        "checkpoint_sha256": "829da338656b54fb127fa5ebb34a3817781603ba5fee8dc228e0a9db66f7b0db",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "eceda87e71ef522fc46204a7be6c181e6dab70943c00e1e852da1665321b7abb",
+        "final_prediction_color_agreement": 0.9912999868392944,
+        "final_source_env0_acc": 0.7982800006866455,
+        "final_source_env1_acc": 0.9003599882125854,
+        "final_source_mean_acc": 0.8493199944496155,
+        "final_target_acc": 0.10899999737739563,
+        "method": "ERM",
+        "parameter_hash": "d15637c76d1a6091dcc26dea09ca8d2af5adbbdc3923f7913b3ff6874e4457bf",
+        "seed": 11
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_11_IRMv1.pt",
+        "checkpoint_sha256": "bb1609a3d27e7f8610e002a7c66bc3bf59a101b820b30e8f0a0b5319c22f22ed",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "604b60c44e4ab6c86c1436d63ef4072af0d7a74b587158150e7f7b9aa6bb2bcf",
+        "final_prediction_color_agreement": 0.36340001225471497,
+        "final_source_env0_acc": 0.6255599856376648,
+        "final_source_env1_acc": 0.6194400191307068,
+        "final_source_mean_acc": 0.6225000023841858,
+        "final_target_acc": 0.663100004196167,
+        "method": "IRMv1",
+        "parameter_hash": "54ace10ecacfd5ee582aa77f12a3ff8de0a19db2e2b73418d4f33d8503dd6beb",
+        "seed": 11
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_12_ERM.pt",
+        "checkpoint_sha256": "ffeb90d82729a47c498f9b553c669ac011ddcc8ae82533e08e5f8839746e6892",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "2910a46066f04dd202d99674666b164ed34a669f8cb96c85eee7c73f75e84849",
+        "final_prediction_color_agreement": 0.991599977016449,
+        "final_source_env0_acc": 0.7993999719619751,
+        "final_source_env1_acc": 0.9010000228881836,
+        "final_source_mean_acc": 0.8501999974250793,
+        "final_target_acc": 0.10429999977350235,
+        "method": "ERM",
+        "parameter_hash": "ebdbddef472294a5d2077a86067da571645beb135771aeeee6e9cf1216fbcb17",
+        "seed": 12
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_12_IRMv1.pt",
+        "checkpoint_sha256": "537f0fa8ee12b0c709a5880a35182cd03d240fb9d526ea6be37bf12b15ae4d36",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "cca9dc37636e0e7c22b842244f937d126000719e9cecd0746e7af2f244d329ef",
+        "final_prediction_color_agreement": 0.34060001373291016,
+        "final_source_env0_acc": 0.5912799835205078,
+        "final_source_env1_acc": 0.5825200080871582,
+        "final_source_mean_acc": 0.586899995803833,
+        "final_target_acc": 0.6725000143051147,
+        "method": "IRMv1",
+        "parameter_hash": "c26734ed612841b8f286121937558a310627badeeb9e2dd95ed02648347eb48e",
+        "seed": 12
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_13_ERM.pt",
+        "checkpoint_sha256": "9939fcc894d7e1c20eb5c65f9678941c2cad45332098cf855c137f85f9171c98",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "6ea3ac64e925582b80bfc142b5c87835af64c3366b6876518b6d1378051e343d",
+        "final_prediction_color_agreement": 0.9876999855041504,
+        "final_source_env0_acc": 0.7990400195121765,
+        "final_source_env1_acc": 0.9005200266838074,
+        "final_source_mean_acc": 0.8497800230979919,
+        "final_target_acc": 0.11620000004768372,
+        "method": "ERM",
+        "parameter_hash": "10d844cfa548a66b0429a163fa4efd2a111f62e16a50e073289f857bddf3b9f1",
+        "seed": 13
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_13_IRMv1.pt",
+        "checkpoint_sha256": "78ac812ee414e3b78ab6152369d876f56ba32505525e045d10e8d649215ced1b",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "972c4d22ac00ef2a2d67b489dae18d9d190ea53f1eb21181f2d86313cc3e0985",
+        "final_prediction_color_agreement": 0.3149000108242035,
+        "final_source_env0_acc": 0.5793600082397461,
+        "final_source_env1_acc": 0.5669599771499634,
+        "final_source_mean_acc": 0.5731599926948547,
+        "final_target_acc": 0.6894000172615051,
+        "method": "IRMv1",
+        "parameter_hash": "e2f5b8447bf18162c3d4d0e964db2cdabe1b49134265169e295d807f28a886a6",
+        "seed": 13
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_14_ERM.pt",
+        "checkpoint_sha256": "b612285a0016a6186bceb90f4dd96648684f496b075ab8ea9d97f7636dd42759",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "481c27d9287f28893663bfdccf013117dbb0466ab9285fff39eaa8ec034d4897",
+        "final_prediction_color_agreement": 0.9904000163078308,
+        "final_source_env0_acc": 0.7990400195121765,
+        "final_source_env1_acc": 0.8997200131416321,
+        "final_source_mean_acc": 0.8493800163269043,
+        "final_target_acc": 0.11309999972581863,
+        "method": "ERM",
+        "parameter_hash": "790a4b10f34104da3071fcef32683206a2cdfce5ecf06e3053db0cbf3a57eff4",
+        "seed": 14
+      },
+      {
+        "checkpoint_path": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/seed_14_IRMv1.pt",
+        "checkpoint_sha256": "beb03573ac0346175be965e3beb0ed7ae1d3ce66572f2657c535dd377f18013f",
+        "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+        "encoder_parameter_hash": "f5103d55b01097a928a7c3b372aabf2d8b7df86892dba7bb066cfce707e02da8",
+        "final_prediction_color_agreement": 0.35179999470710754,
+        "final_source_env0_acc": 0.6093599796295166,
+        "final_source_env1_acc": 0.5990399718284607,
+        "final_source_mean_acc": 0.6041999757289886,
+        "final_target_acc": 0.666700005531311,
+        "method": "IRMv1",
+        "parameter_hash": "10dd406fe9d06996afc90e72f0ff57f11fd3d454f18da01ee9c1a483ed0f81ed",
+        "seed": 14
+      }
+    ],
+    "target_gap": 0.5593400061130523,
+    "target_gap_verified": true
+  },
+  "manifest_sha256": "e7987dfd8868ba9a452573071c00a6a9738efbd51b10380834311e47ddbfd6dd",
+  "old_results_used_as_inputs": false,
+  "preregistration": {
+    "config": {
+      "data": {
+        "image_subsample": 2,
+        "label_definition": "digit < 5",
+        "label_noise": 0.25,
+        "normalize_pixels": true,
+        "source_color_flip_probs": [
+          0.2,
+          0.1
+        ],
+        "target_color_flip_prob": 0.9
+      },
+      "device": "cpu",
+      "irmv1": {
+        "penalty_anneal_iters": 100,
+        "penalty_weight": 10000.0,
+        "whole_loss_rescale_after_anneal": true
+      },
+      "model": {
+        "activation": "relu",
+        "hidden_dim": 64,
+        "input_dim": 392,
+        "linear_layers": 3
+      },
+      "response": {
+        "calibration_update_ratio": 0.1,
+        "damping_epsilon": 0.01,
+        "hessian_stop_gradient": true,
+        "parameter_block": "final_linear_head_weight_and_bias",
+        "solver": "cholesky",
+        "use_explicit_inverse": false
+      },
+      "stage_a": {
+        "erm_max_mean_target_accuracy": 0.35,
+        "irm_min_mean_advantage_over_erm": 0.2,
+        "irm_min_mean_target_accuracy": 0.5,
+        "methods": [
+          "ERM",
+          "IRMv1"
+        ],
+        "seeds": [
+          0,
+          1,
+          2
+        ]
+      },
+      "stage_b": {
+        "methods": [
+          "ERM",
+          "IRMv1",
+          "GRAD",
+          "LOCAL_RESPONSE"
+        ],
+        "seeds": [
+          10,
+          11,
+          12,
+          13,
+          14
+        ]
+      },
+      "task_id": "TASK3-CMNIST-CPU-MINIMAL",
+      "training": {
+        "batch_size_per_environment": 512,
+        "checkpoint_steps": [
+          0,
+          100,
+          200,
+          300,
+          400,
+          500
+        ],
+        "l2_regularizer_weight": 0.001,
+        "learning_rate": 0.001,
+        "optimizer": "adam",
+        "steps": 501
+      }
+    },
+    "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+    "epsilons": [
+      0.01,
+      0.02
+    ],
+    "gates": {
+      "g1_gram": 0.15,
+      "g1_reparameterization": 0.05,
+      "g2_cosine": 0.9,
+      "g2_min_rows": 12,
+      "g2_relative_vector_error": 0.25
+    },
+    "git_head": "a973719211fd85517a7cb978dcd0d7ea5826be04",
+    "head_lbfgs": {
+      "accepted_gradient_norm_max": 0.0001,
+      "max_iter": 100,
+      "tolerance_change": 1e-12,
+      "tolerance_grad": 1e-09
+    },
+    "ift_damping_relative": 1e-08,
+    "manifest": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoint_manifest.csv",
+    "methods": [
+      "ERM",
+      "IRMv1"
+    ],
+    "parameter_block": "frozen_encoder_trainable_augmented_final_head_65d",
+    "primary_metric": "frobenius_norm_A_plus_PiO",
+    "seeds": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "source_hessian_damping_relative": 1e-06,
+    "task_id": "TASK-AOPI-CMNIST-REINSTANTIATION-AUDIT",
+    "written_at_unix": 1789043293.448052
+  },
+  "python": "3.13.13",
+  "torch": "2.12.1"
+}

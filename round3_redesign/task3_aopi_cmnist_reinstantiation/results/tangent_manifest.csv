@@ -1,0 +1,6 @@
+tangent,basis_coordinates,base_dimension,epsilons,implementation
+source_env0_color,1;0;0,3,0.01;0.02,common_random_numbers_probability_threshold
+source_env1_color,0;1;0,3,0.01;0.02,common_random_numbers_probability_threshold
+shared_label_noise,0;0;1,3,0.01;0.02,common_random_numbers_probability_threshold
+common_source_color,0.707106781187;0.707106781187;0,3,0.01;0.02,common_random_numbers_probability_threshold
+antisymmetric_source_color,0.707106781187;-0.707106781187;0,3,0.01;0.02,common_random_numbers_probability_threshold

@@ -1,25 +1,14 @@
-# TASK3-OOD-CAPABILITY-DECOMPOSITION-FIRST-ROUND
+# TASK-AOPI-CMNIST-REINSTANTIATION-AUDIT
 
-task_id: `TASK3-OOD-CAPABILITY-DECOMPOSITION-FIRST-ROUND`
+task_id: `TASK-AOPI-CMNIST-REINSTANTIATION-AUDIT`
 
-goal: `Test whether first-round OOD capability bottlenecks can be separated on corrected CPU-minimal ColoredMNIST using controlled A/B/C interventions.`
+goal: `Audit frozen-encoder, trainable-final-head A/O/Pi response geometry on corrected CPU-minimal ColoredMNIST.`
 
 state_write_authorized: false
 
-scientific_status: diagnostic / capability verification only
+scientific_status: validation / falsification gate only
 
-allowed experiments:
-
-- `A_COVERAGE`
-- `B_SEPARABILITY`
-- `C_SELECTION`
-
-forbidden experiments:
-
-- `D_SOURCE_SIDE_IDENTIFICATION`
-- `E_OPTIMIZATION_RESPONSE_ABILITY`
-
-methods / encoders:
+methods:
 
 - `ERM`
 - `IRMv1`
@@ -38,29 +27,27 @@ inputs:
 - `round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoint_manifest.csv`
 - `round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/`
 - corrected CPU-minimal data/model code
-- corrected counterfactual probe construction
 
 hard constraints:
 
-- Load existing corrected ERM/IRMv1 checkpoints; do not retrain encoders.
-- Verify checkpoint SHA256, config SHA256, parameter hash, model architecture, and existing ERM/IRMv1 target gap before capability analysis.
-- Write preregistration before capability metrics.
-- Freeze ridge value `1e-3` and color-subspace ranks `[0,1,2,4,8,16,32,64]`.
-- Do not add new regularizers, algorithms, datasets, methods, hyperparameter sweeps, target tuning, or canonical state updates.
+- Freeze the nonlinear encoder and audit only the 65-dimensional final head.
+- Verify checkpoint identity and write preregistration before audit metrics.
+- Source fitting, `H_S`, `O_S`, and `Pi` are source-only; held-out target data defines A only post-hoc.
+- Do not add algorithms, regularizers, semantic clustering, target tuning, or canonical-state edits.
 
 outputs:
 
-- `round3_redesign/ood_capability_decomposition/`
-- `src/ood_repr_reg/task3_ood_capability_decomposition/`
-- `src/ood_repr_reg/run_task3_ood_capability_decomposition.py`
-- `tests/test_ood_capability_decomposition.py`
+- `round3_redesign/task3_aopi_cmnist_reinstantiation/`
+- `src/ood_repr_reg/task3_aopi_cmnist_reinstantiation/`
+- `src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation.py`
+- `tests/test_task3_aopi_cmnist_reinstantiation.py`
 - `active/STATE_DELTA.md`
 
 completion verdict enum:
 
-- `FIRST-ROUND-CAPABILITY-ISOLATED`
-- `FIRST-ROUND-CAPABILITY-PARTIAL`
-- `FIRST-ROUND-CAPABILITY-INCONCLUSIVE`
-- `FIRST-ROUND-AUDIT-INVALID`
+- `AOPI-REINSTANTIATION-PASS`
+- `AOPI-REINSTANTIATION-PARTIAL`
+- `AOPI-REINSTANTIATION-FAIL`
+- `AOPI-AUDIT-INVALID`
 
-Historical reopen: none for empirical evidence; this task uses corrected checkpoint artifacts only.
+Interpretation ceiling: frozen-encoder head-block local response audit only.

@@ -1,0 +1,125 @@
+{
+  "error": null,
+  "finite_prediction_gate": {
+    "pass": false,
+    "per_method": {
+      "ERM": {
+        "pass": true,
+        "passed_rows": 15,
+        "total_rows": 15
+      },
+      "IRMv1": {
+        "pass": false,
+        "passed_rows": 0,
+        "total_rows": 15
+      }
+    }
+  },
+  "geometry_stability_gate": {
+    "pass": true,
+    "passed_seed_count": 5,
+    "per_seed": {
+      "10": true,
+      "11": true,
+      "12": true,
+      "13": true,
+      "14": true
+    }
+  },
+  "interpretation_ceiling": "correct-neural frozen-encoder head-block re-instantiation audit only",
+  "method_discrimination_gate": {
+    "irmv1_lower_seed_count": 0,
+    "label": "NONDISCRIMINATIVE",
+    "mean_paired_improvement": -66.07238007689168,
+    "paired_rows": [
+      {
+        "erm_primary_mismatch": 5.31155055729066,
+        "irmv1_lower": false,
+        "irmv1_primary_mismatch": 294.97585036642596,
+        "paired_difference": -289.6642998091353,
+        "seed": 10
+      },
+      {
+        "erm_primary_mismatch": 4.44899998471166,
+        "irmv1_lower": false,
+        "irmv1_primary_mismatch": 13.529304989033818,
+        "paired_difference": -9.080305004322158,
+        "seed": 11
+      },
+      {
+        "erm_primary_mismatch": 4.596044327967605,
+        "irmv1_lower": false,
+        "irmv1_primary_mismatch": 14.99811021575297,
+        "paired_difference": -10.402065887785366,
+        "seed": 12
+      },
+      {
+        "erm_primary_mismatch": 4.85419271687252,
+        "irmv1_lower": false,
+        "irmv1_primary_mismatch": 21.787066851038606,
+        "paired_difference": -16.932874134166084,
+        "seed": 13
+      },
+      {
+        "erm_primary_mismatch": 4.786050854329193,
+        "irmv1_lower": false,
+        "irmv1_primary_mismatch": 9.068406403378658,
+        "paired_difference": -4.282355549049465,
+        "seed": 14
+      }
+    ],
+    "pass": false
+  },
+  "methods": [
+    "ERM",
+    "IRMv1"
+  ],
+  "overall_verdict": "AOPI-REINSTANTIATION-PARTIAL",
+  "paired_method_effects": [
+    {
+      "erm_primary_mismatch": 5.31155055729066,
+      "irmv1_lower": false,
+      "irmv1_primary_mismatch": 294.97585036642596,
+      "paired_difference": -289.6642998091353,
+      "seed": 10
+    },
+    {
+      "erm_primary_mismatch": 4.44899998471166,
+      "irmv1_lower": false,
+      "irmv1_primary_mismatch": 13.529304989033818,
+      "paired_difference": -9.080305004322158,
+      "seed": 11
+    },
+    {
+      "erm_primary_mismatch": 4.596044327967605,
+      "irmv1_lower": false,
+      "irmv1_primary_mismatch": 14.99811021575297,
+      "paired_difference": -10.402065887785366,
+      "seed": 12
+    },
+    {
+      "erm_primary_mismatch": 4.85419271687252,
+      "irmv1_lower": false,
+      "irmv1_primary_mismatch": 21.787066851038606,
+      "paired_difference": -16.932874134166084,
+      "seed": 13
+    },
+    {
+      "erm_primary_mismatch": 4.786050854329193,
+      "irmv1_lower": false,
+      "irmv1_primary_mismatch": 9.068406403378658,
+      "paired_difference": -4.282355549049465,
+      "seed": 14
+    }
+  ],
+  "primary_mismatch_metric": "frobenius_norm_A_plus_PiO",
+  "seeds": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "task_id": "TASK-AOPI-CMNIST-REINSTANTIATION-AUDIT",
+  "valid": true
+}
