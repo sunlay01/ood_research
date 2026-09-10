@@ -1,17 +1,20 @@
-# Proposed State Delta
+# Proposed State Delta: TASK3-OOD-CAPABILITY-DECOMPOSITION-FIRST-ROUND
 
-task_id: TASK3-CMNIST-COUNTERFACTUAL-DIAGNOSTIC-PORT
-verdict: MIXED-DECOMPOSITION
 state_write_authorized: false
+canonical_state_updated: false
 
-Proposed updates:
+## Proposed Result
 
-1. Old CMNIST empirical feature-probe results remain invalid as current evidence.
-2. This task ported only the counterfactual diagnostic construction onto the corrected CPU-minimal ColoredMNIST ERM/IRMv1 runs.
-3. Corrected ERM/IRMv1 counterfactual evidence is new descriptive evidence under `round3_redesign/task3_cmnist_counterfactual_audit/`.
-4. No frozen theorem status changes are proposed.
-5. No old Task1/Task2 CMNIST evidence is restored by this task.
+- result_id: `TASK3-OOD-CAPABILITY-DECOMPOSITION-FIRST-ROUND`
+- verdict: `FIRST-ROUND-CAPABILITY-PARTIAL`
+- dominant_bottleneck: `mixed`
+- loaded checkpoint target gap verified: ERM `0.109800`, IRMv1 `0.669140`, gap `0.559340`
+- outputs: `round3_redesign/ood_capability_decomposition/`
 
-Interpretation ceiling: descriptive diagnostic only; no causality, source-identifiability, new objective, theory validation, or novelty claim.
+## Proposed Decision Impact
 
-No canonical state file was edited.
+This audit should be treated as first-round diagnostic evidence only. It does not close Task 3, does not authorize a new algorithm claim, does not validate frozen theory, and does not execute source-side identification D or optimization/response E.
+
+## Proposed Current-State Wording If Accepted Later
+
+`A first-round corrected CPU-minimal OOD capability decomposition over ERM/IRMv1 seeds 10..14 has been run as diagnostic evidence only, with verdict FIRST-ROUND-CAPABILITY-PARTIAL and dominant_bottleneck mixed. No canonical theory, algorithm, or Task 3 scientific verdict changes are authorized by this file alone.`

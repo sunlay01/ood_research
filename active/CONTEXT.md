@@ -1,29 +1,29 @@
-# TASK3-CMNIST-COUNTERFACTUAL-DIAGNOSTIC-PORT Context
+# TASK3-OOD-CAPABILITY-DECOMPOSITION-FIRST-ROUND Context
 
 Current diagnostic question:
 
-- In the corrected CPU-minimal ColoredMNIST pipeline, ERM target accuracy is near `0.11` and IRMv1 target accuracy is near `0.67` on seeds `10..14`.
-- This task asks what differs between those trained models: encoder representation content, final-head use of color, or both.
+- Can the ERM-vs-IRMv1 OOD gap in corrected CPU-minimal ColoredMNIST be separated into coverage, separability, and selection bottlenecks?
+- This is not an algorithm task and does not execute source-side identification or optimization geometry.
 
-Required source of truth:
+Trusted inputs:
 
 - Corrected CPU-minimal config: `configs/task3_cmnist_cpu_minimal.json`.
-- Corrected data/model/trainer package: `src/ood_repr_reg/task3_cmnist_cpu_minimal/`.
-- Corrected reference run table: `round3_redesign/task3_cmnist_cpu_minimal/results/main_runs.csv`.
+- Corrected ERM/IRMv1 checkpoints: `round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/`.
+- Checkpoint manifest: `round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoint_manifest.csv`.
+- Corrected probe construction: `src/ood_repr_reg/task3_cmnist_counterfactual_audit/`.
 
-Runtime path:
+First-round interventions:
 
-- Reconstruct final `ERM` and `IRMv1` models for seeds `10..14` only if exact checkpoints are absent.
-- Reconciliation must match existing source/target/color-agreement metrics with tolerance `1e-6`.
-- Diagnostics use the full held-out target split post-hoc and never use target metrics for training or selection.
+- Coverage: frozen encoder plus deterministic ridge probes.
+- Separability: remove estimated color-response subspace ranks `[0,1,2,4,8,16,32,64]`.
+- Selection: freeze encoder and retrain head-only ERM, head-only IRMv1, and diagnostic oracle clean heads.
 
 Forbidden interpretation:
 
-- No causality claim.
+- No new regularizer or algorithm claim.
 - No source-identifiability claim.
-- No new objective or algorithm claim.
+- No causal or additive decomposition claim.
 - No frozen theory validation.
-- No novelty claim.
-- No restoration of old CMNIST empirical results.
+- No D/E execution.
 
-Historical reopen: old CMNIST feature-probe code may be inspected for formulas only; old data construction, training, checkpoints, and results are not runtime inputs.
+Canonical state remains unchanged; completion writes only `active/STATE_DELTA.md`.

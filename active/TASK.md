@@ -1,14 +1,25 @@
-# TASK3-CMNIST-COUNTERFACTUAL-DIAGNOSTIC-PORT
+# TASK3-OOD-CAPABILITY-DECOMPOSITION-FIRST-ROUND
 
-task_id: `TASK3-CMNIST-COUNTERFACTUAL-DIAGNOSTIC-PORT`
+task_id: `TASK3-OOD-CAPABILITY-DECOMPOSITION-FIRST-ROUND`
 
-goal: `Port counterfactual color diagnostics onto the corrected CPU-minimal ColoredMNIST ERM/IRMv1 runs and decompose the observed target-accuracy gap into representation content versus final-head color usage.`
+goal: `Test whether first-round OOD capability bottlenecks can be separated on corrected CPU-minimal ColoredMNIST using controlled A/B/C interventions.`
 
 state_write_authorized: false
 
-scientific_status: diagnostic / evidence-cleanup only
+scientific_status: diagnostic / capability verification only
 
-allowed methods:
+allowed experiments:
+
+- `A_COVERAGE`
+- `B_SEPARABILITY`
+- `C_SELECTION`
+
+forbidden experiments:
+
+- `D_SOURCE_SIDE_IDENTIFICATION`
+- `E_OPTIMIZATION_RESPONSE_ABILITY`
+
+methods / encoders:
 
 - `ERM`
 - `IRMv1`
@@ -21,31 +32,35 @@ primary seeds:
 - `13`
 - `14`
 
-allowed files:
+inputs:
 
-- `active/TASK.md`
-- `active/CONTEXT.md`
-- `active/STATE_DELTA.md`
-- `src/ood_repr_reg/task3_cmnist_counterfactual_audit/`
-- `src/ood_repr_reg/run_task3_cmnist_counterfactual_audit.py`
-- `tests/test_task3_cmnist_counterfactual_audit.py`
-- `round3_redesign/task3_cmnist_counterfactual_audit/`
+- `configs/task3_cmnist_cpu_minimal.json`
+- `round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoint_manifest.csv`
+- `round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/`
+- corrected CPU-minimal data/model code
+- corrected counterfactual probe construction
 
 hard constraints:
 
-- Use `configs/task3_cmnist_cpu_minimal.json` as the single source of truth.
-- Use corrected CPU-minimal `build_task3_data`, `build_model_from_config`, and `train_one_method` only.
-- If checkpoints are absent, reconstruct only ERM/IRMv1 seeds `10..14` and reconcile against existing corrected `main_runs.csv` with `1e-6` tolerance.
-- Build counterfactuals from held-out target images after training; original target color is not used for intervention construction.
-- Do not add or evaluate GRAD, LOCAL_RESPONSE, IGA, Fish, Fishr, V-REx, CORAL, MLDG, new objectives, hyperparameter sweeps, or target tuning.
-- Do not modify `CURRENT_STATE.md` or canonical state registries.
+- Load existing corrected ERM/IRMv1 checkpoints; do not retrain encoders.
+- Verify checkpoint SHA256, config SHA256, parameter hash, model architecture, and existing ERM/IRMv1 target gap before capability analysis.
+- Write preregistration before capability metrics.
+- Freeze ridge value `1e-3` and color-subspace ranks `[0,1,2,4,8,16,32,64]`.
+- Do not add new regularizers, algorithms, datasets, methods, hyperparameter sweeps, target tuning, or canonical state updates.
+
+outputs:
+
+- `round3_redesign/ood_capability_decomposition/`
+- `src/ood_repr_reg/task3_ood_capability_decomposition/`
+- `src/ood_repr_reg/run_task3_ood_capability_decomposition.py`
+- `tests/test_ood_capability_decomposition.py`
+- `active/STATE_DELTA.md`
 
 completion verdict enum:
 
-- `REPRESENTATION-DOMINANT`
-- `HEAD-USAGE-DOMINANT`
-- `MIXED-DECOMPOSITION`
-- `DESCRIPTIVE-INCONCLUSIVE`
-- `AUDIT-INVALID`
+- `FIRST-ROUND-CAPABILITY-ISOLATED`
+- `FIRST-ROUND-CAPABILITY-PARTIAL`
+- `FIRST-ROUND-CAPABILITY-INCONCLUSIVE`
+- `FIRST-ROUND-AUDIT-INVALID`
 
-Historical reopen: old CMNIST diagnostic code may be read for mathematical reference only; old empirical results/checkpoints are not evidence for this task.
+Historical reopen: none for empirical evidence; this task uses corrected checkpoint artifacts only.

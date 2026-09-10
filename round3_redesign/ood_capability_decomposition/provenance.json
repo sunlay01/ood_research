@@ -1,0 +1,29 @@
+{
+  "algorithm_claim": false,
+  "canonical_state_edited": false,
+  "causal_additive_decomposition_claim": false,
+  "checkpoint_manifest": "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoint_manifest.csv",
+  "config_path": "configs/task3_cmnist_cpu_minimal.json",
+  "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+  "cpu": "Apple M5",
+  "d_or_e_execution": false,
+  "executed_experiments": [
+    "A_COVERAGE",
+    "B_SEPARABILITY",
+    "C_SELECTION"
+  ],
+  "forbidden_experiments": [
+    "D_SOURCE_SIDE_IDENTIFICATION",
+    "E_OPTIMIZATION_RESPONSE_ABILITY"
+  ],
+  "git_head": "e230af7dc9e19086a9b129113d5a3686a0148b07",
+  "git_status": "M active/CONTEXT.md\n M active/STATE_DELTA.md\n M active/TASK.md\n?? round3_redesign/ood_capability_decomposition/\n?? src/ood_repr_reg/run_task3_ood_capability_decomposition.py\n?? src/ood_repr_reg/task3_ood_capability_decomposition/\n?? tests/test_ood_capability_decomposition.py",
+  "new_regularizer": false,
+  "platform": "macOS-26.3-arm64-arm-64bit-Mach-O",
+  "python": "3.13.13 | packaged by Anaconda, Inc. | (main, Apr 14 2026, 06:14:06) [Clang 20.1.8 ]",
+  "source_identifiability_claim": false,
+  "task_id": "TASK3-OOD-CAPABILITY-DECOMPOSITION-FIRST-ROUND",
+  "theory_validation_claim": false,
+  "torch": "2.12.1",
+  "written_at_unix": 1789036630.736675
+}
