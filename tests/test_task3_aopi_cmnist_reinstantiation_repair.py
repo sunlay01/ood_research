@@ -2,13 +2,14 @@ import inspect
 import json
 from pathlib import Path
 
+import pytest
 import torch
 
 from ood_repr_reg import run_task3_aopi_cmnist_reinstantiation_repair as runner
 from ood_repr_reg.task3_aopi_cmnist_reinstantiation_repair.full_response import DELTA, STEPS, full_response_rows, reconstruct_adam_state
 from ood_repr_reg.task3_aopi_cmnist_reinstantiation_repair.head_response import DAMPING_GRID
 from ood_repr_reg.task3_aopi_cmnist_reinstantiation_repair.linearity_checks import check_linearity
-from ood_repr_reg.task3_aopi_cmnist_reinstantiation_repair.smooth_world import BASIS, DERIVED_DIRECTIONS, SmoothPool, outcome_weight
+from ood_repr_reg.task3_aopi_cmnist_reinstantiation_repair.smooth_world import BASIS, DERIVED_DIRECTIONS, SmoothPool, SmoothWorlds, base_world_identity, environment_parameters, outcome_weight
 from ood_repr_reg.task3_aopi_cmnist_reinstantiation_repair.source_observation import observation_geometry
 from ood_repr_reg.task3_aopi_cmnist_reinstantiation_repair.task_response import HEAD_DIMENSION, expected_head_risk, smooth_fd_consistency
 
@@ -22,6 +23,28 @@ def test_exact_four_outcome_weights_sum_to_one_and_are_smooth():
     weights = sum(outcome_weight(p, q, label_flip, color_flip) for label_flip in (0, 1) for color_flip in (0, 1))
     assert torch.allclose(weights, torch.tensor(1.0, dtype=torch.double))
     assert torch.autograd.grad(weights, (p, q), allow_unused=False) is not None
+
+
+def test_zero_tangent_recovers_correct_cmnist():
+    empty = SmoothPool(torch.empty(0, 28, 28), torch.empty(0, dtype=torch.long), "empty")
+    worlds = SmoothWorlds((empty, empty), (empty, empty), torch.zeros(3, dtype=torch.double))
+    assert base_world_identity(worlds)
+    for observed, expected in (
+        (environment_parameters(worlds.base_theta, environment=0, evaluation=False), (0.2, 0.25)),
+        (environment_parameters(worlds.base_theta, environment=1, evaluation=False), (0.1, 0.25)),
+        (environment_parameters(worlds.base_theta, environment=0, evaluation=True), (0.9, 0.25)),
+        (environment_parameters(worlds.base_theta, environment=1, evaluation=True), (0.9, 0.25)),
+    ):
+        assert tuple(float(value) for value in observed) == pytest.approx(expected)
+
+
+def test_all_mixture_weights_are_valid_probabilities():
+    for p in (0.1, 0.2, 0.9):
+        weights = [outcome_weight(torch.tensor(p), torch.tensor(0.25), label_flip, color_flip) for label_flip in (0, 1) for color_flip in (0, 1)]
+        assert all(0.0 <= float(weight) <= 1.0 for weight in weights)
+        assert float(sum(weights)) == pytest.approx(1.0)
+    with pytest.raises(ValueError, match="probability"):
+        outcome_weight(torch.tensor(1.1), torch.tensor(0.25), 0, 0)
 
 
 def test_smooth_expected_head_risk_has_probability_derivative():
@@ -84,6 +107,7 @@ def test_full_path_is_source_only_and_uses_preregistered_steps():
 def test_runner_declares_old_audit_invalidated_and_full_mismatch_unestablished():
     source = (ROOT / "src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py").read_text(encoding="utf-8")
     assert "AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH" in source
+    assert "b6c9eaf" in source
     assert "NOT_ESTABLISHED" in source
     assert source.index("_preregister(config)") < source.index("corrected_geometry(model, worlds)")
 

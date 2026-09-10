@@ -4,6 +4,8 @@
 
 `AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH`: the old A omitted `-D grad R_S`; thresholded finite data differences were not tangents; O included IRMv1 penalty processing; and Pi was evaluated at a newly refined head-only equilibrium.
 
+Repair commit `b6c9eaf` is also invalidated: its base coordinates were added twice, so its A/O/Pi numbers were not computed on the declared ColoredMNIST distribution. The current rerun uses zero displacement at source `(0.2,0.1)`, evaluation `(0.9,0.9)`, and label noise `0.25`.
+
 ## Repaired construction
 
 The primary space is exactly R^3 and uses smooth four-outcome empirical expectations. `A = H_S^(-1/2) D[grad R_T - grad R_S]`; `O_S` is method-independent concatenated source risk gradients. Derived common/antisymmetric directions are linearity checks only.
@@ -11,6 +13,7 @@ The primary space is exactly R^3 and uses smooth four-outcome empirical expectat
 ## Gates and verdict
 
 - G0 tangent linearity: `True`
+- G-1 base-world identity: `True`
 - G1 corrected-A toy identity: `True`
 - G2 smooth derivative consistency: `True`
 - G3 method-independent O: `True`

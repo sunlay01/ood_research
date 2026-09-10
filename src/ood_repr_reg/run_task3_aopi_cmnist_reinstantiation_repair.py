@@ -16,7 +16,7 @@ import torch
 from .task3_aopi_cmnist_reinstantiation_repair.full_response import full_response_rows, reconstruct_adam_state
 from .task3_aopi_cmnist_reinstantiation_repair.head_response import finite_head_response, h0_reference, head_pi_diagnostics, refine_h1
 from .task3_aopi_cmnist_reinstantiation_repair.linearity_checks import check_linearity
-from .task3_aopi_cmnist_reinstantiation_repair.smooth_world import BASIS, DERIVED_DIRECTIONS, SmoothWorldFactory
+from .task3_aopi_cmnist_reinstantiation_repair.smooth_world import BASIS, DERIVED_DIRECTIONS, SmoothWorldFactory, base_world_identity, environment_parameters, outcome_weight
 from .task3_aopi_cmnist_reinstantiation_repair.source_observation import independent_O_direction, observation_geometry
 from .task3_aopi_cmnist_reinstantiation_repair.task_response import augmented_head, corrected_geometry, independent_A_direction, smooth_fd_consistency
 from .task3_cmnist_counterfactual_audit.diagnostics import model_counterfactual_diagnostics
@@ -64,6 +64,7 @@ def _preregister(config: dict[str, Any]) -> dict[str, Any]:
         "task_id": TASK_ID, "written_at_unix": time.time(), "git_head": _git("rev-parse", "HEAD"),
         "config_sha256": sha256_file(CONFIG_PATH), "seeds": SEEDS, "methods": METHODS,
         "tangent_basis": list(BASIS), "derived_validation_directions": list(DERIVED_DIRECTIONS),
+        "coordinate_semantics": "delta displacement from source (0.2,0.1), evaluation (0.9,0.9), label noise 0.25",
         "smooth_fd_epsilon": 1e-5, "linearity_tolerance": 0.02,
         "full_response": {"delta": 0.01, "K": [1, 5, 20], "continuation_seed_offset": 271828, "functional_coordinate": "source_env0_clean_color_logits_first_256"},
         "head_damping_grid": [1e-10, 1e-8, 1e-6], "source_code_sha256": _source_manifest(),
@@ -73,7 +74,10 @@ def _preregister(config: dict[str, Any]) -> dict[str, Any]:
 
 This repair invalidates the old audit interpretation: it omitted the source term in A, used thresholded finite differences, made O method-dependent, and treated a new head-only equilibrium as the successful full learner.
 
+It also supersedes repair commit `b6c9eaf`: that run represented theta as absolute probabilities and then added the base probabilities a second time, producing invalid source/evaluation mixtures including `p=1.1`.
+
 - Primary tangent basis: `source_env0_color`, `source_env1_color`, `shared_label_noise`.
+- Coordinates are displacements from source `(0.2,0.1)`, evaluation `(0.9,0.9)`, label noise `0.25`; G-1 validates the zero-displacement world and every mixture weight.
 - Primary worlds: smooth four-outcome empirical expectations; no thresholded world is a primary derivative.
 - G0 tangent-linearity tolerance: `0.02`; G0 failure stops the audit.
 - Primary O: concatenated source risk gradients only, method-independent by construction.
@@ -134,6 +138,8 @@ def _report(summary: dict[str, Any]) -> str:
 
 `AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH`: the old A omitted `-D grad R_S`; thresholded finite data differences were not tangents; O included IRMv1 penalty processing; and Pi was evaluated at a newly refined head-only equilibrium.
 
+Repair commit `b6c9eaf` is also invalidated: its base coordinates were added twice, so its A/O/Pi numbers were not computed on the declared ColoredMNIST distribution. The current rerun uses zero displacement at source `(0.2,0.1)`, evaluation `(0.9,0.9)`, and label noise `0.25`.
+
 ## Repaired construction
 
 The primary space is exactly R^3 and uses smooth four-outcome empirical expectations. `A = H_S^(-1/2) D[grad R_T - grad R_S]`; `O_S` is method-independent concatenated source risk gradients. Derived common/antisymmetric directions are linearity checks only.
@@ -141,6 +147,7 @@ The primary space is exactly R^3 and uses smooth four-outcome empirical expectat
 ## Gates and verdict
 
 - G0 tangent linearity: `{summary['gates'].get('G0')}`
+- G-1 base-world identity: `{summary['gates'].get('G-1')}`
 - G1 corrected-A toy identity: `{summary['gates'].get('G1')}`
 - G2 smooth derivative consistency: `{summary['gates'].get('G2')}`
 - G3 method-independent O: `{summary['gates'].get('G3')}`
@@ -160,7 +167,7 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
     records = load_checkpoint_manifest(MANIFEST_PATH, seeds=SEEDS, methods=METHODS, root=ROOT)
     a_rows: list[dict[str, Any]] = []; o_rows: list[dict[str, Any]] = []; linear_rows: list[dict[str, Any]] = []
     head_refs: list[dict[str, Any]] = []; head_pi: list[dict[str, Any]] = []; full_rows: list[dict[str, Any]] = []; reconstruction: list[dict[str, Any]] = []
-    gates = {"G1": _toy_correct_A_gate(), "G2": True, "G3": True, "G4": True, "G5": True}
+    gates = {"G-1": True, "G1": _toy_correct_A_gate(), "G2": True, "G3": True, "G4": True, "G5": True}
     error: str | None = None
     try:
         for record in records:
@@ -168,6 +175,14 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
                 raise TimeoutError("wall-clock budget exceeded before G0")
             model = load_verified_model(record, config, config_sha256=sha256_file(CONFIG_PATH))
             worlds = SmoothWorldFactory(config, record.seed, data_root=ROOT / "data", download=False).build()
+            gates["G-1"] = gates["G-1"] and base_world_identity(worlds)
+            for environment in range(2):
+                for evaluation in (False, True):
+                    p, q = environment_parameters(worlds.base_theta, environment=environment, evaluation=evaluation)
+                    weights = [outcome_weight(p, q, label_flip, color_flip) for label_flip in (0, 1) for color_flip in (0, 1)]
+                    gates["G-1"] = gates["G-1"] and all(0.0 <= float(weight) <= 1.0 for weight in weights) and abs(float(sum(weights)) - 1.0) <= 1e-12
+            if not gates["G-1"]:
+                raise RuntimeError("G-1 base-world identity failed")
             geometry = corrected_geometry(model, worlds)
             observation = observation_geometry(model, worlds)
             fd_error = smooth_fd_consistency(model, worlds)
@@ -210,7 +225,7 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
         error = f"{type(exc).__name__}: {exc}"
     invalid = error is not None and "wall-clock" not in error
     completed_full = len(full_rows) == len(records) * 9
-    if invalid or not gates.get("G0", False) or not gates["G1"] or not gates["G2"] or not gates["G3"]:
+    if invalid or not gates["G-1"] or not gates.get("G0", False) or not gates["G1"] or not gates["G2"] or not gates["G3"]:
         verdict = "AOPI-REPAIR-INVALID"
     elif not completed_full:
         verdict = "AOPI-REPAIR-PARTIAL"
@@ -227,10 +242,10 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
     _write_csv(RESULTS / "tangent_basis.csv", [{"tangent": name, "coordinates": ";".join(map(str, vector.tolist()))} for name, vector in BASIS.items()])
     _write_csv(RESULTS / "linearity_checks.csv", linear_rows); _write_csv(RESULTS / "geometry_A.csv", a_rows); _write_csv(RESULTS / "geometry_O.csv", o_rows)
     _write_csv(RESULTS / "head_reference_audit.csv", head_refs); _write_csv(RESULTS / "head_pi_validation.csv", head_pi); _write_csv(RESULTS / "full_response.csv", full_rows); _write_csv(RESULTS / "paired_method_summary.csv", paired)
-    summary = {"task_id": TASK_ID, "old_audit_status": "AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH", "gates": gates, "full_response_status": "COMPLETE" if completed_full else "INCOMPLETE", "full_mismatch": "NOT_ESTABLISHED", "verdict": verdict, "error": error, "rows": {"A": len(a_rows), "O": len(o_rows), "linearity": len(linear_rows), "head_references": len(head_refs), "head_pi": len(head_pi), "full": len(full_rows)}}
+    summary = {"task_id": TASK_ID, "old_audit_status": "AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH", "superseded_repair_commit": "b6c9eaf (invalid base-coordinate semantics)", "gates": gates, "full_response_status": "COMPLETE" if completed_full else "INCOMPLETE", "full_mismatch": "NOT_ESTABLISHED", "verdict": verdict, "error": error, "rows": {"A": len(a_rows), "O": len(o_rows), "linearity": len(linear_rows), "head_references": len(head_refs), "head_pi": len(head_pi), "full": len(full_rows)}}
     provenance = {"task_id": TASK_ID, "git_head": _git("rev-parse", "HEAD"), "git_status": _git("status", "--short"), "preregistration": prereg, "source_code_sha256": _source_manifest(), "reconstruction": reconstruction, "target_used_for_training_or_selection": False}
     _write_json(RESULTS / "summary.json", summary); _write_json(OUT / "provenance.json", provenance); (OUT / "report.md").write_text(_report(summary), encoding="utf-8")
-    (ROOT / "active/STATE_DELTA.md").write_text(f"# Proposed State Delta\n\nTask: `{TASK_ID}`\n\nOld audit: `AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH`\n\nRepair verdict: `{verdict}`\n\nNo canonical state changes are proposed. Full mismatch remains `NOT_ESTABLISHED`; no algorithm task is authorized by this audit alone.\n", encoding="utf-8")
+    (ROOT / "active/STATE_DELTA.md").write_text(f"# Proposed State Delta\n\nTask: `{TASK_ID}`\n\nOld audit: `AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH`\n\nSuperseded repair: `b6c9eaf` is invalid because base probabilities were added twice.\n\nRepair verdict: `{verdict}`\n\nNo canonical state changes are proposed. Full mismatch remains `NOT_ESTABLISHED`; no algorithm task is authorized by this audit alone.\n", encoding="utf-8")
     return summary
 
 

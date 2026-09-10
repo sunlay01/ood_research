@@ -22,6 +22,9 @@ DERIVED_DIRECTIONS = {
     "common_source_color": torch.tensor([2.0 ** -0.5, 2.0 ** -0.5, 0.0], dtype=torch.double),
     "antisymmetric_source_color": torch.tensor([2.0 ** -0.5, -2.0 ** -0.5, 0.0], dtype=torch.double),
 }
+SOURCE_COLOR_BASES = (0.2, 0.1)
+EVALUATION_COLOR_BASE = 0.9
+LABEL_NOISE_BASE = 0.25
 
 
 @dataclass(frozen=True)
@@ -54,21 +57,42 @@ class SmoothWorlds:
 
 
 def outcome_weight(p: Tensor, q: Tensor, label_flip: int, color_flip: int) -> Tensor:
+    for name, probability in (("color_flip", p), ("label_noise", q)):
+        value = float(probability.detach().cpu())
+        if not 0.0 <= value <= 1.0:
+            raise ValueError(f"{name} probability must be in [0, 1], got {value}")
     label_probability = q if label_flip else 1.0 - q
     color_probability = p if color_flip else 1.0 - p
-    return label_probability * color_probability
+    weight = label_probability * color_probability
+    if not 0.0 <= float(weight.detach().cpu()) <= 1.0:
+        raise ValueError("mixture weight must be a valid probability")
+    return weight
 
 
-def environment_parameters(theta: Tensor, *, environment: int, evaluation: bool) -> tuple[Tensor, Tensor]:
-    """Map the declared three-dimensional tangent coordinate to one environment."""
-    if theta.shape != (3,):
+def environment_parameters(delta: Tensor, *, environment: int, evaluation: bool) -> tuple[Tensor, Tensor]:
+    """Map a three-dimensional displacement from the fixed CMNIST base world."""
+    if delta.shape != (3,):
         raise ValueError("the repaired audit tangent space is exactly R^3")
-    base = 0.9 if evaluation else (0.2 if environment == 0 else 0.1)
-    return theta[environment] + base, theta[2]
+    color_base = EVALUATION_COLOR_BASE if evaluation else SOURCE_COLOR_BASES[environment]
+    return color_base + delta[environment], LABEL_NOISE_BASE + delta[2]
+
+
+def base_world_identity(worlds: SmoothWorlds) -> bool:
+    delta = worlds.base_theta
+    source = [environment_parameters(delta, environment=index, evaluation=False) for index in range(2)]
+    evaluation = [environment_parameters(delta, environment=index, evaluation=True) for index in range(2)]
+    observed = [float(source[0][0]), float(source[1][0]), float(source[0][1]), float(evaluation[0][0]), float(evaluation[1][0]), float(evaluation[0][1])]
+    expected = [0.2, 0.1, 0.25, 0.9, 0.9, 0.25]
+    return bool(torch.allclose(torch.tensor(observed, dtype=torch.double), torch.tensor(expected, dtype=torch.double), atol=0.0, rtol=0.0))
 
 
 class SmoothWorldFactory:
     def __init__(self, config: dict[str, Any], seed: int, *, data_root: Path | str, download: bool = False) -> None:
+        data = config["data"]
+        if tuple(float(value) for value in data["source_color_flip_probs"]) != SOURCE_COLOR_BASES:
+            raise ValueError("repair requires source color bases (0.2, 0.1)")
+        if float(data["target_color_flip_prob"]) != EVALUATION_COLOR_BASE or float(data["label_noise"]) != LABEL_NOISE_BASE:
+            raise ValueError("repair requires target color base 0.9 and label-noise base 0.25")
         gray, digits = load_mnist_tensors(Path(data_root), train=True, download=download)
         order = torch.randperm(50000, generator=torch.Generator().manual_seed(int(seed)))
         source_images, source_digits = gray[:50000][order], digits[:50000][order]
@@ -82,7 +106,7 @@ class SmoothWorldFactory:
                 SmoothPool(evaluation_images[::2].cpu(), evaluation_digits[::2].cpu(), "evaluation_env0"),
                 SmoothPool(evaluation_images[1::2].cpu(), evaluation_digits[1::2].cpu(), "evaluation_env1"),
             ),
-            base_theta=torch.tensor([0.2, 0.1, float(config["data"]["label_noise"])], dtype=torch.double),
+            base_theta=torch.zeros(3, dtype=torch.double),
         )
 
     def build(self) -> SmoothWorlds:

@@ -1,8 +1,9 @@
 {
-  "git_head": "67ac8c5bcfd2c17448f5c7e1718d251d4e9bc89f",
-  "git_status": "M active/CONTEXT.md\n M active/STATE_DELTA.md\n M active/TASK.md\n M tests/test_task3_cmnist_local_response.py\n?? round3_redesign/task3_aopi_cmnist_reinstantiation_repair/\n?? src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py\n?? src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/\n?? tests/test_task3_aopi_cmnist_reinstantiation_repair.py",
+  "git_head": "b6c9eafa07cdbc264f1dd1a88c46579601ccdf85",
+  "git_status": "M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/preregistered_design.md\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/provenance.json\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/report.md\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/results/full_response.csv\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/results/geometry_A.csv\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/results/geometry_O.csv\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/results/head_pi_validation.csv\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/results/head_reference_audit.csv\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/results/linearity_checks.csv\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/results/paired_method_summary.csv\n M round3_redesign/task3_aopi_cmnist_reinstantiation_repair/results/summary.json\n M src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py\n M src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/__init__.py\n M src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/smooth_world.py\n M tests/test_task3_aopi_cmnist_reinstantiation_repair.py",
   "preregistration": {
     "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+    "coordinate_semantics": "delta displacement from source (0.2,0.1), evaluation (0.9,0.9), label noise 0.25",
     "derived_validation_directions": [
       "common_source_color",
       "antisymmetric_source_color"
@@ -17,7 +18,7 @@
       "delta": 0.01,
       "functional_coordinate": "source_env0_clean_color_logits_first_256"
     },
-    "git_head": "67ac8c5bcfd2c17448f5c7e1718d251d4e9bc89f",
+    "git_head": "b6c9eafa07cdbc264f1dd1a88c46579601ccdf85",
     "head_damping_grid": [
       1e-10,
       1e-08,
@@ -38,12 +39,12 @@
     "smooth_fd_epsilon": 1e-05,
     "source_code_sha256": {
       "configs/task3_cmnist_cpu_minimal.json": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
-      "src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py": "b874cba60942412e7d85accbda7371542f65cbc280b9f46e686138efe7f564bc",
-      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/__init__.py": "94c4743622bfa2f416a1fea3fde8d4bbd344fee94eabe648f58c48b9587bb89c",
+      "src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py": "a3fabfcb4b50583eb5d26c9816b80fa5c8692841f8d6f8c86bd3f53e69a5a025",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/__init__.py": "0551954d144c85d42b29d0302d87bd2d3b87a94f3efe52b2ffbaf684080621ad",
       "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/full_response.py": "9a3c803eea069ce02109a72c723bf0b4b2f0e6e17088334952a1f347da18b125",
       "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/head_response.py": "1db1d1cb8026fcad5cbadfd09ee41bce698d7184db1b3ef0e8194033d404703a",
       "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/linearity_checks.py": "1fc1ff406a5262fe3c14872d3ddaceecb4942bc662355683fd1f355dd14a11bb",
-      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/smooth_world.py": "ca3ba01186e31761667466e59b57663090191d0efef5e64e8881374728f7728e",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/smooth_world.py": "caef1f1c6f882a0db368bacb2d8487d9b4502d7a84f247c7e4979b8314a09cb0",
       "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/source_observation.py": "f046ba1ed0de3c09ef004c3a952a74d8073d41627c6d39cab3be772c835302db",
       "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/task_response.py": "9ee88a02dfe06f97a8eed9b61bed5a4b67ab550b0ff0d7b1b4b009b3c6ac3969"
     },
@@ -54,7 +55,7 @@
     ],
     "target_use": "evaluation-side A and post-hoc H0/H1 diagnostics only; never source fitting, O, Pi_head, reconstruction, or continuation",
     "task_id": "TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR",
-    "written_at_unix": 1789047445.926805
+    "written_at_unix": 1789051621.3583128
   },
   "reconstruction": [
     {
@@ -120,12 +121,12 @@
   ],
   "source_code_sha256": {
     "configs/task3_cmnist_cpu_minimal.json": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
-    "src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py": "b874cba60942412e7d85accbda7371542f65cbc280b9f46e686138efe7f564bc",
-    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/__init__.py": "94c4743622bfa2f416a1fea3fde8d4bbd344fee94eabe648f58c48b9587bb89c",
+    "src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py": "a3fabfcb4b50583eb5d26c9816b80fa5c8692841f8d6f8c86bd3f53e69a5a025",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/__init__.py": "0551954d144c85d42b29d0302d87bd2d3b87a94f3efe52b2ffbaf684080621ad",
     "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/full_response.py": "9a3c803eea069ce02109a72c723bf0b4b2f0e6e17088334952a1f347da18b125",
     "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/head_response.py": "1db1d1cb8026fcad5cbadfd09ee41bce698d7184db1b3ef0e8194033d404703a",
     "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/linearity_checks.py": "1fc1ff406a5262fe3c14872d3ddaceecb4942bc662355683fd1f355dd14a11bb",
-    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/smooth_world.py": "ca3ba01186e31761667466e59b57663090191d0efef5e64e8881374728f7728e",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/smooth_world.py": "caef1f1c6f882a0db368bacb2d8487d9b4502d7a84f247c7e4979b8314a09cb0",
     "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/source_observation.py": "f046ba1ed0de3c09ef004c3a952a74d8073d41627c6d39cab3be772c835302db",
     "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/task_response.py": "9ee88a02dfe06f97a8eed9b61bed5a4b67ab550b0ff0d7b1b4b009b3c6ac3969"
   },

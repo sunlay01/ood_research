@@ -3,6 +3,7 @@
   "full_mismatch": "NOT_ESTABLISHED",
   "full_response_status": "COMPLETE",
   "gates": {
+    "G-1": true,
     "G0": true,
     "G1": true,
     "G2": true,
@@ -19,6 +20,7 @@
     "head_references": 20,
     "linearity": 10
   },
+  "superseded_repair_commit": "b6c9eaf (invalid base-coordinate semantics)",
   "task_id": "TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR",
   "verdict": "AOPI-REPAIR-PARTIAL"
 }
