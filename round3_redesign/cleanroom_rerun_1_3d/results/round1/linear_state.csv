@@ -1,0 +1,6 @@
+metric,value
+source_moment_rank,4
+ambient_state_dimension,16
+target_transport_pairing,0.004597912428667104
+full_target_excess_over_noise,0.210951885668351
+quotient_projection_residual,2.220446049250313e-16

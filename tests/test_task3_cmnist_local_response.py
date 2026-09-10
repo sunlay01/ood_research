@@ -71,6 +71,8 @@ def test_task3r_live_artifacts_are_removed_and_active_task_replaced():
     assert (
         "TASK3-CMNIST-LOCAL-RESPONSE" in active_task
         or "TASK3-BASELINE-FIDELITY-RECOVERY" in active_task
+        or "TASK3-CMNIST-CPU-MINIMAL" in active_task
+        or "TASK-RERUN-1-3D-CLEANROOM" in active_task
     )
     assert (ROOT / "round3_redesign/task3_applicability").exists()
 

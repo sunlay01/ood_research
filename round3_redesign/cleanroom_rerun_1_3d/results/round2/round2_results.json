@@ -1,0 +1,49 @@
+{
+  "ambiguity": {
+    "ambient_symmetric_dimension": 10,
+    "ambiguity_dimension": 1,
+    "raw_source_kernel_dimension": 7,
+    "source_rank_in_quotient": 3,
+    "support_example": 0.5250000000000002,
+    "target_recovery_exact": false,
+    "target_recovery_residual": 0.7071067811865476,
+    "target_visible_dimension": 4
+  },
+  "induced_costs": [
+    {
+      "direct_descent": false,
+      "induced_cost": 0.5799999999999998,
+      "method": "L2",
+      "status": "exact"
+    },
+    {
+      "direct_descent": false,
+      "induced_cost": 0.0,
+      "method": "CORAL",
+      "status": "degenerate_infimum"
+    },
+    {
+      "direct_descent": false,
+      "induced_cost": 0.026613039999999973,
+      "method": "IRMv1",
+      "status": "conditional"
+    }
+  ],
+  "irmv1": {
+    "three_source_design_rank": 3,
+    "three_source_erm_penalty": 0.0002749656257451919,
+    "two_source_penalty": 2.6006072780303894e-32,
+    "two_source_source_risk": 0.51,
+    "two_source_target_risk": 1.1568744047642625
+  },
+  "source_observation": {
+    "absolute_kernel_dimension": 7,
+    "absolute_rank": 3,
+    "target_coordinates": [
+      -2.8574641209845906,
+      -0.9407638013725235,
+      0.3659589104109289,
+      -0.03059972554980367
+    ]
+  }
+}

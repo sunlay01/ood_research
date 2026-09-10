@@ -1,0 +1,54 @@
+{
+  "CORAL": {
+    "audit_pass": true,
+    "condition_number": Infinity,
+    "gradient_max_error": 0.0,
+    "hessian_max_error": 0.0,
+    "hessian_symmetry_error": 0.0,
+    "max_eigenvalue": 0.0,
+    "method": "CORAL",
+    "min_eigenvalue": 0.0,
+    "numerical_rank": 0,
+    "psd_or_indefinite": "PSD",
+    "value": 0.0
+  },
+  "IRMV1": {
+    "audit_pass": true,
+    "condition_number": Infinity,
+    "gradient_max_error": 1.4481492767101645e-09,
+    "hessian_max_error": 4.193425647613935e-06,
+    "hessian_symmetry_error": 0.0,
+    "max_eigenvalue": 15.168021258290153,
+    "method": "IRMV1",
+    "min_eigenvalue": -2.7755575615628915e-18,
+    "numerical_rank": 3,
+    "psd_or_indefinite": "PSD",
+    "value": 0.0005095009098938877
+  },
+  "L2": {
+    "audit_pass": true,
+    "condition_number": 1.0,
+    "gradient_max_error": 6.635525462428404e-13,
+    "hessian_max_error": 1.794111526010056e-10,
+    "hessian_symmetry_error": 0.0,
+    "max_eigenvalue": 1.0,
+    "method": "L2",
+    "min_eigenvalue": 1.0,
+    "numerical_rank": 9,
+    "psd_or_indefinite": "PSD",
+    "value": 0.1582113919903534
+  },
+  "VREX": {
+    "audit_pass": true,
+    "condition_number": Infinity,
+    "gradient_max_error": 7.67661758813154e-14,
+    "hessian_max_error": 1.839583514597759e-09,
+    "hessian_symmetry_error": 0.0,
+    "max_eigenvalue": 0.004403921096655328,
+    "method": "VREX",
+    "min_eigenvalue": -0.003947913182390727,
+    "numerical_rank": 3,
+    "psd_or_indefinite": "indefinite",
+    "value": 0.0001400934162370672
+  }
+}
