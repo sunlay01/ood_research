@@ -1,0 +1,100 @@
+{
+  "implementation_validity_flags": {
+    "adam_persistent": true,
+    "all_rows_finite": true,
+    "batch_size_per_env_exactly_512": true,
+    "calibration_ratios_in_bounds": true,
+    "grad_is_head_only_by_definition": true,
+    "grad_penalty_backprop_reaches_encoder": true,
+    "lr_hessian_is_65x65": true,
+    "lr_hessian_stopgrad": true,
+    "lr_only_changes_metric": true,
+    "lr_uses_cholesky_solve": true,
+    "lr_uses_same_head_gradients_as_grad": true,
+    "model_exact_392_64_64_1": true,
+    "no_beta_grid": true,
+    "no_checkpoint_selection": true,
+    "no_explicit_inverse": true,
+    "no_iga_fish_domainbed": true,
+    "no_target_in_training": true,
+    "same_seed_same_batch_schedule": true,
+    "same_seed_same_initialization": true,
+    "steps_exactly_501": true,
+    "three_linear_layers": true
+  },
+  "lr_wins_vs_grad": 0,
+  "mean_LR_minus_ERM": 0.001460002362728119,
+  "mean_LR_minus_GRAD": -0.00899999737739563,
+  "mean_source_delta_LR_minus_ERM": 8.398890495300292e-05,
+  "mechanism_direction_counts": {
+    "final_P_LR_lower_than_ERM": 4,
+    "target_prediction_color_agreement_lower_than_ERM": 3
+  },
+  "method_means_stds": {
+    "ERM": {
+      "source_mean": 0.8497520089149475,
+      "source_std": 0.0003981458099071671,
+      "target_mean": 0.10979999899864197,
+      "target_std": 0.00485540983389911
+    },
+    "GRAD": {
+      "source_mean": 0.8499080061912536,
+      "source_std": 0.0005715995787778023,
+      "target_mean": 0.12025999873876572,
+      "target_std": 0.005827776669594319
+    },
+    "IRMv1": {
+      "source_mean": 0.5995999991893768,
+      "source_std": 0.019630488160651802,
+      "target_mean": 0.6691400051116944,
+      "target_std": 0.013166369985302455
+    },
+    "LOCAL_RESPONSE": {
+      "source_mean": 0.8498359978199005,
+      "source_std": 0.00042811246240158574,
+      "target_mean": 0.11126000136137008,
+      "target_std": 0.0063775401752472795
+    }
+  },
+  "paired_LR_minus_ERM": [
+    0.004200004041194916,
+    -0.0006999969482421875,
+    -0.0018000006675720215,
+    0.0015000030398368835,
+    0.004100002348423004
+  ],
+  "paired_LR_minus_GRAD": [
+    -0.009899996221065521,
+    -0.009400002658367157,
+    -0.012199997901916504,
+    -0.012299992144107819,
+    -0.0011999979615211487
+  ],
+  "source_accuracy_deltas_LR_minus_ERM": [
+    -2.002716064453125e-05,
+    0.0005200207233428955,
+    3.999471664428711e-05,
+    0.00013998150825500488,
+    -0.0002600252628326416
+  ],
+  "stage_a_gate": {
+    "criteria": {
+      "erm_le_0p35": true,
+      "irm_advantage_ge_0p20": true,
+      "irmv1_ge_0p50": true
+    },
+    "erm_mean_target_accuracy": 0.10726666698853175,
+    "irmv1_mean_target_accuracy": 0.6746666431427002,
+    "irmv1_minus_erm": 0.5673999761541685,
+    "passed": true,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "stage": "A"
+  },
+  "stage_b_completed": true,
+  "task_id": "TASK3-CMNIST-CPU-MINIMAL",
+  "verdict": "CPU-MINIMAL-NO-SIGNAL"
+}

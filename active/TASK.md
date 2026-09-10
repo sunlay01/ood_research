@@ -1,51 +1,34 @@
-# TASK3-BASELINE-FIDELITY-RECOVERY
+# TASK3-CMNIST-CPU-MINIMAL
 
-task_id: `TASK3-BASELINE-FIDELITY-RECOVERY`
+task_id: `TASK3-CMNIST-CPU-MINIMAL`
 
-goal: `Recover and audit ERM, IRMv1, IGA, and Fish baseline identities before any Task 3 scientific verdict is interpreted.`
+goal: `Run a CPU-only ColoredMNIST proof-of-concept comparing GRAD identity-metric head-gradient disagreement with LOCAL_RESPONSE inverse-Hessian-metric head-gradient disagreement.`
 
 state_write_authorized: false
 
-required_result_ids:
+Task 3 scientific status: NOT YET DECIDED
 
-- `R-REPAIR-GATE`
-- `R-TASK1-MECHANISM`
-- `R-TASK2-SHARP`
+allowed files:
 
-allowed_initial_files:
-
-- `AGENTS.md`
-- `CURRENT_STATE.md`
-- `active/CONTEXT.md`
 - `active/TASK.md`
-- pinned upstream baseline code under `artifacts/baseline_fidelity/upstreams/`
-
-allowed_code_roots:
-
-- `src/ood_repr_reg/task3_baseline_fidelity/`
-- `src/ood_repr_reg/run_task3_baseline_fidelity.py`
-- `tests/test_baseline_fidelity.py`
-
-historical_reopen_policy:
-
-- Use `AGENTS.md`; record `REOPEN_REASON:` before reopening history.
-- Do not use Task 3 local-response outputs as scientific evidence in this gate.
-
-success_gate:
-
-- Pinned upstream commits are recorded.
-- Facebook IRM Colored MNIST recovery is preserved or rerun.
-- IGA is full-network gradient alignment, not head-only gradient variance.
-- Fish uses clone, sequential inner-domain updates, carried inner optimizer state, and outer interpolation.
-- `HEAD_GRADIENT_VARIANCE_SURROGATE` is explicitly blocked from being reported as IGA or Fish.
-- Final verdict is one of `BASELINE-FIDELITY-PASS`, `BASELINE-FIDELITY-PARTIAL`, or `BASELINE-FIDELITY-FAIL`.
-
-required_outputs:
-
-- `round3_redesign/task3_baseline_fidelity/`
-- `round3_redesign/task3_baseline_fidelity/results/`
+- `active/CONTEXT.md`
 - `active/STATE_DELTA.md`
+- `configs/task3_cmnist_cpu_minimal.json`
+- `src/ood_repr_reg/task3_cmnist_cpu_minimal/`
+- `src/ood_repr_reg/run_task3_cmnist_cpu_minimal.py`
+- `tests/test_task3_cmnist_cpu_minimal.py`
+- `round3_redesign/task3_cmnist_cpu_minimal/`
 
-state_delta_policy:
+Stage A gate:
 
-- Canonical state is not edited; proposed changes go to `active/STATE_DELTA.md`.
+- Run only `ERM` and `IRMv1` on seeds `0,1,2`.
+- Continue only if IRMv1 mean target accuracy is at least `0.50`, ERM mean target accuracy is at most `0.35`, and IRMv1 minus ERM is at least `0.20`.
+
+Stage B methods:
+
+- `ERM`
+- `IRMv1`
+- `GRAD`
+- `LOCAL_RESPONSE`
+
+Historical reopen: none.

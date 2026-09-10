@@ -1,0 +1,17 @@
+{
+  "criteria": {
+    "erm_le_0p35": true,
+    "irm_advantage_ge_0p20": true,
+    "irmv1_ge_0p50": true
+  },
+  "erm_mean_target_accuracy": 0.10726666698853175,
+  "irmv1_mean_target_accuracy": 0.6746666431427002,
+  "irmv1_minus_erm": 0.5673999761541685,
+  "passed": true,
+  "seeds": [
+    0,
+    1,
+    2
+  ],
+  "stage": "A"
+}

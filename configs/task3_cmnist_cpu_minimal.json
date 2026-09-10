@@ -1,0 +1,50 @@
+{
+  "task_id": "TASK3-CMNIST-CPU-MINIMAL",
+  "device": "cpu",
+  "data": {
+    "label_definition": "digit < 5",
+    "label_noise": 0.25,
+    "source_color_flip_probs": [0.2, 0.1],
+    "target_color_flip_prob": 0.9,
+    "image_subsample": 2,
+    "normalize_pixels": true
+  },
+  "model": {
+    "input_dim": 392,
+    "hidden_dim": 64,
+    "activation": "relu",
+    "linear_layers": 3
+  },
+  "training": {
+    "steps": 501,
+    "batch_size_per_environment": 512,
+    "learning_rate": 0.001,
+    "optimizer": "adam",
+    "l2_regularizer_weight": 0.001,
+    "checkpoint_steps": [0, 100, 200, 300, 400, 500]
+  },
+  "irmv1": {
+    "penalty_anneal_iters": 100,
+    "penalty_weight": 10000.0,
+    "whole_loss_rescale_after_anneal": true
+  },
+  "response": {
+    "parameter_block": "final_linear_head_weight_and_bias",
+    "damping_epsilon": 0.01,
+    "calibration_update_ratio": 0.10,
+    "hessian_stop_gradient": true,
+    "use_explicit_inverse": false,
+    "solver": "cholesky"
+  },
+  "stage_a": {
+    "seeds": [0, 1, 2],
+    "methods": ["ERM", "IRMv1"],
+    "irm_min_mean_target_accuracy": 0.50,
+    "erm_max_mean_target_accuracy": 0.35,
+    "irm_min_mean_advantage_over_erm": 0.20
+  },
+  "stage_b": {
+    "seeds": [10, 11, 12, 13, 14],
+    "methods": ["ERM", "IRMv1", "GRAD", "LOCAL_RESPONSE"]
+  }
+}

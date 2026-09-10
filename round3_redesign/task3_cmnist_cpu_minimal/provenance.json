@@ -1,0 +1,28 @@
+{
+  "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+  "cpu_model": "Apple M5",
+  "device": "cpu",
+  "exact_command": "PYTHONPATH=src python -m ood_repr_reg.run_task3_cmnist_cpu_minimal --stage all",
+  "python_version": "3.13.13 | packaged by Anaconda, Inc. | (main, Apr 14 2026, 06:14:06) [Clang 20.1.8 ]",
+  "pytorch_version": "2.12.1",
+  "random_seeds": {
+    "stage_a": [
+      0,
+      1,
+      2
+    ],
+    "stage_b": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  "repo_commit_after_implementation_before_run": "9ad56c0ca05f08ae471592c97a8008bcf4346d21",
+  "repo_commit_before_run": "9ad56c0ca05f08ae471592c97a8008bcf4346d21",
+  "requested_stage": "all",
+  "torchvision_version": "0.27.1",
+  "working_tree_status_before_stage_a": "M  active/CONTEXT.md\nM  active/STATE_DELTA.md\nM  active/TASK.md\nA  configs/task3_cmnist_cpu_minimal.json\nAM round3_redesign/task3_cmnist_cpu_minimal/preregistered_design.md\nA  round3_redesign/task3_cmnist_cpu_minimal/provenance.json\nA  round3_redesign/task3_cmnist_cpu_minimal/report.md\nAM round3_redesign/task3_cmnist_cpu_minimal/results/baseline_gate.csv\nA  round3_redesign/task3_cmnist_cpu_minimal/results/baseline_gate.json\nAM round3_redesign/task3_cmnist_cpu_minimal/results/dynamics.csv\nAM round3_redesign/task3_cmnist_cpu_minimal/results/main_runs.csv\nA  round3_redesign/task3_cmnist_cpu_minimal/results/summary.json\nAM src/ood_repr_reg/run_task3_cmnist_cpu_minimal.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/__init__.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/data.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/evaluation.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/methods.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/model.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/trainer.py\nA  tests/test_task3_cmnist_cpu_minimal.py",
+  "working_tree_status_before_stage_b": "M  active/CONTEXT.md\nM  active/STATE_DELTA.md\nM  active/TASK.md\nA  configs/task3_cmnist_cpu_minimal.json\nAM round3_redesign/task3_cmnist_cpu_minimal/preregistered_design.md\nA  round3_redesign/task3_cmnist_cpu_minimal/provenance.json\nA  round3_redesign/task3_cmnist_cpu_minimal/report.md\nAM round3_redesign/task3_cmnist_cpu_minimal/results/baseline_gate.csv\nA  round3_redesign/task3_cmnist_cpu_minimal/results/baseline_gate.json\nAM round3_redesign/task3_cmnist_cpu_minimal/results/dynamics.csv\nAM round3_redesign/task3_cmnist_cpu_minimal/results/main_runs.csv\nA  round3_redesign/task3_cmnist_cpu_minimal/results/summary.json\nAM src/ood_repr_reg/run_task3_cmnist_cpu_minimal.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/__init__.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/data.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/evaluation.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/methods.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/model.py\nA  src/ood_repr_reg/task3_cmnist_cpu_minimal/trainer.py\nA  tests/test_task3_cmnist_cpu_minimal.py"
+}
