@@ -1,0 +1,134 @@
+{
+  "git_head": "67ac8c5bcfd2c17448f5c7e1718d251d4e9bc89f",
+  "git_status": "M active/CONTEXT.md\n M active/STATE_DELTA.md\n M active/TASK.md\n M tests/test_task3_cmnist_local_response.py\n?? round3_redesign/task3_aopi_cmnist_reinstantiation_repair/\n?? src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py\n?? src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/\n?? tests/test_task3_aopi_cmnist_reinstantiation_repair.py",
+  "preregistration": {
+    "config_sha256": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+    "derived_validation_directions": [
+      "common_source_color",
+      "antisymmetric_source_color"
+    ],
+    "full_response": {
+      "K": [
+        1,
+        5,
+        20
+      ],
+      "continuation_seed_offset": 271828,
+      "delta": 0.01,
+      "functional_coordinate": "source_env0_clean_color_logits_first_256"
+    },
+    "git_head": "67ac8c5bcfd2c17448f5c7e1718d251d4e9bc89f",
+    "head_damping_grid": [
+      1e-10,
+      1e-08,
+      1e-06
+    ],
+    "linearity_tolerance": 0.02,
+    "methods": [
+      "ERM",
+      "IRMv1"
+    ],
+    "seeds": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ],
+    "smooth_fd_epsilon": 1e-05,
+    "source_code_sha256": {
+      "configs/task3_cmnist_cpu_minimal.json": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+      "src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py": "b874cba60942412e7d85accbda7371542f65cbc280b9f46e686138efe7f564bc",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/__init__.py": "94c4743622bfa2f416a1fea3fde8d4bbd344fee94eabe648f58c48b9587bb89c",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/full_response.py": "9a3c803eea069ce02109a72c723bf0b4b2f0e6e17088334952a1f347da18b125",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/head_response.py": "1db1d1cb8026fcad5cbadfd09ee41bce698d7184db1b3ef0e8194033d404703a",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/linearity_checks.py": "1fc1ff406a5262fe3c14872d3ddaceecb4942bc662355683fd1f355dd14a11bb",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/smooth_world.py": "ca3ba01186e31761667466e59b57663090191d0efef5e64e8881374728f7728e",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/source_observation.py": "f046ba1ed0de3c09ef004c3a952a74d8073d41627c6d39cab3be772c835302db",
+      "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/task_response.py": "9ee88a02dfe06f97a8eed9b61bed5a4b67ab550b0ff0d7b1b4b009b3c6ac3969"
+    },
+    "tangent_basis": [
+      "source_env0_color",
+      "source_env1_color",
+      "shared_label_noise"
+    ],
+    "target_use": "evaluation-side A and post-hoc H0/H1 diagnostics only; never source fitting, O, Pi_head, reconstruction, or continuation",
+    "task_id": "TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR",
+    "written_at_unix": 1789047445.926805
+  },
+  "reconstruction": [
+    {
+      "method": "ERM",
+      "optimizer_state_hash": "3b8faaf1db878641e0d7fac1ec9e6a3b9c9cce8b7985c1380bead02927281d8d",
+      "parameter_hash": "95f1074beb6fc9c80d06a0c71afc44d587326e03e1ed67412aff4f48f274f231",
+      "seed": 10
+    },
+    {
+      "method": "IRMv1",
+      "optimizer_state_hash": "a140c2d0e1372692550e29ebb8f6a2b932fa7ad67f875b5148a08b97267bd34a",
+      "parameter_hash": "9592151bc0c643ba60b2e256de21f7428174f3501c07700db7af1827957d2c03",
+      "seed": 10
+    },
+    {
+      "method": "ERM",
+      "optimizer_state_hash": "c7bd0b523f9ddf02150cb2f2842f13ba1b68679a8dcb72273b858e6dc23d9827",
+      "parameter_hash": "d15637c76d1a6091dcc26dea09ca8d2af5adbbdc3923f7913b3ff6874e4457bf",
+      "seed": 11
+    },
+    {
+      "method": "IRMv1",
+      "optimizer_state_hash": "58b05645761360bf35befefb689450f239fb7fcbe1cbff0cf58a8a87c9f4bd33",
+      "parameter_hash": "54ace10ecacfd5ee582aa77f12a3ff8de0a19db2e2b73418d4f33d8503dd6beb",
+      "seed": 11
+    },
+    {
+      "method": "ERM",
+      "optimizer_state_hash": "088763701837011538ab8872518666237a657b3cb8334742097de3b38b676376",
+      "parameter_hash": "ebdbddef472294a5d2077a86067da571645beb135771aeeee6e9cf1216fbcb17",
+      "seed": 12
+    },
+    {
+      "method": "IRMv1",
+      "optimizer_state_hash": "4a7176444419d5c6a990874aa323c4400ef7fae4fd307b40b628eacd7446881d",
+      "parameter_hash": "c26734ed612841b8f286121937558a310627badeeb9e2dd95ed02648347eb48e",
+      "seed": 12
+    },
+    {
+      "method": "ERM",
+      "optimizer_state_hash": "9ecdbf5091b1f5eaaa856502e9f1179f9d36e0d0e427bd6784e51d6432fc352c",
+      "parameter_hash": "10d844cfa548a66b0429a163fa4efd2a111f62e16a50e073289f857bddf3b9f1",
+      "seed": 13
+    },
+    {
+      "method": "IRMv1",
+      "optimizer_state_hash": "5d8f627b1e7a8cfe6bd6c9f6b00ccdfe5f031a8919ca6fd5f622dc838cdba60d",
+      "parameter_hash": "e2f5b8447bf18162c3d4d0e964db2cdabe1b49134265169e295d807f28a886a6",
+      "seed": 13
+    },
+    {
+      "method": "ERM",
+      "optimizer_state_hash": "a5f7c2d06bd4ec7d8c31669659237b2ad5f4b3104e1f1f3be29fce785428e23a",
+      "parameter_hash": "790a4b10f34104da3071fcef32683206a2cdfce5ecf06e3053db0cbf3a57eff4",
+      "seed": 14
+    },
+    {
+      "method": "IRMv1",
+      "optimizer_state_hash": "a56673c8320905d0e2c402f5d375a54c113a5b523278d88d619b52289d023060",
+      "parameter_hash": "10dd406fe9d06996afc90e72f0ff57f11fd3d454f18da01ee9c1a483ed0f81ed",
+      "seed": 14
+    }
+  ],
+  "source_code_sha256": {
+    "configs/task3_cmnist_cpu_minimal.json": "a1083f49401660ecbb1f1b19e75848ad24612750b34e5255131945ebbbbbe60d",
+    "src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py": "b874cba60942412e7d85accbda7371542f65cbc280b9f46e686138efe7f564bc",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/__init__.py": "94c4743622bfa2f416a1fea3fde8d4bbd344fee94eabe648f58c48b9587bb89c",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/full_response.py": "9a3c803eea069ce02109a72c723bf0b4b2f0e6e17088334952a1f347da18b125",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/head_response.py": "1db1d1cb8026fcad5cbadfd09ee41bce698d7184db1b3ef0e8194033d404703a",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/linearity_checks.py": "1fc1ff406a5262fe3c14872d3ddaceecb4942bc662355683fd1f355dd14a11bb",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/smooth_world.py": "ca3ba01186e31761667466e59b57663090191d0efef5e64e8881374728f7728e",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/source_observation.py": "f046ba1ed0de3c09ef004c3a952a74d8073d41627c6d39cab3be772c835302db",
+    "src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/task_response.py": "9ee88a02dfe06f97a8eed9b61bed5a4b67ab550b0ff0d7b1b4b009b3c6ac3969"
+  },
+  "target_used_for_training_or_selection": false,
+  "task_id": "TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR"
+}

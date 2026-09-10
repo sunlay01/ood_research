@@ -1,0 +1,24 @@
+{
+  "error": null,
+  "full_mismatch": "NOT_ESTABLISHED",
+  "full_response_status": "COMPLETE",
+  "gates": {
+    "G0": true,
+    "G1": true,
+    "G2": true,
+    "G3": true,
+    "G4": true,
+    "G5": true
+  },
+  "old_audit_status": "AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH",
+  "rows": {
+    "A": 30,
+    "O": 30,
+    "full": 90,
+    "head_pi": 60,
+    "head_references": 20,
+    "linearity": 10
+  },
+  "task_id": "TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR",
+  "verdict": "AOPI-REPAIR-PARTIAL"
+}

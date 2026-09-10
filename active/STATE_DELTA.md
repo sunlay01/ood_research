@@ -1,9 +1,9 @@
 # Proposed State Delta
 
-Task: `TASK-AOPI-CMNIST-REINSTANTIATION-AUDIT`
+Task: `TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR`
 
-Verdict: `AOPI-REINSTANTIATION-PARTIAL`
+Old audit: `AOPI-OLD-AUDIT-INVALIDATED-BY-SEMANTIC-MISMATCH`
 
-Proposed result ID: `R-AOPI-CMNIST-HEAD-AUDIT`.
+Repair verdict: `AOPI-REPAIR-PARTIAL`
 
-This is a frozen-encoder, 65-dimensional final-head local response audit only. It does not update canonical theorem status. Task 3 scientific verdict remains pending broader authorized evaluation.
+No canonical state changes are proposed. Full mismatch remains `NOT_ESTABLISHED`; no algorithm task is authorized by this audit alone.

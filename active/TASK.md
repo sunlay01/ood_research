@@ -1,8 +1,8 @@
-# TASK-AOPI-CMNIST-REINSTANTIATION-AUDIT
+# TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR
 
-task_id: `TASK-AOPI-CMNIST-REINSTANTIATION-AUDIT`
+task_id: `TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR`
 
-goal: `Audit frozen-encoder, trainable-final-head A/O/Pi response geometry on corrected CPU-minimal ColoredMNIST.`
+goal: `Repair the CMNIST A/O/Pi audit with smooth tangent expectations, corrected A/O, secondary Pi_head, and primary finite-time Pi_full.`
 
 state_write_authorized: false
 
@@ -30,24 +30,26 @@ inputs:
 
 hard constraints:
 
-- Freeze the nonlinear encoder and audit only the 65-dimensional final head.
+- Preserve the old audit as historical evidence; do not overwrite it.
+- Use exactly three primary tangent directions and smooth weighted expectations.
+- Treat frozen-head Pi as secondary and full-network finite-time response as primary.
 - Verify checkpoint identity and write preregistration before audit metrics.
 - Source fitting, `H_S`, `O_S`, and `Pi` are source-only; held-out target data defines A only post-hoc.
 - Do not add algorithms, regularizers, semantic clustering, target tuning, or canonical-state edits.
 
 outputs:
 
-- `round3_redesign/task3_aopi_cmnist_reinstantiation/`
-- `src/ood_repr_reg/task3_aopi_cmnist_reinstantiation/`
-- `src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation.py`
-- `tests/test_task3_aopi_cmnist_reinstantiation.py`
+- `round3_redesign/task3_aopi_cmnist_reinstantiation_repair/`
+- `src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/`
+- `src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py`
+- `tests/test_task3_aopi_cmnist_reinstantiation_repair.py`
 - `active/STATE_DELTA.md`
 
 completion verdict enum:
 
-- `AOPI-REINSTANTIATION-PASS`
-- `AOPI-REINSTANTIATION-PARTIAL`
-- `AOPI-REINSTANTIATION-FAIL`
-- `AOPI-AUDIT-INVALID`
+- `AOPI-REPAIR-PASS`
+- `AOPI-REPAIR-PARTIAL`
+- `AOPI-REPAIR-FAIL`
+- `AOPI-REPAIR-INVALID`
 
-Interpretation ceiling: frozen-encoder head-block local response audit only.
+Interpretation ceiling: validity repair only; no new algorithm, theory validation, causal claim, or universal DG claim.
