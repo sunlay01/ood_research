@@ -2,20 +2,14 @@
 
 Task: `TASK-RERUN-1-3D-CLEANROOM`
 
-Final verdict: `THEORY-SURVIVES-EMPIRICAL-MAINLINE-CHANGES`
+Final verdict: `RERUN-INCONCLUSIVE`
 
-Baseline fidelity: `BASELINE-FIDELITY-PASS`
+Superseded earlier verdict: `THEORY-SURVIVES-EMPIRICAL-MAINLINE-CHANGES`
 
-Old results used before diff: `false`
+Superseding repair report: `/Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/cleanroom_rerun_1_3d_repair/repair_report.md`
 
-Old operator snapshots used: `false`
+Reason: the original clean-room neural bridge used target samples/labels for the source-side bridge and an 8D target-fitted PCA. The focused repair uses source-only `O/Pi`, a common source-only projection, and a real old-vs-new `helps` diff, but the neural bridge remains partial rather than a scientific PASS.
+
+Baseline fidelity remains: `BASELINE-FIDELITY-PASS`
 
 Canonical state updated: `false`
-
-## Interpretation
-
-The rerun separates finite-dimensional theorem identities, synthetic/Gaussian evidence, and fresh CMNIST neural evidence. Pytest/build success is treated as implementation validity only. Scientific interpretation is taken from regenerated cleanroom CSV/JSON artifacts and the explicit old-vs-new diff phase.
-
-## Required next action
-
-Do not update canonical state until this clean-room report is reviewed. If accepted, old mixed Task1/Task2 CMNIST evidence should be marked `SUPERSEDED_BY_CLEANROOM_RERUN` rather than left as default authority.
