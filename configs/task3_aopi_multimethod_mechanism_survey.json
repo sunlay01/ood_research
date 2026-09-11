@@ -1,7 +1,7 @@
 {
   "task_id": "TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL",
   "device": "cpu",
-  "methods": ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "SPECTRAL_NORM_REG", "SPECTRAL_REG_2024", "SVB_ORTHDNN", "STABLE_RANK_NORM", "SAM", "ASAM"],
+  "methods": ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "SPECTRAL_NORM_REG", "SPECTRAL_REG_2024", "SVB_ORTHDNN", "STABLE_RANK_NORM", "SAM", "ASAM", "SPECTRAL_DECOUPLING"],
   "candidate_methods": ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "SPECTRAL_NORM_REG", "SPECTRAL_REG_2024", "SVB_ORTHDNN", "STABLE_RANK_NORM", "SVD_SPARSE", "SAM", "ASAM", "FAD", "DISAM"],
   "include_coral_if_fidelity_pass": true,
   "seeds": [10, 11, 12, 13, 14],
@@ -86,6 +86,11 @@
     "lambda": 0.001,
     "penalty": "sum_sigma1_squared_all_linear_weights",
     "equation_verified": true,
+    "official_code_checked_if_available": false
+  },
+  "spectral_decoupling": {
+    "lambda": 0.1,
+    "penalty": "mean_squared_source_logits",
     "official_code_checked_if_available": false
   },
   "spectral_reg_2024": {
