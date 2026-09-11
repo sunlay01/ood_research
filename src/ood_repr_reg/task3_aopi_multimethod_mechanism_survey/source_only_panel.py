@@ -20,12 +20,16 @@ class SourceOnlyResult:
     steps: int
     final_loss: float
     source_accuracy: float
+    target_accuracy: float | None
+    target_color_agreement: float | None
     finite: bool
 
 
 def run_source_only(model: nn.Module, source_batches: tuple[tuple[Tensor, Tensor], tuple[Tensor, Tensor]],
                     method: str, config: dict[str, Any], *, steps: int = 200,
-                    learning_rate: float | None = None) -> SourceOnlyResult:
+                    learning_rate: float | None = None,
+                    target_batch: tuple[Tensor, Tensor] | None = None,
+                    target_colors: Tensor | None = None) -> SourceOnlyResult:
     """Train a spectral/flatness method without the shared DG runner."""
     algorithm = get_algorithm(method, config)
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate or float(config["training"]["learning_rate"]))
@@ -36,9 +40,17 @@ def run_source_only(model: nn.Module, source_batches: tuple[tuple[Tensor, Tensor
                                      learning_rate=optimizer.param_groups[0]["lr"], algorithm_state=state)
         optimizer, state, last = result.optimizer, result.algorithm_state, result.parts
         if not bool(torch.isfinite(last.objective.detach())):
-            return SourceOnlyResult(method, step + 1, float("nan"), 0.0, False)
+            return SourceOnlyResult(method, step + 1, float("nan"), 0.0, None, None, False)
     with torch.no_grad():
         logits = torch.cat([model(x) for x, _ in source_batches])
         labels = torch.cat([y for _, y in source_batches]).to(logits.device)
         accuracy = ((logits > 0).long() == labels.long()).float().mean().item()
-    return SourceOnlyResult(method, steps, float(last.risk.detach()), accuracy, True)
+        target_accuracy = target_agreement = None
+        if target_batch is not None:
+            tx, ty = target_batch
+            pred = (model(tx) > 0).long().view(-1)
+            target_accuracy = (pred == ty.long().view(-1)).float().mean().item()
+            if target_colors is not None:
+                target_agreement = (pred == target_colors.long().view(-1)).float().mean().item()
+    return SourceOnlyResult(method, steps, float(last.risk.detach()), accuracy,
+                            target_accuracy, target_agreement, True)
