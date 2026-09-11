@@ -29,14 +29,16 @@ def run_source_only(model: nn.Module, source_batches: tuple[tuple[Tensor, Tensor
                     method: str, config: dict[str, Any], *, steps: int = 200,
                     learning_rate: float | None = None,
                     target_batch: tuple[Tensor, Tensor] | None = None,
-                    target_colors: Tensor | None = None) -> SourceOnlyResult:
+                    target_colors: Tensor | None = None,
+                    batch_provider=None) -> SourceOnlyResult:
     """Train a spectral/flatness method without the shared DG runner."""
     algorithm = get_algorithm(method, config)
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate or float(config["training"]["learning_rate"]))
     state = algorithm.initial_state(seed=0)
     last = None
     for step in range(steps):
-        result = algorithm.train_step(model, optimizer, source_batches, step=step,
+        batches = batch_provider(step) if batch_provider is not None else source_batches
+        result = algorithm.train_step(model, optimizer, batches, step=step,
                                      learning_rate=optimizer.param_groups[0]["lr"], algorithm_state=state)
         optimizer, state, last = result.optimizer, result.algorithm_state, result.parts
         if not bool(torch.isfinite(last.objective.detach())):
