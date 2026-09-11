@@ -1,4 +1,0 @@
-case,feature,left_delta,left_run,left_value,right_delta,right_run,right_value
-same_rho_slack_different_behavior,rho_slack,4.6580447732313957e-07,gaussian|hidden_u_hurts|IRMV1|0.001|population,1.231690048352228e-10,-5.546790434407534e-06,gaussian|hidden_u_hurts|VREX|0.1|population,9.270902883106455e-09
-same_E_norm_different_behavior,E_operator_norm,4.931356192283687e-07,gaussian|hidden_u_hurts|VREX|0.01|population,3.081136761313994e-06,-5.549371592250552e-07,gaussian|u_exposed_complete_information|VREX|0.01|population,3.5022703391840437e-06
-smaller_z0_worse_behavior,z0_norm,4.6580447732313957e-07,gaussian|u_exposed_complete_information|IRMV1|0.001|population,3.663482231671869e-06,-5.549371592250552e-07,gaussian|hidden_u_hurts|VREX|0.01|population,5.890824092330206e-06

@@ -1,4 +1,0 @@
-method,induced_cost,status,direct_descent
-L2,0.5799999999999998,exact,False
-CORAL,0.0,degenerate_infimum,False
-IRMv1,0.026613039999999973,conditional,False

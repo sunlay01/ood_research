@@ -1,8 +1,0 @@
-{
-  "entries": {
-    "cmnist_bridge_new": "/Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/cleanroom_rerun_1_3d/results/cmnist_bridge/summary.json",
-    "task1_new": "/Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/cleanroom_rerun_1_3d/results/task1/summary.json",
-    "task2_new": "/Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/cleanroom_rerun_1_3d/results/task2/summary.json"
-  },
-  "task_id": "TASK-RERUN-1-3D-CLEANROOM"
-}

@@ -1,8 +1,0 @@
-{
-  "status": "stress_only",
-  "dimension": 9,
-  "source_hessian_min_eigenvalue": 0.41906916276428796,
-  "optimum_norm": 1.7785857551413256,
-  "moment_psd": true,
-  "deep_network_claim": false
-}

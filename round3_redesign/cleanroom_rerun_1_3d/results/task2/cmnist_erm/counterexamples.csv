@@ -1,6 +1,0 @@
-E_operator_norm,adaptive_regret,condition_holds,fixture,full_minimax_condition,information_floor,total_regret
-0.5,0.5,True,nonzero_E_within_slack,True,0.5,0.5
-0.01,0.5000500000000001,False,small_E_in_zero_slack_direction,False,0.5,0.5000500000000001
-0.5,0.5,True,static_steering_breaks_optimality,False,0.5,0.5266666666666667
-0.5,0.5,True,same_norm_different_placement_good,True,0.5,0.5
-0.5,0.6250000000000001,False,same_norm_different_placement_bad,False,0.5,0.6250000000000001

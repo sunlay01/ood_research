@@ -1,3 +1,0 @@
-# Algorithm Mechanism Decomposition
-
-Verdict: `ALGORITHM-MECHANISM-PASS`. The audit contains 220 rows with 0 errors. The maximum IFT reconstruction relative error is `3.396e-10` and the maximum component-total error is `8.102e-10`. The corrected geometry snapshot audit passed for all 220 rows. Exact IFT totals are compared with independently differentiated components and static-path finite differences. All four forcing/filtering counterfactuals are expanded at the shared ERM source solution and are evaluated with the post-hoc task residual E=A_rec+Pi O. `A`, `E`, and affine regret are unavailable to learner-side construction.

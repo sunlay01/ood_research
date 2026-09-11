@@ -1,9 +1,0 @@
-name,n_source,ambient_state_rank,source_contrast_rank,exposed_response_rank,total_response_rank,unexposed_quotient_dimension,singular_values,condition_number,tolerance_profile
-single_source,1,1,0,0,5,5,[],inf,"{'relative': 1e-09, 'rank_rule': 'singular > relative * max singular'}"
-one_relation_contrast,3,3,2,2,5,3,"[0.08612691000501556, 0.011374609478138195, 0.0]",7.571856437845185,"{'relative': 1e-09, 'rank_rule': 'singular > relative * max singular'}"
-two_shortcut_contrasts,5,5,4,3,5,2,"[0.08665498486524738, 0.07825116352061387, 0.010368820064007264, 3.839021108805005e-19, 0.0]",8.357265757368888,"{'relative': 1e-09, 'rank_rule': 'singular > relative * max singular'}"
-duplicate_source,4,3,2,2,5,3,"[0.0862788830920324, 0.01145208307527625, 1.7094752060248727e-18, 0.0]",7.533903004799077,"{'relative': 1e-09, 'rank_rule': 'singular > relative * max singular'}"
-risk_null_nuisance,4,4,3,2,5,3,"[0.08627888309203237, 0.011452083075276249, 0.0, 0.0]",7.533903004799075,"{'relative': 1e-09, 'rank_rule': 'singular > relative * max singular'}"
-new_target_relevant_contrast,4,4,3,3,5,2,"[0.1809738237475906, 0.0857324407719097, 0.01117414163522999, 0.0]",16.19576963093199,"{'relative': 1e-09, 'rank_rule': 'singular > relative * max singular'}"
-redundant_shortcut_copies,5,3,2,2,5,3,"[0.12163119308569097, 0.015999212043591532, 1.457612489272962e-18, 3.9983772143313776e-20, 0.0]",7.602323961598485,"{'relative': 1e-09, 'rank_rule': 'singular > relative * max singular'}"
-independent_nuisance_dimensions,4,4,3,2,5,3,"[0.08627888309203237, 0.011452083075276249, 0.0, 0.0]",7.533903004799075,"{'relative': 1e-09, 'rank_rule': 'singular > relative * max singular'}"

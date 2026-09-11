@@ -1,9 +1,0 @@
-metric,value
-target_visible_dimension,4
-source_rank_in_quotient,3
-ambiguity_dimension,1
-ambient_symmetric_dimension,10
-raw_source_kernel_dimension,7
-target_recovery_residual,0.7071067811865476
-target_recovery_exact,False
-support_example,0.5250000000000002
