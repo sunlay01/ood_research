@@ -1,0 +1,106 @@
+{
+  "task_id": "TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY",
+  "device": "cpu",
+  "methods": ["ERM", "IRMv1", "VREX", "CORAL"],
+  "include_coral_if_fidelity_pass": true,
+  "seeds": [10, 11, 12, 13, 14],
+  "data": {
+    "source_color_flip_probs": [0.2, 0.1],
+    "target_color_flip_prob": 0.9,
+    "label_noise": 0.25,
+    "label_definition": "digit < 5",
+    "image_subsample": 2,
+    "normalize_pixels": true,
+    "label_rule": "digit < 5",
+    "source_split": "MNIST train first 50000, seeded permutation, even/odd pools",
+    "target_split": "MNIST train last 10000"
+  },
+  "model": {
+    "input_dim": 392,
+    "hidden_dim": 64,
+    "activation": "relu",
+    "linear_layers": 3
+  },
+  "training": {
+    "steps": 501,
+    "batch_size_per_environment": 512,
+    "learning_rate": 0.001,
+    "l2_regularizer_weight": 0.001,
+    "checkpoint_steps": [0, 100, 200, 300, 400, 500]
+  },
+  "irmv1": {
+    "penalty_anneal_iters": 100,
+    "penalty_weight": 10000.0,
+    "whole_loss_rescale_after_anneal": true
+  },
+  "vrex": {
+    "lambda": 10.0,
+    "penalty_anneal_iters": 100,
+    "pre_anneal_penalty_weight": 1.0,
+    "post_anneal_penalty_weight": 10.0,
+    "reset_adam_at_anneal": true,
+    "whole_loss_rescale_after_anneal": false
+  },
+  "coral": {
+    "gamma": 1.0,
+    "feature_dimension": 64,
+    "covariance_denominator": "n-1",
+    "mean_normalization": "divide_by_d",
+    "covariance_normalization": "divide_by_d_squared",
+    "representation_normalization": "none"
+  },
+  "world": {
+    "dimension": 5,
+    "base_probabilities": {
+      "source_env0_color": 0.2,
+      "source_env1_color": 0.1,
+      "evaluation_color": 0.9,
+      "source_label_noise": 0.25,
+      "evaluation_label_noise": 0.25
+    },
+    "primary_basis": ["e1", "e2", "e3", "e4", "e5"],
+    "derived_directions_are_basis": false,
+    "derivative_kind": "smooth_four_outcome_expectation"
+  },
+  "response": {
+    "delta": 0.01,
+    "horizons": [1, 5, 20],
+    "head_dimension": 65,
+    "source_hessian_damping_relative": 1e-6,
+    "coordinate": "frozen_encoder_augmented_final_head",
+    "source_exposed_basis_indices": [0, 1, 3]
+  },
+  "banks": {
+    "geometry_pool_size_per_pool": 1024,
+    "source_bank_size_per_environment": 256,
+    "counterfactual_bank_size": 512,
+    "class_balance": "clean_digit_label_balanced",
+    "clean_task_view": "same_counterfactual_images_with_equal_red_green_average"
+  },
+  "blind_grouping": {
+    "standardization": "column_zscore",
+    "distance": "euclidean",
+    "linkage": "average",
+    "candidate_k": [2, 3, 4],
+    "silhouette_threshold": 0.25,
+    "bootstrap_repeats": 200,
+    "bootstrap_ari_threshold": 0.75,
+    "bootstrap_seed": 20260910,
+    "row_ids": "opaque_u000_to_u010",
+    "semantic_labels_visible_before_freeze": false
+  },
+  "selection": {
+    "target_tuning": false,
+    "target_checkpoint_selection": false,
+    "target_method_inclusion": false,
+    "target_grouping": false,
+    "response_contrast_promotion": "descriptive_only"
+  },
+  "execution": {
+    "wall_clock_seconds": 3600,
+    "download_mnist": false,
+    "old_results_overwritten": false,
+    "stop_on_missing_primary_row": true,
+    "stop_on_fidelity_failure": true
+  }
+}

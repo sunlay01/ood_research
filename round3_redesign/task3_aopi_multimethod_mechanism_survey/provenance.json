@@ -1,0 +1,308 @@
+{
+  "task_id": "TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY",
+  "git_head": "d13d1c9a6e285d592c6f611e772544d7dffdcafc",
+  "branch": "task3-cmnist-local-response",
+  "git_status": "M active/CONTEXT.md\n M active/STATE_DELTA.md\n M active/TASK.md\n?? configs/task3_aopi_multimethod_mechanism_survey.json\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/\n?? src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/\n?? tests/test_task3_aopi_multimethod_blindness.py\n?? tests/test_task3_aopi_multimethod_method_fidelity.py\n?? tests/test_task3_aopi_multimethod_response.py\n?? tests/test_task3_aopi_multimethod_world.py",
+  "config_sha256": "18c4e242af2e5280b9e6bbaac7f8d1f0074771e92ffc41a35fea7cf27d8207d1",
+  "source_sha256": {
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/blind_grouping.py": "a0ee027ecbb551d2591d1f897f97cff335f7c49e57be5fe74a7fd35d79e5b800",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/task_response.py": "ab288de95db6f1731b29bf5a5494a35719c49e5af87209aa646f03b9119e7dc5",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/analysis.py": "99d100a6fa96de669b942b535caa6daff2f92301a4404922852dbcfb77ece2a2",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/config_schema.py": "8e098833a39ec7d384ccbde2ca6f092624bc478328a5f25d66eaaf08d71dd324",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/__init__.py": "2591467d16c1569517b1f4a342ee3df76bed4063dc969c55748a96c4f5b06a27",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/functional_banks.py": "6bcdd7148ccce7cab2334c35491e4d958f3b264bd37c8e73e096ddd4e6ef7686",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/smooth_world5.py": "3cb0f666330952e73c5cb9a1574fe77de632bc0f47a4775eb5cf62fe15a90824",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/source_observation.py": "92cb157ef4b6bd6026725f8dee4d150ab1c4a27271fe372a235cfff40f80d13e",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/method_trainer.py": "c49c930ae4972747a99bf32c573a6728c113b7ce3e3ad49695d729c2a24c1cef",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/signatures.py": "99c4cf1514902c9b4bb7c92f2548d122ee4150728fa56bbf7b61e41c8e7602fc",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/method_objectives.py": "89b3150c167752c84992392c5c6f9803ed346a6e2926ae29501cd891597584d2",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/full_response.py": "f77ac36ecdaef9c731a8baa5ec53d331aecd9fd34b95d791fd7f92f091af7d09",
+    "src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py": "bcb94a5b67d9abbf6b63ae5b7a5dd42aef6b0eb0eefb2878f52ee8f7b3fad75e"
+  },
+  "test_sha256": {
+    "tests/test_task3_aopi_multimethod_world.py": "888a8a497a1df0b97e35b5727172ea1bcf50a5b5bf064f436a2461410101ce9c",
+    "tests/test_task3_aopi_multimethod_response.py": "ac725487653afbdb028c1afe79b2f037a15a816821d9ca044d8c1e1392e2e0f0",
+    "tests/test_task3_aopi_multimethod_blindness.py": "b106d14e77af6f6575015ffd77adfa0d561e9dbddf2d4bbf0060adab037d4ae7",
+    "tests/test_task3_aopi_multimethod_method_fidelity.py": "c74c5857730a996683bacf11960c16a077c437a32fead68bddc7b0a87c9d7508"
+  },
+  "reference_manifest_sha256": {
+    "round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoint_manifest.csv": "e7987dfd8868ba9a452573071c00a6a9738efbd51b10380834311e47ddbfd6dd"
+  },
+  "generated_checkpoint_sha256": {
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_VREX.pt": "e152a213cb627b5fd2107491012eb8cac033bc97cb6a404bc3c43fd5f6ce3948",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_IRMv1.pt": "68e3c6ea3dccc583738ca6f88136238dd184a4f7cd99e639de9d556a3c248a15",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_IRMv1.pt": "e560aa262007bd34adb0c238b53b3b5ddc8f9c87ac526bad34516a7d2d272a05",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_ERM.pt": "85800343f2d110eeb8b2a1389368a1b92ca4d2d2056737a21b99004b0011cc84",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_CORAL.pt": "3ccb4fb732d2050c46c208278249ef2be46558215cb2a24e5ea9262c7f8338ad",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_ERM.pt": "0d8fdde4b72c9d7952aa3781d2312b816247411e83f233942b0c8c9f9a6759c9",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_VREX.pt": "4a79cb624a41567962b1b2b982227ae129e4746dedbf7391156fa8591af508e1",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_VREX.pt": "5901a757e8783b9843fac94b2c532afa6600c32dce9a3913229c940734d242e1",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_IRMv1.pt": "a2e648794fa7e7ef0716cee1e10de37fef9eb88a7a32da141f0451a35796bbe2",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_VREX.pt": "d083d55b49902ccd111ad231046edc44cad28a3df33cb34f4c77b527aecfe83c",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_CORAL.pt": "52f782aa2ac4f2bd89173f2495710c1e297faf03ac0d0c2f188ebca927fb7648",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_CORAL.pt": "2bff05b3753f6ad565815b8219e21ab2336e32b9767686ce34818b3a499c99e6",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_ERM.pt": "e86c8b5e012fccce5af3e0d04f719e774c1ec5ef3e23e48352f3dcb42a0aaf2d",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_IRMv1.pt": "e991a9ffc4221e97eebad01d04414589c91d94975f2922cabee90d1de518aa5e",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_IRMv1.pt": "81665c57a0e000b0256ab4b8c846dd271f9252e6b48bbdb80e65d518a8509c4f",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_ERM.pt": "3303dd7e1469386b0a452908a5c7b7941bd52a15aedf062e20d649087da8f1bb",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_CORAL.pt": "fa5d5eb3c5d7691ad92a3daef6194800e81efddf54e53a69bd606cda5409c764",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_CORAL.pt": "f1fd032d8a48136aa35ea312d44ac48b66b9e526ee7375124a65b7d29066af20",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_ERM.pt": "98d7c9d01cbe14a5ac65645db4c61913b7df4905249e3a8c909e3d43c6ef5984",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_VREX.pt": "fde630c7573ab0bd9e0e7175521db707e4cc17663bfdb801a125bd49a8fc5a55"
+  },
+  "python": "3.13.13",
+  "torch": "2.12.1",
+  "device": "cpu",
+  "target_used_for_training": false,
+  "target_used_for_tuning": false,
+  "target_used_for_grouping": false,
+  "old_results_overwritten": false,
+  "summary": {
+    "task_id": "TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY",
+    "verdict": "MULTIMETHOD-MECHANISM-SURVEY-PARTIAL",
+    "stage": "complete",
+    "errors": [],
+    "world_gates": [
+      {
+        "seed": 10,
+        "method": "ERM",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 10,
+        "method": "IRMv1",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 10,
+        "method": "VREX",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 10,
+        "method": "CORAL",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 11,
+        "method": "ERM",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 11,
+        "method": "IRMv1",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 11,
+        "method": "VREX",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 11,
+        "method": "CORAL",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 12,
+        "method": "ERM",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 12,
+        "method": "IRMv1",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 12,
+        "method": "VREX",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 12,
+        "method": "CORAL",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 13,
+        "method": "ERM",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 13,
+        "method": "IRMv1",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 13,
+        "method": "VREX",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 13,
+        "method": "CORAL",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 14,
+        "method": "ERM",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 14,
+        "method": "IRMv1",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 14,
+        "method": "VREX",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      },
+      {
+        "seed": 14,
+        "method": "CORAL",
+        "rank_A": 5,
+        "rank_O": 3,
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "passed": true
+      }
+    ],
+    "grouping": {
+      "opaque_ids": [
+        "u000",
+        "u001",
+        "u002",
+        "u003",
+        "u004",
+        "u005",
+        "u006",
+        "u007",
+        "u008",
+        "u009",
+        "u010"
+      ],
+      "feature_keys": [
+        "a_m000",
+        "a_m001",
+        "a_m002",
+        "a_m003",
+        "o_m000",
+        "o_m001",
+        "o_m002",
+        "o_m003",
+        "r_m000_K1",
+        "r_m000_K20",
+        "r_m000_K5",
+        "r_m001_K1",
+        "r_m001_K20",
+        "r_m001_K5",
+        "r_m002_K1",
+        "r_m002_K20",
+        "r_m002_K5",
+        "r_m003_K1",
+        "r_m003_K20",
+        "r_m003_K5"
+      ],
+      "selected_k": 4,
+      "silhouette": 0.41763244817404993,
+      "bootstrap_mean_ari": 1.0,
+      "stable": true,
+      "status": "STAGE4-PASS",
+      "grouping_method": "average_linkage_euclidean_column_zscore",
+      "grouping_hyperparameters": {
+        "candidate_k": [
+          2,
+          3,
+          4
+        ],
+        "repeats": 200,
+        "seed": 20260910,
+        "silhouette_threshold": 0.25,
+        "ari_threshold": 0.75,
+        "seed_resampling": true
+      }
+    },
+    "method_count": 4,
+    "seed_count": 5,
+    "target_used_for_training": false,
+    "target_used_for_tuning": false,
+    "target_used_for_grouping": false
+  }
+}

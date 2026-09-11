@@ -1,28 +1,23 @@
-# TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR Context
+# TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY Context
 
-Question: do corrected smooth tangent A/O objects have valid three-dimensional
-geometry, and can secondary head and primary full-training response diagnostics
-describe ERM/IRMv1 without conflating a refit head with the successful learner?
+This isolated audit compares ERM, IRMv1, VREX, and CORAL under corrected CPU-minimal CMNIST. The R5 base world is `(0.2, 0.1, 0.9, 0.25, 0.25)` and tangent coordinates are displacements from that base.
 
-The old audit is scientifically superseded because its A omitted the source
-term, its finite differences were thresholded, its O was method-dependent, and
-its Pi was a newly refit head equilibrium. This repair keeps the old artifacts
-unchanged and uses the verified checkpoints as H0 full-learner references.
+The old audits remain unchanged and are not runtime inputs to this survey. All four methods use common source rows, initialization, and schedule. Response differences are descriptive only.
 
 Trusted inputs:
 
-- Corrected CPU-minimal config and source-generating semantics.
-- Verified ERM/IRMv1 checkpoints and manifest for seeds `10..14`.
+- `configs/task3_aopi_multimethod_mechanism_survey.json` and corrected CPU-minimal source-generating semantics.
+- Accepted ERM/IRM reconstruction manifest for seeds `10..14` as an F0 anchor.
 
 Source-only construction:
 
-- Smooth four-outcome expectation derivatives on exactly three probability coordinates.
-- Corrected A includes D grad(R_T-R_S); O contains only source risk gradients.
-- H1 Pi_head is secondary; Pi_full uses exact reconstructed Adam state and K=1,5,20 source-only continuations.
+- Smooth four-outcome expectation derivatives on five R5 probability coordinates.
+- A includes `D grad(R_T - R_S)`; O contains only source risk gradients and no method penalty.
+- Pi_full uses K=1,5,20 source-only continuations with plus/minus/control replay.
 
 Evaluation-only construction:
 
-- Held-out evaluation worlds enter corrected A and post-hoc predictor diagnostics only.
-- Target rows cannot select any source fit, damping, direction, continuation, or threshold.
+- Held-out evaluation worlds enter A, evaluation banks, and post-hoc performance only.
+- Target rows cannot select source fit, direction, continuation, normalization, grouping, or method inclusion.
 
 Canonical state remains unchanged; completion writes only `active/STATE_DELTA.md`.

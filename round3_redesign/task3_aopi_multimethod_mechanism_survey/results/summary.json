@@ -1,0 +1,248 @@
+{
+  "errors": [],
+  "grouping": {
+    "bootstrap_mean_ari": 1.0,
+    "feature_keys": [
+      "a_m000",
+      "a_m001",
+      "a_m002",
+      "a_m003",
+      "o_m000",
+      "o_m001",
+      "o_m002",
+      "o_m003",
+      "r_m000_K1",
+      "r_m000_K20",
+      "r_m000_K5",
+      "r_m001_K1",
+      "r_m001_K20",
+      "r_m001_K5",
+      "r_m002_K1",
+      "r_m002_K20",
+      "r_m002_K5",
+      "r_m003_K1",
+      "r_m003_K20",
+      "r_m003_K5"
+    ],
+    "grouping_hyperparameters": {
+      "ari_threshold": 0.75,
+      "candidate_k": [
+        2,
+        3,
+        4
+      ],
+      "repeats": 200,
+      "seed": 20260910,
+      "seed_resampling": true,
+      "silhouette_threshold": 0.25
+    },
+    "grouping_method": "average_linkage_euclidean_column_zscore",
+    "opaque_ids": [
+      "u000",
+      "u001",
+      "u002",
+      "u003",
+      "u004",
+      "u005",
+      "u006",
+      "u007",
+      "u008",
+      "u009",
+      "u010"
+    ],
+    "selected_k": 4,
+    "silhouette": 0.41763244817404993,
+    "stable": true,
+    "status": "STAGE4-PASS"
+  },
+  "method_count": 4,
+  "seed_count": 5,
+  "stage": "complete",
+  "target_used_for_grouping": false,
+  "target_used_for_training": false,
+  "target_used_for_tuning": false,
+  "task_id": "TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY",
+  "verdict": "MULTIMETHOD-MECHANISM-SURVEY-PARTIAL",
+  "world_gates": [
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ERM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "IRMv1",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "VREX",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "CORAL",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ERM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "IRMv1",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "VREX",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "CORAL",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ERM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "IRMv1",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "VREX",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "CORAL",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ERM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "IRMv1",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "VREX",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "CORAL",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ERM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "IRMv1",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "VREX",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "CORAL",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    }
+  ]
+}

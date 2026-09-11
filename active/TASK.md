@@ -1,55 +1,27 @@
-# TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR
+# TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY
 
-task_id: `TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR`
+task_id: `TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY`
 
-goal: `Repair the CMNIST A/O/Pi audit with smooth tangent expectations, corrected A/O, secondary Pi_head, and primary finite-time Pi_full.`
+goal: `Run an isolated descriptive A/O/Pi survey of ERM, IRMv1, VREX, and CORAL on corrected CMNIST.`
 
 state_write_authorized: false
 
 scientific_status: validation / falsification gate only
 
-methods:
+methods: ERM, IRMv1, VREX, CORAL
 
-- `ERM`
-- `IRMv1`
+primary seeds: 10, 11, 12, 13, 14
 
-primary seeds:
-
-- `10`
-- `11`
-- `12`
-- `13`
-- `14`
-
-inputs:
-
-- `configs/task3_cmnist_cpu_minimal.json`
-- `round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoint_manifest.csv`
-- `round3_redesign/task3_cmnist_counterfactual_audit/results/checkpoints/`
-- corrected CPU-minimal data/model code
+inputs: `configs/task3_aopi_multimethod_mechanism_survey.json`, corrected CPU-minimal data/model code, and the accepted ERM/IRM reconstruction manifest.
 
 hard constraints:
 
-- Preserve the old audit as historical evidence; do not overwrite it.
-- Use exactly three primary tangent directions and smooth weighted expectations.
-- Treat frozen-head Pi as secondary and full-network finite-time response as primary.
-- Verify checkpoint identity and write preregistration before audit metrics.
-- Source fitting, `H_S`, `O_S`, and `Pi` are source-only; held-out target data defines A only post-hoc.
-- Do not add algorithms, regularizers, semantic clustering, target tuning, or canonical-state edits.
+- Use the R5 displacement world with smooth four-outcome expectations and e1..e5 as primary basis.
+- Define O from source env0/env1 risks only, without method-specific penalties.
+- Use source-only training and Pi_full continuation; target/evaluation is post-hoc only.
+- Keep every fixed method and seed even when target performance is poor.
+- Do not add OURS, Fish/Fishr, MLDG, HA, CMA, target tuning, or canonical-state edits.
 
-outputs:
+outputs: `round3_redesign/task3_aopi_multimethod_mechanism_survey/`
 
-- `round3_redesign/task3_aopi_cmnist_reinstantiation_repair/`
-- `src/ood_repr_reg/task3_aopi_cmnist_reinstantiation_repair/`
-- `src/ood_repr_reg/run_task3_aopi_cmnist_reinstantiation_repair.py`
-- `tests/test_task3_aopi_cmnist_reinstantiation_repair.py`
-- `active/STATE_DELTA.md`
-
-completion verdict enum:
-
-- `AOPI-REPAIR-PASS`
-- `AOPI-REPAIR-PARTIAL`
-- `AOPI-REPAIR-FAIL`
-- `AOPI-REPAIR-INVALID`
-
-Interpretation ceiling: validity repair only; no new algorithm, theory validation, causal claim, or universal DG claim.
+Interpretation ceiling: descriptive response differences only; no semantic mechanism recovery, causal claim, theory validation, or new algorithm claim.
