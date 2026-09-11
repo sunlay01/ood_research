@@ -8,7 +8,7 @@ Environment:
 	PIL: 12.2.0
 Args:
 	algorithm: MLDG
-	checkpoint_freq: 2
+	checkpoint_freq: 1
 	data_dir: /Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/domainbed_data
 	dataset: ColoredMNIST
 	holdout_fraction: 0.2
@@ -18,7 +18,7 @@ Args:
 	save_model_every_checkpoint: False
 	seed: 0
 	skip_model_save: True
-	steps: 2
+	steps: 1
 	task: domain_generalization
 	test_envs: [2]
 	trial_seed: 0
@@ -42,3 +42,5 @@ HParams:
 	vit_attn_tune: False
 	vit_dropout: 0.0
 	weight_decay: 0.0
+env0_in_acc   env0_out_acc  env1_in_acc   env1_out_acc  env2_in_acc   env2_out_acc  epoch         loss          mem_gb        step          step_time    
+0.5027319477  0.5023574796  0.5003482081  0.5047149593  0.5036160069  0.5060008573  0.0000000000  0.0000000000  0.0000000000  0             13.045588970 
