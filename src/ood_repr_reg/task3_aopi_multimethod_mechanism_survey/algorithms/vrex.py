@@ -21,6 +21,9 @@ def vrex_penalty_from_losses(losses: Tensor) -> Tensor:
 class VRExAlgorithm(BaseAlgorithm):
     name = "VREX"
     formula_id = "CMNIST_VREX_ANNEALED_V1"
+    reference_id = "REx_OFFICIAL_COLOREDMNIST_SCALE"
+    variant_id = "VREX_LAMBDA10000_ANNEAL100_RESCALE"
+    admission_role = "INTERMEDIATE"
 
     def prepare_step(
         self,

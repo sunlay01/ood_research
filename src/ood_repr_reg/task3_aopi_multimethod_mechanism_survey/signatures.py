@@ -8,7 +8,13 @@ from typing import Any, Iterable
 import numpy as np
 
 
-METHOD_CODES = {"ERM": "m000", "IRMv1": "m001", "VREX": "m002", "CORAL": "m003"}
+def method_code_map(methods: Iterable[str]) -> dict[str, str]:
+    ordered: list[str] = []
+    for method in methods:
+        name = str(method)
+        if name not in ordered:
+            ordered.append(name)
+    return {method: f"m{index:03d}" for index, method in enumerate(ordered)}
 
 
 def _rms(values: Iterable[float]) -> float:
@@ -40,15 +46,17 @@ def normalized_response_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]
     return result
 
 
-def mechanism_signature_rows(a_rows: list[dict[str, Any]], o_rows: list[dict[str, Any]], normalized_rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def mechanism_signature_rows(a_rows: list[dict[str, Any]], o_rows: list[dict[str, Any]], normalized_rows: list[dict[str, Any]], *, methods: Iterable[str] | None = None) -> list[dict[str, Any]]:
     by_direction: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
+    method_list = list(methods) if methods is not None else [str(row["method"]) for row in [*a_rows, *o_rows, *normalized_rows] if "method" in row]
+    method_codes = method_code_map(method_list)
     for row in a_rows:
-        by_direction[str(row["opaque_direction_id"])][f"a_{METHOD_CODES.get(str(row['method']), 'm_unknown')}"] .append(float(row["A_normalized_norm"]))
+        by_direction[str(row["opaque_direction_id"])][f"a_{method_codes.get(str(row['method']), 'm_unknown')}"].append(float(row["A_normalized_norm"]))
     for row in o_rows:
-        code = METHOD_CODES.get(str(row.get("method", "")), "m_unknown")
+        code = method_codes.get(str(row.get("method", "")), "m_unknown")
         by_direction[str(row["opaque_direction_id"])][f"o_{code}"].append(float(row["O_normalized_norm"]))
     for row in normalized_rows:
-        key = f"r_{METHOD_CODES.get(str(row['method']), 'm_unknown')}_K{row['K']}"
+        key = f"r_{method_codes.get(str(row['method']), 'm_unknown')}_K{row['K']}"
         by_direction[str(row["opaque_direction_id"])][key].append(float(row["normalized_source_response"]))
     keys = sorted({key for values in by_direction.values() for key in values})
     return [

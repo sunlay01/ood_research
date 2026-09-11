@@ -52,6 +52,9 @@ def smooth_coral_penalty(model: nn.Module, worlds: SmoothWorld5, indices: tuple[
 class CORALAlgorithm(BaseAlgorithm):
     name = "CORAL"
     formula_id = "CMNIST_REPRESENTATION_CORAL_V1"
+    reference_id = "DOMAINBED_CORAL_FORMULA"
+    variant_id = "CORAL_GAMMA1_SOURCE_ONLY"
+    admission_role = "NEGATIVE_CONTROL"
 
     @property
     def gamma(self) -> float:

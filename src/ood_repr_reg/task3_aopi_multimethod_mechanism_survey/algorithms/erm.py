@@ -12,6 +12,9 @@ from .base import BaseAlgorithm, smooth_source_risk_vector
 class ERMAlgorithm(BaseAlgorithm):
     name = "ERM"
     formula_id = "CPU_MINIMAL_ERM_V1"
+    reference_id = "CPU_MINIMAL_CANONICAL"
+    variant_id = "ERM_CANONICAL"
+    admission_role = "NEGATIVE_CONTROL"
 
     def objective(
         self,

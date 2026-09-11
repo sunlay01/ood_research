@@ -7,8 +7,12 @@ from typing import Any
 from .base import SurveyAlgorithm
 from .coral import CORALAlgorithm
 from .erm import ERMAlgorithm
+from .feature_nuclear import FeatureNuclearAlgorithm
+from .fishr import FishrAlgorithm
 from .irmv1 import IRMv1Algorithm
+from .mldg import MLDGAlgorithm
 from .vrex import VRExAlgorithm
+from .weight_nuclear import WeightNuclearAlgorithm
 
 
 ALGORITHM_CLASSES = {
@@ -16,6 +20,10 @@ ALGORITHM_CLASSES = {
     "IRMv1": IRMv1Algorithm,
     "VREX": VRExAlgorithm,
     "CORAL": CORALAlgorithm,
+    "FISHR": FishrAlgorithm,
+    "MLDG": MLDGAlgorithm,
+    "WEIGHT_NUCLEAR": WeightNuclearAlgorithm,
+    "FEATURE_NUCLEAR": FeatureNuclearAlgorithm,
 }
 
 

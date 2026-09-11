@@ -13,6 +13,7 @@ from torch import Tensor, nn
 from ..task3_cmnist_cpu_minimal.data import BatchSchedule, ColoredEnvironment, scheduled_source_batches
 from ..task3_cmnist_cpu_minimal.model import parameter_hash
 from ..task3_cmnist_cpu_minimal.trainer import batch_schedule_hash
+from .algorithms.base import AlgorithmState
 from .algorithms.registry import get_algorithm
 
 
@@ -43,14 +44,20 @@ def optimizer_state_hash(state: dict[str, Any]) -> str:
 class SurveyTrainResult:
     model: nn.Module
     optimizer_state: dict[str, Any]
+    algorithm_state: AlgorithmState
     seed: int
     method: str
     initial_parameter_hash: str
     batch_schedule_hash: str
     final_parameter_hash: str
     optimizer_state_hash: str
+    algorithm_state_hash: str
     optimizer_reset_count: int
     objective_formula_id: str
+    algorithm_reference_id: str
+    algorithm_variant_id: str
+    admission_role: str
+    admitted_to_pi: bool
     final_loss: float
     final_risk: float
     final_penalty: float
@@ -72,21 +79,28 @@ def train_survey_method(
     learning_rate = float(config["training"]["learning_rate"])
     algorithm = get_algorithm(method, config)
     optimizer = torch.optim.Adam(model.parameters(), lr=learning_rate)
+    algorithm_state = algorithm.initial_state(seed=seed)
     reset_count = 0
     parts = None
     invalid_reason = "OK"
     for step in range(int(config["training"]["steps"])):
-        optimizer, did_reset = algorithm.prepare_step(optimizer, model, step=step, learning_rate=learning_rate)
-        reset_count += int(did_reset)
         batches = scheduled_source_batches(source_envs, batch_schedule, step, config["device"])
         try:
-            parts = algorithm.objective(model, batches, step=step)
+            step_result = algorithm.train_step(
+                model,
+                optimizer,
+                batches,
+                step=step,
+                learning_rate=learning_rate,
+                algorithm_state=algorithm_state,
+            )
+            parts = step_result.parts
+            optimizer = step_result.optimizer
+            algorithm_state = step_result.algorithm_state
+            reset_count += int(step_result.did_reset_optimizer)
             if not bool(torch.isfinite(parts.objective.detach())):
                 invalid_reason = "NONFINITE_OBJECTIVE"
                 break
-            optimizer.zero_grad(set_to_none=True)
-            parts.objective.backward()
-            optimizer.step()
         except Exception as exc:
             invalid_reason = f"TRAINING_FAILED:{type(exc).__name__}:{exc}"
             break
@@ -94,12 +108,18 @@ def train_survey_method(
     state = copy.deepcopy(optimizer.state_dict())
     return SurveyTrainResult(
         model=model.cpu(), optimizer_state=state, seed=int(seed), method=method,
+        algorithm_state=algorithm_state.clone(),
         initial_parameter_hash=initial_parameter_hash,
         batch_schedule_hash=batch_schedule_hash(batch_schedule),
         final_parameter_hash=parameter_hash(model),
         optimizer_state_hash=optimizer_state_hash(state),
+        algorithm_state_hash=algorithm_state.hash(),
         optimizer_reset_count=reset_count,
         objective_formula_id=algorithm.formula_id,
+        algorithm_reference_id=algorithm.reference_id,
+        algorithm_variant_id=algorithm.variant_id,
+        admission_role=algorithm.admission_role,
+        admitted_to_pi=bool(algorithm.admits_to_pi),
         final_loss=float("nan") if parts is None else float(parts.objective.detach().cpu()),
         final_risk=float("nan") if parts is None else float(parts.risk.detach().cpu()),
         final_penalty=float("nan") if parts is None else float(parts.penalty.detach().cpu()),

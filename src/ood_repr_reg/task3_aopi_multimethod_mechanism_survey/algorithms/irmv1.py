@@ -14,6 +14,9 @@ from .base import BaseAlgorithm, smooth_source_risk_vector
 class IRMv1Algorithm(BaseAlgorithm):
     name = "IRMv1"
     formula_id = "CPU_MINIMAL_IRMV1_V1"
+    reference_id = "CPU_MINIMAL_CANONICAL"
+    variant_id = "IRMv1_CANONICAL"
+    admission_role = "POSITIVE_CONTROL"
 
     def objective(
         self,

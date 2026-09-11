@@ -139,3 +139,16 @@ coordinate semantics, rank bounds, and failure modes are reviewed explicitly.
 - review: writes preregistration before metrics, trains all fixed methods/seeds from shared source schedules, keeps target evaluation post-hoc, writes isolated results, emits heartbeat logs, and stops on fidelity/world failures. ERM/IRM reference hashes are checked; no method is removed for poor target accuracy.
 - boundary check: method objectives receive source batches only; target is passed only to evaluation. Full responses use source smooth continuations, fixed horizons, and replay hashes. A plausible failure is an incomplete timeout run; it is recorded as invalid rather than silently interpreted.
 - final verdict: `PASS`
+
+## Algorithm panel expansion
+
+- task: `TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK`
+- files: `algorithms/base.py`, `fishr.py`, `mldg.py`, `weight_nuclear.py`, `feature_nuclear.py`, `stable_rank.py`, `registry.py`, `method_trainer.py`, `full_response.py`, `signatures.py`, `config_schema.py`, and `run_task3_aopi_multimethod_mechanism_survey.py`
+- worktree basis: expansion implemented after `bb31c19fe709df44e84415a779fb66762045212e`; canonical state files and old repair artifacts were not edited.
+- mathematical objects and dimensions: default algorithm step interface owns `AlgorithmState`, `StepResult`, and `SmoothStepResult`; Fishr uses 65D classifier-parameter per-example gradients; MLDG uses first-order source env meta-train/meta-test roles; weight nuclear penalizes only the two encoder linear matrices; feature nuclear applies positive source-feature nuclear norm; stable rank remains diagnostic-only.
+- boundary checks: training paths consume source batches only; `full_response.py` clones final model, Adam state, and algorithm state, then calls `algorithm.smooth_train_step()`; no new method-specific math lives in runner/full-response; `signatures.py` generates dynamic opaque method codes and does not use target accuracy.
+- displacement/base semantics: `smooth_world5.py`, `task_response.py`, `source_observation.py`, and functional banks were preserved; R5 base identity and `O e3/e5 = 0` remain enforced by tests and runner gates.
+- rank and derived-direction checks: primary A/O rank uses only e1..e5; derived directions remain linear-combination diagnostics and do not add rank columns.
+- counterexample considered: a plausible but wrong expansion would duplicate Fishr/MLDG math inside `full_response.py` or hard-code eight method strings in signature construction. Regression tests now check method-owned interfaces, dynamic codes, and deletion of `method_objectives.py`.
+- tests: focused expansion tests plus prior multimethod, project-state, CPU-minimal, and counterfactual regression tests passed after the expanded run.
+- final verdict: `PASS`

@@ -118,7 +118,7 @@ def paired_method_summary(performance_rows: list[dict[str, Any]], response_rows:
 
 def final_verdict(*, valid: bool, complete: bool, grouping_stable: bool) -> str:
     if not valid:
-        return "MULTIMETHOD-MECHANISM-SURVEY-INVALID"
+        return "ALGORITHM-PANEL-EXPANSION-INVALID"
     if not complete or not grouping_stable:
-        return "MULTIMETHOD-MECHANISM-SURVEY-PARTIAL"
-    return "MULTIMETHOD-MECHANISM-SURVEY-PARTIAL"
+        return "ALGORITHM-PANEL-EXPANSION-PARTIAL"
+    return "ALGORITHM-PANEL-EXPANSION-PARTIAL"

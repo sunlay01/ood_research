@@ -6,5 +6,5 @@ C. Pi_full is a faithful finite continuation: each method uses its real final mo
 D. Cross-method response is scale-safe: each method is normalized from its own source-exposed basis; raw cross-method norms are not used for claims.
 E. Blind grouping is blind: only opaque direction IDs and numeric signatures enter grouping; semantic labels are assigned post-hoc.
 F. Patterns are assessed across all five fixed seeds through seed-resampled signatures, not only the last seed.
-G. No counterexample method is silently excluded; VREX and CORAL remain in all tables regardless of target performance.
+G. No counterexample method is silently excluded; low-performing and rank-probe methods remain in all relevant tables and are not selected by target accuracy.
 H. Strongest defensible conclusion: Correct CMNIST can show reproducible descriptive differences in task/source-conditioned response treatment across these DG learners. This does not establish semantic recovery, causality, a universal taxonomy, theory validation, or a new algorithm.

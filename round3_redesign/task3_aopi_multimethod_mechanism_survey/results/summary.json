@@ -1,4 +1,15 @@
 {
+  "admitted_pi_method_count": 8,
+  "admitted_pi_methods": [
+    "ERM",
+    "IRMv1",
+    "VREX",
+    "CORAL",
+    "FISHR",
+    "MLDG",
+    "WEIGHT_NUCLEAR",
+    "FEATURE_NUCLEAR"
+  ],
   "errors": [],
   "grouping": {
     "bootstrap_mean_ari": 1.0,
@@ -7,10 +18,18 @@
       "a_m001",
       "a_m002",
       "a_m003",
+      "a_m004",
+      "a_m005",
+      "a_m006",
+      "a_m007",
       "o_m000",
       "o_m001",
       "o_m002",
       "o_m003",
+      "o_m004",
+      "o_m005",
+      "o_m006",
+      "o_m007",
       "r_m000_K1",
       "r_m000_K20",
       "r_m000_K5",
@@ -22,7 +41,19 @@
       "r_m002_K5",
       "r_m003_K1",
       "r_m003_K20",
-      "r_m003_K5"
+      "r_m003_K5",
+      "r_m004_K1",
+      "r_m004_K20",
+      "r_m004_K5",
+      "r_m005_K1",
+      "r_m005_K20",
+      "r_m005_K5",
+      "r_m006_K1",
+      "r_m006_K20",
+      "r_m006_K5",
+      "r_m007_K1",
+      "r_m007_K20",
+      "r_m007_K5"
     ],
     "grouping_hyperparameters": {
       "ari_threshold": 0.75,
@@ -50,19 +81,48 @@
       "u009",
       "u010"
     ],
-    "selected_k": 4,
-    "silhouette": 0.38812896702441413,
+    "selected_k": 3,
+    "silhouette": 0.380733145024872,
     "stable": true,
     "status": "STAGE4-PASS"
   },
-  "method_count": 4,
+  "method_codes": {
+    "CORAL": "m003",
+    "ERM": "m000",
+    "FEATURE_NUCLEAR": "m007",
+    "FISHR": "m004",
+    "IRMv1": "m001",
+    "MLDG": "m005",
+    "VREX": "m002",
+    "WEIGHT_NUCLEAR": "m006"
+  },
+  "method_count": 8,
+  "methods": [
+    "ERM",
+    "IRMv1",
+    "VREX",
+    "CORAL",
+    "FISHR",
+    "MLDG",
+    "WEIGHT_NUCLEAR",
+    "FEATURE_NUCLEAR"
+  ],
+  "rows": {
+    "fidelity": 40,
+    "geometry_A": 440,
+    "geometry_O": 440,
+    "normalized_response": 1320,
+    "performance": 40,
+    "pi_full": 1320,
+    "signatures": 11
+  },
   "seed_count": 5,
   "stage": "complete",
   "target_used_for_grouping": false,
   "target_used_for_training": false,
   "target_used_for_tuning": false,
-  "task_id": "TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY",
-  "verdict": "MULTIMETHOD-MECHANISM-SURVEY-PARTIAL",
+  "task_id": "TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK",
+  "verdict": "ALGORITHM-PANEL-EXPANSION-PARTIAL",
   "world_gates": [
     {
       "Oe3_norm": 0.0,
@@ -103,6 +163,42 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
+      "method": "FISHR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "MLDG",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "WEIGHT_NUCLEAR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "FEATURE_NUCLEAR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
       "method": "ERM",
       "passed": true,
       "rank_A": 5,
@@ -139,6 +235,42 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
+      "method": "FISHR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "MLDG",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "WEIGHT_NUCLEAR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "FEATURE_NUCLEAR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
       "method": "ERM",
       "passed": true,
       "rank_A": 5,
@@ -175,6 +307,42 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
+      "method": "FISHR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "MLDG",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "WEIGHT_NUCLEAR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "FEATURE_NUCLEAR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
       "method": "ERM",
       "passed": true,
       "rank_A": 5,
@@ -203,6 +371,42 @@
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
       "method": "CORAL",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "FISHR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "MLDG",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "WEIGHT_NUCLEAR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "FEATURE_NUCLEAR",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -239,6 +443,42 @@
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
       "method": "CORAL",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "FISHR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "MLDG",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "WEIGHT_NUCLEAR",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "FEATURE_NUCLEAR",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,

@@ -5,8 +5,9 @@ from __future__ import annotations
 from typing import Any
 
 
-ALLOWED_METHODS = {"ERM", "IRMv1", "VREX", "CORAL"}
+ALLOWED_METHODS = {"ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "WEIGHT_NUCLEAR", "FEATURE_NUCLEAR"}
 EXPECTED_BASE = (0.2, 0.1, 0.9, 0.25, 0.25)
+EXPECTED_TASK_ID = "TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK"
 FORBIDDEN_SELECTION_KEYS = {
     "best_target", "target_accuracy_grid", "target_hyperparameter_grid",
 }
@@ -19,7 +20,7 @@ def _require(condition: bool, message: str) -> None:
 
 def validate_config(config: dict[str, Any]) -> dict[str, Any]:
     """Validate scientific semantics and return the same config object."""
-    _require(config.get("task_id") == "TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY", "wrong task id")
+    _require(config.get("task_id") == EXPECTED_TASK_ID, "wrong task id")
     methods = config.get("methods")
     _require(isinstance(methods, list) and methods and set(methods) <= ALLOWED_METHODS, "unknown methods")
     _require(len(methods) == len(set(methods)), "duplicate methods")
@@ -55,6 +56,23 @@ def validate_config(config: dict[str, Any]) -> dict[str, Any]:
     coral = config.get("coral", {})
     _require(float(coral.get("gamma")) == 1.0 and coral.get("feature_dimension") == 64, "wrong CORAL config")
     _require(coral.get("covariance_denominator") == "n-1", "CORAL covariance must use n-1")
+    fishr = config.get("fishr", {})
+    _require(fishr.get("penalty_anneal_iters") == 100, "wrong Fishr anneal")
+    _require(float(fishr.get("pre_anneal_penalty_weight")) == 1.0 and float(fishr.get("post_anneal_penalty_weight")) == 10000.0, "wrong Fishr weights")
+    _require(fishr.get("whole_loss_rescale_after_anneal") is True and fishr.get("reset_adam_at_anneal") is True, "Fishr must use common anneal/reset/rescale")
+    _require(fishr.get("gradient_scope") == "classifier_weight_and_bias" and fishr.get("variance") == "centered_diagonal", "wrong Fishr variance semantics")
+    mldg = config.get("mldg", {})
+    _require(float(mldg.get("beta")) == 1.0 and float(mldg.get("inner_lr")) == 0.001 and int(mldg.get("inner_steps")) == 1, "wrong MLDG config")
+    _require(mldg.get("order") == "first_order" and mldg.get("meta_schedule") == "deterministic_alternating_env0_env1", "wrong MLDG semantics")
+    weight_nuclear = config.get("weight_nuclear", {})
+    _require(float(weight_nuclear.get("lambda")) == 0.001, "wrong weight nuclear lambda")
+    _require(weight_nuclear.get("penalized_layers") == "encoder_linear_only" and weight_nuclear.get("head_penalized") is False, "wrong weight nuclear scope")
+    feature_nuclear = config.get("feature_nuclear", {})
+    _require(float(feature_nuclear.get("lambda")) == 0.0001, "wrong feature nuclear lambda")
+    _require(feature_nuclear.get("feature_scope") == "concatenated_source_encoder_features", "wrong feature nuclear scope")
+    _require(feature_nuclear.get("formula_reference_status") == "VERIFIED_LOSS_PLUS_LAMBDA_SUM_SINGULAR_VALUES", "feature nuclear reference unresolved")
+    stable_rank = config.get("stable_rank", {})
+    _require(stable_rank.get("registered_as_algorithm") is False and stable_rank.get("diagnostic_only") is True, "stable rank must stay diagnostic-only")
 
     world = config.get("world", {})
     _require(world.get("dimension") == 5 and world.get("primary_basis") == ["e1", "e2", "e3", "e4", "e5"], "world must be R^5")

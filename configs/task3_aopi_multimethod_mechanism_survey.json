@@ -1,7 +1,7 @@
 {
-  "task_id": "TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY",
+  "task_id": "TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK",
   "device": "cpu",
-  "methods": ["ERM", "IRMv1", "VREX", "CORAL"],
+  "methods": ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "WEIGHT_NUCLEAR", "FEATURE_NUCLEAR"],
   "include_coral_if_fidelity_pass": true,
   "seeds": [10, 11, 12, 13, 14],
   "data": {
@@ -48,6 +48,39 @@
     "mean_normalization": "divide_by_d",
     "covariance_normalization": "divide_by_d_squared",
     "representation_normalization": "none"
+  },
+  "fishr": {
+    "penalty_anneal_iters": 100,
+    "pre_anneal_penalty_weight": 1.0,
+    "post_anneal_penalty_weight": 10000.0,
+    "reset_adam_at_anneal": true,
+    "whole_loss_rescale_after_anneal": true,
+    "gradient_scope": "classifier_weight_and_bias",
+    "variance": "centered_diagonal"
+  },
+  "mldg": {
+    "beta": 1.0,
+    "inner_lr": 0.001,
+    "inner_steps": 1,
+    "order": "first_order",
+    "meta_schedule": "deterministic_alternating_env0_env1"
+  },
+  "weight_nuclear": {
+    "lambda": 0.001,
+    "penalized_layers": "encoder_linear_only",
+    "head_penalized": false,
+    "selection_rule": "preregistered_source_only_rank_probe"
+  },
+  "feature_nuclear": {
+    "lambda": 0.0001,
+    "feature_scope": "concatenated_source_encoder_features",
+    "formula_reference_status": "VERIFIED_LOSS_PLUS_LAMBDA_SUM_SINGULAR_VALUES",
+    "selection_rule": "preregistered_source_only_rank_probe"
+  },
+  "stable_rank": {
+    "registered_as_algorithm": false,
+    "diagnostic_only": true,
+    "formula": "frobenius_norm_squared_over_spectral_norm_squared"
   },
   "world": {
     "dimension": 5,
