@@ -15,6 +15,7 @@ from .fishr import FishrAlgorithm
 from .irmv1 import IRMv1Algorithm
 from .mldg import MLDGAlgorithm
 from .sam import SAMAlgorithm
+from .spectral_decoupling import SpectralDecouplingAlgorithm
 from .spectral_norm_reg import SpectralNormRegAlgorithm
 from .spectral_reg_2024 import SpectralReg2024Algorithm
 from .stable_rank_norm import StableRankNormAlgorithm
@@ -40,6 +41,7 @@ ALGORITHM_CLASSES = {
     "SVD_SPARSE": SVDSparseAlgorithm,
     "SAM": SAMAlgorithm,
     "ASAM": ASAMAlgorithm,
+    "SPECTRAL_DECOUPLING": SpectralDecouplingAlgorithm,
     "FAD": FADAlgorithm,
     "DISAM": DISAMAlgorithm,
 }
