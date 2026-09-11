@@ -1,0 +1,45 @@
+Environment:
+	Python: 3.13.13
+	PyTorch: 2.12.1
+	Torchvision: 0.27.1
+	CUDA: None
+	CUDNN: None
+	NumPy: 2.4.6
+	PIL: 12.2.0
+Args:
+	algorithm: ANDMask
+	checkpoint_freq: 1
+	data_dir: /Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/domainbed_data
+	dataset: ColoredMNIST
+	holdout_fraction: 0.2
+	hparams: None
+	hparams_seed: 0
+	output_dir: /Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/task3_official_success_reproduction/results/domainbed_andmask_seed0
+	save_model_every_checkpoint: False
+	seed: 0
+	skip_model_save: True
+	steps: 1
+	task: domain_generalization
+	test_envs: [2]
+	trial_seed: 0
+	uda_holdout_fraction: 0
+HParams:
+	batch_size: 64
+	class_balanced: False
+	data_augmentation: True
+	dinov2: False
+	freeze_bn: False
+	lars: False
+	linear_steps: 500
+	lr: 0.001
+	nonlinear_classifier: False
+	resnet18: False
+	resnet50_augmix: True
+	resnet_dropout: 0.0
+	tau: 1
+	vit: False
+	vit_attn_tune: False
+	vit_dropout: 0.0
+	weight_decay: 0.0
+env0_in_acc   env0_out_acc  env1_in_acc   env1_out_acc  env2_in_acc   env2_out_acc  epoch         loss          mem_gb        step          step_time    
+0.4972680523  0.4976425204  0.4996517919  0.4952850407  0.4963839931  0.4939991427  0.0000000000  0.7345475256  0.0000000000  0             16.046137809 

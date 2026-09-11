@@ -1,0 +1,48 @@
+{
+  "diagnosis_counts": {
+    "budget_sensitive": 0,
+    "implementation_issue": 0,
+    "protocol_mismatch": 0,
+    "recovered": 0,
+    "unresolved": 1
+  },
+  "git_commit_before_run": "a31b142d0c17df2bf519536e8ffc9f63b0c5b3b0",
+  "methods": [
+    "GroupDRO"
+  ],
+  "python_version": "3.13.13",
+  "rows": [
+    {
+      "budget_sensitive": false,
+      "budget_steps": 1,
+      "dataset": "ColoredMNIST",
+      "default_hparams_first": true,
+      "diagnosis": "unresolved",
+      "env2_out_acc": 0.4939991427346764,
+      "implementation_issue": false,
+      "loss": 0.7345482707023621,
+      "method": "GroupDRO",
+      "native_script": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/DomainBed/domainbed/scripts/train.py",
+      "output_dir": "/Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/task3_official_success_reproduction/results/domainbed_groupdro_seed0",
+      "penalty": null,
+      "protocol_mismatch": false,
+      "returncode": 0,
+      "seed": 0,
+      "status": "completed",
+      "stdout_tail": "Environment:\\n\tPython: 3.13.13\\n\tPyTorch: 2.12.1\\n\tTorchvision: 0.27.1\\n\tCUDA: None\\n\tCUDNN: None\\n\tNumPy: 2.4.6\\n\tPIL: 12.2.0\\nArgs:\\n\talgorithm: GroupDRO\\n\tcheckpoint_freq: 1\\n\tdata_dir: /Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/domainbed_data\\n\tdataset: ColoredMNIST\\n\tholdout_fraction: 0.2\\n\thparams: None\\n\thparams_seed: 0\\n\toutput_dir: /Users/sunlay/Desktop/ood-representation-regularization/round3_redesign/task3_official_success_reproduction/results/domainbed_groupdro_seed0\\n\tsave_model_every_checkpoint: False\\n\tseed: 0\\n\tskip_model_save: True\\n\tsteps: 1\\n\ttask: domain_generalization\\n\ttest_envs: [2]\\n\ttrial_seed: 0\\n\tuda_holdout_fraction: 0\\nHParams:\\n\tbatch_size: 64\\n\tclass_balanced: False\\n\tdata_augmentation: True\\n\tdinov2: False\\n\tfreeze_bn: False\\n\tgroupdro_eta: 0.01\\n\tlars: False\\n\tlinear_steps: 500\\n\tlr: 0.001\\n\tnonlinear_classifier: False\\n\tresnet18: False\\n\tresnet50_augmix: True\\n\tresnet_dropout: 0.0\\n\tvit: False\\n\tvit_attn_tune: False\\n\tvit_dropout: 0.0\\n\tweight_decay: 0.0\\nenv0_in_acc   env0_out_acc  env1_in_acc   env1_out_acc  env2_in_acc   env2_out_acc  epoch         loss          mem_gb        step          step_time    \\n0.4972680523  0.4976425204  0.4996517919  0.4952850407  0.4963839931  0.4939991427  0.0000000000  0.7345482707  0.0000000000  0             17.471705675 \\n",
+      "steps": 1,
+      "target_accuracy": 0.4939991427346764,
+      "target_used_for_training_or_selection": false,
+      "test_envs": "[2]",
+      "upstream": "DomainBed",
+      "upstream_commit": "b93c22a1cfc3b2428398272c1a116c8de1f4139e"
+    }
+  ],
+  "run_unix_time": 1789136165.9844968,
+  "runner": "ood_repr_reg.run_task3_official_success_reproduction",
+  "seeds": 1,
+  "steps": 1,
+  "target_leakage_detected": false,
+  "task_id": "TASK3-OFFICIAL-SUCCESS-REPRODUCTION",
+  "torch_version": "2.12.1"
+}

@@ -1,0 +1,50 @@
+{
+  "domainbed": {
+    "authority_files": "domainbed/algorithms.py; domainbed/hparams_registry.py; domainbed/datasets.py",
+    "checked_out_commit": "b93c22a1cfc3b2428398272c1a116c8de1f4139e",
+    "commit": "b93c22a1cfc3b2428398272c1a116c8de1f4139e",
+    "local_dir": "artifacts/baseline_fidelity/upstreams/DomainBed",
+    "local_path": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/DomainBed",
+    "pinned_commit_matches": true,
+    "present": true,
+    "repo": "facebookresearch/DomainBed",
+    "url": "https://github.com/facebookresearch/DomainBed.git"
+  },
+  "facebook_irm": {
+    "authority_files": "code/colored_mnist/main.py",
+    "checked_out_commit": "fc185d0f828a98f57030ba3647efc7394d1be95a",
+    "commit": "fc185d0f828a98f57030ba3647efc7394d1be95a",
+    "local_dir": "artifacts/baseline_fidelity/upstreams/InvariantRiskMinimization",
+    "local_path": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/InvariantRiskMinimization",
+    "pinned_commit_matches": true,
+    "present": true,
+    "repo": "facebookresearch/InvariantRiskMinimization",
+    "url": "https://github.com/facebookresearch/InvariantRiskMinimization.git"
+  },
+  "fish_author": {
+    "authority_files": "README.md; src/main.py; src/utils.py",
+    "checked_out_commit": "333efa24572d99da0a4107ab9cc4af93a915d2a9",
+    "commit": "333efa24572d99da0a4107ab9cc4af93a915d2a9",
+    "local_dir": "artifacts/baseline_fidelity/upstreams/fish",
+    "local_path": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/fish",
+    "pinned_commit_matches": true,
+    "present": true,
+    "repo": "YugeTen/fish",
+    "url": "https://github.com/YugeTen/fish.git"
+  },
+  "fish_author_cmnist_status": {
+    "reason": "Pinned YugeTen/fish native benchmark is not Colored MNIST; DomainBed Fish is the CMNIST fallback authority.",
+    "used_for_native_cmnist": false
+  },
+  "fishr_optional": {
+    "authority_files": "optional only; not used by this gate",
+    "checked_out_commit": null,
+    "commit": "7b8fdf1e0b15226ded9b58efd37698e74e616ab7",
+    "local_dir": "artifacts/baseline_fidelity/upstreams/fishr",
+    "local_path": "/Users/sunlay/Desktop/ood-representation-regularization/artifacts/baseline_fidelity/upstreams/fishr",
+    "pinned_commit_matches": false,
+    "present": false,
+    "repo": "alexrame/fishr",
+    "url": "https://github.com/alexrame/fishr.git"
+  }
+}
