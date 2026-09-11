@@ -28,7 +28,11 @@ def make_sam_perturbations(model: nn.Module, *, rho: float, adaptive: bool = Fal
     for parameter in model.parameters():
         if parameter.grad is None:
             continue
-        factor = (parameter.detach().abs() + eta).square() if adaptive else torch.ones_like(parameter)
+        # ASAM uses the parameter magnitude as a diagonal re-scaling of the
+        # gradient.  The norm above and the perturbation must use the same
+        # metric; squaring this factor here would turn ASAM into a different
+        # (and scale-dependent) update.
+        factor = (parameter.detach().abs() + eta) if adaptive else torch.ones_like(parameter)
         perturbation = factor * parameter.grad * scale.to(parameter)
         perturbations.append((parameter, perturbation.detach().clone()))
     return perturbations
