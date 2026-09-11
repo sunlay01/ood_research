@@ -1,27 +1,30 @@
-# TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK
+# TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL
 
-task_id: `TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK`
+task_id: `TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL`
 
-goal: `Extend the modular CMNIST A/O/Pi survey from ERM, IRMv1, VREX, and CORAL to Fishr, MLDG, weight-nuclear, feature-nuclear, and stable-rank diagnostics.`
+goal: `Run a common-harness CMNIST spectral and flatness mechanism panel extending the modular A/O/Pi survey.`
 
 state_write_authorized: false
 
 scientific_status: validation / falsification gate only
 
-methods: ERM, IRMv1, VREX, CORAL, FISHR, MLDG, WEIGHT_NUCLEAR, FEATURE_NUCLEAR
+runnable methods: ERM, IRMv1, VREX, CORAL, FISHR, MLDG, SPECTRAL_NORM_REG, SPECTRAL_REG_2024, SVB_ORTHDNN, STABLE_RANK_NORM, SAM, ASAM
+
+deferred candidates: SVD_SPARSE, FAD, DISAM
+
+legacy-only rank probes: WEIGHT_NUCLEAR, FEATURE_NUCLEAR
 
 primary seeds: 10, 11, 12, 13, 14
 
-inputs: `configs/task3_aopi_multimethod_mechanism_survey.json`, corrected CPU-minimal data/model code, existing modular survey algorithms, and the accepted ERM/IRM reconstruction manifest.
-
 hard constraints:
 
-- Preserve CMNIST data/model semantics, R5 smooth displacement world, A/O geometry, functional banks, normalization, and blind grouping semantics.
-- Keep one algorithm file per runnable method; training and Pi_full continuation call algorithm-owned interfaces.
-- Do not add OURS, HA, CMA, target tuning, target method selection, target grouping, or canonical-state edits.
-- Admit new methods to A/O/Pi only through source-only training and smooth-continuation fidelity.
-- Overall scientific interpretation is capped at `ALGORITHM-PANEL-EXPANSION-PARTIAL`.
+- Preserve CMNIST data/model semantics, R5 smooth displacement world, A/O definitions, functional banks, normalization, and blind grouping.
+- Existing ERM, IRMv1, VREX, CORAL, FISHR, and MLDG methods remain frozen.
+- Use one algorithm file per runnable method; training and Pi_full continuation call algorithm-owned interfaces.
+- Do not use target data for training, tuning, variant selection, method inclusion, normalization, or grouping.
+- This is common-budget controlled mechanism comparison, not paper benchmark reproduction.
+- Overall scientific verdict cannot be PASS.
 
 outputs: `round3_redesign/task3_aopi_multimethod_mechanism_survey/`
 
-Interpretation ceiling: descriptive response differences only; no semantic mechanism recovery, causal claim, theory validation, new algorithm claim, or universal DG taxonomy.
+Interpretation ceiling: descriptive spectral, flatness, and A/O/Pi associations only; no causal low-rank/flatness claim, new algorithm claim, or theory validation.

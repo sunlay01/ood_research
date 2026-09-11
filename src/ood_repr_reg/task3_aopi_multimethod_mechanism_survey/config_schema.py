@@ -5,9 +5,9 @@ from __future__ import annotations
 from typing import Any
 
 
-ALLOWED_METHODS = {"ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "WEIGHT_NUCLEAR", "FEATURE_NUCLEAR"}
+ALLOWED_METHODS = {"ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "WEIGHT_NUCLEAR", "FEATURE_NUCLEAR", "SPECTRAL_NORM_REG", "SPECTRAL_REG_2024", "SVB_ORTHDNN", "STABLE_RANK_NORM", "SVD_SPARSE", "SAM", "ASAM", "FAD", "DISAM"}
 EXPECTED_BASE = (0.2, 0.1, 0.9, 0.25, 0.25)
-EXPECTED_TASK_ID = "TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK"
+EXPECTED_TASK_ID = "TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL"
 FORBIDDEN_SELECTION_KEYS = {
     "best_target", "target_accuracy_grid", "target_hyperparameter_grid",
 }
@@ -24,6 +24,9 @@ def validate_config(config: dict[str, Any]) -> dict[str, Any]:
     methods = config.get("methods")
     _require(isinstance(methods, list) and methods and set(methods) <= ALLOWED_METHODS, "unknown methods")
     _require(len(methods) == len(set(methods)), "duplicate methods")
+    candidates = config.get("candidate_methods", methods)
+    _require(isinstance(candidates, list) and set(methods) <= set(candidates) <= ALLOWED_METHODS, "bad candidate methods")
+    _require("WEIGHT_NUCLEAR" not in methods and "FEATURE_NUCLEAR" not in methods, "legacy rank probes must not be default methods")
     _require(config.get("seeds") == [10, 11, 12, 13, 14], "primary seeds must be 10..14")
     _require(config.get("device") == "cpu", "survey is CPU-only")
 
@@ -67,10 +70,30 @@ def validate_config(config: dict[str, Any]) -> dict[str, Any]:
     weight_nuclear = config.get("weight_nuclear", {})
     _require(float(weight_nuclear.get("lambda")) == 0.001, "wrong weight nuclear lambda")
     _require(weight_nuclear.get("penalized_layers") == "encoder_linear_only" and weight_nuclear.get("head_penalized") is False, "wrong weight nuclear scope")
+    _require(weight_nuclear.get("legacy_only") is True and weight_nuclear.get("default_enabled") is False, "weight nuclear must be legacy-only")
     feature_nuclear = config.get("feature_nuclear", {})
     _require(float(feature_nuclear.get("lambda")) == 0.0001, "wrong feature nuclear lambda")
     _require(feature_nuclear.get("feature_scope") == "concatenated_source_encoder_features", "wrong feature nuclear scope")
     _require(feature_nuclear.get("formula_reference_status") == "VERIFIED_LOSS_PLUS_LAMBDA_SUM_SINGULAR_VALUES", "feature nuclear reference unresolved")
+    _require(feature_nuclear.get("legacy_only") is True and feature_nuclear.get("default_enabled") is False, "feature nuclear must be legacy-only")
+    snr = config.get("spectral_norm_reg", {})
+    _require(float(snr.get("lambda")) == 0.001 and snr.get("penalty") == "sum_sigma1_squared_all_linear_weights", "wrong spectral norm reg config")
+    sr2024 = config.get("spectral_reg_2024", {})
+    _require(float(sr2024.get("lambda")) == 0.001 and int(sr2024.get("exponent")) == 2 and float(sr2024.get("target_sigma_power")) == 1.0, "wrong SR2024 config")
+    svb = config.get("svb_orthdnn", {})
+    _require(float(svb.get("svb_factor")) == 0.05 and svb.get("projection") == "post_optimizer_step_singular_value_clamp", "wrong SVB config")
+    srn = config.get("stable_rank_norm", {})
+    _require(float(srn.get("target_rank")) == 8.0 and float(srn.get("spectral_norm_target")) == 1.0, "wrong stable rank norm config")
+    svd = config.get("svd_sparse", {})
+    _require(svd.get("performance_admission") is False and "SVD_SPARSE_DEFERRED" in svd.get("reason", ""), "SVD sparse must be deferred")
+    sam = config.get("sam", {})
+    _require(float(sam.get("rho")) == 0.05 and sam.get("adaptive") is False, "wrong SAM config")
+    asam = config.get("asam", {})
+    _require(float(asam.get("rho")) == 0.5 and float(asam.get("eta")) == 0.01 and asam.get("adaptive") is True, "wrong ASAM config")
+    fad = config.get("fad", {})
+    _require(fad.get("performance_admission") is False and "FAD_REFERENCE_UNRESOLVED" in fad.get("reason", ""), "FAD must be deferred until exact reference is implemented")
+    disam = config.get("disam", {})
+    _require(disam.get("performance_admission") is False and "DISAM_REFERENCE_UNRESOLVED" in disam.get("reason", ""), "DISAM must be deferred until exact reference is implemented")
     stable_rank = config.get("stable_rank", {})
     _require(stable_rank.get("registered_as_algorithm") is False and stable_rank.get("diagnostic_only") is True, "stable rank must stay diagnostic-only")
 
@@ -95,4 +118,7 @@ def validate_config(config: dict[str, Any]) -> dict[str, Any]:
     _require(grouping.get("candidate_k") == [2, 3, 4], "cluster candidates are not fixed")
     _require(float(grouping.get("silhouette_threshold")) == 0.25 and float(grouping.get("bootstrap_ari_threshold")) == 0.75, "grouping gates are not fixed")
     _require(grouping.get("semantic_labels_visible_before_freeze") is False, "grouping is not blind")
+    diagnostics = config.get("diagnostics", {})
+    _require(int(diagnostics.get("source_bank_size_per_environment")) == 64, "wrong diagnostic source bank size")
+    _require(int(diagnostics.get("hessian_power_iterations")) >= 3 and int(diagnostics.get("hutchinson_probes")) >= 2, "diagnostic probes too small")
     return config

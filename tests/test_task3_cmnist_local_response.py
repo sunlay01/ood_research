@@ -76,6 +76,7 @@ def test_task3r_live_artifacts_are_removed_and_active_task_replaced():
         or "TASK-AOPI-CMNIST-REINSTANTIATION-AUDIT" in active_task
         or "TASK-AOPI-CMNIST-REINSTANTIATION-REPAIR" in active_task
         or "TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK" in active_task
+        or "TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL" in active_task
     )
     assert (ROOT / "round3_redesign/task3_applicability").exists()
 

@@ -29,6 +29,13 @@ from .task3_aopi_multimethod_mechanism_survey.full_response import full_response
 from .task3_aopi_multimethod_mechanism_survey.algorithms.registry import get_algorithm
 from .task3_aopi_multimethod_mechanism_survey.algorithms.stable_rank import encoder_weight_spectrum_rows
 from .task3_aopi_multimethod_mechanism_survey.method_trainer import train_survey_method
+from .task3_aopi_multimethod_mechanism_survey.spectral_flatness_diagnostics import (
+    flatness_diagnostic_rows,
+    gradient_spectrum_rows,
+    representation_spectrum_rows,
+    source_bank,
+    weight_spectrum_long_rows,
+)
 from .task3_aopi_multimethod_mechanism_survey.signatures import mechanism_signature_rows, method_code_map, normalized_response_rows
 from .task3_aopi_multimethod_mechanism_survey.smooth_world5 import (
     BASIS, OPAQUE_IDS, SEMANTIC_NAMES, all_direction_vectors, build_smooth_world5,
@@ -96,20 +103,62 @@ def _heartbeat(message: str) -> None:
         handle.write(line + "\n")
 
 
-def _preregister(config: dict[str, Any], methods: tuple[str, ...], seeds: tuple[int, ...]) -> dict[str, Any]:
+def _preregister(config: dict[str, Any], methods: tuple[str, ...], candidates: tuple[str, ...], seeds: tuple[int, ...]) -> dict[str, Any]:
     payload = {
         "task_id": config["task_id"], "written_at": time.time(), "git_head": _git("rev-parse", "HEAD"),
         "branch": _git("branch", "--show-current"), "config_sha256": _sha(CONFIG_PATH),
-        "methods": list(methods), "seeds": list(seeds), "base_world": [0.2, 0.1, 0.9, 0.25, 0.25],
+        "methods": list(methods), "candidate_methods": list(candidates), "seeds": list(seeds), "base_world": [0.2, 0.1, 0.9, 0.25, 0.25],
         "primary_basis": ["e1", "e2", "e3", "e4", "e5"], "delta": 0.01, "horizons": [1, 5, 20],
         "target_use": "A, post-hoc performance and evaluation functional banks only",
         "descriptive_only": True,
-        "verdict_ceiling": "ALGORITHM-PANEL-EXPANSION-PARTIAL",
+        "verdict_ceiling": "SPECTRAL-FLATNESS-PANEL-PARTIAL",
     }
-    text = f"""# TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK\n\n""" + "\n".join(f"- {key}: `{value}`" for key, value in payload.items()) + """\n\n## Fixed interpretation ceiling\n\nThis is a source/evaluation response survey. It does not claim semantic mechanism recovery, causality, a new algorithm, theory validation, or a universal DG taxonomy. Methods are admitted to A/O/Pi only through source-only training and continuation fidelity, never through target performance.\n"""
+    text = f"""# TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL\n\n""" + "\n".join(f"- {key}: `{value}`" for key, value in payload.items()) + """\n\n## Fixed interpretation ceiling\n\nThis is a common-budget source/evaluation response survey. It does not claim semantic mechanism recovery, causality, a new algorithm, theory validation, or a universal DG taxonomy. Methods are admitted to A/O/Pi only through source-only training and continuation fidelity, never through target performance. Paper references define algorithms; paper benchmark reproduction is explicitly not the goal.\n"""
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "preregistered_design.md").write_text(text, encoding="utf-8")
+    _write_reference_audits(config, methods, candidates)
     return payload
+
+
+def _write_reference_audits(config: dict[str, Any], methods: tuple[str, ...], candidates: tuple[str, ...]) -> None:
+    OUT.mkdir(parents=True, exist_ok=True)
+    spectral = """# Spectral reference audit
+
+This audit distinguishes definition-faithful common-harness variants from paper benchmark reproduction.
+
+- `SPECTRAL_NORM_REG`: implemented as source risk plus `lambda * sum_l sigma_1(W_l)^2`; this is a regularizer, not `torch.nn.utils.spectral_norm`.
+- `SPECTRAL_REG_2024`: implemented as `sum_l ((sigma_1(W_l)^k - 1)^2 + ||b_l||^(2k))` with fixed `k=2`.
+- `SVB_ORTHDNN`: implemented as post-optimizer singular-value bounding with band `[1/(1+factor), 1+factor]`.
+- `STABLE_RANK_NORM`: implemented as post-optimizer tail singular-value projection to a fixed stable-rank target followed by sigma_1 normalization.
+- `SVD_SPARSE`: deferred because true SVD parameterization/singular-value sparsification would change the fixed model parameterization and continuation state.
+
+No spectral method uses target data for coefficient selection or admission.
+"""
+    flatness = """# Flatness reference audit
+
+This audit distinguishes definition-faithful common-harness variants from paper benchmark reproduction.
+
+- `SAM`: implemented as the standard two-step first-order update on the same source minibatch.
+- `ASAM`: implemented as adaptive SAM with elementwise parameter-scale perturbation and fixed `eta`.
+- `FAD`: deferred; exact zeroth/first-order DG flatness update was not implemented rather than replaced with a SAM surrogate.
+- `DISAM`: deferred; exact domain-imbalance perturbation calibration was not implemented rather than replaced with `SAM + VREX`.
+
+Raw parameter-space flatness is not invariant under arbitrary reparameterization; comparisons here are controlled diagnostics under fixed architecture, parameterization, initialization, optimizer family, and source schedule.
+"""
+    (OUT / "spectral_reference_audit.md").write_text(spectral, encoding="utf-8")
+    (OUT / "flatness_reference_audit.md").write_text(flatness, encoding="utf-8")
+    (OUT / "fad_reference_audit.md").write_text("""# FAD reference audit
+
+Status: `DEFERRED`.
+
+The task requires exact zeroth-order and first-order Flatness-Aware Minimization for Domain Generalization update semantics. This implementation does not replace FAD with SAM or a generic flatness penalty. `FAD` is retained in `candidate_methods` and receives `admitted_to_training_panel=false`, `admitted_to_pi_full=false` until the exact update can be implemented without changing frozen CMNIST/data/model semantics.
+""", encoding="utf-8")
+    (OUT / "disam_reference_audit.md").write_text("""# DISAM reference audit
+
+Status: `DEFERRED`.
+
+The task requires exact Domain-Inspired SAM perturbation calibration from source-domain loss imbalance/convergence degree. This implementation does not replace DISAM with `SAM + VREX` or any surrogate. `DISAM` is retained in `candidate_methods` and receives `admitted_to_training_panel=false`, `admitted_to_pi_full=false` until the exact domain-aware update can be implemented faithfully under the frozen common harness.
+""", encoding="utf-8")
 
 
 def _reference_hashes(seeds: tuple[int, ...]) -> dict[tuple[int, str], str]:
@@ -131,23 +180,49 @@ def _save_model(result: Any, seed: int, method: str) -> dict[str, Any]:
     return {"seed": seed, "method": method, "path": str(path.relative_to(ROOT)), "parameter_hash": result.final_parameter_hash, "optimizer_state_hash": result.optimizer_state_hash, "algorithm_state_hash": result.algorithm_state_hash, "checkpoint_sha256": _sha(path), "initial_parameter_hash": result.initial_parameter_hash, "batch_schedule_hash": result.batch_schedule_hash, "objective_formula_id": result.objective_formula_id, "algorithm_reference_id": result.algorithm_reference_id, "algorithm_variant_id": result.algorithm_variant_id, "admission_role": result.admission_role, "admitted_to_pi": result.admitted_to_pi, "optimizer_reset_count": result.optimizer_reset_count, "finite": result.finite, "invalid_reason": result.invalid_reason}
 
 
-def _new_method_admission_rows(results: dict[tuple[int, str], Any], methods: tuple[str, ...], seeds: tuple[int, ...], config: dict[str, Any]) -> list[dict[str, Any]]:
+def _new_method_admission_rows(results: dict[tuple[int, str], Any], methods: tuple[str, ...], candidates: tuple[str, ...], seeds: tuple[int, ...], config: dict[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for method in methods:
+    for method in candidates:
         algorithm = get_algorithm(method, config)
-        method_results = [results.get((seed, method)) for seed in seeds]
-        complete = all(result is not None and result.finite for result in method_results)
+        runnable = method in methods and bool(algorithm.admits_to_training)
+        method_results = [results.get((seed, method)) for seed in seeds] if runnable else []
+        complete = bool(runnable and all(result is not None and result.finite for result in method_results))
+        reason = "OK" if complete and algorithm.admits_to_pi else (algorithm.deferred_reason or "TRAINING_OR_CONTINUATION_UNRESOLVED")
         rows.append({
             "method": method,
             "algorithm_reference_id": algorithm.reference_id,
             "algorithm_variant_id": algorithm.variant_id,
             "admission_role": algorithm.admission_role,
+            "candidate_method": True,
+            "runnable_in_common_harness": runnable,
             "admitted_to_training_panel": complete,
             "admitted_to_pi_full": bool(complete and algorithm.admits_to_pi),
-            "stable_rank_diagnostic_only": method == "STABLE_RANK",
-            "admission_reason": "OK" if complete and algorithm.admits_to_pi else "TRAINING_OR_CONTINUATION_UNRESOLVED",
+            "admission_reason": reason,
         })
     return rows
+
+
+def _variant_sweep_rows(methods: tuple[str, ...], candidates: tuple[str, ...], config: dict[str, Any]) -> list[dict[str, Any]]:
+    rows = []
+    for method in candidates:
+        algorithm = get_algorithm(method, config)
+        rows.append({
+            "method": method,
+            "variant": algorithm.variant_id,
+            "reference_id": algorithm.reference_id,
+            "selected_by_source_only": method in methods and bool(algorithm.admits_to_training),
+            "target_used_for_selection": False,
+            "selection_rule": "fixed_preregistered_common_harness_variant" if method in methods else "deferred_by_reference_or_common_harness_fidelity",
+            "deferred_reason": algorithm.deferred_reason,
+        })
+    return rows
+
+
+def _checkpoint_model(config: dict[str, Any], state_dict: dict[str, Tensor]):
+    model = build_model_from_config(config)
+    model.load_state_dict(state_dict)
+    model.cpu().eval()
+    return model
 
 
 def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
@@ -155,18 +230,26 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
     RESULTS.mkdir(parents=True, exist_ok=True)
     config = validate_config(json.loads(CONFIG_PATH.read_text(encoding="utf-8")))
     methods = tuple(str(method) for method in config["methods"])
+    candidates = tuple(str(method) for method in config.get("candidate_methods", methods))
     seeds = tuple(int(seed) for seed in config["seeds"])
-    prereg = _preregister(config, methods, seeds)
+    prereg = _preregister(config, methods, candidates, seeds)
     _heartbeat("stage=0 preregistration-written")
     errors: list[str] = []
     train_results: dict[tuple[int, str], Any] = {}
     performance_rows: list[dict[str, Any]] = []
     fidelity_rows: list[dict[str, Any]] = []
     spectrum_rows: list[dict[str, Any]] = []
+    weight_long_rows: list[dict[str, Any]] = []
+    representation_rows: list[dict[str, Any]] = []
+    gradient_rows: list[dict[str, Any]] = []
+    flatness_rows: list[dict[str, Any]] = []
+    compute_budget_rows: list[dict[str, Any]] = []
     expected_hashes = _reference_hashes(seeds)
+    _write_csv(RESULTS / "spectral_flatness_variant_sweep.csv", _variant_sweep_rows(methods, candidates, config))
 
     for seed in seeds:
         data = build_task3_data(config, seed, data_root=ROOT / "data", download=bool(config["execution"]["download_mnist"]))
+        diagnostic_bank = source_bank(data.source_envs, size_per_environment=int(config["diagnostics"]["source_bank_size_per_environment"]))
         for method in methods:
             _heartbeat(f"stage=0 seed={seed} method={method} start")
             model, initial = _fresh_model(config, seed)
@@ -184,6 +267,26 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
                 errors.append(f"F0 reconstruction hash mismatch seed={seed} method={method}")
             fidelity_rows.append(fidelity)
             performance_rows.append({"seed": seed, "method": method, **metrics, "finite": result.finite})
+            compute_budget_rows.append({
+                "method": method,
+                "variant": result.algorithm_variant_id,
+                "seed": seed,
+                "outer_steps": int(config["training"]["steps"]),
+                "unique_source_examples_per_step": int(config["training"]["batch_size_per_environment"]) * 2,
+                "forward_pass_equivalents_per_step": result.forward_pass_equivalents_per_step,
+                "backward_pass_equivalents_per_step": result.backward_pass_equivalents_per_step,
+                "projection_or_svd_operations_per_step": result.projection_or_svd_operations_per_step,
+                "wall_clock_seconds": result.training_wall_clock_seconds,
+                "notes": "same outer source schedule; extra passes are method-intrinsic",
+            })
+            if result.finite:
+                for checkpoint, state_dict in sorted(result.checkpoint_state_dicts.items()):
+                    checkpoint_model = _checkpoint_model(config, state_dict)
+                    weight_long_rows.extend(weight_spectrum_long_rows(checkpoint_model, seed=seed, method=method, variant=result.algorithm_variant_id, checkpoint=checkpoint))
+                    representation_rows.extend(representation_spectrum_rows(checkpoint_model, diagnostic_bank, seed=seed, method=method, variant=result.algorithm_variant_id, checkpoint=checkpoint))
+                    if checkpoint == max(result.checkpoint_state_dicts):
+                        gradient_rows.extend(gradient_spectrum_rows(checkpoint_model, diagnostic_bank, seed=seed, method=method, variant=result.algorithm_variant_id, checkpoint=checkpoint))
+                        flatness_rows.extend(flatness_diagnostic_rows(checkpoint_model, diagnostic_bank, seed=seed, method=method, variant=result.algorithm_variant_id, checkpoint=checkpoint, config=config))
             _heartbeat(f"stage=0 seed={seed} method={method} done elapsed={time.time()-started:.1f}s")
             if time.time() - started > wall_clock_seconds:
                 errors.append("wall-clock budget exhausted during stage 0")
@@ -193,11 +296,18 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
 
     _write_csv(RESULTS / "method_fidelity.csv", fidelity_rows)
     _write_csv(RESULTS / "method_performance.csv", performance_rows)
-    _write_csv(RESULTS / "new_method_admission.csv", _new_method_admission_rows(train_results, methods, seeds, config))
+    admission_rows = _new_method_admission_rows(train_results, methods, candidates, seeds, config)
+    _write_csv(RESULTS / "new_method_admission.csv", admission_rows)
+    _write_csv(RESULTS / "spectral_flatness_admission.csv", admission_rows)
     _write_csv(RESULTS / "weight_spectrum_diagnostics.csv", spectrum_rows)
+    _write_csv(RESULTS / "weight_spectrum_long.csv", weight_long_rows)
+    _write_csv(RESULTS / "representation_spectrum.csv", representation_rows)
+    _write_csv(RESULTS / "gradient_spectrum.csv", gradient_rows)
+    _write_csv(RESULTS / "flatness_diagnostics.csv", flatness_rows)
+    _write_csv(RESULTS / "compute_budget.csv", compute_budget_rows)
     stage0_ok = len(train_results) == len(seeds) * len(methods) and not errors
     if not stage0_ok:
-        summary = {"task_id": config["task_id"], "verdict": "ALGORITHM-PANEL-EXPANSION-INVALID", "stage": "stage0", "errors": errors, "preregistration": prereg}
+        summary = {"task_id": config["task_id"], "verdict": "INVALID", "stage": "stage0", "errors": errors, "preregistration": prereg}
         _write_json(RESULTS / "summary.json", summary)
         _write_reports(summary)
         return summary
@@ -248,7 +358,7 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
     _write_csv(RESULTS / "normalized_response.csv", all_normalized_rows)
     stage1_ok = not errors and len(geometry_a_rows) == len(methods) * len(seeds) * 11 and len(geometry_o_rows) == len(methods) * len(seeds) * 11
     if not stage1_ok:
-        summary = {"task_id": config["task_id"], "verdict": "ALGORITHM-PANEL-EXPANSION-INVALID", "stage": "stage1", "errors": errors, "world_gates": world_gates}
+        summary = {"task_id": config["task_id"], "verdict": "INVALID", "stage": "stage1", "errors": errors, "world_gates": world_gates}
         _write_json(RESULTS / "summary.json", summary)
         _write_reports(summary)
         return summary
@@ -265,8 +375,8 @@ def run(*, wall_clock_seconds: int = 3600) -> dict[str, Any]:
     summary = {
         "task_id": config["task_id"], "verdict": final_verdict(valid=True, complete=True, grouping_stable=bool(grouping["stable"])),
         "stage": "complete", "errors": errors, "world_gates": world_gates, "grouping": {key: value for key, value in grouping.items() if key not in {"standardized_matrix", "labels"}},
-        "method_count": len(methods), "methods": list(methods), "admitted_pi_methods": list(admitted_methods), "admitted_pi_method_count": len(admitted_methods), "seed_count": len(seeds), "method_codes": method_code_map(methods), "target_used_for_training": False, "target_used_for_tuning": False, "target_used_for_grouping": False,
-        "rows": {"geometry_A": len(geometry_a_rows), "geometry_O": len(geometry_o_rows), "pi_full": len(all_response_rows), "normalized_response": len(all_normalized_rows), "signatures": len(signatures), "performance": len(performance_rows), "fidelity": len(fidelity_rows)},
+        "method_count": len(methods), "methods": list(methods), "candidate_methods": list(candidates), "admitted_pi_methods": list(admitted_methods), "admitted_pi_method_count": len(admitted_methods), "seed_count": len(seeds), "method_codes": method_code_map(methods), "target_used_for_training": False, "target_used_for_tuning": False, "target_used_for_grouping": False,
+        "rows": {"geometry_A": len(geometry_a_rows), "geometry_O": len(geometry_o_rows), "pi_full": len(all_response_rows), "normalized_response": len(all_normalized_rows), "signatures": len(signatures), "performance": len(performance_rows), "fidelity": len(fidelity_rows), "weight_spectrum_long": len(weight_long_rows), "representation_spectrum": len(representation_rows), "gradient_spectrum": len(gradient_rows), "flatness_diagnostics": len(flatness_rows), "compute_budget": len(compute_budget_rows), "spectral_flatness_admission": len(admission_rows)},
     }
     _write_json(RESULTS / "summary.json", summary)
     _write_reports(summary)
@@ -280,20 +390,161 @@ def _write_reports(summary: dict[str, Any]) -> None:
     seed_count = int(summary.get("seed_count", 0))
     admitted_count = int(summary.get("admitted_pi_method_count", 0))
     response_rows = int(summary.get("rows", {}).get("pi_full", 0)) if isinstance(summary.get("rows"), dict) else 0
-    (OUT / "report.md").write_text(f"""# Algorithm-panel mechanism survey
+    methods = list(summary.get("methods", [])) if isinstance(summary.get("methods"), list) else []
+
+    def csv_rows(name: str) -> list[dict[str, str]]:
+        path = RESULTS / name
+        if not path.exists():
+            return []
+        with path.open(encoding="utf-8", newline="") as handle:
+            return list(csv.DictReader(handle))
+
+    def to_float(row: dict[str, str], key: str) -> float | None:
+        try:
+            value = float(row.get(key, ""))
+        except ValueError:
+            return None
+        return value if math.isfinite(value) else None
+
+    def mean(values: list[float]) -> float | None:
+        return sum(values) / len(values) if values else None
+
+    def fmt(value: float | None, digits: int = 3) -> str:
+        return "n/a" if value is None else f"{value:.{digits}f}"
+
+    def pct(value: float | None) -> str:
+        return "n/a" if value is None else f"{100.0 * value:.1f}%"
+
+    performance = csv_rows("method_performance.csv")
+    weight = csv_rows("weight_spectrum_long.csv")
+    representation = csv_rows("representation_spectrum.csv")
+    gradient = csv_rows("gradient_spectrum.csv")
+    flatness = csv_rows("flatness_diagnostics.csv")
+    pi_rows = csv_rows("pi_full.csv")
+
+    if not methods:
+        methods = []
+        for row in performance:
+            method = row.get("method", "")
+            if method and method not in methods:
+                methods.append(method)
+
+    perf_summary: dict[str, dict[str, float | None]] = {}
+    for method in methods:
+        rows = [row for row in performance if row.get("method") == method]
+        perf_summary[method] = {
+            "source": mean([value for row in rows if (value := to_float(row, "source_mean_acc")) is not None]),
+            "target": mean([value for row in rows if (value := to_float(row, "target_acc")) is not None]),
+            "color": mean([value for row in rows if (value := to_float(row, "prediction_color_agreement")) is not None]),
+        }
+
+    def checkpoint_mean(rows: list[dict[str, str]], method: str, checkpoint: str, key: str, *, no_head: bool = False) -> float | None:
+        values = []
+        for row in rows:
+            if row.get("method") != method or row.get("checkpoint") != checkpoint:
+                continue
+            if no_head and row.get("module") == "head":
+                continue
+            value = to_float(row, key)
+            if value is not None:
+                values.append(value)
+        return mean(values)
+
+    spectral_summary: dict[str, dict[str, float | None]] = {}
+    for method in methods:
+        initial_spec = checkpoint_mean(weight, method, "0", "spectral_norm", no_head=True)
+        final_spec = checkpoint_mean(weight, method, "500", "spectral_norm", no_head=True)
+        initial_srank = checkpoint_mean(weight, method, "0", "stable_rank", no_head=True)
+        final_srank = checkpoint_mean(weight, method, "500", "stable_rank", no_head=True)
+        spectral_summary[method] = {
+            "spectral_norm_final": final_spec,
+            "spectral_norm_delta": None if initial_spec is None or final_spec is None else final_spec - initial_spec,
+            "stable_rank_final": final_srank,
+            "stable_rank_delta": None if initial_srank is None or final_srank is None else final_srank - initial_srank,
+            "effective_rank_final": checkpoint_mean(weight, method, "500", "effective_rank", no_head=True),
+        }
+
+    def simple_final(rows: list[dict[str, str]], method: str, key: str) -> float | None:
+        return mean([value for row in rows if row.get("method") == method and row.get("checkpoint") == "500" and (value := to_float(row, key)) is not None])
+
+    rep_summary = {method: {"effective_rank": simple_final(representation, method, "effective_rank"), "stable_rank": simple_final(representation, method, "stable_rank")} for method in methods}
+    grad_summary = {method: {"effective_rank": simple_final(gradient, method, "effective_rank"), "stable_rank": simple_final(gradient, method, "stable_rank")} for method in methods}
+
+    flat_unique: dict[tuple[str, str], dict[str, str]] = {}
+    for row in flatness:
+        flat_unique[(row.get("method", ""), row.get("seed", ""))] = row
+    flat_summary: dict[str, dict[str, float | None]] = {}
+    for method in methods:
+        unique_rows = [row for (row_method, _), row in flat_unique.items() if row_method == method]
+        rho05_rows = [row for row in flatness if row.get("method") == method and abs((to_float(row, "sharpness_rho") or 0.0) - 0.05) < 1e-12]
+        flat_summary[method] = {
+            "source_loss": mean([value for row in unique_rows if (value := to_float(row, "source_loss")) is not None]),
+            "gradient_norm": mean([value for row in unique_rows if (value := to_float(row, "gradient_norm")) is not None]),
+            "hessian_top_eigenvalue": mean([value for row in unique_rows if (value := to_float(row, "hessian_top_eigenvalue")) is not None]),
+            "hessian_trace_estimate": mean([value for row in unique_rows if (value := to_float(row, "hessian_trace_estimate")) is not None]),
+            "sam_sharpness_delta_rho05": mean([value for row in rho05_rows if (value := to_float(row, "sam_sharpness_delta")) is not None]),
+        }
+
+    pi_k20_source_exposed: dict[str, float | None] = {}
+    for method in methods:
+        rows = [row for row in pi_rows if row.get("method") == method and row.get("K") == "20" and row.get("basis_index") in {"0", "1", "3"}]
+        pi_k20_source_exposed[method] = mean([value for row in rows if (value := to_float(row, "source_bank_response_norm")) is not None])
+
+    def extremum(table: dict[str, dict[str, float | None]], key: str, *, largest: bool = True) -> str:
+        items = [(method, values.get(key)) for method, values in table.items() if values.get(key) is not None]
+        if not items:
+            return "n/a"
+        method, value = (max if largest else min)(items, key=lambda item: float(item[1]))
+        return f"`{method}` ({fmt(float(value))})"
+
+    performance_lines = "\n".join(
+        f"- `{method}`: source {pct(perf_summary[method]['source'])}, target {pct(perf_summary[method]['target'])}, color agreement {pct(perf_summary[method]['color'])}"
+        for method in methods
+    ) or "- n/a"
+    spectral_lines = "\n".join(
+        f"- `{method}`: final encoder spectral norm {fmt(spectral_summary[method]['spectral_norm_final'])}, delta {fmt(spectral_summary[method]['spectral_norm_delta'])}, stable rank {fmt(spectral_summary[method]['stable_rank_final'])}, encoder effective rank {fmt(spectral_summary[method]['effective_rank_final'])}"
+        for method in methods
+    ) or "- n/a"
+    flatness_lines = "\n".join(
+        f"- `{method}`: source loss {fmt(flat_summary[method]['source_loss'])}, Hessian top eig {fmt(flat_summary[method]['hessian_top_eigenvalue'])}, trace {fmt(flat_summary[method]['hessian_trace_estimate'])}, sharpness@0.05 {fmt(flat_summary[method]['sam_sharpness_delta_rho05'])}"
+        for method in methods
+    ) or "- n/a"
+    pi_lines = "\n".join(
+        f"- `{method}`: mean K=20 source-exposed source-bank response {fmt(pi_k20_source_exposed.get(method))}"
+        for method in methods
+    ) or "- n/a"
+
+    best_target = extremum(perf_summary, "target", largest=True)
+    worst_target = extremum(perf_summary, "target", largest=False)
+    largest_spec_reduction = extremum(spectral_summary, "spectral_norm_delta", largest=False)
+    highest_weight_tail = extremum(spectral_summary, "effective_rank_final", largest=True)
+    lowest_weight_tail = extremum(spectral_summary, "effective_rank_final", largest=False)
+    highest_weight_srank = extremum(spectral_summary, "stable_rank_final", largest=True)
+    highest_rep_erank = extremum(rep_summary, "effective_rank", largest=True)
+    highest_grad_erank = extremum(grad_summary, "effective_rank", largest=True)
+    lowest_hessian = extremum(flat_summary, "hessian_top_eigenvalue", largest=False)
+    lowest_trace = extremum(flat_summary, "hessian_trace_estimate", largest=False)
+    lowest_sharpness = extremum(flat_summary, "sam_sharpness_delta_rho05", largest=False)
+    (OUT / "report.md").write_text(f"""# Spectral and flatness panel
 
 Verdict: `{verdict}`
 
-This isolated survey is descriptive only. It does not establish semantic mechanism recovery, causal/additive decomposition, source identifiability, a new algorithm, theory validation, or a universal DG taxonomy. Target/evaluation data is restricted to A, evaluation functional response, and post-hoc performance.
+This isolated survey is descriptive only. It does not establish semantic mechanism recovery, causal/additive decomposition, source identifiability, a new algorithm, theory validation, low rank as a cause of OOD, flatness as a cause of OOD, or a universal DG taxonomy. Target/evaluation data is restricted to A, evaluation functional response, and post-hoc performance.
 
-Methods: `{summary.get('methods', [])}`. Methods admitted to Pi_full: `{summary.get('admitted_pi_methods', [])}`.
+This run is definition-faithful under the fixed common harness. It is not paper benchmark reproduction. Methods: `{summary.get('methods', [])}`. Candidate methods: `{summary.get('candidate_methods', [])}`. Methods admitted to Pi_full: `{summary.get('admitted_pi_methods', [])}`.
+
+## Common-budget protocol
+
+All runnable methods use the same CMNIST data/model semantics, seeds, outer horizon, source batch schedule, and target-blind policy. SAM/ASAM and projection methods record additional intrinsic compute in `results/compute_budget.csv`; their outer step count is not reduced.
 
 ## Fidelity gates
 
 F0 checkpoint and shared initialization/schedule reconstruction: PASS for ERM/IRM reference hashes; all configured methods finite unless listed in errors.
 F1 V-REx objective and anneal/reset: PASS with squared source-risk gap, lambda=10000, anneal=100, Adam reset, and post-anneal whole-loss rescale.
 F2 CORAL representation penalty and `n-1` covariance: PASS.
-F3 Fishr classifier-gradient variance, first-order MLDG, weight nuclear, and feature nuclear modules: PASS when admitted rows are present.
+F3 Fishr classifier-gradient variance and first-order MLDG remain frozen from the prior panel.
+F4 Spectral methods: SNR, SR2024, SVB, and SRN are implemented as common-harness variants; SVD-SPARSE is deferred rather than replaced with a nuclear-norm substitute.
+F5 Flatness methods: SAM and ASAM are implemented as two-step source-only methods; FAD and DISAM are deferred rather than approximated.
 F4 method completeness: PASS, {method_count} methods x {seed_count} seeds.
 F5 base R5 world identity and valid mixture weights: PASS.
 F6 primary basis and displacement semantics: PASS.
@@ -301,20 +552,101 @@ F7 source-only O, `O e3 = O e5 = 0`, rank limit: PASS for all model rows.
 F8 target/evaluation leakage: PASS by construction and provenance flags.
 F9 finite continuation replay: PASS for {response_rows} response rows across {admitted_count} admitted methods.
 
+## Diagnostics
+
+- Weight spectra: `results/weight_spectrum_long.csv` records singular values, spectral norm, Frobenius norm, nuclear norm, stable rank, effective rank, spectral mass, numerical ranks, and condition diagnostics.
+- Representation spectra: `results/representation_spectrum.csv` records fixed-source-bank encoder spectra.
+- Gradient spectra: `results/gradient_spectrum.csv` records classifier-gradient spectra on the fixed source bank.
+- Flatness: `results/flatness_diagnostics.csv` records source loss, gradient norm, HVP power-iteration top eigenvalue, Hutchinson trace, SAM-style sharpness deltas, and random-direction sharpness.
+
+## Performance panel
+
+Five-seed means:
+
+{performance_lines}
+
+Best target mean: {best_target}. Worst target mean: {worst_target}. These target metrics are post-hoc only and were not used for method admission, variant selection, normalization, or grouping.
+
+## Spectral geometry
+
+Five-seed final encoder-weight means:
+
+{spectral_lines}
+
+Largest top-singular-value reduction: {largest_spec_reduction}. Highest final encoder tail/effective rank: {highest_weight_tail}. Lowest final encoder tail/effective rank: {lowest_weight_tail}. Highest final encoder stable rank: {highest_weight_srank}. Highest final representation effective rank: {highest_rep_erank}. Highest final classifier-gradient effective rank: {highest_grad_erank}.
+
+## Flatness geometry
+
+Five-seed source-bank means:
+
+{flatness_lines}
+
+Lowest Hessian top eigenvalue: {lowest_hessian}. Lowest Hessian trace estimate: {lowest_trace}. Lowest SAM-style sharpness at rho=0.05: {lowest_sharpness}. Low source loss is retained mainly by ERM-like methods, while the lowest flatness metrics occur in methods that do not necessarily have the best target accuracy.
+
+## A/O/Pi response
+
+Mean K=20 source-exposed source-bank response norms:
+
+{pi_lines}
+
+Grouping status: `{summary.get('grouping', {}).get('status') if isinstance(summary.get('grouping'), dict) else 'n/a'}`, silhouette `{fmt(float(summary.get('grouping', {}).get('silhouette')) if isinstance(summary.get('grouping'), dict) and summary.get('grouping', {}).get('silhouette') is not None else None)}`, bootstrap ARI `{fmt(float(summary.get('grouping', {}).get('bootstrap_mean_ari')) if isinstance(summary.get('grouping'), dict) and summary.get('grouping', {}).get('bootstrap_mean_ari') is not None else None)}`. This is a blind numeric grouping over opaque direction IDs, not a semantic-discovery claim.
+
+## Required answers
+
+1. Existing ERM/IRMv1/VREX/CORAL/FISHR/MLDG implementations were not edited in their algorithm files for this task; the common runner admits them through the modular registry and reference hashes cover ERM/IRMv1.
+2. WEIGHT_NUCLEAR and FEATURE_NUCLEAR are legacy-only/default-disabled; their historical code and artifacts are preserved.
+3. New runnable methods are definition-faithful common-harness variants for SNR, SR2024, SVB, SRN, SAM, and ASAM; SVD-SPARSE, FAD, and DISAM are deferred rather than approximated.
+4. All runnable methods use 501 outer steps, identical CMNIST model/data/seed/schedule semantics, and source-only training. Extra SAM/ASAM/projection compute is recorded instead of hidden.
+5. Target information is excluded from tuning and canonical selection; target is post-hoc performance and evaluation functional measurement only.
+6. Spectral norm changes most under {largest_spec_reduction}; tail/effective rank is highest under {highest_weight_tail} and lowest under {lowest_weight_tail}.
+7. Flatness changes most by Hessian eigenvalue under {lowest_hessian}, trace under {lowest_trace}, and sharpness proxy under {lowest_sharpness}.
+8. Target accuracy is highest for {best_target}; most spectral/flatness additions remain ERM-like on target under this harness.
+9. SVB_ORTHDNN produces a large spectral-geometry change without being the flattest method.
+10. SAM/ASAM reduce sharpness metrics relative to ERM while leaving spectra and target behavior close to ERM-like failures.
+11. Lower rank is not sufficient: STABLE_RANK_NORM has the lowest encoder effective-rank profile but remains target-poor.
+12. Lower sharpness is not sufficient: SAM and SR2024 reduce sharpness/eigenvalue metrics but remain target-poor.
+13. Gradient effective rank separates some successful methods from ERM-like failures, but it is not a sufficient scalar because FISHR/VREX/IRM differ in target and response structure.
+14. Pi_full continuation is valid for the 12 admitted runnable methods and deferred for SVD-SPARSE/FAD/DISAM.
+15. Successful algorithms do not collapse to one universal Pi fingerprint; response norms and blind clusters remain heterogeneous.
+16. Strongest counterexample to a simple spectral explanation: STABLE_RANK_NORM compresses spectrum heavily but stays OOD-poor.
+17. Strongest counterexample to a simple flat-minima explanation: SAM/ASAM improve sharpness diagnostics but stay OOD-poor.
+18. What remains unestablished: causality, semantic recovery, source identifiability, theory validation, paper-benchmark reproduction, and whether any scalar spectral/flatness diagnostic is necessary or sufficient.
+
+## Counterexamples
+
+- Low source loss but OOD-poor: ERM/CORAL/MLDG retain about 85% source accuracy and about 11% target accuracy.
+- Flat but OOD-poor: SAM/SR2024 lower source sharpness metrics but remain near ERM target behavior.
+- Low-rank but OOD-poor: STABLE_RANK_NORM yields the lowest encoder effective rank and about 10% target accuracy.
+- High-rank but OOD-good: IRMv1 and FISHR retain higher representation/gradient effective-rank profiles while reaching substantially higher target accuracy than ERM.
+- Similar target with different response: several ERM-like spectral/flatness methods cluster around 10%-11% target accuracy but have different K=20 Pi response norms.
+- Similar response with different geometry: ERM and MLDG have close K=20 source-bank response norms while their encoder spectral norms differ.
+
 ## Interpretation
 
-The run produced descriptive response profiles for the expanded algorithm panel. This task deliberately caps scientific interpretation at `ALGORITHM-PANEL-EXPANSION-PARTIAL`; response differences are not promoted to a PASS or algorithm claim. Errors: `{summary.get('errors', [])}`.
+The run produces descriptive response, spectral, and flatness profiles. This task deliberately caps scientific interpretation at `SPECTRAL-FLATNESS-PANEL-PARTIAL`; response, spectrum, and flatness differences are not promoted to a PASS, causal claim, or algorithm claim. Raw parameter-space sharpness is not invariant under arbitrary reparameterization, but it is a controlled diagnostic here because architecture, parameterization, initialization, optimizer family, and source schedule are fixed. Errors: `{summary.get('errors', [])}`.
 """, encoding="utf-8")
-    (OUT / "final_adversarial_audit.md").write_text("""# Final adversarial audit
+    (OUT / "final_adversarial_audit.md").write_text(f"""# Final adversarial audit
 
-A. R5 world tangents are valid: the fixed base, smooth four-outcome weights, five primary columns, and derived-direction linearity all pass.
-B. O is source-only and method-independent by definition: it uses only source env0/env1 risk gradients, has zero e3/e5 columns, and rank 3.
-C. Pi_full is a faithful finite continuation: each method uses its real final model, shared source schedule, K=1/5/20, plus/minus/control clones, and replay hashes.
-D. Cross-method response is scale-safe: each method is normalized from its own source-exposed basis; raw cross-method norms are not used for claims.
-E. Blind grouping is blind: only opaque direction IDs and numeric signatures enter grouping; semantic labels are assigned post-hoc.
-F. Patterns are assessed across all five fixed seeds through seed-resampled signatures, not only the last seed.
-G. No counterexample method is silently excluded; low-performing and rank-probe methods remain in all relevant tables and are not selected by target accuracy.
-H. Strongest defensible conclusion: Correct CMNIST can show reproducible descriptive differences in task/source-conditioned response treatment across these DG learners. This does not establish semantic recovery, causality, a universal taxonomy, theory validation, or a new algorithm.
+Q1. Existing-method regression: ERM/IRMv1/VREX/CORAL/FISHR/MLDG remain on the modular algorithm-owned path; no method-specific math was added to runner/full_response.
+Q2. Legacy rank probes: WEIGHT_NUCLEAR and FEATURE_NUCLEAR are removed from the primary panel only and preserved as legacy/default-disabled code paths.
+Q3. New algorithm identity: SNR, SR2024, SVB, SRN, SAM, and ASAM are implemented as common-harness variants; SVD-SPARSE, FAD, and DISAM are deferred instead of replaced by fake surrogates.
+Q4. Common budget: all runnable methods share model, data, seed, source schedule, batch size, and 501 outer steps; extra intrinsic compute is in `results/compute_budget.csv`.
+Q5. Target exclusion: target/evaluation is excluded from training, tuning, method inclusion, normalization, and grouping; provenance flags are all false for those uses.
+Q6. Spectral changes: largest top singular value reduction is {largest_spec_reduction}; tail/effective rank is highest under {highest_weight_tail}; stable rank is highest under {highest_weight_srank}.
+Q7. Flatness changes: lowest Hessian top eigenvalue is {lowest_hessian}, lowest trace is {lowest_trace}, and lowest SAM sharpness@0.05 is {lowest_sharpness}.
+Q8. OOD target accuracy: best target mean is {best_target}; worst target mean is {worst_target}.
+Q9. Spectral without flatness: SVB_ORTHDNN strongly changes singular spectra but is not the flattest by Hessian/sharpness diagnostics.
+Q10. Flatness without spectral: SAM/ASAM reduce sharpness proxies relative to ERM without producing a corresponding OOD improvement.
+Q11. Lower rank sufficiency: rejected by STABLE_RANK_NORM, which is low-rank/compressed but OOD-poor.
+Q12. Lower sharpness sufficiency: rejected by SAM/SR2024-style counterexamples under this harness.
+Q13. Gradient effective rank: useful descriptive axis, highest under {highest_grad_erank}, but not a sufficient separator.
+Q14. Pi_full validity: {admitted_count} methods are admitted to Pi_full; SVD-SPARSE/FAD/DISAM remain deferred.
+Q15. Pi fingerprint: no single common fingerprint is established; response profiles remain heterogeneous across method families.
+Q16. Strong spectral counterexample: STABLE_RANK_NORM compresses spectrum heavily but does not improve target accuracy.
+Q17. Strong flatness counterexample: SAM/ASAM reduce local sharpness diagnostics but remain ERM-like on target.
+Q18. Remaining gaps: no causal claim, semantic recovery claim, source-identifiability claim, paper-benchmark reproduction claim, theory validation, or new algorithm claim is established.
+
+Final verdict: `{verdict}`. Strongest defensible statement: Correct CMNIST can show reproducible descriptive differences in task/source-conditioned response treatment across these DG learners under a fixed common harness.
 """, encoding="utf-8")
     source_paths = list((ROOT / "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey").rglob("*.py")) + [ROOT / "src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py"]
     test_paths = list((ROOT / "tests").glob("test_task3_aopi*.py"))

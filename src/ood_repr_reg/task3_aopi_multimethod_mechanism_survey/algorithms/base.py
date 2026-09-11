@@ -71,6 +71,11 @@ class SurveyAlgorithm(Protocol):
     variant_id: str
     admission_role: str
     admits_to_pi: bool
+    admits_to_training: bool
+    deferred_reason: str
+    forward_pass_equivalents_per_step: float
+    backward_pass_equivalents_per_step: float
+    projection_or_svd_operations_per_step: float
 
     def objective(
         self,
@@ -133,6 +138,11 @@ class BaseAlgorithm:
     variant_id = "BASE"
     admission_role = "PERFORMANCE_ONLY"
     admits_to_pi = True
+    admits_to_training = True
+    deferred_reason = ""
+    forward_pass_equivalents_per_step = 1.0
+    backward_pass_equivalents_per_step = 1.0
+    projection_or_svd_operations_per_step = 0.0
 
     def __init__(self, config: dict[str, Any]) -> None:
         self.config = config

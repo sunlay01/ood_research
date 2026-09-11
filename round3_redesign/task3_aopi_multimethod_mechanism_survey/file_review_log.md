@@ -152,3 +152,19 @@ coordinate semantics, rank bounds, and failure modes are reviewed explicitly.
 - counterexample considered: a plausible but wrong expansion would duplicate Fishr/MLDG math inside `full_response.py` or hard-code eight method strings in signature construction. Regression tests now check method-owned interfaces, dynamic codes, and deletion of `method_objectives.py`.
 - tests: focused expansion tests plus prior multimethod, project-state, CPU-minimal, and counterfactual regression tests passed after the expanded run.
 - final verdict: `PASS`
+
+## Spectral and flatness panel
+
+- task: `TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL`
+- files: `algorithms/spectral_norm_reg.py`, `spectral_reg_2024.py`, `svb_orthdnn.py`, `stable_rank_norm.py`, `svd_sparse.py`, `sam.py`, `asam.py`, `fad.py`, `disam.py`, `deferred.py`, `spectral_flatness_diagnostics.py`, `method_trainer.py`, `config_schema.py`, `run_task3_aopi_multimethod_mechanism_survey.py`, and focused spectral/flatness tests.
+- worktree basis: implemented after `a0d991d9ae609a52ba3861be32ef18d3406072de`; canonical state files, frozen CMNIST data/model files, R5 world, A/O definitions, functional banks, and old repair artifacts were not edited.
+- mathematical objects and dimensions: runnable additions cover four spectral common-harness variants and two flatness optimizers; diagnostics record weight singular spectra per linear layer, representation spectra on the fixed source bank, classifier-gradient spectra, source-loss/HVP/Hutchinson/sharpness flatness metrics, and compute equivalents. A remains 65D frozen final-head geometry, O remains source-risk-only and method-independent.
+- source/target/method/seed/optimizer boundaries: training and smooth continuation call algorithm-owned `train_step` / `smooth_train_step`; target/evaluation enters only A, evaluation functional banks, and post-hoc performance. SAM/ASAM use the same source minibatch for both passes and restore parameters before the optimizer step. Projection methods apply post-step method-owned projection.
+- displacement/base semantics: `smooth_world5.py` remains the source of truth; zero displacement recovers `(0.2, 0.1, 0.9, 0.25, 0.25)`, primary basis is `e1..e5`, and derived directions remain diagnostics only.
+- rank limits and derived directions: all 60 method/seed rows pass `rank(A)=5`, `rank(O)=3`, `O e3=0`, and `O e5=0`; no rank clipping or derived-column inflation is used.
+- discontinuous finite-difference check: spectral/flatness diagnostics are checkpoint measurements, while A/O/Pi continues to use the existing smooth expectation path, not thresholded Bernoulli resampling.
+- target leakage / method-specific O / scale mismatch checks: provenance flags `target_used_for_training=false`, `target_used_for_tuning=false`, `target_used_for_grouping=false`; O has no method argument; grouping uses opaque IDs and method-internal source-exposed normalization.
+- adversarial counterexamples considered: STABLE_RANK_NORM can heavily compress spectrum while remaining OOD-poor; SAM/ASAM can lower sharpness proxies without OOD improvement; SVB can reshape spectra without being the flattest method; ERM/CORAL/MLDG can keep high source accuracy while failing target.
+- fixes made: generated actual metrics-driven report and final adversarial audit from CSV outputs so the committed runner can regenerate the committed interpretation files; FAD/DISAM are explicit deferred candidates rather than SAM-like surrogates.
+- tests: focused spectral/flatness tests, prior multimethod tests, project-state checks, CPU-minimal regression, and counterfactual audit tests were run before the final output pass; post-output focused tests are rerun after this entry.
+- final verdict: `PASS` engineering / `SPECTRAL-FLATNESS-PANEL-PARTIAL` scientific interpretation ceiling.

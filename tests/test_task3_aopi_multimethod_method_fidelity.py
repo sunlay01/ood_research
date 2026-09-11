@@ -31,7 +31,8 @@ def toy_envs():
 
 def test_config_fixes_method_panel_and_training_identity():
     cfg = config()
-    assert cfg["methods"] == ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "WEIGHT_NUCLEAR", "FEATURE_NUCLEAR"]
+    assert cfg["methods"] == ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "SPECTRAL_NORM_REG", "SPECTRAL_REG_2024", "SVB_ORTHDNN", "STABLE_RANK_NORM", "SAM", "ASAM"]
+    assert {"SVD_SPARSE", "FAD", "DISAM"} <= set(cfg["candidate_methods"])
     assert cfg["seeds"] == [10, 11, 12, 13, 14]
     assert cfg["training"]["steps"] == 501
     assert cfg["training"]["batch_size_per_environment"] == 512
@@ -41,6 +42,8 @@ def test_config_fixes_method_panel_and_training_identity():
     assert cfg["fishr"]["post_anneal_penalty_weight"] == 10000.0
     assert cfg["mldg"]["order"] == "first_order"
     assert cfg["stable_rank"]["registered_as_algorithm"] is False
+    assert cfg["weight_nuclear"]["legacy_only"] is True
+    assert cfg["feature_nuclear"]["default_enabled"] is False
 
 
 def test_each_algorithm_has_own_file_and_registry_is_only_dispatch():
@@ -53,6 +56,15 @@ def test_each_algorithm_has_own_file_and_registry_is_only_dispatch():
         "MLDG": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.mldg",
         "WEIGHT_NUCLEAR": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.weight_nuclear",
         "FEATURE_NUCLEAR": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.feature_nuclear",
+        "SPECTRAL_NORM_REG": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.spectral_norm_reg",
+        "SPECTRAL_REG_2024": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.spectral_reg_2024",
+        "SVB_ORTHDNN": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.svb_orthdnn",
+        "STABLE_RANK_NORM": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.stable_rank_norm",
+        "SVD_SPARSE": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.svd_sparse",
+        "SAM": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.sam",
+        "ASAM": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.asam",
+        "FAD": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.fad",
+        "DISAM": "ood_repr_reg.task3_aopi_multimethod_mechanism_survey.algorithms.disam",
     }
     assert {name: cls.__module__ for name, cls in ALGORITHM_CLASSES.items()} == expected_modules
     full_response_source = (ROOT / "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/full_response.py").read_text()

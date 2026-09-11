@@ -1,5 +1,5 @@
 {
-  "admitted_pi_method_count": 8,
+  "admitted_pi_method_count": 12,
   "admitted_pi_methods": [
     "ERM",
     "IRMv1",
@@ -7,8 +7,29 @@
     "CORAL",
     "FISHR",
     "MLDG",
-    "WEIGHT_NUCLEAR",
-    "FEATURE_NUCLEAR"
+    "SPECTRAL_NORM_REG",
+    "SPECTRAL_REG_2024",
+    "SVB_ORTHDNN",
+    "STABLE_RANK_NORM",
+    "SAM",
+    "ASAM"
+  ],
+  "candidate_methods": [
+    "ERM",
+    "IRMv1",
+    "VREX",
+    "CORAL",
+    "FISHR",
+    "MLDG",
+    "SPECTRAL_NORM_REG",
+    "SPECTRAL_REG_2024",
+    "SVB_ORTHDNN",
+    "STABLE_RANK_NORM",
+    "SVD_SPARSE",
+    "SAM",
+    "ASAM",
+    "FAD",
+    "DISAM"
   ],
   "errors": [],
   "grouping": {
@@ -22,6 +43,10 @@
       "a_m005",
       "a_m006",
       "a_m007",
+      "a_m008",
+      "a_m009",
+      "a_m010",
+      "a_m011",
       "o_m000",
       "o_m001",
       "o_m002",
@@ -30,6 +55,10 @@
       "o_m005",
       "o_m006",
       "o_m007",
+      "o_m008",
+      "o_m009",
+      "o_m010",
+      "o_m011",
       "r_m000_K1",
       "r_m000_K20",
       "r_m000_K5",
@@ -53,7 +82,19 @@
       "r_m006_K5",
       "r_m007_K1",
       "r_m007_K20",
-      "r_m007_K5"
+      "r_m007_K5",
+      "r_m008_K1",
+      "r_m008_K20",
+      "r_m008_K5",
+      "r_m009_K1",
+      "r_m009_K20",
+      "r_m009_K5",
+      "r_m010_K1",
+      "r_m010_K20",
+      "r_m010_K5",
+      "r_m011_K1",
+      "r_m011_K20",
+      "r_m011_K5"
     ],
     "grouping_hyperparameters": {
       "ari_threshold": 0.75,
@@ -82,21 +123,25 @@
       "u010"
     ],
     "selected_k": 3,
-    "silhouette": 0.380733145024872,
+    "silhouette": 0.42886685824995696,
     "stable": true,
     "status": "STAGE4-PASS"
   },
   "method_codes": {
+    "ASAM": "m011",
     "CORAL": "m003",
     "ERM": "m000",
-    "FEATURE_NUCLEAR": "m007",
     "FISHR": "m004",
     "IRMv1": "m001",
     "MLDG": "m005",
-    "VREX": "m002",
-    "WEIGHT_NUCLEAR": "m006"
+    "SAM": "m010",
+    "SPECTRAL_NORM_REG": "m006",
+    "SPECTRAL_REG_2024": "m007",
+    "STABLE_RANK_NORM": "m009",
+    "SVB_ORTHDNN": "m008",
+    "VREX": "m002"
   },
-  "method_count": 8,
+  "method_count": 12,
   "methods": [
     "ERM",
     "IRMv1",
@@ -104,25 +149,35 @@
     "CORAL",
     "FISHR",
     "MLDG",
-    "WEIGHT_NUCLEAR",
-    "FEATURE_NUCLEAR"
+    "SPECTRAL_NORM_REG",
+    "SPECTRAL_REG_2024",
+    "SVB_ORTHDNN",
+    "STABLE_RANK_NORM",
+    "SAM",
+    "ASAM"
   ],
   "rows": {
-    "fidelity": 40,
-    "geometry_A": 440,
-    "geometry_O": 440,
-    "normalized_response": 1320,
-    "performance": 40,
-    "pi_full": 1320,
-    "signatures": 11
+    "compute_budget": 60,
+    "fidelity": 60,
+    "flatness_diagnostics": 120,
+    "geometry_A": 660,
+    "geometry_O": 660,
+    "gradient_spectrum": 60,
+    "normalized_response": 1980,
+    "performance": 60,
+    "pi_full": 1980,
+    "representation_spectrum": 360,
+    "signatures": 11,
+    "spectral_flatness_admission": 15,
+    "weight_spectrum_long": 1080
   },
   "seed_count": 5,
   "stage": "complete",
   "target_used_for_grouping": false,
   "target_used_for_training": false,
   "target_used_for_tuning": false,
-  "task_id": "TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK",
-  "verdict": "ALGORITHM-PANEL-EXPANSION-PARTIAL",
+  "task_id": "TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL",
+  "verdict": "SPECTRAL-FLATNESS-PANEL-PARTIAL",
   "world_gates": [
     {
       "Oe3_norm": 0.0,
@@ -181,7 +236,7 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "WEIGHT_NUCLEAR",
+      "method": "SPECTRAL_NORM_REG",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -190,7 +245,43 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "FEATURE_NUCLEAR",
+      "method": "SPECTRAL_REG_2024",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SVB_ORTHDNN",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "STABLE_RANK_NORM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SAM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 10
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ASAM",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -253,7 +344,7 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "WEIGHT_NUCLEAR",
+      "method": "SPECTRAL_NORM_REG",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -262,7 +353,43 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "FEATURE_NUCLEAR",
+      "method": "SPECTRAL_REG_2024",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SVB_ORTHDNN",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "STABLE_RANK_NORM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SAM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 11
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ASAM",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -325,7 +452,7 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "WEIGHT_NUCLEAR",
+      "method": "SPECTRAL_NORM_REG",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -334,7 +461,43 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "FEATURE_NUCLEAR",
+      "method": "SPECTRAL_REG_2024",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SVB_ORTHDNN",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "STABLE_RANK_NORM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SAM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 12
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ASAM",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -397,7 +560,7 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "WEIGHT_NUCLEAR",
+      "method": "SPECTRAL_NORM_REG",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -406,7 +569,43 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "FEATURE_NUCLEAR",
+      "method": "SPECTRAL_REG_2024",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SVB_ORTHDNN",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "STABLE_RANK_NORM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SAM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 13
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ASAM",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -469,7 +668,7 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "WEIGHT_NUCLEAR",
+      "method": "SPECTRAL_NORM_REG",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,
@@ -478,7 +677,43 @@
     {
       "Oe3_norm": 0.0,
       "Oe5_norm": 0.0,
-      "method": "FEATURE_NUCLEAR",
+      "method": "SPECTRAL_REG_2024",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SVB_ORTHDNN",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "STABLE_RANK_NORM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "SAM",
+      "passed": true,
+      "rank_A": 5,
+      "rank_O": 3,
+      "seed": 14
+    },
+    {
+      "Oe3_norm": 0.0,
+      "Oe5_norm": 0.0,
+      "method": "ASAM",
       "passed": true,
       "rank_A": 5,
       "rank_O": 3,

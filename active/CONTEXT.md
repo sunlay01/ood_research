@@ -1,22 +1,26 @@
-# TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK Context
+# TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL Context
 
-This isolated expansion keeps the previously repaired CMNIST A/O/Pi survey semantics and broadens the algorithm panel. The R5 base world remains `(0.2, 0.1, 0.9, 0.25, 0.25)` and tangent coordinates remain displacements from that base.
+This task extends the already modular CMNIST A/O/Pi survey into a common-budget spectral and flatness panel. It keeps the same CMNIST data, model, seeds, optimizer base, source schedule, R5 smooth world, A/O definitions, functional banks, normalization, and blind grouping semantics.
 
-Trusted invariant components:
+Common-harness scope:
 
-- Corrected CPU-minimal CMNIST data/model semantics and source batch schedule.
-- Smooth four-outcome expectation world, task response `A = H_S^(-1/2) D grad(R_T - R_S)`, source-only method-independent `O`, functional banks, normalization, and blind grouping.
-- ERM/IRMv1 reference hashes from the accepted counterfactual audit manifest.
+- Paper references define algorithmic updates; paper-specific architecture, batch size, horizon, or benchmark accuracy are not imported.
+- Existing methods `ERM`, `IRMv1`, `VREX`, `CORAL`, `FISHR`, and `MLDG` remain behavior-preserving.
+- `WEIGHT_NUCLEAR` and `FEATURE_NUCLEAR` are preserved as legacy-only code paths and are not default primary methods.
 
-Algorithm structure:
+Runnable additions:
 
-- `algorithms/erm.py`, `irmv1.py`, `vrex.py`, and `coral.py` remain behavior-preserving.
-- New methods live in dedicated files: `fishr.py`, `mldg.py`, `weight_nuclear.py`, `feature_nuclear.py`; `stable_rank.py` is diagnostic-only.
-- `method_trainer.py` and `full_response.py` call algorithm-owned step interfaces rather than reimplementing method math.
+- Spectral family: `SPECTRAL_NORM_REG`, `SPECTRAL_REG_2024`, `SVB_ORTHDNN`, `STABLE_RANK_NORM`.
+- Flatness family: `SAM`, `ASAM`.
 
-Evaluation boundaries:
+Deferred candidates:
 
-- Target/evaluation data may enter A, evaluation functional banks, and post-hoc performance only.
-- Target rows cannot select source fit, direction, continuation, normalization, grouping, rank coefficient, or method inclusion.
+- `SVD_SPARSE` is deferred because faithful singular-vector parameterization/sparsification would change the fixed model parameterization.
+- `FAD` and `DISAM` are deferred until exact update semantics are implemented; no SAM surrogate is allowed.
+
+Diagnostics:
+
+- Weight, representation, gradient spectrum, compute-budget, and source flatness diagnostics are auxiliary tables only.
+- These diagnostics do not enter `O` and do not justify causal claims.
 
 Canonical state remains unchanged; completion writes only `active/STATE_DELTA.md`.

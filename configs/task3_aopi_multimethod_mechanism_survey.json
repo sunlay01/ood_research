@@ -1,7 +1,8 @@
 {
-  "task_id": "TASK-AOPI-ALGORITHM-PANEL-EXPANSION-FISHR-MLDG-RANK",
+  "task_id": "TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL",
   "device": "cpu",
-  "methods": ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "WEIGHT_NUCLEAR", "FEATURE_NUCLEAR"],
+  "methods": ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "SPECTRAL_NORM_REG", "SPECTRAL_REG_2024", "SVB_ORTHDNN", "STABLE_RANK_NORM", "SAM", "ASAM"],
+  "candidate_methods": ["ERM", "IRMv1", "VREX", "CORAL", "FISHR", "MLDG", "SPECTRAL_NORM_REG", "SPECTRAL_REG_2024", "SVB_ORTHDNN", "STABLE_RANK_NORM", "SVD_SPARSE", "SAM", "ASAM", "FAD", "DISAM"],
   "include_coral_if_fidelity_pass": true,
   "seeds": [10, 11, 12, 13, 14],
   "data": {
@@ -69,13 +70,71 @@
     "lambda": 0.001,
     "penalized_layers": "encoder_linear_only",
     "head_penalized": false,
+    "legacy_only": true,
+    "default_enabled": false,
     "selection_rule": "preregistered_source_only_rank_probe"
   },
   "feature_nuclear": {
     "lambda": 0.0001,
     "feature_scope": "concatenated_source_encoder_features",
     "formula_reference_status": "VERIFIED_LOSS_PLUS_LAMBDA_SUM_SINGULAR_VALUES",
+    "legacy_only": true,
+    "default_enabled": false,
     "selection_rule": "preregistered_source_only_rank_probe"
+  },
+  "spectral_norm_reg": {
+    "lambda": 0.001,
+    "penalty": "sum_sigma1_squared_all_linear_weights",
+    "equation_verified": true,
+    "official_code_checked_if_available": false
+  },
+  "spectral_reg_2024": {
+    "lambda": 0.001,
+    "exponent": 2,
+    "target_sigma_power": 1.0,
+    "bias_term": "bias_norm_power_2k",
+    "equation_verified": true,
+    "official_code_checked_if_available": false
+  },
+  "svb_orthdnn": {
+    "svb_factor": 0.05,
+    "projection": "post_optimizer_step_singular_value_clamp",
+    "lower": "1/(1+factor)",
+    "upper": "1+factor",
+    "equation_verified": true,
+    "official_code_checked_if_available": false
+  },
+  "stable_rank_norm": {
+    "target_rank": 8.0,
+    "spectral_norm_target": 1.0,
+    "projection": "post_optimizer_step_tail_rescale_then_sigma1_normalize",
+    "equation_verified": true,
+    "official_code_checked_if_available": false
+  },
+  "svd_sparse": {
+    "performance_admission": false,
+    "reason": "SVD_SPARSE_DEFERRED_TRUE_FACTORISED_PARAMETERIZATION_WOULD_CHANGE_MODEL_COMPARABILITY"
+  },
+  "sam": {
+    "rho": 0.05,
+    "adaptive": false,
+    "equation_verified": true,
+    "official_code_checked_if_available": true
+  },
+  "asam": {
+    "rho": 0.5,
+    "eta": 0.01,
+    "adaptive": true,
+    "equation_verified": true,
+    "official_code_checked_if_available": true
+  },
+  "fad": {
+    "performance_admission": false,
+    "reason": "FAD_REFERENCE_UNRESOLVED_EXACT_ZERO_AND_FIRST_ORDER_UPDATE_NOT_IMPLEMENTED"
+  },
+  "disam": {
+    "performance_admission": false,
+    "reason": "DISAM_REFERENCE_UNRESOLVED_DOMAIN_IMBALANCE_CALIBRATION_NOT_IMPLEMENTED"
   },
   "stable_rank": {
     "registered_as_algorithm": false,
@@ -135,5 +194,13 @@
     "old_results_overwritten": false,
     "stop_on_missing_primary_row": true,
     "stop_on_fidelity_failure": true
+  },
+  "diagnostics": {
+    "source_bank_size_per_environment": 64,
+    "hessian_power_iterations": 6,
+    "hutchinson_probes": 4,
+    "sharpness_radii": [0.01, 0.05],
+    "random_direction_probes": 4,
+    "random_direction_seed": 20260911
   }
 }

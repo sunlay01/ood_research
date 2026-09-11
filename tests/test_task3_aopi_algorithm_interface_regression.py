@@ -30,20 +30,20 @@ def test_dynamic_method_codes_follow_config_order_and_remain_opaque():
     methods = config()["methods"]
     codes = method_code_map(methods)
     assert codes["ERM"] == "m000"
-    assert codes["FEATURE_NUCLEAR"] == "m007"
+    assert codes["ASAM"] == "m011"
     assert len(set(codes.values())) == len(methods)
 
 
 def test_mechanism_signatures_accept_expanded_methods_without_unknown_columns():
     rows = [{"opaque_direction_id": "u000", "method": method, "A_normalized_norm": float(i + 1)} for i, method in enumerate(config()["methods"])]
     signature = mechanism_signature_rows(rows, [], [], methods=config()["methods"])[0]
-    assert "a_m007" in signature
+    assert "a_m011" in signature
     assert "a_m_unknown" not in signature
 
 
 def test_no_method_specific_math_outside_algorithm_files_for_new_methods():
     assert not (ROOT / "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/method_objectives.py").exists()
-    forbidden = {'"FISHR"', '"MLDG"', '"WEIGHT_NUCLEAR"', '"FEATURE_NUCLEAR"'}
+    forbidden = {'"SPECTRAL_NORM_REG"', '"SPECTRAL_REG_2024"', '"SVB_ORTHDNN"', '"STABLE_RANK_NORM"', '"SAM"', '"ASAM"'}
     for path in [
         ROOT / "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/full_response.py",
         ROOT / "src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py",
@@ -63,4 +63,5 @@ def test_existing_algorithm_default_step_preserves_parameter_update_path():
     result = algorithm.train_step(model, optimizer, batches, step=0, learning_rate=0.001, algorithm_state=algorithm.initial_state(seed=10))
     assert result.parts.applied_penalty_weight == 0.0
     assert parameter_hash(model) != before
-    assert set(config()["methods"]) == set(ALGORITHM_CLASSES)
+    assert set(config()["methods"]) < set(ALGORITHM_CLASSES)
+    assert set(config()["candidate_methods"]) <= set(ALGORITHM_CLASSES)
