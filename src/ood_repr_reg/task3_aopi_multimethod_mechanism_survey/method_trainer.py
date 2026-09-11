@@ -139,7 +139,7 @@ def train_survey_method(
         optimizer_reset_count=reset_count,
         objective_formula_id=algorithm.formula_id,
         algorithm_reference_id=algorithm.reference_id,
-        algorithm_variant_id=algorithm.variant_id,
+        algorithm_variant_id=str(config.get("_active_variant_id", algorithm.variant_id)),
         admission_role=algorithm.admission_role,
         admitted_to_pi=bool(algorithm.admits_to_pi),
         admits_to_training=bool(algorithm.admits_to_training),

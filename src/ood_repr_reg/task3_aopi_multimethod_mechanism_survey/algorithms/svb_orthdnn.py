@@ -36,6 +36,13 @@ class SVBOrthDNNAlgorithm(BaseAlgorithm):
     def factor(self) -> float:
         return float(self.config["svb_orthdnn"]["svb_factor"])
 
+    @property
+    def projection_frequency(self) -> int:
+        return int(self.config["svb_orthdnn"]["projection_frequency"])
+
+    def should_project(self, step: int) -> bool:
+        return (int(step) + 1) % self.projection_frequency == 0
+
     def objective(self, model: nn.Module, batches: tuple[tuple[Tensor, Tensor], tuple[Tensor, Tensor]], *, step: int) -> ObjectiveParts:
         losses = torch.stack(source_environment_losses(model, batches))
         risk = losses.mean()
@@ -48,14 +55,16 @@ class SVBOrthDNNAlgorithm(BaseAlgorithm):
 
     def train_step(self, model: nn.Module, optimizer: torch.optim.Optimizer, batches: tuple[tuple[Tensor, Tensor], tuple[Tensor, Tensor]], *, step: int, learning_rate: float, algorithm_state: AlgorithmState) -> StepResult:
         result = super().train_step(model, optimizer, batches, step=step, learning_rate=learning_rate, algorithm_state=algorithm_state)
-        apply_svb_projection(model, factor=self.factor)
         state = result.algorithm_state.clone()
-        state.payload["projection_count"] = int(state.payload.get("projection_count", 0)) + 1
+        if self.should_project(step):
+            apply_svb_projection(model, factor=self.factor)
+            state.payload["projection_count"] = int(state.payload.get("projection_count", 0)) + 1
         return StepResult(result.parts, result.optimizer, state, result.did_reset_optimizer)
 
     def smooth_train_step(self, model: nn.Module, optimizer: torch.optim.Optimizer, worlds: SmoothWorld5, indices: tuple[Tensor, Tensor], delta: Tensor, *, step: int, learning_rate: float, algorithm_state: AlgorithmState) -> SmoothStepResult:
         result = super().smooth_train_step(model, optimizer, worlds, indices, delta, step=step, learning_rate=learning_rate, algorithm_state=algorithm_state)
-        apply_svb_projection(model, factor=self.factor)
         state = result.algorithm_state.clone()
-        state.payload["projection_count"] = int(state.payload.get("projection_count", 0)) + 1
+        if self.should_project(step):
+            apply_svb_projection(model, factor=self.factor)
+            state.payload["projection_count"] = int(state.payload.get("projection_count", 0)) + 1
         return SmoothStepResult(result.objective, result.optimizer, state, result.did_reset_optimizer, result.finite)

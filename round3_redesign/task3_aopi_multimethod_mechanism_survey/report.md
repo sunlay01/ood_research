@@ -10,6 +10,19 @@ This run is definition-faithful under the fixed common harness. It is not paper 
 
 All runnable methods use the same CMNIST data/model semantics, seeds, outer horizon, source batch schedule, and target-blind policy. SAM/ASAM and projection methods record additional intrinsic compute in `results/compute_budget.csv`; their outer step count is not reduced.
 
+## Source-only calibration
+
+The spectral/flatness families were calibrated with 30 actual seed-10 training runs, not a one-row placeholder. Canonical variants were frozen using source accuracy >=55% and the preregistered method-specific source geometry score, with source loss as tie-breaker. Only after `selected_source_only_variants.json` and the pre-target sweep table were written were target metrics evaluated for every retained variant.
+
+- `SPECTRAL_NORM_REG`: 5 variants; post-hoc target range 10.2% to 10.6%; source-only canonical `SPECTRAL_NORM_REG[lambda=1]`
+- `SPECTRAL_REG_2024`: 5 variants; post-hoc target range 10.2% to 10.6%; source-only canonical `SPECTRAL_REG_2024[lambda=1]`
+- `SVB_ORTHDNN`: 5 variants; post-hoc target range 10.2% to 11.0%; source-only canonical `SVB_ORTHDNN[factor=0.05,frequency=1]`
+- `STABLE_RANK_NORM`: 5 variants; post-hoc target range 10.2% to 10.2%; source-only canonical `STABLE_RANK_NORM[target_rank=8]`
+- `SAM`: 5 variants; post-hoc target range 10.2% to 10.6%; source-only canonical `SAM[rho=0.2]`
+- `ASAM`: 5 variants; post-hoc target range 10.3% to 10.7%; source-only canonical `ASAM[rho=2]`
+
+Across this declared grid, every spectral/flatness variant remained a color-shortcut solution: target accuracy stayed near chance while target prediction/color agreement stayed near 100%. This supports a negative result for these tested variants under this harness. It does not justify the broader claim that the complete SNR, SR2024, SVB, SRN, SAM, or ASAM method families cannot work under other source-only configurations.
+
 ## Fidelity gates
 
 F0 checkpoint and shared initialization/schedule reconstruction: PASS for ERM/IRM reference hashes; all configured methods finite unless listed in errors.
@@ -42,14 +55,14 @@ Five-seed means:
 - `CORAL`: source 85.0%, target 10.9%, color agreement 99.2%
 - `FISHR`: source 69.0%, target 55.9%, color agreement 48.4%
 - `MLDG`: source 85.0%, target 11.2%, color agreement 98.9%
-- `SPECTRAL_NORM_REG`: source 85.0%, target 10.6%, color agreement 99.6%
-- `SPECTRAL_REG_2024`: source 85.0%, target 10.3%, color agreement 99.8%
+- `SPECTRAL_NORM_REG`: source 84.6%, target 11.0%, color agreement 99.0%
+- `SPECTRAL_REG_2024`: source 85.0%, target 10.2%, color agreement 100.0%
 - `SVB_ORTHDNN`: source 85.0%, target 10.2%, color agreement 100.0%
 - `STABLE_RANK_NORM`: source 85.0%, target 10.2%, color agreement 100.0%
-- `SAM`: source 85.0%, target 10.4%, color agreement 99.7%
-- `ASAM`: source 85.0%, target 10.6%, color agreement 99.5%
+- `SAM`: source 85.0%, target 10.2%, color agreement 100.0%
+- `ASAM`: source 85.0%, target 10.3%, color agreement 99.9%
 
-Best target mean: `IRMv1` (0.669). Worst target mean: `SVB_ORTHDNN` (0.102). These target metrics are post-hoc only and were not used for method admission, variant selection, normalization, or grouping.
+Best target mean: `IRMv1` (0.669). Worst target mean: `SPECTRAL_REG_2024` (0.102). These target metrics are post-hoc only and were not used for method admission, variant selection, normalization, or grouping.
 
 ## Spectral geometry
 
@@ -61,14 +74,14 @@ Five-seed final encoder-weight means:
 - `CORAL`: final encoder spectral norm 1.700, delta -0.176, stable rank 5.272, encoder effective rank 41.949
 - `FISHR`: final encoder spectral norm 1.383, delta -0.494, stable rank 16.465, encoder effective rank 54.830
 - `MLDG`: final encoder spectral norm 1.951, delta 0.074, stable rank 7.648, encoder effective rank 47.833
-- `SPECTRAL_NORM_REG`: final encoder spectral norm 1.443, delta -0.434, stable rank 6.275, encoder effective rank 42.032
-- `SPECTRAL_REG_2024`: final encoder spectral norm 1.331, delta -0.545, stable rank 5.931, encoder effective rank 41.857
+- `SPECTRAL_NORM_REG`: final encoder spectral norm 0.509, delta -1.367, stable rank 51.083, encoder effective rank 61.097
+- `SPECTRAL_REG_2024`: final encoder spectral norm 1.019, delta -0.858, stable rank 48.040, encoder effective rank 59.404
 - `SVB_ORTHDNN`: final encoder spectral norm 1.050, delta -0.826, stable rank 53.623, encoder effective rank 63.978
 - `STABLE_RANK_NORM`: final encoder spectral norm 1.000, delta -0.876, stable rank 1.296, encoder effective rank 10.628
-- `SAM`: final encoder spectral norm 1.609, delta -0.267, stable rank 4.910, encoder effective rank 42.810
-- `ASAM`: final encoder spectral norm 1.649, delta -0.228, stable rank 5.193, encoder effective rank 43.655
+- `SAM`: final encoder spectral norm 1.544, delta -0.332, stable rank 5.163, encoder effective rank 44.486
+- `ASAM`: final encoder spectral norm 1.611, delta -0.265, stable rank 5.710, encoder effective rank 47.104
 
-Largest top-singular-value reduction: `STABLE_RANK_NORM` (-0.876). Highest final encoder tail/effective rank: `SVB_ORTHDNN` (63.978). Lowest final encoder tail/effective rank: `STABLE_RANK_NORM` (10.628). Highest final encoder stable rank: `SVB_ORTHDNN` (53.623). Highest final representation effective rank: `FISHR` (39.476). Highest final classifier-gradient effective rank: `SVB_ORTHDNN` (25.165).
+Largest top-singular-value reduction: `SPECTRAL_NORM_REG` (-1.367). Highest final encoder tail/effective rank: `SVB_ORTHDNN` (63.978). Lowest final encoder tail/effective rank: `STABLE_RANK_NORM` (10.628). Highest final encoder stable rank: `SVB_ORTHDNN` (53.623). Highest final representation effective rank: `FISHR` (39.476). Highest final classifier-gradient effective rank: `SVB_ORTHDNN` (25.165).
 
 ## Flatness geometry
 
@@ -80,14 +93,14 @@ Five-seed source-bank means:
 - `CORAL`: source loss 0.369, Hessian top eig 3.620, trace 16.719, sharpness@0.05 0.018
 - `FISHR`: source loss 0.675, Hessian top eig 0.267, trace 3.228, sharpness@0.05 0.014
 - `MLDG`: source loss 0.365, Hessian top eig 3.709, trace 18.892, sharpness@0.05 0.019
-- `SPECTRAL_NORM_REG`: source loss 0.370, Hessian top eig 2.777, trace 12.504, sharpness@0.05 0.015
-- `SPECTRAL_REG_2024`: source loss 0.374, Hessian top eig 2.101, trace 8.714, sharpness@0.05 0.012
+- `SPECTRAL_NORM_REG`: source loss 0.670, Hessian top eig 0.651, trace 0.030, sharpness@0.05 0.010
+- `SPECTRAL_REG_2024`: source loss 0.424, Hessian top eig 1.262, trace 3.580, sharpness@0.05 0.010
 - `SVB_ORTHDNN`: source loss 0.395, Hessian top eig 3.497, trace 8.026, sharpness@0.05 0.015
 - `STABLE_RANK_NORM`: source loss 0.384, Hessian top eig 3.684, trace 14.080, sharpness@0.05 0.016
-- `SAM`: source loss 0.372, Hessian top eig 1.720, trace 8.944, sharpness@0.05 0.012
-- `ASAM`: source loss 0.372, Hessian top eig 2.032, trace 10.021, sharpness@0.05 0.014
+- `SAM`: source loss 0.383, Hessian top eig 0.916, trace 3.430, sharpness@0.05 0.008
+- `ASAM`: source loss 0.378, Hessian top eig 1.231, trace 6.081, sharpness@0.05 0.011
 
-Lowest Hessian top eigenvalue: `FISHR` (0.267). Lowest Hessian trace estimate: `VREX` (1.418). Lowest SAM-style sharpness at rho=0.05: `SAM` (0.012). Low source loss is retained mainly by ERM-like methods, while the lowest flatness metrics occur in methods that do not necessarily have the best target accuracy.
+Lowest Hessian top eigenvalue: `FISHR` (0.267). Lowest Hessian trace estimate: `SPECTRAL_NORM_REG` (0.030). Lowest SAM-style sharpness at rho=0.05: `SAM` (0.008). Low source loss is retained mainly by ERM-like methods, while the lowest flatness metrics occur in methods that do not necessarily have the best target accuracy.
 
 ## A/O/Pi response
 
@@ -99,14 +112,14 @@ Mean K=20 source-exposed source-bank response norms:
 - `CORAL`: mean K=20 source-exposed source-bank response 94.027
 - `FISHR`: mean K=20 source-exposed source-bank response 8.731
 - `MLDG`: mean K=20 source-exposed source-bank response 94.855
-- `SPECTRAL_NORM_REG`: mean K=20 source-exposed source-bank response 75.826
-- `SPECTRAL_REG_2024`: mean K=20 source-exposed source-bank response 60.595
+- `SPECTRAL_NORM_REG`: mean K=20 source-exposed source-bank response 0.308
+- `SPECTRAL_REG_2024`: mean K=20 source-exposed source-bank response 13.040
 - `SVB_ORTHDNN`: mean K=20 source-exposed source-bank response 52.670
 - `STABLE_RANK_NORM`: mean K=20 source-exposed source-bank response 66.997
-- `SAM`: mean K=20 source-exposed source-bank response 96.823
-- `ASAM`: mean K=20 source-exposed source-bank response 101.020
+- `SAM`: mean K=20 source-exposed source-bank response 81.294
+- `ASAM`: mean K=20 source-exposed source-bank response 102.653
 
-Grouping status: `STAGE4-PASS`, silhouette `0.429`, bootstrap ARI `1.000`. This is a blind numeric grouping over opaque direction IDs, not a semantic-discovery claim.
+Grouping status: `STAGE4-PASS`, silhouette `0.424`, bootstrap ARI `1.000`. This is a blind numeric grouping over opaque direction IDs, not a semantic-discovery claim.
 
 ## Required answers
 
@@ -115,8 +128,8 @@ Grouping status: `STAGE4-PASS`, silhouette `0.429`, bootstrap ARI `1.000`. This 
 3. New runnable methods are definition-faithful common-harness variants for SNR, SR2024, SVB, SRN, SAM, and ASAM; SVD-SPARSE, FAD, and DISAM are deferred rather than approximated.
 4. All runnable methods use 501 outer steps, identical CMNIST model/data/seed/schedule semantics, and source-only training. Extra SAM/ASAM/projection compute is recorded instead of hidden.
 5. Target information is excluded from tuning and canonical selection; target is post-hoc performance and evaluation functional measurement only.
-6. Spectral norm changes most under `STABLE_RANK_NORM` (-0.876); tail/effective rank is highest under `SVB_ORTHDNN` (63.978) and lowest under `STABLE_RANK_NORM` (10.628).
-7. Flatness changes most by Hessian eigenvalue under `FISHR` (0.267), trace under `VREX` (1.418), and sharpness proxy under `SAM` (0.012).
+6. Spectral norm changes most under `SPECTRAL_NORM_REG` (-1.367); tail/effective rank is highest under `SVB_ORTHDNN` (63.978) and lowest under `STABLE_RANK_NORM` (10.628).
+7. Flatness changes most by Hessian eigenvalue under `FISHR` (0.267), trace under `SPECTRAL_NORM_REG` (0.030), and sharpness proxy under `SAM` (0.008).
 8. Target accuracy is highest for `IRMv1` (0.669); most spectral/flatness additions remain ERM-like on target under this harness.
 9. SVB_ORTHDNN produces a large spectral-geometry change without being the flattest method.
 10. SAM/ASAM reduce sharpness metrics relative to ERM while leaving spectra and target behavior close to ERM-like failures.

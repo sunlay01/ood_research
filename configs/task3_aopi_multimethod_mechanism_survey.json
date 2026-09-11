@@ -98,6 +98,7 @@
   },
   "svb_orthdnn": {
     "svb_factor": 0.05,
+    "projection_frequency": 100,
     "projection": "post_optimizer_step_singular_value_clamp",
     "lower": "1/(1+factor)",
     "upper": "1+factor",
@@ -202,5 +203,27 @@
     "sharpness_radii": [0.01, 0.05],
     "random_direction_probes": 4,
     "random_direction_seed": 20260911
+  },
+  "source_only_variant_sweep": {
+    "enabled": true,
+    "calibration_seed": 10,
+    "selection_metric": "source_mean_loss",
+    "tie_breaker": "source_mean_accuracy",
+    "source_accuracy_floor": 0.55,
+    "canonical_selector": "best_method_specific_source_geometry_then_source_loss",
+    "variants": {
+      "SPECTRAL_NORM_REG": [0.0, 0.001, 0.01, 0.1, 1.0],
+      "SPECTRAL_REG_2024": [0.0, 0.001, 0.01, 0.1, 1.0],
+      "SVB_ORTHDNN": [
+        {"svb_factor": 0.05, "projection_frequency": 1},
+        {"svb_factor": 0.05, "projection_frequency": 10},
+        {"svb_factor": 0.05, "projection_frequency": 100},
+        {"svb_factor": 0.1, "projection_frequency": 100},
+        {"svb_factor": 0.2, "projection_frequency": 100}
+      ],
+      "STABLE_RANK_NORM": [8.0, 16.0, 32.0, 48.0, 64.0],
+      "SAM": [0.0, 0.01, 0.05, 0.1, 0.2],
+      "ASAM": [0.0, 0.1, 0.5, 1.0, 2.0]
+    }
   }
 }

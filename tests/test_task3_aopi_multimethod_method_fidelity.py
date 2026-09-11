@@ -44,6 +44,11 @@ def test_config_fixes_method_panel_and_training_identity():
     assert cfg["stable_rank"]["registered_as_algorithm"] is False
     assert cfg["weight_nuclear"]["legacy_only"] is True
     assert cfg["feature_nuclear"]["default_enabled"] is False
+    sweep = cfg["source_only_variant_sweep"]
+    assert sweep["selection_metric"] == "source_mean_loss"
+    assert sweep["source_accuracy_floor"] == 0.55
+    assert all(len(values) >= 3 for values in sweep["variants"].values())
+    assert cfg["svb_orthdnn"]["projection_frequency"] == 100
 
 
 def test_each_algorithm_has_own_file_and_registry_is_only_dispatch():

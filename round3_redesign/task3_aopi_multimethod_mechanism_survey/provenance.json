@@ -1,20 +1,20 @@
 {
   "task_id": "TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL",
-  "git_head": "a0d991d9ae609a52ba3861be32ef18d3406072de",
+  "git_head": "412f4ae2711d1701f265b98c96bda39a48a39fb9",
   "branch": "task3-cmnist-local-response",
-  "git_status": "M active/CONTEXT.md\n M active/TASK.md\n M configs/task3_aopi_multimethod_mechanism_survey.json\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/final_adversarial_audit.md\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/preregistered_design.md\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/provenance.json\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/report.md\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/derived_direction_checks.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/functional_response.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/geometry_A.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/geometry_O.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/mechanism_signatures.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/method_fidelity.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/method_performance.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/new_method_admission.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/normalized_response.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/paired_method_summary.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/pi_full.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/summary.json\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/weight_spectrum_diagnostics.csv\n M src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/__init__.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/__init__.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/base.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/registry.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/analysis.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/config_schema.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/method_trainer.py\n M tests/test_task3_aopi_algorithm_interface_regression.py\n M tests/test_task3_aopi_multimethod_method_fidelity.py\n M tests/test_task3_cmnist_local_response.py\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/disam_reference_audit.md\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/fad_reference_audit.md\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/flatness_reference_audit.md\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/results/compute_budget.csv\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/results/flatness_diagnostics.csv\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/results/gradient_spectrum.csv\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/results/representation_spectrum.csv\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/results/spectral_flatness_admission.csv\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/results/spectral_flatness_variant_sweep.csv\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/results/weight_spectrum_long.csv\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/spectral_reference_audit.md\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/asam.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/deferred.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/disam.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/fad.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/sam.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/spectral_norm_reg.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/spectral_reg_2024.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/stable_rank_norm.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/svb_orthdnn.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/svd_sparse.py\n?? src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/spectral_flatness_diagnostics.py\n?? tests/test_task3_aopi_asam.py\n?? tests/test_task3_aopi_common_budget.py\n?? tests/test_task3_aopi_disam.py\n?? tests/test_task3_aopi_fad.py\n?? tests/test_task3_aopi_flatness_diagnostics.py\n?? tests/test_task3_aopi_sam.py\n?? tests/test_task3_aopi_spectral_diagnostics.py\n?? tests/test_task3_aopi_spectral_norm_reg.py\n?? tests/test_task3_aopi_spectral_reg_2024.py\n?? tests/test_task3_aopi_stable_rank_norm.py\n?? tests/test_task3_aopi_svb_orthdnn.py\n?? tests/test_task3_aopi_svd_sparse.py",
-  "config_sha256": "bb460b86aad7f7817fef107ef2dd21a14a7c76c29dab6a6d35d8d01ff8a845e0",
+  "git_status": "M configs/task3_aopi_multimethod_mechanism_survey.json\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/final_adversarial_audit.md\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/preregistered_design.md\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/provenance.json\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/report.md\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/blind_group_assignments.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/compute_budget.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/flatness_diagnostics.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/functional_response.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/geometry_A.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/geometry_O.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/gradient_spectrum.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/mechanism_signatures.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/method_fidelity.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/method_performance.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/new_method_admission.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/normalized_response.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/paired_method_summary.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/pi_full.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/posthoc_semantic_audit.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/representation_spectrum.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/spectral_flatness_admission.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/spectral_flatness_variant_sweep.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/summary.json\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/weight_spectrum_diagnostics.csv\n M round3_redesign/task3_aopi_multimethod_mechanism_survey/results/weight_spectrum_long.csv\n M src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/svb_orthdnn.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/config_schema.py\n M src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/method_trainer.py\n M tests/test_task3_aopi_multimethod_method_fidelity.py\n M tests/test_task3_aopi_spectral_diagnostics.py\n?? round3_redesign/task3_aopi_multimethod_mechanism_survey/results/selected_source_only_variants.json",
+  "config_sha256": "e821f5a159e25601c0087784be9d9e783784ea8ff38228280f48ebcb7ac04f01",
   "source_sha256": {
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/blind_grouping.py": "a0ee027ecbb551d2591d1f897f97cff335f7c49e57be5fe74a7fd35d79e5b800",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/task_response.py": "ab288de95db6f1731b29bf5a5494a35719c49e5af87209aa646f03b9119e7dc5",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/spectral_flatness_diagnostics.py": "19178a91e1d8d50054a2a6456f07cbdba1066dcf1d8977078cc6c1e6f3f55bc3",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/analysis.py": "d7ec82ebc835125d02d8ae277bea6a2ae769a726606ef6d6ecdab3d225685b63",
-    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/config_schema.py": "77982b49877b543491923297d58cb65b0a8ff0820add99d009fccaa9a9ed4bfa",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/config_schema.py": "d8f436ea67472b1e24bbdd3e08a875a392dd21bd316aa49a6a9d044d28c7862d",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/__init__.py": "a2ea3b3a15d36e47cf86f203556d74fa4f985ae7e284172104f2ef56aeac7200",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/functional_banks.py": "6bcdd7148ccce7cab2334c35491e4d958f3b264bd37c8e73e096ddd4e6ef7686",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/smooth_world5.py": "3cb0f666330952e73c5cb9a1574fe77de632bc0f47a4775eb5cf62fe15a90824",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/source_observation.py": "92cb157ef4b6bd6026725f8dee4d150ab1c4a27271fe372a235cfff40f80d13e",
-    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/method_trainer.py": "ae9705a5211664cee41effaf4dc6c1310bd13bc61adc0b18e9114a77860d6e08",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/method_trainer.py": "ea43358b8947405e83007e9730c207e78c615809603e208cf51c30c4c93ee023",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/signatures.py": "3a26485f5789ff12d74393f200d882bc2465d9637648a8e3e88b4a50680120ce",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/full_response.py": "12313475dae5e476e41939b41de1758f979361420c6939be58ddd3af2cadc887",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/irmv1.py": "cdd263d9a348dd5408a8af82e293e02650e1143042660fa0839e85ce171d3a96",
@@ -29,7 +29,7 @@
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/__init__.py": "2f71c05ca36419f84f4f375ccf96fb8101d14c66080809e1e2249fa9398f446f",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/fad.py": "c921cf04a319a33d35e86f7a4a92dd8ad2dc0bd18f2e6b0779773e867bc6cc51",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/coral.py": "b50d5c82a38152fbfade3debc09c9666a16cfbdf50b2b50a6ad7e36bc3baf659",
-    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/svb_orthdnn.py": "a77e8917aa6b2c1f441dde2b73de270a5d32b2302ffb31630366b6764b707d1f",
+    "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/svb_orthdnn.py": "2f736b820755ea8053f26110ad5edc25ae881980da5c447543b1a84422c43270",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/fishr.py": "4089da7e63f769d60c4e3eac0cc76b59827a8582672c69340812e32e5b3ed97a",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/deferred.py": "4fb629f8de785eb512719dd49f479b8b40a674deef729ad9d9189afe20bcc49a",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/disam.py": "f920ebe952d1a30ea048b485e3d12dec86b14cd25eb2f89b45193532d1000666",
@@ -39,7 +39,7 @@
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/base.py": "2870cd5f79dab6145b37c44cba2452e21d818df969980fcc4154e7f8f5b73cb6",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/spectral_reg_2024.py": "8653bd52aaa05938c0e14e5f27bef49efcad69f1066159b6a3945ca6d4be15ce",
     "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey/algorithms/spectral_norm_reg.py": "5326f0e8d5ea15c125d9c58a53249fef3bad2d4dc8bd5ac7487f156275b4a00d",
-    "src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py": "03084afe6fdd3015f8051dce393364eaa5e2ed6a304634fc3583ec3c64fcec5f"
+    "src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py": "ab3d9f5cc864aa1a2f139e84b0a5d1837848e8e4357274b2b96a74386a4dc59a"
   },
   "test_sha256": {
     "tests/test_task3_aopi_fishr.py": "50578e3cc35c7d355394659333c15de6aa1a93f0429a2639a36db165c8da3cdc",
@@ -51,7 +51,7 @@
     "tests/test_task3_aopi_mldg.py": "3e940d87b32eac41bc34c3cb2b20d9e5a6e569391479a5c2133eb57880928362",
     "tests/test_task3_aopi_spectral_reg_2024.py": "f062233d5d9b1b1446dc44a2082bcdc859225eb3c8f8ec793bc116c540b251ca",
     "tests/test_task3_aopi_common_budget.py": "19ad098376eb1252ae1f9a3b131d9c6334a7fe22948566af7f77cc5eb5167f2f",
-    "tests/test_task3_aopi_spectral_diagnostics.py": "4eb7effdd8d0484ac77475d791ac0a56b97e0e04652fb92cda48d7427d50de07",
+    "tests/test_task3_aopi_spectral_diagnostics.py": "6ba2e450f97bea871369edb0c9e93c94a8bd759ee0f61343172d7b14cdc148d3",
     "tests/test_task3_aopi_svb_orthdnn.py": "953aa945c89f57e264f223cfb01d184deb24f0c2974871631d6ccb2c7a0e71ae",
     "tests/test_task3_aopi_multimethod_response.py": "ac725487653afbdb028c1afe79b2f037a15a816821d9ca044d8c1e1392e2e0f0",
     "tests/test_task3_aopi_asam.py": "1369d0289038e6e3f96d41d7cfecc20abda26282103b56fd7fe48c94cd71f7ef",
@@ -62,7 +62,7 @@
     "tests/test_task3_aopi_cmnist_reinstantiation_repair.py": "b6c7c14c840e6d65696cd28a869de2000c6dfcd46f8e7fa3acf618d90e1ef56f",
     "tests/test_task3_aopi_algorithm_interface_regression.py": "e5c3532dc39fd86c2cd0e8e7e34a4f8b176c0984c828f4f99621bb1ec12bd75f",
     "tests/test_task3_aopi_fad.py": "24f09b31ee0a4e11cc674d92b5c087451cdaf3ae920a3c280f71b42ccb0b9d97",
-    "tests/test_task3_aopi_multimethod_method_fidelity.py": "6b408f7031c9a6be20038035b952cb9714af9751f3886ec9f979351b5f273fc0",
+    "tests/test_task3_aopi_multimethod_method_fidelity.py": "4793d6602f1a646ccffb1da63a685877b0bc4d56a6a5dbffebfc55f2f4e957bb",
     "tests/test_task3_aopi_flatness_diagnostics.py": "4f39a586f24fc9cc0ec6797d06327cbaf6de4a4eb986ca5749c70c7c6bc3a93a"
   },
   "reference_manifest_sha256": {
@@ -73,46 +73,46 @@
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_STABLE_RANK_NORM.pt": "459a0b68b7ad1d6d9aeaa6d2d971dc27da5cfa963dd0c7ac9aa1e0dd0cbd15b7",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_IRMv1.pt": "481e8bc2ea77ae95ebee2f362ad3d20029888d2a2a56ac3b01173ab4efb2eb18",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_IRMv1.pt": "0457b5325edcc582b4df03b99098bb5637a4c4b7e62ee41bacee91a9bc7c3a91",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_ASAM.pt": "6ab27daa02d83c8d4820f9c53f521f3909b5263c517086dad5d71530f8f0e27c",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_ASAM.pt": "fad6b0f60dae2453d6bf1d2d9e3456a28eec23098e8c37ca779fd5a322c7e7aa",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_SVB_ORTHDNN.pt": "b09bc33f0ff6f4299adee7c6146a408b04ce43dc7a6b8dd8e493376bdd5f69f3",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_ERM.pt": "8fd0c826fbc5742c01c5d5f4128963715f5dfb649209497d5cf8d7c68c95174b",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_FEATURE_NUCLEAR.pt": "212fbe07f3eb4638bd3dac62a253b9bb4ac69fa61eebc366251a011fefc0b474",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_CORAL.pt": "2737cad94928cfc30f1daf06eb555681cc22b8ec7f5aa47543d0066f511d3c57",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_SAM.pt": "7618ae08d10942850966a15ee83dca0711c6d8988fd8abdd60f6c164c568c37e",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_ASAM.pt": "c71aad31a0f7b7dd08a2428da0ab435f8dfb70f3246d43e9a8f189b043dd5748",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_SAM.pt": "aaa4d852c3c604cfcd2290328cdd9ccc5d79455fed28b583587ab2491421d08e",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_ASAM.pt": "0a07751a639134606920dc4d16e76bf3be02899eb522c2a0cf36111a49772e6c",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_ERM.pt": "b57f1a6476e2f4913c7cafa10dba8e625ec8c8439c7eec7fc4fd5146cf7e74fd",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_STABLE_RANK_NORM.pt": "59178c269727331433dc9efdf7527e26ae00193ec21858b02d3069ca26a9cb1e",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_SVB_ORTHDNN.pt": "91370d2656b668c4ce73073c9d8c5a874fa1b5db94fa81ccce3c6e69c97ffe59",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_SPECTRAL_REG_2024.pt": "4c8a2baa37433773d718edce0c2c3cbf1637c04f5a74e61390a9cd73edd2904d",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_SPECTRAL_REG_2024.pt": "ffad70a3e2bf6cf943898838f595c8b66b18fc563197f00d3427e57d7d1d056f",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_FISHR.pt": "088a344aee4d16afa8274d81e15070c21e053fc1b6ac317b3167b0617b13902d",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_FISHR.pt": "989691608d63239b898be1ece995ccdc50dff5b2ffb3db391b6fb6a6809247a7",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_SPECTRAL_NORM_REG.pt": "7b2a072e5aca94260d78e2fcc472feb33c5dcc4704022703fa31683ad9f06e37",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_SPECTRAL_NORM_REG.pt": "7e05696b82d0d5119d8f922208d3b86925d79ff25f1f91f6f0ab6773790c714f",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_FEATURE_NUCLEAR.pt": "f71efa9acb96dfc8d704a4a8708dd46c712f0591a59d262fbb8857673906076b",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_STABLE_RANK_NORM.pt": "61ebbc9504d5e920b6e588f9c4e758742540fe34856ac12ef341edffbe383dc2",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_STABLE_RANK_NORM.pt": "d627648629d812f954b9a523a4b481e84e818e55fa8da3cd28c8f9e436a8aa0e",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_VREX.pt": "4d787e1e2e6ccd727240c9500998b71695d53aa843518e97b539f4e6f464d1e1",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_STABLE_RANK_NORM.pt": "eb4d2b90a04126d43e50af54ea62c72cec142420d6cf285ba9ebd247a9d8bcdf",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_ASAM.pt": "7893419d62918647663efdd0348bf2587a3dbfd4b228e37c27e9257f6db4a25e",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_ASAM.pt": "8474f6099da1ac18a85bbd16bb7a31c91d59fa01d655a450440618ab3a381115",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_SVB_ORTHDNN.pt": "d876f25b301b4df63b33cd23785744e4bba5290d1fd7ec4248e3021433aed951",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_SAM.pt": "372d4ec9dbab2267b8507f9ae9a12ccd9804f6045b3a54685ae1e86e24cc8912",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_SAM.pt": "4542a9f247bc7b14f65d411fdf38e2605b32bde4534e8d48d121d75b3e5d6e81",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_VREX.pt": "c03bf8443f6a1297f838caaf1eb70f9ebd342b052d03fa70be76884b5f651cd0",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_FEATURE_NUCLEAR.pt": "37a1f42c469d8b8808355ee9d28dc0bd222a98f116d6c713657854a17ff35479",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_SVB_ORTHDNN.pt": "7e980fc0ea3ac162d08e63cdc1aa3aa1bc7757b15160cfd1d17451d0096f0a3b",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_IRMv1.pt": "531285ed10d1155ed040326049052d98df01052695e6e47bfc935cce9bef978c",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_SVB_ORTHDNN.pt": "3a3563c6239e026f877583fbf5c11f9a4db96d10b9484ca4f5ba7bc08e879454",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_VREX.pt": "e378ce7e4db0a79636c0c69b3c834b826b7f089c7d0d59fe3772ea90a4c9a22d",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_ASAM.pt": "e58c6c71c96a899070bc5f49fcc75732cf76dc07ea59ae54cb12149d48e5ac03",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_ASAM.pt": "849e32f430b76e0fde450308cbcb237a859eae176fcbcb6965fd3f421301ea81",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_MLDG.pt": "d86d588eca70858273cbb110535dc58412adb453c7eb4e3963e53d6e7dbcf590",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_SPECTRAL_NORM_REG.pt": "a38676214a109e77d7b6bce334a6d32af91e2613873987b1a4408fd4f06c4683",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_SPECTRAL_NORM_REG.pt": "2a04a4df273d46e6f326a1bc25695336c83c141a99418135427b0b889e91bdfb",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_CORAL.pt": "75b9e07eeaad2015543b60d3f5d1ed8fb6a8d38781bca064f6cb7a50d139110c",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_CORAL.pt": "c579e133422e87265813f3db84732d057178ece841a70b3737462353a472099e",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_SAM.pt": "17157f1af02d5a7e47a4af591bc3da49e5c8b5a16fac7c055eb5b965093c2975",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_SPECTRAL_REG_2024.pt": "ce2a8e403fc5cd48eb5321a80ebc7e7edfa3f77ecd88512a3f526841dc961ef4",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_SAM.pt": "ffa0ad171886c9661dedefe03428b4a40bfc31679d6b2c2aedabb19eb122b8ad",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_SPECTRAL_REG_2024.pt": "0dc46453434194fba00594c9c42cb39afe736707082acff016ff1d407bcbbaee",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_MLDG.pt": "25535df94c80e533a9f57711a06d46cbd56bdce4bd79d06d8c7f50e0e79365e3",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_SPECTRAL_NORM_REG.pt": "b13c1ac649c937e74f309c7752cae952b3f6efd34eb9bfc5d5f221fe99382c68",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_SPECTRAL_REG_2024.pt": "ec4a1469ed070e0206139aa61f987c9fcc83a1d26a74763e34d0891e5159f0cb",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_SPECTRAL_NORM_REG.pt": "2e98749ddd14224a5f905f5b4676abc96d0a33f7d587ebbf71f270cf22981003",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_SPECTRAL_REG_2024.pt": "f1672349d000ab148637092de969236634f419d23bad0135af127a1ab937ccc5",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_SPECTRAL_NORM_REG.pt": "c38a6710dcdca2f6c005d2c99219a07d341e9b9920c45494a4e9784d83d0cf2c",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_SPECTRAL_REG_2024.pt": "d0adf605536e4cfc374a9cdcff6451a9fa4b67bcda6d58253e68cd630045a304",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_SPECTRAL_NORM_REG.pt": "24d8fb81944968e7d206ad0edea3ce7c0126e76349b9ac5447aab638d10c7c26",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_SPECTRAL_REG_2024.pt": "64caf0de52efa88c8ab8a3d32c445de1f771b18c145727972c2e6e577db71c80",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_ERM.pt": "b07461a336dd6771d942cb6f0a000b348b208e2dc28d6e67646c9e4ec57c6eaf",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_WEIGHT_NUCLEAR.pt": "627c222e747e8b80f75d4f2aa94997106c7f7279fdab760b338a6a14853ab6d7",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_FISHR.pt": "61902c777e645560c1e6fcd87e33c7397022d008fad95209e63defeec1da04a8",
@@ -122,16 +122,16 @@
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_MLDG.pt": "2e9520885b2fc548f89365c0ce7b0ce95a8e7ba8d9eb982b541a4cce7c00064a",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_WEIGHT_NUCLEAR.pt": "9d290a7ad5693949c2d6b1132f1c85cdf8c17702979e60e2beeb35b2546d6402",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_ERM.pt": "fc7ce7571366779bcf2a9fe84cfc9a7b83fe2c054ef4fbaf07cd6a60762fd367",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_ASAM.pt": "8431779b871128055454e301d49f77a67ae67bcc38fd0bf81690e51efac03615",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_ASAM.pt": "7068456414163ee989b82ac639175e7b1bf58e657567cbf62a4ee685ff910abf",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_FEATURE_NUCLEAR.pt": "7ea85a9b6e9c0c1f3c14d66bfa0494cca5a81a7eaff41167bfd74a81b0b2355c",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_CORAL.pt": "2c3ba8824a9f99680963fdeacc7c74662e21520e7f0e9f3a56c20de38ae8ae7b",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_CORAL.pt": "e1b9bc52098abf5a2e1c4fe6de2450c46bcc18eaeac04093135c47a84de4b5ba",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_SPECTRAL_REG_2024.pt": "54b4922dc25e0e4dab4f43a55568bc0e0a033318559af0c0a007c8cc4f3397dd",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_SPECTRAL_REG_2024.pt": "9671a1fb0564a343edbbc300684e6aae32025c9a8689aeca6d2ab38509ce40d8",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_WEIGHT_NUCLEAR.pt": "dce7fdeaad2e31cd2bd5949ba8a8a5ca8b821e71abac3e80d00653d577c03345",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_SPECTRAL_NORM_REG.pt": "aae9d54d8053701b7ca88b40d6654a67e0aa7983368f378f8338bbc5c4f38c7a",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_SAM.pt": "153a1f0ba3153ae0249ac7813f6d36ccfadb4411c9ce46677d86cfb03a32b670",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_10_SPECTRAL_NORM_REG.pt": "62ba61f42914e65e8fe4a990e8500f61b335f711332cd1f1095d454e86c5c477",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_11_SAM.pt": "fb4606d24cd347bf6525ce8aa2cda63519259eda0c55b1e4af6ddee100721a92",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_12_MLDG.pt": "0ad7430b27ea8bbb1a76565a1519e5ee9457ce0a7a9baf9c56e1620e28715a04",
-    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_SAM.pt": "3a38f7a11be040ce10893b08e2a36bf14a743b7a5e221e97df7760f3e50d9f3d",
+    "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_SAM.pt": "1863930d3fa65a74aa869264ca0ba1ad6198db14eb5b6a4bd44190aacce8e1fd",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_WEIGHT_NUCLEAR.pt": "a5f36d9a6ba81b6414245f078ce6ddbf89de4c38fda4d9fa64935db25f4de464",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_14_ERM.pt": "55cc0bb0d62ec1b8e8e483e9a55001e236e26c05d2e704484ec2331ba0a85445",
     "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/checkpoints/seed_13_MLDG.pt": "8c1478cf2e63e9d4259f687616a319fdaa0a52a9a105b9c3ed2da6f400d07b10",
@@ -148,566 +148,41 @@
   "target_used_for_grouping": false,
   "old_results_overwritten": false,
   "summary": {
-    "task_id": "TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL",
-    "verdict": "SPECTRAL-FLATNESS-PANEL-PARTIAL",
-    "stage": "complete",
-    "errors": [],
-    "world_gates": [
-      {
-        "seed": 10,
-        "method": "ERM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "IRMv1",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "VREX",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "CORAL",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "FISHR",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "MLDG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "SPECTRAL_NORM_REG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "SPECTRAL_REG_2024",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "SVB_ORTHDNN",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "STABLE_RANK_NORM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "SAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 10,
-        "method": "ASAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "ERM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "IRMv1",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "VREX",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "CORAL",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "FISHR",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "MLDG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "SPECTRAL_NORM_REG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "SPECTRAL_REG_2024",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "SVB_ORTHDNN",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "STABLE_RANK_NORM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "SAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 11,
-        "method": "ASAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "ERM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "IRMv1",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "VREX",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "CORAL",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "FISHR",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "MLDG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "SPECTRAL_NORM_REG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "SPECTRAL_REG_2024",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "SVB_ORTHDNN",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "STABLE_RANK_NORM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "SAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 12,
-        "method": "ASAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "ERM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "IRMv1",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "VREX",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "CORAL",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "FISHR",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "MLDG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "SPECTRAL_NORM_REG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "SPECTRAL_REG_2024",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "SVB_ORTHDNN",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "STABLE_RANK_NORM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "SAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 13,
-        "method": "ASAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "ERM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "IRMv1",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "VREX",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "CORAL",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "FISHR",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "MLDG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "SPECTRAL_NORM_REG",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "SPECTRAL_REG_2024",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "SVB_ORTHDNN",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "STABLE_RANK_NORM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "SAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      },
-      {
-        "seed": 14,
-        "method": "ASAM",
-        "rank_A": 5,
-        "rank_O": 3,
-        "Oe3_norm": 0.0,
-        "Oe5_norm": 0.0,
-        "passed": true
-      }
+    "admitted_pi_method_count": 12,
+    "admitted_pi_methods": [
+      "ERM",
+      "IRMv1",
+      "VREX",
+      "CORAL",
+      "FISHR",
+      "MLDG",
+      "SPECTRAL_NORM_REG",
+      "SPECTRAL_REG_2024",
+      "SVB_ORTHDNN",
+      "STABLE_RANK_NORM",
+      "SAM",
+      "ASAM"
     ],
+    "candidate_methods": [
+      "ERM",
+      "IRMv1",
+      "VREX",
+      "CORAL",
+      "FISHR",
+      "MLDG",
+      "SPECTRAL_NORM_REG",
+      "SPECTRAL_REG_2024",
+      "SVB_ORTHDNN",
+      "STABLE_RANK_NORM",
+      "SVD_SPARSE",
+      "SAM",
+      "ASAM",
+      "FAD",
+      "DISAM"
+    ],
+    "errors": [],
     "grouping": {
-      "opaque_ids": [
-        "u000",
-        "u001",
-        "u002",
-        "u003",
-        "u004",
-        "u005",
-        "u006",
-        "u007",
-        "u008",
-        "u009",
-        "u010"
-      ],
+      "bootstrap_mean_ari": 1.0,
       "feature_keys": [
         "a_m000",
         "a_m001",
@@ -770,13 +245,8 @@
         "r_m011_K20",
         "r_m011_K5"
       ],
-      "selected_k": 3,
-      "silhouette": 0.42886685824995696,
-      "bootstrap_mean_ari": 1.0,
-      "stable": true,
-      "status": "STAGE4-PASS",
-      "grouping_method": "average_linkage_euclidean_column_zscore",
       "grouping_hyperparameters": {
+        "ari_threshold": 0.75,
         "candidate_k": [
           2,
           3,
@@ -784,10 +254,41 @@
         ],
         "repeats": 200,
         "seed": 20260910,
-        "silhouette_threshold": 0.25,
-        "ari_threshold": 0.75,
-        "seed_resampling": true
-      }
+        "seed_resampling": true,
+        "silhouette_threshold": 0.25
+      },
+      "grouping_method": "average_linkage_euclidean_column_zscore",
+      "opaque_ids": [
+        "u000",
+        "u001",
+        "u002",
+        "u003",
+        "u004",
+        "u005",
+        "u006",
+        "u007",
+        "u008",
+        "u009",
+        "u010"
+      ],
+      "selected_k": 3,
+      "silhouette": 0.4238873434146295,
+      "stable": true,
+      "status": "STAGE4-PASS"
+    },
+    "method_codes": {
+      "ASAM": "m011",
+      "CORAL": "m003",
+      "ERM": "m000",
+      "FISHR": "m004",
+      "IRMv1": "m001",
+      "MLDG": "m005",
+      "SAM": "m010",
+      "SPECTRAL_NORM_REG": "m006",
+      "SPECTRAL_REG_2024": "m007",
+      "STABLE_RANK_NORM": "m009",
+      "SVB_ORTHDNN": "m008",
+      "VREX": "m002"
     },
     "method_count": 12,
     "methods": [
@@ -804,70 +305,578 @@
       "SAM",
       "ASAM"
     ],
-    "candidate_methods": [
-      "ERM",
-      "IRMv1",
-      "VREX",
-      "CORAL",
-      "FISHR",
-      "MLDG",
-      "SPECTRAL_NORM_REG",
-      "SPECTRAL_REG_2024",
-      "SVB_ORTHDNN",
-      "STABLE_RANK_NORM",
-      "SVD_SPARSE",
-      "SAM",
-      "ASAM",
-      "FAD",
-      "DISAM"
-    ],
-    "admitted_pi_methods": [
-      "ERM",
-      "IRMv1",
-      "VREX",
-      "CORAL",
-      "FISHR",
-      "MLDG",
-      "SPECTRAL_NORM_REG",
-      "SPECTRAL_REG_2024",
-      "SVB_ORTHDNN",
-      "STABLE_RANK_NORM",
-      "SAM",
-      "ASAM"
-    ],
-    "admitted_pi_method_count": 12,
-    "seed_count": 5,
-    "method_codes": {
-      "ERM": "m000",
-      "IRMv1": "m001",
-      "VREX": "m002",
-      "CORAL": "m003",
-      "FISHR": "m004",
-      "MLDG": "m005",
-      "SPECTRAL_NORM_REG": "m006",
-      "SPECTRAL_REG_2024": "m007",
-      "SVB_ORTHDNN": "m008",
-      "STABLE_RANK_NORM": "m009",
-      "SAM": "m010",
-      "ASAM": "m011"
-    },
-    "target_used_for_training": false,
-    "target_used_for_tuning": false,
-    "target_used_for_grouping": false,
     "rows": {
+      "compute_budget": 60,
+      "fidelity": 60,
+      "flatness_diagnostics": 120,
       "geometry_A": 660,
       "geometry_O": 660,
-      "pi_full": 1980,
-      "normalized_response": 1980,
-      "signatures": 11,
-      "performance": 60,
-      "fidelity": 60,
-      "weight_spectrum_long": 1080,
-      "representation_spectrum": 360,
       "gradient_spectrum": 60,
-      "flatness_diagnostics": 120,
-      "compute_budget": 60,
-      "spectral_flatness_admission": 15
-    }
+      "normalized_response": 1980,
+      "performance": 60,
+      "pi_full": 1980,
+      "representation_spectrum": 360,
+      "signatures": 11,
+      "spectral_flatness_admission": 15,
+      "weight_spectrum_long": 1080
+    },
+    "seed_count": 5,
+    "selected_source_only_variants": {
+      "ASAM": "ASAM[rho=2]",
+      "SAM": "SAM[rho=0.2]",
+      "SPECTRAL_NORM_REG": "SPECTRAL_NORM_REG[lambda=1]",
+      "SPECTRAL_REG_2024": "SPECTRAL_REG_2024[lambda=1]",
+      "STABLE_RANK_NORM": "STABLE_RANK_NORM[target_rank=8]",
+      "SVB_ORTHDNN": "SVB_ORTHDNN[factor=0.05,frequency=1]"
+    },
+    "source_only_sweep_rows": 30,
+    "stage": "complete",
+    "target_used_for_grouping": false,
+    "target_used_for_training": false,
+    "target_used_for_tuning": false,
+    "task_id": "TASK-AOPI-SPECTRAL-AND-FLATNESS-PANEL",
+    "verdict": "SPECTRAL-FLATNESS-PANEL-PARTIAL",
+    "world_gates": [
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ERM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "IRMv1",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "VREX",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "CORAL",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "FISHR",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "MLDG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_NORM_REG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_REG_2024",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SVB_ORTHDNN",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "STABLE_RANK_NORM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ASAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 10
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ERM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "IRMv1",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "VREX",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "CORAL",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "FISHR",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "MLDG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_NORM_REG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_REG_2024",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SVB_ORTHDNN",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "STABLE_RANK_NORM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ASAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 11
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ERM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "IRMv1",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "VREX",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "CORAL",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "FISHR",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "MLDG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_NORM_REG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_REG_2024",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SVB_ORTHDNN",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "STABLE_RANK_NORM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ASAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 12
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ERM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "IRMv1",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "VREX",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "CORAL",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "FISHR",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "MLDG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_NORM_REG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_REG_2024",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SVB_ORTHDNN",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "STABLE_RANK_NORM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ASAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 13
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ERM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "IRMv1",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "VREX",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "CORAL",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "FISHR",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "MLDG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_NORM_REG",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SPECTRAL_REG_2024",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SVB_ORTHDNN",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "STABLE_RANK_NORM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "SAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      },
+      {
+        "Oe3_norm": 0.0,
+        "Oe5_norm": 0.0,
+        "method": "ASAM",
+        "passed": true,
+        "rank_A": 5,
+        "rank_O": 3,
+        "seed": 14
+      }
+    ]
   }
 }

@@ -1,4 +1,5 @@
 import json
+import csv
 from pathlib import Path
 
 import torch
@@ -19,3 +20,11 @@ def test_spectral_diagnostic_rows_have_required_rank_fields():
     assert {"singular_values", "spectral_norm", "stable_rank", "effective_rank", "numerical_rank_1e3"} <= set(rows[0])
     assert representation_spectrum_rows(model, bank, seed=10, method="ERM", variant="v", checkpoint=0)[0]["effective_rank"] > 0
     assert gradient_spectrum_rows(model, bank, seed=10, method="ERM", variant="v", checkpoint=0)[0]["stable_rank"] >= 0
+
+
+def test_persisted_weight_spectrum_is_not_empty_when_results_exist():
+    path = ROOT / "round3_redesign/task3_aopi_multimethod_mechanism_survey/results/weight_spectrum_long.csv"
+    if path.exists():
+        rows = list(csv.DictReader(path.open()))
+        assert rows
+        assert {"method", "seed", "checkpoint", "singular_values"} <= set(rows[0])

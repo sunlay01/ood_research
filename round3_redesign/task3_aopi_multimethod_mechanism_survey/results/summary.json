@@ -123,7 +123,7 @@
       "u010"
     ],
     "selected_k": 3,
-    "silhouette": 0.42886685824995696,
+    "silhouette": 0.4238873434146295,
     "stable": true,
     "status": "STAGE4-PASS"
   },
@@ -172,6 +172,15 @@
     "weight_spectrum_long": 1080
   },
   "seed_count": 5,
+  "selected_source_only_variants": {
+    "ASAM": "ASAM[rho=2]",
+    "SAM": "SAM[rho=0.2]",
+    "SPECTRAL_NORM_REG": "SPECTRAL_NORM_REG[lambda=1]",
+    "SPECTRAL_REG_2024": "SPECTRAL_REG_2024[lambda=1]",
+    "STABLE_RANK_NORM": "STABLE_RANK_NORM[target_rank=8]",
+    "SVB_ORTHDNN": "SVB_ORTHDNN[factor=0.05,frequency=1]"
+  },
+  "source_only_sweep_rows": 30,
   "stage": "complete",
   "target_used_for_grouping": false,
   "target_used_for_training": false,
