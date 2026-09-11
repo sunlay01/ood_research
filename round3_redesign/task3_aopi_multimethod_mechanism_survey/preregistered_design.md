@@ -1,10 +1,10 @@
 # TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY
 
 - task_id: `TASK-AOPI-MULTIMETHOD-MECHANISM-SURVEY`
-- written_at: `1789098456.328846`
-- git_head: `d13d1c9a6e285d592c6f611e772544d7dffdcafc`
+- written_at: `1789101843.53423`
+- git_head: `6d122008beeb01174959d97fd298e32539e9c0e6`
 - branch: `task3-cmnist-local-response`
-- config_sha256: `18c4e242af2e5280b9e6bbaac7f8d1f0074771e92ffc41a35fea7cf27d8207d1`
+- config_sha256: `88e7b1a9230351058c80d56105df3fd0dfa742aa21e5578b5ac89bc060736f49`
 - methods: `['ERM', 'IRMv1', 'VREX', 'CORAL']`
 - seeds: `[10, 11, 12, 13, 14]`
 - base_world: `[0.2, 0.1, 0.9, 0.25, 0.25]`

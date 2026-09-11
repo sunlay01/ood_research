@@ -7,73 +7,12 @@ from typing import Any
 
 import torch
 from torch import Tensor, nn
-from torch.nn import functional as F
 
 from ..task3_cmnist_cpu_minimal.model import parameter_hash
+from .algorithms.registry import get_algorithm
 from .functional_banks import FunctionalBanks, bank_logits
-from .method_objectives import vrex_penalty_from_losses
 from .method_trainer import SurveyTrainResult, optimizer_state_hash
-from .smooth_world5 import all_direction_vectors, SmoothPool, SmoothWorld5, environment_parameters, outcome_weight
-
-
-def _smooth_environment_risk(model: nn.Module, pool: SmoothPool, indices: Tensor, p: Tensor, q: Tensor) -> Tensor:
-    value = next(model.parameters()).new_zeros(())
-    for images, labels, label_flip, color_flip in pool.outcome_batches(indices):
-        value = value + outcome_weight(p, q, label_flip, color_flip).to(images.device) * F.binary_cross_entropy_with_logits(model(images), labels.float())
-    return value
-
-
-def _smooth_coral(model: nn.Module, pools: tuple[SmoothPool, SmoothPool], indices: tuple[Tensor, Tensor], delta: Tensor) -> Tensor:
-    representations = []
-    for environment, (pool, index) in enumerate(zip(pools, indices)):
-        p, q = environment_parameters(delta, environment=environment, evaluation=False)
-        chunks = []
-        weights = []
-        for images, _, label_flip, color_flip in pool.outcome_batches(index):
-            chunks.append(model.encode(images))
-            weights.append(outcome_weight(p, q, label_flip, color_flip).expand(images.shape[0]))
-        z = torch.cat(chunks)
-        w = torch.cat(weights).to(z)
-        w = w / w.sum()
-        mean = (z * w[:, None]).sum(dim=0)
-        centered = z - mean
-        covariance = ((centered * w[:, None]).T @ centered) * (len(index) / (len(index) - 1))
-        representations.append((mean, covariance))
-    dimension = representations[0][0].numel()
-    return (representations[0][0] - representations[1][0]).square().sum() / dimension + (representations[0][1] - representations[1][1]).square().sum() / dimension**2
-
-
-def smooth_source_objective(model: nn.Module, worlds: SmoothWorld5, indices: tuple[Tensor, Tensor], delta: Tensor, method: str, config: dict[str, Any], step: int) -> Tensor:
-    risks = []
-    for environment, (pool, index) in enumerate(zip(worlds.source, indices)):
-        p, q = environment_parameters(delta, environment=environment, evaluation=False)
-        risks.append(_smooth_environment_risk(model, pool, index, p, q))
-    risk_vector = torch.stack(risks)
-    risk = risk_vector.mean()
-    l2 = sum(parameter.square().sum() for parameter in model.parameters())
-    weight = float(config["training"]["l2_regularizer_weight"])
-    if method == "ERM":
-        return risk + weight * l2
-    if method == "IRMv1":
-        penalties = []
-        for environment, (pool, index) in enumerate(zip(worlds.source, indices)):
-            p, q = environment_parameters(delta, environment=environment, evaluation=False)
-            scale = torch.ones((), requires_grad=True)
-            weighted = []
-            for images, labels, label_flip, color_flip in pool.outcome_batches(index):
-                loss = F.binary_cross_entropy_with_logits(model(images) * scale, labels.float())
-                weighted.append(outcome_weight(p, q, label_flip, color_flip).to(loss) * loss)
-            penalty_gradient = torch.autograd.grad(torch.stack(weighted).sum(), scale, create_graph=True)[0]
-            penalties.append(penalty_gradient.square())
-        applied = float(config["irmv1"]["penalty_weight"] if step >= int(config["irmv1"]["penalty_anneal_iters"]) else 1.0)
-        objective = risk + weight * l2 + applied * torch.stack(penalties).mean()
-        return objective / applied if applied > 1.0 else objective
-    if method == "VREX":
-        applied = float(config["vrex"]["post_anneal_penalty_weight"] if step >= int(config["vrex"]["penalty_anneal_iters"]) else config["vrex"]["pre_anneal_penalty_weight"])
-        return risk + weight * l2 + applied * vrex_penalty_from_losses(risk_vector)
-    if method == "CORAL":
-        return risk + weight * l2 + float(config["coral"]["gamma"]) * _smooth_coral(model, worlds.source, indices, delta)
-    raise ValueError(f"unknown continuation method: {method}")
+from .smooth_world5 import all_direction_vectors, SmoothWorld5
 
 
 def _clone_state(result: SurveyTrainResult) -> tuple[nn.Module, torch.optim.Adam]:
@@ -85,11 +24,12 @@ def _clone_state(result: SurveyTrainResult) -> tuple[nn.Module, torch.optim.Adam
 
 def _run_path(result: SurveyTrainResult, worlds: SmoothWorld5, banks: FunctionalBanks, delta: Tensor, method: str, config: dict[str, Any], schedule: tuple[Tensor, Tensor], horizons: tuple[int, ...]) -> dict[int, tuple[str, str, dict[str, Tensor]]]:
     model, optimizer = _clone_state(result)
+    algorithm = get_algorithm(method, config)
     snapshots = {0: (parameter_hash(model), optimizer_state_hash(optimizer.state_dict()), bank_logits(model, banks))}
     with torch.enable_grad():
         for step in range(max(horizons)):
             indices = (schedule[0][step], schedule[1][step])
-            objective = smooth_source_objective(model, worlds, indices, delta, method, config, int(config["training"]["steps"]) + step)
+            objective = algorithm.smooth_objective(model, worlds, indices, delta, step=int(config["training"]["steps"]) + step)
             optimizer.zero_grad(set_to_none=True)
             objective.backward()
             optimizer.step()

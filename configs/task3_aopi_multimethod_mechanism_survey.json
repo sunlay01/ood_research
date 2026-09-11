@@ -34,12 +34,12 @@
     "whole_loss_rescale_after_anneal": true
   },
   "vrex": {
-    "lambda": 10.0,
+    "lambda": 10000.0,
     "penalty_anneal_iters": 100,
     "pre_anneal_penalty_weight": 1.0,
-    "post_anneal_penalty_weight": 10.0,
+    "post_anneal_penalty_weight": 10000.0,
     "reset_adam_at_anneal": true,
-    "whole_loss_rescale_after_anneal": false
+    "whole_loss_rescale_after_anneal": true
   },
   "coral": {
     "gamma": 1.0,

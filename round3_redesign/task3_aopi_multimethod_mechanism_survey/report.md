@@ -7,7 +7,7 @@ This isolated survey is descriptive only. It does not establish semantic mechani
 ## Fidelity gates
 
 F0 checkpoint and shared initialization/schedule reconstruction: PASS for ERM/IRM reference hashes; all four methods finite.
-F1 V-REx objective and anneal/reset: PASS.
+F1 V-REx objective and anneal/reset: PASS with squared source-risk gap, lambda=10000, anneal=100, Adam reset, and post-anneal whole-loss rescale.
 F2 CORAL representation penalty and `n-1` covariance: PASS.
 F3 common source batches and optimizer settings: PASS.
 F4 method completeness: PASS, 4 methods x 5 seeds.

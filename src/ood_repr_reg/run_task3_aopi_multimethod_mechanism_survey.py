@@ -252,7 +252,7 @@ This isolated survey is descriptive only. It does not establish semantic mechani
 ## Fidelity gates
 
 F0 checkpoint and shared initialization/schedule reconstruction: PASS for ERM/IRM reference hashes; all four methods finite.
-F1 V-REx objective and anneal/reset: PASS.
+F1 V-REx objective and anneal/reset: PASS with squared source-risk gap, lambda=10000, anneal=100, Adam reset, and post-anneal whole-loss rescale.
 F2 CORAL representation penalty and `n-1` covariance: PASS.
 F3 common source batches and optimizer settings: PASS.
 F4 method completeness: PASS, 4 methods x 5 seeds.
@@ -277,7 +277,7 @@ F. Patterns are assessed across all five fixed seeds through seed-resampled sign
 G. No counterexample method is silently excluded; VREX and CORAL remain in all tables regardless of target performance.
 H. Strongest defensible conclusion: Correct CMNIST can show reproducible descriptive differences in task/source-conditioned response treatment across these DG learners. This does not establish semantic recovery, causality, a universal taxonomy, theory validation, or a new algorithm.
 """, encoding="utf-8")
-    source_paths = list((ROOT / "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey").glob("*.py")) + [ROOT / "src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py"]
+    source_paths = list((ROOT / "src/ood_repr_reg/task3_aopi_multimethod_mechanism_survey").rglob("*.py")) + [ROOT / "src/ood_repr_reg/run_task3_aopi_multimethod_mechanism_survey.py"]
     test_paths = list((ROOT / "tests").glob("test_task3_aopi_multimethod_*.py"))
     checkpoint_paths = list((RESULTS / "checkpoints").glob("*.pt"))
     (OUT / "provenance.json").write_text(json.dumps(_jsonable({"task_id": summary.get("task_id"), "git_head": _git("rev-parse", "HEAD"), "branch": _git("branch", "--show-current"), "git_status": _git("status", "--short"), "config_sha256": _sha(CONFIG_PATH), "source_sha256": _file_hashes(source_paths), "test_sha256": _file_hashes(test_paths), "reference_manifest_sha256": _file_hashes([REFERENCE_MANIFEST]), "generated_checkpoint_sha256": _file_hashes(checkpoint_paths), "python": platform.python_version(), "torch": torch.__version__, "device": "cpu", "target_used_for_training": False, "target_used_for_tuning": False, "target_used_for_grouping": False, "old_results_overwritten": False, "summary": summary}), indent=2) + "\n", encoding="utf-8")
