@@ -1,0 +1,109 @@
+{
+  "fullnetwork": {
+    "bootstrap_pair_agreement_mean": 0.9976888888888888,
+    "bootstrap_pair_agreement_std": 0.022995265213130774,
+    "candidate_scores": [
+      {
+        "k": 2,
+        "silhouette": 0.638760941002615
+      },
+      {
+        "k": 3,
+        "silhouette": 0.5146426267569779
+      },
+      {
+        "k": 4,
+        "silhouette": 0.4341167080461375
+      }
+    ],
+    "feature_columns": [
+      "response_source_scale",
+      "response_cf_scale",
+      "response_clean_scale",
+      "response_cf_source_ratio",
+      "response_clean_source_ratio",
+      "direction_entropy",
+      "direction_top1_mass",
+      "direction_top3_mass",
+      "direction_effective_rank",
+      "pi_source_bank_scale",
+      "pi_cf_bank_scale",
+      "pi_cf_source_ratio",
+      "A_normalized_scale",
+      "O_normalized_scale",
+      "A_O_scale_ratio",
+      "A_rank",
+      "O_rank"
+    ],
+    "n_rows": 20,
+    "prefix": "full",
+    "selected_k": 2
+  },
+  "representation_head": {
+    "bootstrap_pair_agreement_mean": 0.9037109867094987,
+    "bootstrap_pair_agreement_std": 0.18606819862035248,
+    "candidate_scores": [
+      {
+        "k": 2,
+        "silhouette": 0.3593265129114489
+      },
+      {
+        "k": 3,
+        "silhouette": 0.24161573909042158
+      },
+      {
+        "k": 4,
+        "silhouette": 0.3055103862953478
+      }
+    ],
+    "feature_columns": [
+      "color_delta_norm",
+      "delta_color_delta_norm",
+      "conditional_color_delta_norm",
+      "delta_conditional_color_delta_norm",
+      "spurious_delta_norm",
+      "delta_spurious_delta_norm",
+      "between_trace",
+      "delta_between_trace",
+      "env_within_trace",
+      "delta_env_within_trace",
+      "trace_ratio",
+      "delta_trace_ratio",
+      "within_effective_rank",
+      "delta_within_effective_rank",
+      "global_effective_rank",
+      "delta_global_effective_rank",
+      "global_stable_rank",
+      "delta_global_stable_rank",
+      "head_color_delta_cos2",
+      "delta_head_color_delta_cos2",
+      "head_env_subspace_cos2",
+      "delta_head_env_subspace_cos2",
+      "head_interaction_subspace_cos2",
+      "delta_head_interaction_subspace_cos2",
+      "head_spurious_delta_cos2",
+      "delta_head_spurious_delta_cos2",
+      "interaction_to_between_ratio",
+      "delta_interaction_to_between_ratio",
+      "interaction_to_within_ratio",
+      "delta_interaction_to_within_ratio",
+      "spurious_to_label_norm_ratio",
+      "delta_spurious_to_label_norm_ratio",
+      "label_color_cos2",
+      "delta_label_color_cos2",
+      "label_env_interaction_trace",
+      "delta_label_env_interaction_trace",
+      "global_eig_top1_ratio",
+      "delta_global_eig_top1_ratio",
+      "global_eig_top5_ratio",
+      "delta_global_eig_top5_ratio",
+      "within_eig_top1_ratio",
+      "delta_within_eig_top1_ratio",
+      "within_eig_top5_ratio",
+      "delta_within_eig_top5_ratio"
+    ],
+    "n_rows": 10,
+    "prefix": "rep",
+    "selected_k": 2
+  }
+}

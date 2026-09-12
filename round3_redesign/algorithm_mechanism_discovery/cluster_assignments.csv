@@ -1,0 +1,31 @@
+method,seed,cluster,layer
+ERM,10,1,fullnetwork
+ERM,11,1,fullnetwork
+ERM,12,1,fullnetwork
+ERM,13,1,fullnetwork
+ERM,14,1,fullnetwork
+FISHR,10,0,fullnetwork
+FISHR,11,0,fullnetwork
+FISHR,12,0,fullnetwork
+FISHR,13,0,fullnetwork
+FISHR,14,0,fullnetwork
+IRMv1,10,0,fullnetwork
+IRMv1,11,0,fullnetwork
+IRMv1,12,0,fullnetwork
+IRMv1,13,0,fullnetwork
+IRMv1,14,0,fullnetwork
+VREX,10,0,fullnetwork
+VREX,11,0,fullnetwork
+VREX,12,0,fullnetwork
+VREX,13,0,fullnetwork
+VREX,14,0,fullnetwork
+Full-BIRM (Official),10,0,representation_head
+Full-BIRM (Official),11,0,representation_head
+Full-BIRM (Official),12,0,representation_head
+Full-BIRM (Official),13,0,representation_head
+Full-BIRM (Official),14,0,representation_head
+IRMv1,10,0,representation_head
+IRMv1,11,0,representation_head
+IRMv1,12,1,representation_head
+IRMv1,13,0,representation_head
+IRMv1,14,0,representation_head
