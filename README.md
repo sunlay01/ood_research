@@ -187,6 +187,73 @@ negative findings: no mechanism label is promoted until it survives controls
 for method identity, \(\lambda\), and environment family and passes common-base
 counterfactuals.
 
+The first path-functional probe is archived in
+`round3_redesign/vrex_trajectory_microscope/`. V-REx seeds 11, 12, and 13 were
+reused to compute early/middle/late cumulative functional updates, signed
+leave-one-seed-out projections, cancellation efficiency, and source-side
+recovery rates. A single first-divergence event was already rejected as a
+sufficient explanation. The new probe finds a candidate pattern in late
+functional cancellation (seed 12 has higher late total and clean-bank
+efficiency), while recovery rate and reference alignment fail to separate the
+same success case. These are path-statistic candidates only: the probe does
+not yet estimate time-varying \(A_t\), \(O_t\), or a target-relevant gold
+direction.
+
+The signed path-budget follow-up is archived in
+`round3_redesign/vrex_signed_path_budget_v2/`. It constructs a source-visible
+task-response direction through a dynamic (A_t/O_{S,t}) projector and a
+head-to-bank pullback, then decomposes each functional update into signed and
+orthogonal budget. This probe falsifies the stronger version of the
+late-coherence hypothesis: seed 12 has the best target accuracy but the lowest
+late useful-budget fraction under this current proxy (0.243 versus 0.276 and
+0.251). Thus low cancellation and source-visible projection are not yet a
+sufficient mechanism; the earlier coherence result remains an optimizer/path
+statistic candidate pending a representation-aware residual and held-out
+validation.
+
+The representation/readout split is archived in
+`round3_redesign/vrex_representation_head_split_v4/`. The exact identity
+(Delta f=H_{t-1}Delta W+Delta H W_{t-1}+Delta HDelta W) shows that late
+functional motion is representation-dominated for all three V-REx seeds. Seed
+12 has the highest cancellation efficiency of the representation-induced
+functional component (0.198 versus 0.135 and 0.147), while latent activation
+cancellation itself is not uniquely high. This narrows the candidate to
+coherent *functional use of representation changes*, rather than simply stable
+features or stable readout. It remains a three-seed correlation and requires
+matched reruns, task-relevant residuals, and intervention.
+
+### Method-agnostic mechanism and local-regret audit
+
+The independent audit in `round3_redesign/method_agnostic_mechanism/` connects
+the source-side trajectory analysis to a controlled Gaussian truth model and a
+conditional local response-regret bound. The Gaussian track checks
+
+\[
+\Pi=-(H_R+\lambda K)^{-1}(B_R+\lambda C)
+\]
+
+and the common-base cells `Pi00`, `PiC0`, `Pi0K`, `PiCK`, while keeping pure C/K
+increments, interaction, and Shapley shares distinct. It reports finite-sample
+operator errors, resolvent certificates, spectral-gap rejection, and independent
+trust-region checks. Median \(\Pi\) error decreases from 0.129 at \(n=128\) to
+0.0347 at \(n=2048\) in the designed fixture; the confidence certificate
+abstains when the inverse margin is not positive.
+
+The V-REx track freezes source-only features before reading target outcomes and
+tests three pre-registered hypotheses: observable transfer, late settling, and
+state transition. Observable transfer and late settling rank seed 12 first in
+the primary late window, but the evidence is only three seeds and does not
+surpass method/path-length controls. State transition does not separate the
+successful seed. The result is therefore `INSUFFICIENT_VALIDATION`: these are
+numeric path candidates, not identified forcing/filtering mechanisms.
+
+The finite-horizon audit verifies the full optimizer-state chain rule, shows
+that non-commuting update order matters even when Jacobian spectra match, and
+rejects literal noisy-kernel rank as a stable projector. The accompanying
+report is [mechanism_theorem_report.md](round3_redesign/method_agnostic_mechanism/mechanism_theorem_report.md),
+with hashes and commands in `provenance.json`. No CMNIST classification DG
+theorem or causal mechanism claim is made.
+
 ## Registries
 
 - [Theorem Registry](docs/state/THEOREM_REGISTRY.md)
@@ -201,3 +268,26 @@ counterfactuals.
 Earlier semantic-latent, Round-1, Round-2, and previous Round-3 artifacts remain
 available as historical evidence. They are not default authority for the current
 research state unless a registry entry explicitly points to them.
+### Dynamic geometry follow-up (V-REx seeds 11/12/13)
+
+The next mechanism probe evaluates local task and source-observation geometry at checkpoints 0, 25, ..., 500 while keeping target outcomes out of geometry construction and checkpoint choice. Results are stored in `round3_redesign/vrex_dynamic_geometry_v2/`. The three runs keep rank(A)=5 and rank(O)=3; seed 12 combines the best late functional cancellation efficiency with a larger late mean O norm, while A scale is nearly unchanged. This is only a candidate joint path/exposure pattern. A and O have different codomains, so the current pass reports their spectra separately and does not form an invalid direct projection. A valid common-space pullback and held-out seeds are required before calling this a mechanism.
+
+### Cross-method CMNIST trajectory audit (IRMv1 / V-REx / Fishr / BIRM)
+
+A unified source-only pass now compares the 501-step ColoredMNIST trajectories for
+full-network IRMv1, V-REx and Fishr, with BIRM and LoRA-BIRM retained as a separate
+sparse-checkpoint representation/head-level track. Results are in
+`round3_redesign/method_agnostic_mechanism/cmnist_cross_method_report.md` and the
+feature tables `cmnist_method_path_features.csv` and
+`cmnist_rephead_method_features.csv`.
+
+The late path statistics do not support a method-independent cancellation mechanism:
+IRMv1 has the highest target mean (~0.675) but the lowest late cancellation efficiency
+(~0.095), while Fishr (~0.552 target) and V-REx (~0.528 target) have higher values
+(~0.238 and ~0.158). Thus cancellation/coherence is method-conditioned and confounded
+with path length and optimizer dynamics. BIRM/LoRA-BIRM reach approximately 0.705/0.735
+best target accuracy in the head-only protocol, but their geometry is not pooled with
+full-network Pi. The current conclusion remains `numeric_geometry_family`, with no
+forcing/filtering claim.
+
+The candidate-mechanism audit is implemented in `src/ood_repr_reg/audit_candidate_mechanisms.py`. It explicitly tests the earlier V-REx hypotheses on IRMv1 and Fishr CMNIST trajectories using within-method seed rankings and pooled cross-method checks. The audit finds no method-independent mechanism: cancellation agrees with target only in selected windows/methods and reverses in pooled data; adjacent cosine and clean/source transfer produce multiple within-method counterexamples. BIRM/LoRA-BIRM remain sparse head-only data and are therefore not used to test full-network path hypotheses.

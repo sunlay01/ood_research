@@ -1,0 +1,16 @@
+{
+  "dataset": "ColoredMNIST",
+  "target_used_only_external_audit": true,
+  "methods": [
+    "VREX",
+    "IRMv1",
+    "FISHR"
+  ],
+  "candidate_metrics": [
+    "cancellation_efficiency",
+    "mean_adjacent_cosine",
+    "clean_to_source",
+    "cf_source_ratio"
+  ],
+  "decision": "numeric_geometry_family"
+}

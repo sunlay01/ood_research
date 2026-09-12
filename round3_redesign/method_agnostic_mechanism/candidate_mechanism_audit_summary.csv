@@ -1,0 +1,41 @@
+method,window,hypothesis,pairwise_rank_agreement,pairs,counterexamples
+FISHR,early,cancellation_efficiency,1.0,3,
+FISHR,early,mean_adjacent_cosine,0.3333333333333333,3,11-13;12-13
+FISHR,early,clean_to_source,0.0,3,11-12;11-13;12-13
+FISHR,early,cf_source_ratio,0.3333333333333333,3,11-13;12-13
+FISHR,late,cancellation_efficiency,0.6666666666666666,3,11-12
+FISHR,late,mean_adjacent_cosine,0.3333333333333333,3,11-13;12-13
+FISHR,late,clean_to_source,0.6666666666666666,3,11-12
+FISHR,late,cf_source_ratio,0.3333333333333333,3,11-13;12-13
+FISHR,middle,cancellation_efficiency,0.6666666666666666,3,12-13
+FISHR,middle,mean_adjacent_cosine,0.0,3,11-12;11-13;12-13
+FISHR,middle,clean_to_source,0.0,3,11-12;11-13;12-13
+FISHR,middle,cf_source_ratio,0.3333333333333333,3,11-13;12-13
+IRMv1,early,cancellation_efficiency,0.0,3,11-12;11-13;12-13
+IRMv1,early,mean_adjacent_cosine,0.6666666666666666,3,12-13
+IRMv1,early,clean_to_source,1.0,3,
+IRMv1,early,cf_source_ratio,1.0,3,
+IRMv1,late,cancellation_efficiency,1.0,3,
+IRMv1,late,mean_adjacent_cosine,0.6666666666666666,3,12-13
+IRMv1,late,clean_to_source,0.0,3,11-12;11-13;12-13
+IRMv1,late,cf_source_ratio,0.6666666666666666,3,11-12
+IRMv1,middle,cancellation_efficiency,0.3333333333333333,3,11-12;11-13
+IRMv1,middle,mean_adjacent_cosine,0.0,3,11-12;11-13;12-13
+IRMv1,middle,clean_to_source,1.0,3,
+IRMv1,middle,cf_source_ratio,0.6666666666666666,3,11-12
+VREX,early,cancellation_efficiency,0.3333333333333333,3,11-12;11-13
+VREX,early,mean_adjacent_cosine,0.3333333333333333,3,11-12;12-13
+VREX,early,clean_to_source,0.3333333333333333,3,11-12;12-13
+VREX,early,cf_source_ratio,0.6666666666666666,3,12-13
+VREX,late,cancellation_efficiency,1.0,3,
+VREX,late,mean_adjacent_cosine,0.0,3,11-12;11-13;12-13
+VREX,late,clean_to_source,0.0,3,11-12;11-13;12-13
+VREX,late,cf_source_ratio,0.3333333333333333,3,11-12;12-13
+VREX,middle,cancellation_efficiency,0.0,3,11-12;11-13;12-13
+VREX,middle,mean_adjacent_cosine,0.6666666666666666,3,12-13
+VREX,middle,clean_to_source,0.0,3,11-12;11-13;12-13
+VREX,middle,cf_source_ratio,0.0,3,11-12;11-13;12-13
+ALL,late,cancellation_efficiency,-0.4607492798272964,9,cross-method pooled correlation
+ALL,late,mean_adjacent_cosine,-0.8842902636241976,9,cross-method pooled correlation
+ALL,late,clean_to_source,-0.8121527252503707,9,cross-method pooled correlation
+ALL,late,cf_source_ratio,-0.07273184224581637,9,cross-method pooled correlation
