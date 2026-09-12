@@ -1,0 +1,167 @@
+{
+  "methods": [
+    "ERM",
+    "CORAL",
+    "IRMv1",
+    "VREX",
+    "FISHR"
+  ],
+  "seeds": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "logical_checkpoint": 300,
+  "legacy_checkpoint_key": 299,
+  "checkpoint_semantics": "C_t is after t completed optimizer updates; legacy state-dict key t-1 is used for t>0",
+  "horizon": 20,
+  "finite_alpha": 0.1,
+  "response_epsilon": 0.01,
+  "response_schedule": "probe_A",
+  "outcome_schedule": "independent_B",
+  "outcome_schedule_seed_offset": 1000003,
+  "predictor_sets": {
+    "A_scalar_target": [
+      "target_A_norm"
+    ],
+    "AO_scalar_target": [
+      "target_A_norm",
+      "target_O_norm"
+    ],
+    "A_full_geometry": [
+      "A_norm_0",
+      "A_norm_1",
+      "A_norm_2",
+      "A_cos_0_1",
+      "A_cos_0_2",
+      "A_cos_1_2"
+    ],
+    "AO_full_geometry": [
+      "A_norm_0",
+      "A_norm_1",
+      "A_norm_2",
+      "A_cos_0_1",
+      "A_cos_0_2",
+      "A_cos_1_2",
+      "O_norm_0",
+      "O_norm_1",
+      "O_norm_2",
+      "O_cos_0_1",
+      "O_cos_0_2",
+      "O_cos_1_2"
+    ],
+    "AO_full_plus_R_full": [
+      "A_norm_0",
+      "A_norm_1",
+      "A_norm_2",
+      "A_cos_0_1",
+      "A_cos_0_2",
+      "A_cos_1_2",
+      "O_norm_0",
+      "O_norm_1",
+      "O_norm_2",
+      "O_cos_0_1",
+      "O_cos_0_2",
+      "O_cos_1_2",
+      "R_full_norm_0",
+      "R_full_alloc_0_source",
+      "R_full_alloc_0_counterfactual",
+      "R_full_alloc_0_clean",
+      "R_full_norm_1",
+      "R_full_alloc_1_source",
+      "R_full_alloc_1_counterfactual",
+      "R_full_alloc_1_clean",
+      "R_full_norm_2",
+      "R_full_alloc_2_source",
+      "R_full_alloc_2_counterfactual",
+      "R_full_alloc_2_clean",
+      "R_full_cos_0_1",
+      "R_full_cos_0_2",
+      "R_full_cos_1_2"
+    ],
+    "AO_full_plus_R_color_only": [
+      "A_norm_0",
+      "A_norm_1",
+      "A_norm_2",
+      "A_cos_0_1",
+      "A_cos_0_2",
+      "A_cos_1_2",
+      "O_norm_0",
+      "O_norm_1",
+      "O_norm_2",
+      "O_cos_0_1",
+      "O_cos_0_2",
+      "O_cos_1_2",
+      "R_color_only_norm_0",
+      "R_color_only_alloc_0_source",
+      "R_color_only_alloc_0_counterfactual",
+      "R_color_only_alloc_0_clean",
+      "R_color_only_norm_1",
+      "R_color_only_alloc_1_source",
+      "R_color_only_alloc_1_counterfactual",
+      "R_color_only_alloc_1_clean",
+      "R_color_only_cos_0_1"
+    ],
+    "AO_full_plus_R_noise_only": [
+      "A_norm_0",
+      "A_norm_1",
+      "A_norm_2",
+      "A_cos_0_1",
+      "A_cos_0_2",
+      "A_cos_1_2",
+      "O_norm_0",
+      "O_norm_1",
+      "O_norm_2",
+      "O_cos_0_1",
+      "O_cos_0_2",
+      "O_cos_1_2",
+      "R_noise_only_norm_2",
+      "R_noise_only_alloc_2_source",
+      "R_noise_only_alloc_2_counterfactual",
+      "R_noise_only_alloc_2_clean"
+    ],
+    "method_identity": [
+      "method_identity_ERM",
+      "method_identity_CORAL",
+      "method_identity_IRMv1",
+      "method_identity_VREX",
+      "method_identity_FISHR"
+    ]
+  },
+  "response_blocks": {
+    "R_full": [
+      0,
+      1,
+      2
+    ],
+    "R_color_only": [
+      0,
+      1
+    ],
+    "R_noise_only": [
+      2
+    ]
+  },
+  "within_codomain_only": true,
+  "same_complete_state_for_AO_response_outcome": true,
+  "state_gate_file": "round3_redesign/semantic_mechanism_bridge/aopi_full_geometry_state_gate.csv",
+  "target_used_for_training": false,
+  "target_used_for_feature_selection": false,
+  "outcome": "finite-shift continuation displacement relative to zero-shift continuation on independent schedule B",
+  "status": "FULL_AO_GEOMETRY_MECHANISM_SPECIFICITY_AUDIT",
+  "git_head": "5830a865350530f86a81fdaf09422cd8879b1eaf",
+  "python": "3.13.13",
+  "torch": "2.12.1",
+  "input_config_sha256": "f4ff8230723d639cd20c7be2f01736d7acde869687c3c74602c4d70ac1b734a0",
+  "effective_config_sha256": "a51135880755d2671f70c17eb0e0ab029e5f80330fe020a5ae9c5b4b95849bf7",
+  "script_sha256": "bafe4f2c39ed41a5fcafb916f6771b38fb47059b93013cc0ce41e35770a59767",
+  "output_sha256": {
+    "response_vectors": "1c3bfeba825d7055751d57f7df58ba251028cf6755fe6cd02c8b01a4c4949fa5",
+    "finite_outcomes": "7bb99ef28c15b9672caa2d85cb1ffbee6946acf3258efcd16f7119dd54cf4088",
+    "features": "82a7c5e3afe04e41e0e5802116cc19d052170786c55d8c7ceee63eefba913e28",
+    "state_gate": "50649e6b966d61207a96e9d66dd8115451d0433ada56784c42c7bff5e1b81355",
+    "audit": "e3f6d72861009a6f8ba39d1625ad12f53dfb15b3ae48ce8e3789b3fad9251665"
+  }
+}
