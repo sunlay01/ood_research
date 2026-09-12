@@ -1,9 +1,7 @@
-# Data-first mechanism atom discovery pilot
+# Leakage-free lagged response-descriptor pilot
 
-A neutral atom library was fixed before reading target outcomes. Atoms are source-side checkpoint summaries; the response is the 2048-dimensional next functional update. Ridge/SINDy-style group ranking is evaluated by held-out seed.
+At step t, descriptors are lagged to predict the next functional update at t+1. Scaling is fitted within each held-out-seed training fold. MultiTaskLasso imposes group sparsity across the full response vector. This remains a descriptor-predictability experiment, not causal mechanism identification; matched interventions are required.
 
-- FISHR: held-out vector R2 mean=0.2165, std=0.1302.
-- IRMv1: held-out vector R2 mean=0.2956, std=0.0892.
-- VREX: held-out vector R2 mean=0.2118, std=0.0798.
-
-This pilot tests generative predictability of observed response, not causality. Selected atoms are method-conditioned and do not establish forcing/filtering. The next decisive step is held-out intervention prediction followed by matched fork knockout/swap.
+- FISHR: held-out vector R2=0.2017±0.1182.
+- IRMv1: held-out vector R2=0.2791±0.0734.
+- VREX: held-out vector R2=0.1901±0.0704.

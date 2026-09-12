@@ -1,19 +1,11 @@
 {
   "dataset": "ColoredMNIST",
-  "response": "next_functional_update_vector",
-  "atom_library": [
-    "parameter_update_norm",
-    "functional_update_norm",
-    "source_functional_update_norm",
-    "counterfactual_functional_update_norm",
-    "clean_functional_update_norm",
-    "counterfactual_source_ratio",
-    "partition_entropy",
-    "update_cosine_prev",
-    "functional_update_cosine_prev"
-  ],
-  "cv": "leave_one_seed_out",
+  "response": "functional_update_t_plus_1",
+  "features": "descriptor_at_t",
+  "no_same_step_response": true,
+  "fold_local_standardization": true,
+  "model": "MultiTaskLasso_group_sparse",
   "target_used": false,
-  "causal_identification": false,
-  "next_step": "held_out_intervention_and_matched_fork"
+  "status": "descriptor_predictability_not_mechanism",
+  "next_step": "pre_update_state_atoms_and_held_out_interventions"
 }
