@@ -29,5 +29,6 @@
   "target_used_for": "posthoc metadata only",
   "birm_interface": "official final checkpoint; no optimizer continuation state",
   "geometry_definition": "fixed-model finite difference under semantic data-generating perturbation",
-  "verdict": "PENDING_CROSS_METHOD_PREDICTIVE_AUDIT"
+  "verdict": "INVALID_AS_MECHANISM_PREDICTOR_TAUTOLOGICAL_AFFINE_OUTCOME",
+  "stop_reason": "finite outcome is algebraically alpha times local loss slope in current expected-risk construction"
 }

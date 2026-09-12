@@ -1,5 +1,11 @@
 # Cross-method mechanism-specific predictive audit
 
-For each semantic direction and finite shift, a one-feature ridge model maps the source-defined local loss response slope to finite-shift loss change. Evaluation is leave-one-method-out across seven methods (ERM, CORAL, IRMv1, V-REx, Fishr, Full-BIRM, LoRA-BIRM); target accuracy is never a predictor.
+This pass was intentionally audited for tautology before interpretation. The local loss-response slope and the finite shifted loss change satisfy, to numerical precision,
 
-This is a diagnostic of whether local response is informative for the same semantic mechanism at finite scale. It is not yet a causal mechanism result: the finite outcome uses the same fixed model and data-generating coordinate, and the BIRM variants have a distinct official checkpoint interface.
+`finite_loss(alpha) - finite_loss(0) = alpha * local_loss_slope`
+
+for the tested alphas. The apparent leave-one-method-out RMSE near machine precision is therefore a consequence of the same affine expected-risk construction, not evidence that response geometry predicts an independently generated mechanism outcome.
+
+The source-color-contrast coordinate also has essentially zero effect in this implementation because the two source environments are averaged symmetrically. This is a useful implementation diagnostic, not a mechanism result.
+
+Verdict: `NO-POSITIVE-SEMANTIC-MECHANISM-CANDIDATE`. A valid next test must use a genuinely held-out finite training/evaluation behavior (for example, a fixed checkpoint followed by a prescribed continuation or prediction-flip metric) whose outcome is not algebraically defined by the local derivative being tested.
