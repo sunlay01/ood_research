@@ -1,0 +1,31 @@
+{
+  "methods": [
+    "ERM",
+    "CORAL",
+    "IRMv1",
+    "VREX",
+    "FISHR"
+  ],
+  "seeds": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "checkpoint": 300,
+  "horizon": 20,
+  "finite_alpha": 0.1,
+  "predictors": [
+    "A_norm",
+    "O_norm",
+    "full_response_norms",
+    "response_Gram",
+    "bank_allocation"
+  ],
+  "outcome": "finite-shift continuation displacement relative to zero-shift continuation",
+  "target_used_for_training": false,
+  "target_used_for_feature_selection": false,
+  "birm_boundary": "separate static head-only artifact",
+  "status": "PREDICTIVE_AUDIT"
+}
