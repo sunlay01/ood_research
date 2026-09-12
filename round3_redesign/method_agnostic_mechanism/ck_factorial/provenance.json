@@ -1,0 +1,25 @@
+{
+  "dataset": "ColoredMNIST",
+  "methods": [
+    "IRMv1",
+    "VREX",
+    "FISHR"
+  ],
+  "seeds": [
+    10,
+    11,
+    12
+  ],
+  "checkpoint": 300,
+  "subspace_dimension": 8,
+  "epsilon": 0.05,
+  "cells": [
+    "00",
+    "10",
+    "01",
+    "11"
+  ],
+  "local_only_h1": true,
+  "target_used": false,
+  "interpretation": "C/K local operator pilot; no claim of independently realizable algorithms"
+}
