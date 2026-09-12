@@ -1,0 +1,33 @@
+{
+  "checkpoint": 300,
+  "control_replay_exact": true,
+  "dataset": "ColoredMNIST",
+  "horizons": [
+    1,
+    5,
+    20
+  ],
+  "interpretation_boundary": "controlled regularizer intervention; does not isolate forcing C from filtering K",
+  "intervention": "post-anneal regularizer scale",
+  "methods": [
+    "IRMv1",
+    "VREX",
+    "FISHR"
+  ],
+  "regularizer_scales": [
+    0.0,
+    0.5,
+    1.0,
+    2.0
+  ],
+  "same_model_optimizer_algorithm_state": true,
+  "same_source_batch_schedule": true,
+  "seeds": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "target_used": false
+}

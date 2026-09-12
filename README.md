@@ -299,3 +299,9 @@ The trajectory audits are observational, even when expanded to five seeds. They 
 ### Data-first mechanism-atom pilot
 
 `src/ood_repr_reg/mechanism_atom_discovery.py` implements the SINDy-style first stage proposed in the methodology revision. A fixed neutral source-side atom library predicts the 2048-dimensional next functional update, with leave-one-seed-out evaluation on five-seed CMNIST trajectories. Held-out vector R² is 0.296±0.089 (IRMv1), 0.212±0.080 (V-REx), and 0.216±0.130 (Fishr). This establishes limited generative predictability of observed updates, not causal mechanism identification. Selected atoms and the audit are in `round3_redesign/method_agnostic_mechanism/mechanism_atom_*`; held-out intervention and matched fork validation remain required.
+
+### Matched fork intervention pilot
+
+The first controlled perturbation-response dataset is in `round3_redesign/method_agnostic_mechanism/regularizer_forks/`. For each IRMv1, V-REx, and Fishr CMNIST run (five seeds), the complete step-300 model, Adam state, algorithm state, and source batch schedule were cloned. Branches changed only the post-anneal regularizer scale (0, 0.5, 1, 2) and were rolled out for horizons 1, 5, and 20. Duplicate control replays matched exactly in parameters, optimizer state, algorithm state, and functional response.
+
+The intervention produces large, reproducible short-horizon effects when the regularizer is removed (mean horizon-5 effect norms: IRMv1 69.95, V-REx 36.15, Fishr 34.04) and much smaller effects for half/double scaling. This validates the matched-fork apparatus and establishes intervention sensitivity. It does **not** isolate forcing `C` from filtering `K`, nor does it establish an OOD mechanism; those require separate common-base component interventions.
