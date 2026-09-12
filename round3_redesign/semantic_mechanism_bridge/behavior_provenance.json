@@ -1,0 +1,33 @@
+{
+  "methods": [
+    "ERM",
+    "CORAL",
+    "IRMv1",
+    "VREX",
+    "FISHR",
+    "Full-BIRM (Official)",
+    "LoRA-BIRM (Official)"
+  ],
+  "seeds": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "directions": [
+    "source_color_common",
+    "source_color_contrast",
+    "source_label_noise"
+  ],
+  "epsilon": 0.01,
+  "alphas": [
+    0.02,
+    0.05,
+    0.1
+  ],
+  "target_used_for": "posthoc metadata only",
+  "birm_interface": "official final checkpoint; no optimizer continuation state",
+  "geometry_definition": "fixed-model finite difference under semantic data-generating perturbation",
+  "verdict": "PENDING_CROSS_METHOD_PREDICTIVE_AUDIT"
+}
