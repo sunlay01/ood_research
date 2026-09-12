@@ -295,3 +295,7 @@ The candidate-mechanism audit is implemented in `src/ood_repr_reg/audit_candidat
 ### Mechanism identification revision
 
 The trajectory audits are observational, even when expanded to five seeds. They cannot identify forcing/filtering causality because method, optimizer state, representation state, and measured geometry co-vary. A mechanism claim now requires matched fork interventions from the same complete checkpoint state: change only forcing (`C`), only filtering (`K`), or representation/readout coupling while replaying identical data and randomness. Until those forks are run, `(C,K)->Pi` remains a theoretical coordinate system and CMNIST path statistics remain descriptive.
+
+### Data-first mechanism-atom pilot
+
+`src/ood_repr_reg/mechanism_atom_discovery.py` implements the SINDy-style first stage proposed in the methodology revision. A fixed neutral source-side atom library predicts the 2048-dimensional next functional update, with leave-one-seed-out evaluation on five-seed CMNIST trajectories. Held-out vector R² is 0.296±0.089 (IRMv1), 0.212±0.080 (V-REx), and 0.216±0.130 (Fishr). This establishes limited generative predictability of observed updates, not causal mechanism identification. Selected atoms and the audit are in `round3_redesign/method_agnostic_mechanism/mechanism_atom_*`; held-out intervention and matched fork validation remain required.

@@ -1,0 +1,19 @@
+{
+  "dataset": "ColoredMNIST",
+  "response": "next_functional_update_vector",
+  "atom_library": [
+    "parameter_update_norm",
+    "functional_update_norm",
+    "source_functional_update_norm",
+    "counterfactual_functional_update_norm",
+    "clean_functional_update_norm",
+    "counterfactual_source_ratio",
+    "partition_entropy",
+    "update_cosine_prev",
+    "functional_update_cosine_prev"
+  ],
+  "cv": "leave_one_seed_out",
+  "target_used": false,
+  "causal_identification": false,
+  "next_step": "held_out_intervention_and_matched_fork"
+}
