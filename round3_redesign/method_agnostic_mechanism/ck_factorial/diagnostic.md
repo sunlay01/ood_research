@@ -1,7 +1,5 @@
-# C/K factorial diagnostic
+# Corrected C/K factorial smoke
 
-The CMNIST local C/K pilot completed for IRMv1, V-REx and Fishr at step 300, but it fails the local trust-region calibration gate. A single absolute epsilon in an 8-D random parameter subspace produced enormous C-driven displacements for IRMv1 (up to 2.9e5 functional norm) and V-REx (2.7e3), while K-driven effects were orders of magnitude smaller. This indicates that the projected operator estimates and step scaling are not commensurate across methods; the resulting dominance pattern is numerical, not evidence for forcing dominance.
+The previous factorial run is invalid and excluded. This corrected smoke fixes: checkpoint semantics (`theta_300` is after updates 0..299 and uses batch 300), the Newton minus sign, inclusion of L2 in the base risk/Hessian, common parameter trust-region radius, and projected solve instrumentation. It runs one seed per method before expansion.
 
-Fishr has comparable C and K magnitudes, but the interaction changes across seeds. No forcing/filtering conclusion is accepted.
-
-Required correction before scientific interpretation: normalize each cell to a common parameter trust-region norm (or use a whitened Fisher/Hessian metric), verify finite-difference linearity at epsilon/2 and epsilon/4, and reject near-singular projected Hessians. Then repeat h=1 before any h>1 rollout.
+At this stage the output is only a numerical smoke. A scientific interpretation requires finite-difference radius scaling, condition-number gates, and multiple seeds.

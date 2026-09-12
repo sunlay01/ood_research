@@ -6,13 +6,12 @@
     "FISHR"
   ],
   "seeds": [
-    10,
-    11,
-    12
+    10
   ],
   "checkpoint": 300,
   "subspace_dimension": 8,
-  "epsilon": 0.05,
+  "epsilon": 0.001,
+  "trust_region_radius": 0.001,
   "cells": [
     "00",
     "10",
