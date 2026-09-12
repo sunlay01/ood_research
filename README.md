@@ -291,3 +291,7 @@ full-network Pi. The current conclusion remains `numeric_geometry_family`, with 
 forcing/filtering claim.
 
 The candidate-mechanism audit is implemented in `src/ood_repr_reg/audit_candidate_mechanisms.py`. It explicitly tests the earlier V-REx hypotheses on IRMv1 and Fishr CMNIST trajectories using within-method seed rankings and pooled cross-method checks. The audit finds no method-independent mechanism: cancellation agrees with target only in selected windows/methods and reverses in pooled data; adjacent cosine and clean/source transfer produce multiple within-method counterexamples. BIRM/LoRA-BIRM remain sparse head-only data and are therefore not used to test full-network path hypotheses.
+
+### Mechanism identification revision
+
+The trajectory audits are observational, even when expanded to five seeds. They cannot identify forcing/filtering causality because method, optimizer state, representation state, and measured geometry co-vary. A mechanism claim now requires matched fork interventions from the same complete checkpoint state: change only forcing (`C`), only filtering (`K`), or representation/readout coupling while replaying identical data and randomness. Until those forks are run, `(C,K)->Pi` remains a theoretical coordinate system and CMNIST path statistics remain descriptive.
