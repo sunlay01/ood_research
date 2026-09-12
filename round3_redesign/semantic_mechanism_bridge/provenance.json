@@ -1,0 +1,33 @@
+{
+  "methods": [
+    "ERM",
+    "IRMv1",
+    "VREX",
+    "FISHR",
+    "CORAL"
+  ],
+  "seeds": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "horizons": [
+    1,
+    5,
+    20
+  ],
+  "source_only": true,
+  "target_used_for": "posthoc_metrics_only",
+  "vector_archive": "semantic_response_vectors.npz",
+  "git_commit": "f50548a6f48aee6d923e494533a43fb141d6e7f0",
+  "semantic_registry": "smooth_world5.py",
+  "literature_audit": "literature_semantic_decompositions.md",
+  "alignment_status": "NOT-COMPUTABLE-VECTOR-MISSING",
+  "candidate_verdict": "NO-POSITIVE-SEMANTIC-MECHANISM-CANDIDATE",
+  "controls": [
+    "ERM",
+    "CORAL"
+  ]
+}

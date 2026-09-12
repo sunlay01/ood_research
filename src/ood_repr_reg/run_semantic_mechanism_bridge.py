@@ -57,7 +57,8 @@ def run():
             rows = full_response_rows(result, world, banks, config=config, seed=seed, method=method)
             for row in rows:
                 row = dict(row)
-                row["semantic_direction"] = SEMANTIC_NAMES[int(row["basis_index"])] if int(row["basis_index"]) >= 0 else "derived_semantic_direction"
+                direction_index = int(str(row["opaque_direction_id"])[1:])
+                row["semantic_direction"] = SEMANTIC_NAMES[direction_index]
                 row["source_only"] = row["semantic_direction"] in {"source_env0_color", "source_env1_color", "source_label_noise", "source_color_common", "source_color_contrast"}
                 row["target_acc_posthoc"] = float(metrics.get("target_accuracy", float("nan")))
                 summary_rows.append(row)
