@@ -1,0 +1,41 @@
+{
+  "dataset": "ColoredMNIST",
+  "methods": [
+    "IRMv1",
+    "VREX",
+    "FISHR"
+  ],
+  "seeds": [
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "checkpoint": 300,
+  "subspace_dimension": 8,
+  "epsilon": 0.001,
+  "trust_region_radius": 0.001,
+  "radius_grid": [
+    0.001,
+    0.0005,
+    0.00025
+  ],
+  "cells": [
+    "00",
+    "10",
+    "01",
+    "11"
+  ],
+  "local_only_h1": true,
+  "target_used": false,
+  "orthonormal_subspace": true,
+  "dtype": "float64",
+  "common_alpha": true,
+  "linearity_tolerance": 0.25,
+  "condition_threshold": 1000000.0,
+  "pd_threshold": 1e-06,
+  "residual_threshold": 1e-06,
+  "derived_contrast_validity_propagated": true,
+  "interpretation": "C/K local operator pilot; no claim of independently realizable algorithms"
+}

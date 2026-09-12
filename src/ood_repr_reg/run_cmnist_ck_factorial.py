@@ -9,6 +9,7 @@ from pathlib import Path
 import copy,json
 from dataclasses import replace
 import numpy as np,pandas as pd,torch
+from torch import nn
 from .task3_aopi_multimethod_mechanism_survey.algorithms.registry import get_algorithm
 from .task3_aopi_multimethod_mechanism_survey.functional_banks import bank_logits,build_functional_banks
 from .task3_aopi_multimethod_mechanism_survey.smooth_world5 import build_smooth_world5
@@ -18,6 +19,17 @@ from .task3_cmnist_cpu_minimal.model import build_model_from_config
 from .task3_aopi_multimethod_mechanism_survey.method_trainer import train_survey_method
 ROOT=Path(__file__).resolve().parents[2];CFG_PATH=ROOT/'configs/task3_aopi_multimethod_mechanism_survey.json';OUT=ROOT/'round3_redesign/method_agnostic_mechanism/ck_factorial';METHODS=('IRMv1','VREX','FISHR');SEEDS=(10,11,12);STEP=300;KDIM=8;EPS=0.001;RHO=0.001;SMOKE_SEEDS=(10,)
 LINEARITY_TOL=0.25;COND_MAX=1e6;PD_THRESH=1e-6;RESIDUAL_TOL=1e-6
+MODEL_VARIANT='minimal'
+
+class WideColoredMNISTMLP(nn.Module):
+ def __init__(self):
+  super().__init__();self.encoder=nn.Sequential(nn.Linear(392,256),nn.ReLU(),nn.Linear(256,256),nn.ReLU(),nn.Linear(256,256),nn.ReLU());self.head=nn.Linear(256,1)
+  for q in self.modules():
+   if isinstance(q,nn.Linear): nn.init.xavier_uniform_(q.weight);nn.init.zeros_(q.bias)
+ def encode(self,x): return self.encoder(x.reshape(x.shape[0],-1))
+ def forward(self,x): return self.head(self.encode(x))
+
+def build_factorial_model(cfg): return WideColoredMNISTMLP() if MODEL_VARIANT=='wide256x3' else build_model_from_config(cfg)
 
 def flatten_params(m): return torch.cat([p.detach().reshape(-1) for p in m.parameters()])
 def set_flat(m,x):
@@ -29,7 +41,7 @@ def feat(m,b):
 def run_one(method,seed):
  raw=json.loads(CFG_PATH.read_text());raw['methods']=[method];raw['candidate_methods']=[method];cfg=copy.deepcopy(validate_config(raw)); cfg['training']['steps']=STEP+1; cfg['training']['checkpoint_steps']=[STEP-1];
  data=build_task3_data(cfg,seed,data_root=ROOT/'data',download=bool(cfg['execution']['download_mnist']));world=build_smooth_world5(cfg,seed,data_root=ROOT/'data',download=False);banks=build_functional_banks(world,source_size_per_environment=int(cfg['banks']['source_bank_size_per_environment']),counterfactual_size=int(cfg['banks']['counterfactual_bank_size']))
- torch.manual_seed(seed);m=build_model_from_config(cfg);res=train_survey_method(model=m,source_envs=data.source_envs,batch_schedule=data.batch_schedule,method=method,config=cfg,seed=seed,initial_parameter_hash='');m.load_state_dict(res.checkpoint_state_dicts[STEP-1]);m=m.double();m.train();banks=replace(banks,**{k:getattr(banks,k).double() if getattr(banks,k).is_floating_point() else getattr(banks,k) for k in ('source','counterfactual_red','counterfactual_green','clean_task')});alg=get_algorithm(method,cfg);batches=scheduled_source_batches(data.source_envs,data.batch_schedule,STEP,cfg['device']);batches=tuple((x.double(),y) for x,y in batches); parts=alg.objective(m,batches,step=STEP); risk=parts.risk + float(cfg['training']['l2_regularizer_weight'])*sum(p.square().sum() for p in m.parameters()); pen=parts.penalty; params=[p for p in m.parameters()]; gr=torch.autograd.grad(risk,params,create_graph=True);gp=torch.autograd.grad(pen,params,create_graph=True);gB=torch.cat([x.reshape(-1) for x in gr]);gC=torch.cat([x.reshape(-1) for x in gp]);
+ torch.manual_seed(seed);m=build_factorial_model(cfg);res=train_survey_method(model=m,source_envs=data.source_envs,batch_schedule=data.batch_schedule,method=method,config=cfg,seed=seed,initial_parameter_hash='');m.load_state_dict(res.checkpoint_state_dicts[STEP-1]);m=m.double();m.train();banks=replace(banks,**{k:getattr(banks,k).double() if getattr(banks,k).is_floating_point() else getattr(banks,k) for k in ('source','counterfactual_red','counterfactual_green','clean_task')});alg=get_algorithm(method,cfg);batches=scheduled_source_batches(data.source_envs,data.batch_schedule,STEP,cfg['device']);batches=tuple((x.double(),y) for x,y in batches); parts=alg.objective(m,batches,step=STEP); risk=parts.risk + float(cfg['training']['l2_regularizer_weight'])*sum(p.square().sum() for p in m.parameters()); pen=parts.penalty; params=[p for p in m.parameters()]; gr=torch.autograd.grad(risk,params,create_graph=True);gp=torch.autograd.grad(pen,params,create_graph=True);gB=torch.cat([x.reshape(-1) for x in gr]);gC=torch.cat([x.reshape(-1) for x in gp]);
  Q,_=torch.linalg.qr(torch.randn(gB.numel(),KDIM,dtype=torch.float64),mode='reduced'); V=Q.T; vecs=[V[j] for j in range(KDIM)]; B=V@gB; C=V@gC; Hc=torch.zeros((KDIM,KDIM),dtype=torch.float64);
  for j in range(KDIM):
   hv=torch.autograd.grad((gp[0]*vecs[j][:gp[0].numel()].reshape_as(gp[0])).sum() if len(gp)==1 else sum((a*b.reshape_as(a)).sum() for a,b in zip(gp,vecs[j].split([p.numel() for p in params]))),params,retain_graph=True)
