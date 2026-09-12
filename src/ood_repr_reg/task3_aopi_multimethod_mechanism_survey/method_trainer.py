@@ -51,6 +51,11 @@ class SurveyTrainResult:
     optimizer_state: dict[str, Any]
     algorithm_state: AlgorithmState
     checkpoint_state_dicts: dict[int, dict[str, Tensor]]
+    # Unlike ``checkpoint_state_dicts`` (which preserves the legacy loop-index
+    # convention), bundles are keyed by the number of completed updates.  Thus
+    # ``checkpoint_bundles[t]`` is the complete state C_t at which continuation
+    # step t must be evaluated.
+    checkpoint_bundles: dict[int, dict[str, Any]]
     seed: int
     method: str
     initial_parameter_hash: str
@@ -75,6 +80,7 @@ class SurveyTrainResult:
     final_penalty: float
     finite: bool
     invalid_reason: str
+    continuation_step: int = 0
 
 
 def train_survey_method(
@@ -99,9 +105,23 @@ def train_survey_method(
     parts = None
     invalid_reason = "OK"
     checkpoints: dict[int, dict[str, Tensor]] = {}
+    checkpoint_bundles: dict[int, dict[str, Any]] = {}
     checkpoint_steps = set(int(step) for step in config["training"].get("checkpoint_steps", []))
+    completed_updates = 0
     if 0 in checkpoint_steps:
         checkpoints[0] = clone_state_dict(model)
+        optimizer_snapshot = copy.deepcopy(optimizer.state_dict())
+        algorithm_snapshot = algorithm_state.clone()
+        checkpoint_bundles[0] = {
+            "checkpoint_step": 0,
+            "model_state": copy.deepcopy(checkpoints[0]),
+            "optimizer_state": optimizer_snapshot,
+            "algorithm_state": algorithm_snapshot,
+            "continuation_step": 0,
+            "model_parameter_hash": parameter_hash(model),
+            "optimizer_state_hash": optimizer_state_hash(optimizer_snapshot),
+            "algorithm_state_hash": algorithm_snapshot.hash(),
+        }
     for step in range(int(config["training"]["steps"])):
         batches = scheduled_source_batches(source_envs, batch_schedule, step, config["device"])
         try:
@@ -116,12 +136,30 @@ def train_survey_method(
             parts = step_result.parts
             optimizer = step_result.optimizer
             algorithm_state = step_result.algorithm_state
+            completed_updates = step + 1
             reset_count += int(step_result.did_reset_optimizer)
             if not bool(torch.isfinite(parts.objective.detach())):
                 invalid_reason = "NONFINITE_OBJECTIVE"
                 break
             if step in checkpoint_steps and step != 0:
                 checkpoints[int(step)] = clone_state_dict(model)
+                # The legacy state-dict key is the loop index (and is kept for
+                # existing diagnostics).  The bundle key is the logical state
+                # C_t, i.e. after t completed optimizer updates.
+                logical_step = int(step) + 1
+                optimizer_snapshot = copy.deepcopy(optimizer.state_dict())
+                algorithm_snapshot = algorithm_state.clone()
+                checkpoint_bundles[logical_step] = {
+                    "checkpoint_step": logical_step,
+                    "training_loop_step": int(step),
+                    "model_state": copy.deepcopy(checkpoints[int(step)]),
+                    "optimizer_state": optimizer_snapshot,
+                    "algorithm_state": algorithm_snapshot,
+                    "continuation_step": logical_step,
+                    "model_parameter_hash": parameter_hash(model),
+                    "optimizer_state_hash": optimizer_state_hash(optimizer_snapshot),
+                    "algorithm_state_hash": algorithm_snapshot.hash(),
+                }
         except Exception as exc:
             invalid_reason = f"TRAINING_FAILED:{type(exc).__name__}:{exc}"
             break
@@ -131,6 +169,7 @@ def train_survey_method(
         model=model.cpu(), optimizer_state=state, seed=int(seed), method=method,
         algorithm_state=algorithm_state.clone(),
         checkpoint_state_dicts=checkpoints,
+        checkpoint_bundles=checkpoint_bundles,
         initial_parameter_hash=initial_parameter_hash,
         batch_schedule_hash=batch_schedule_hash(batch_schedule),
         final_parameter_hash=parameter_hash(model),
@@ -152,4 +191,5 @@ def train_survey_method(
         final_risk=float("nan") if parts is None else float(parts.risk.detach().cpu()),
         final_penalty=float("nan") if parts is None else float(parts.penalty.detach().cpu()),
         finite=finite, invalid_reason=invalid_reason,
+        continuation_step=int(completed_updates),
     )

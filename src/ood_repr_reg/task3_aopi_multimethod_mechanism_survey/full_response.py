@@ -17,7 +17,12 @@ from .smooth_world5 import all_direction_vectors, SmoothWorld5
 
 def _clone_state(result: SurveyTrainResult) -> tuple[nn.Module, torch.optim.Adam, Any]:
     model = copy.deepcopy(result.model).cpu()
-    optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+    # Instantiate with the saved learning rate before loading the state.  Adam
+    # stores its param-group hyperparameters in the state dict; using a
+    # hard-coded value here could silently change a checkpoint continuation.
+    saved_groups = result.optimizer_state.get("param_groups", [])
+    saved_lr = float(saved_groups[0].get("lr", 0.001)) if saved_groups else 0.001
+    optimizer = torch.optim.Adam(model.parameters(), lr=saved_lr)
     optimizer.load_state_dict(copy.deepcopy(result.optimizer_state))
     return model, optimizer, result.algorithm_state.clone()
 
@@ -36,7 +41,7 @@ def _run_path(result: SurveyTrainResult, worlds: SmoothWorld5, banks: Functional
                 worlds,
                 indices,
                 delta,
-                step=int(config["training"]["steps"]) + step,
+                step=int(getattr(result, "continuation_step", config["training"]["steps"])) + step,
                 learning_rate=learning_rate,
                 algorithm_state=algorithm_state,
             )
