@@ -60,7 +60,7 @@ def run():
                 direction_index = int(str(row["opaque_direction_id"])[1:])
                 row["semantic_direction"] = SEMANTIC_NAMES[direction_index]
                 row["source_only"] = row["semantic_direction"] in {"source_env0_color", "source_env1_color", "source_label_noise", "source_color_common", "source_color_contrast"}
-                row["target_acc_posthoc"] = float(metrics.get("target_accuracy", float("nan")))
+                row["target_acc_posthoc"] = float(metrics.get("target_acc", float("nan")))
                 summary_rows.append(row)
             # Reconstruct exact response vectors using the same common schedule and continuation.
             max_h = max(horizons); gen = torch.Generator().manual_seed(seed + 271828)
