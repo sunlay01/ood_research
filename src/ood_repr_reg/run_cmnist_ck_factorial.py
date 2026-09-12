@@ -40,14 +40,18 @@ def run_one(method,seed):
  Hr=torch.zeros((KDIM,KDIM))
  for j in range(KDIM):
   splits=vecs[j].split([p.numel() for p in params]);dot=sum((a*b.reshape_as(a)).sum() for a,b in zip(gr,splits));hv=torch.autograd.grad(dot,params,retain_graph=True);Hr[:,j]=V@torch.cat([a.reshape(-1) for a in hv])
- H=(Hr+Hr.T)/2;K=(Hc+Hc.T)/2;eye=1e-4*torch.eye(KDIM);f0=feat(m,banks);rows=[];responses={}
+ H=(Hr+Hr.T)/2;K=(Hc+Hc.T)/2;eye=1e-4*torch.eye(KDIM);f0=feat(m,banks);rows=[];responses={}; raw_ops={}
  for c_on in (0,1):
   for k_on in (0,1):
    M=H+k_on*lam*K+eye;rhs=B+c_on*lam*C; eig=torch.linalg.eigvalsh(M); cond=float((eig.abs().max()/(eig.abs().min()+1e-12))); d=-torch.linalg.solve(M,rhs)
-   # local subspace displacement V^T parameter = d
-   raw_delta=V.T@d; theta=flatten_params(m); theta2=theta + RHO*raw_delta/(raw_delta.norm()+1e-12);branch=copy.deepcopy(m);set_flat(branch,theta2);r=feat(branch,banks)-f0;key=f'{c_on}{k_on}';responses[key]=r;rows.append({'method':method,'seed':seed,'checkpoint':STEP,'cell':key,'delta_norm':float((RHO*raw_delta/(raw_delta.norm()+1e-12)).norm()),'functional_response_norm':float(r.norm()),'source_response_norm':float(r[:len(banks.source)].norm()),'counterfactual_response_norm':float(r[len(banks.source):len(banks.source)+len(banks.counterfactual_red)+len(banks.counterfactual_green)].norm()),'clean_response_norm':float(r[-len(banks.clean_task):].norm()),'projected_condition_number':cond,'linear_solve_residual':float((M@d+rhs).norm())})
- dC=responses['10']-responses['00'];dK=responses['01']-responses['00'];dI=responses['11']-responses['10']-responses['01']+responses['00'];
- for name,x in [('delta_C',dC),('delta_K',dK),('delta_interaction',dI)]: rows.append({'method':method,'seed':seed,'checkpoint':STEP,'cell':name,'delta_norm':np.nan,'functional_response_norm':float(x.norm()),'source_response_norm':float(x[:len(banks.source)].norm()),'counterfactual_response_norm':float(x[len(banks.source):len(banks.source)+len(banks.counterfactual_red)+len(banks.counterfactual_green)].norm()),'clean_response_norm':float(x[-len(banks.clean_task):].norm())})
+   raw_ops[f'{c_on}{k_on}']=(M,rhs,d,eig,cond)
+ maxnorm=max(float((V.T@q[2]).norm()) for q in raw_ops.values());
+ for radius in (RHO, RHO/2.0, RHO/4.0):
+  alpha=radius/max(maxnorm,1e-12); responses={}
+  for key,(M,rhs,d,eig,cond) in raw_ops.items():
+   raw_delta=V.T@d; theta=flatten_params(m); theta2=theta + alpha*raw_delta;branch=copy.deepcopy(m);set_flat(branch,theta2);r=feat(branch,banks)-f0;responses[key]=r;rows.append({'method':method,'seed':seed,'checkpoint':STEP,'radius':radius,'cell':key,'delta_norm':float((alpha*raw_delta).norm()),'raw_direction_norm':float(raw_delta.norm()),'common_alpha':alpha,'functional_response_norm':float(r.norm()),'source_response_norm':float(r[:len(banks.source)].norm()),'counterfactual_response_norm':float(r[len(banks.source):len(banks.source)+len(banks.counterfactual_red)+len(banks.counterfactual_green)].norm()),'clean_response_norm':float(r[-len(banks.clean_task):].norm()),'projected_condition_number':cond,'min_eigenvalue':float(eig.min()),'negative_eigenvalue_count':int((eig<0).sum()),'pd_gate':bool(eig.min()>1e-6),'linear_solve_residual':float((M@d+rhs).norm())})
+  dC=responses['10']-responses['00'];dK=responses['01']-responses['00'];dI=responses['11']-responses['10']-responses['01']+responses['00'];
+  for name,x in [('delta_C',dC),('delta_K',dK),('delta_interaction',dI)]: rows.append({'method':method,'seed':seed,'checkpoint':STEP,'radius':radius,'cell':name,'delta_norm':np.nan,'functional_response_norm':float(x.norm()),'source_response_norm':float(x[:len(banks.source)].norm()),'counterfactual_response_norm':float(x[len(banks.source):len(banks.source)+len(banks.counterfactual_red)+len(banks.counterfactual_green)].norm()),'clean_response_norm':float(x[-len(banks.clean_task):].norm())})
  return rows
 
 def main():
