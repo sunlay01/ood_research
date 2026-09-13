@@ -127,13 +127,14 @@ The revision consists of four theorem obligations:
 3. `ker A=S°` and source-observable quotient/indistinguishability;
 4. metric/gauge covariance of any split decomposition.
 
-The exact quadratic representation and a concrete annihilator response lemma
-are Lean-checked in `lean/OodTheoryVerification/Stage11R/Basic.lean`.
-Pairing/operator covariance, quotient identification, metric-aware projection,
-and support-function statements are paper proofs with deterministic numerical
-witnesses in `experiments/risk_representation_revision_tests.py`. No Taylor
-theorem, Stage 12 master theorem, algorithm mapping, or new regularizer is
-claimed here.
+The exact quadratic representation, finite-source exposure-energy identity,
+finite-dimensional `exposureKernel = sourceAnnihilator` equality, and an
+abstract linear-map paired-covariance theorem are Lean-checked in
+`lean/OodTheoryVerification/Stage11R/Basic.lean`. The quotient identification
+`V*/S° ~= S*`, metric-aware projection, and support-function statements remain
+paper proofs with deterministic numerical witnesses in
+`experiments/risk_representation_revision_tests.py`. No Taylor theorem, Stage
+12 master theorem, algorithm mapping, or new regularizer is claimed here.
 
 ## 8. Deterministic audit
 
