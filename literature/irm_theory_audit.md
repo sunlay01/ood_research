@@ -11,6 +11,16 @@ Arjovsky et al. (2019, Eq. 2) define ideal IRM as finding a representation `Phi`
 * Kamath et al. (2021, “Does Invariant Risk Minimization Capture Causal Variables?”) show that even population IRM can fail to identify causal variables without additional assumptions. The proof studies invariance constraints and linear predictors, not deep optimizer dynamics.
 * Ahuja et al. (2021) and related invariant-learning theory use algebraic invariance/optimality conditions, restricted linear models, or identifiability assumptions. The gradient penalty is either absent from the theorem or represented through the corresponding population constraint.
 
+## Three theory treatments of gradient-based IRM
+
+The reviewed literature now separates three distinct moves:
+
+1. **Direct gradient-penalty analysis:** work with `||∇_w R_e||²` itself, requiring a derivative class, smoothness, and a stationary/optimization statement. This is uncommon for deep finite-sample DG.
+2. **Population-constraint abstraction:** replace the penalty by simultaneous optimality/invariance and analyze restricted linear or structural models (Arjovsky et al.; Rosenfeld et al.; Kamath et al.).
+3. **Objective-to-functional translation:** Lai & Wang (2024, PMLR 235:25913--25935, Theorems 3.1--3.11) identify the IRMv1 gradient norm with a TV-`ell_2` variation of risk as a function of the classifier variable, then study TV-`ell_1` and minimax variants under functional regularity and environment-family conditions. This preserves a mathematical trace of the gradient object, but it is not an equivalence between the full deep training dynamics and a standard DG bound.
+
+The third route is a representation-translation example, not a broad cross-method unification: it captures IRM/TV variants, while GroupDRO, Fishr, and generic Wasserstein objectives are outside the stated functional unless separately mapped.
+
 ## Why the gradient penalty rarely appears in a clean bound
 
 1. The penalty is a derivative of an *empirical risk*, so concentration must control a derivative class (and often its Lipschitz/smoothness envelope) jointly with the predictor class.
@@ -20,7 +30,7 @@ Arjovsky et al. (2019, Eq. 2) define ideal IRM as finding a representation `Phi`
 
 ## Evidence-bounded conclusion
 
-In the sources reviewed here, no broadly applicable finite-sample source-only target-risk theorem analyzes the exact deep IRMv1 gradient-penalty training dynamics without restrictive model, smoothness, optimization, and environment-identifiability assumptions. This is narrower and defensible than saying “IRM has no theory”: there is substantial theory for ideal IRM, restricted linear cases, consistency/identifiability, and impossibility.
+In the sources reviewed here, no broadly applicable finite-sample source-only target-risk theorem analyzes the exact deep IRMv1 gradient-penalty training dynamics without restrictive model, smoothness, optimization, and environment-identifiability assumptions. Lai--Wang provides an important fourth option beyond “analyze a constraint”: translate the gradient penalty into a variational functional and state OOD conditions. This is narrower and defensible than saying “IRM has no theory”: there is substantial theory for ideal IRM, restricted linear cases, consistency/identifiability, impossibility, and functional translations.
 
 ## Audit checklist for future papers
 
