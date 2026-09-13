@@ -10,6 +10,8 @@ Current scope:
 - `Stage9/Basic.lean`: finite-dimensional coverage definitions and elementary
   range/kernel facts;
 - `Stage9/Support.lean`: exact support identity for an explicit product class;
+  for `A = diag(a,0)`, the range-coordinate radius is `rho * sqrt(a)` because
+  the gauge uses `A^dagger/2`;
 - `Stage9/Calibration.lean`: scale calibration for a diagonal finite-dimensional
   operator.
 - `Stage9/Control.lean`: monotone composition of explicit `rho`/`kappa`, learner

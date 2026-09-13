@@ -79,7 +79,8 @@ family is automatically covered. Algorithm mapping and new regularizer design
 remain blocked.
 
 The first machine-checked Stage 9 slice is under `lean/`: finite-dimensional
-range/kernel facts, the exact product-class support identity, scale calibration,
+range/kernel facts, the exact product-class support identity (with the correct
+`sqrt(a)` coordinate scale for `A = diag(a,0)`), scale calibration,
 and the monotone control/non-vacuity composition lemma all pass `lake build` on
 the local Lean 4.33.1 + mathlib cache. The general PSD-domination,
 principal-angle, and shift-generator theorems remain explicit proof obligations;

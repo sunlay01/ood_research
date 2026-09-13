@@ -294,8 +294,9 @@ training, neural networks, or benchmark datasets.
 
 The existing Lean Stage 9 files machine-check the coordinate support identity
 and the finite-dimensional range/kernel decomposition. The new Stage 10 Lean
-file checks a concrete two-dimensional hidden-direction witness and the scalar
-same-spectrum coverage identities. The general principal-angle, rank-nullity,
+file checks a concrete two-dimensional hidden-direction witness, diagonal
+line-strength ingredients for the same-spectrum example, and the isotropic
+negative control. The general principal-angle, rank-nullity,
 source-domain-count, and Courant--Fischer statements above are paper proofs;
 the deterministic Python tests provide executable checks for their finite
 matrix instances. No theorem is labelled Lean-verified beyond the exact
