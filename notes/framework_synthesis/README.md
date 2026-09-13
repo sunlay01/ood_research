@@ -18,6 +18,8 @@ Read in this order:
 10. `regularization_ood_bound_methodology.md` and
     `minimal_population_experiment.md` — the finite-dimensional mother bound
     and its falsification probe.
+11. `operator_gauge_master_theorem.md` — the candidate PSD-operator and convex-
+    gauge duality theorem that separates sensitivity from target coverage.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires

@@ -12,9 +12,10 @@ python notes/framework_synthesis/experiments/exposure_geometry_tests.py
 
 The script checks the `r^T K^dagger r` projection identity, quadratic scaling of
 `Var_e(R_e)` under `delta_e -> epsilon delta_e`, invariance of the pseudoinverse
-quantity, and separation of matched-V-REx source systems with different
-exposure rank. A failure is a reason to stop and repair the formalization before
-adding finite-sample or optimizer claims.
+quantity, fixed-physical-target recalibration (`rho_epsilon=rho/|epsilon|`), and
+separation of matched-V-REx source systems with different exposure rank. A
+failure is a reason to stop and repair the formalization before adding
+finite-sample or optimizer claims.
 
 Expected qualitative outcome:
 
@@ -27,7 +28,9 @@ For `rho=1` and `kappa=0.25`, the resulting support bounds are approximately
 `0.883883` and `0.707107`. The gap is generated solely by the unexposed
 direction, which scalar V-REx cannot see.
 
-This probe supports the distinction between source-risk variance and
-target-relevant sensitivity. It does not prove that V-REx, MMD, and DRO are
-already exact corollaries. That requires separate translation lemmas and an
-explicit target-family calibration theorem.
+The amplitude calibration is important: holding `rho` fixed changes the target
+class itself, so the apparent scaling of the exposed term is not a comparison
+of one physical deployment family. The probe supports the distinction between
+source-risk variance, learner sensitivity, and target coverage. It does not
+prove that V-REx, MMD, and DRO are already exact corollaries. That requires
+separate translation lemmas and an explicit target-family calibration theorem.

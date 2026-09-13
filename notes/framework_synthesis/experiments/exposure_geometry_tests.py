@@ -53,6 +53,22 @@ def amplitude_test() -> None:
     print(f"INFO amplitude baseline variance={variance0:.12g}, projection norm squared={q0:.12g}")
 
 
+def amplitude_calibration_test() -> None:
+    """Holding a physical target displacement fixed cancels amplitude scaling."""
+    base = np.array([[1.0, 0.0], [-1.0, 0.0], [0.0, 1.0], [0.0, -1.0]])
+    ell = np.array([1.0, 2.0]) / np.sqrt(5.0)
+    c0 = covariance(base)
+    rho0 = 1.7
+    exposed0 = float(np.sqrt(ell @ c0 @ ell))
+    bound0 = rho0 * exposed0
+    for eps in (0.1, 2.5):
+        c = covariance(eps * base)
+        rho_eps = rho0 / abs(eps)
+        bound_eps = rho_eps * float(np.sqrt(ell @ c @ ell))
+        check_close(f"fixed-target calibration eps={eps}", bound_eps, bound0)
+    print(f"INFO fixed physical target bound={bound0:.12g}; rho rescales as rho/|eps|")
+
+
 def rank_test() -> None:
     ell = np.array([1.0, 1.0]) / np.sqrt(2.0)
     rank1 = np.array([[1.0, 0.0], [-1.0, 0.0], [1.0, 0.0], [-1.0, 0.0]])
@@ -85,5 +101,6 @@ def projection_identity_test() -> None:
 if __name__ == "__main__":
     projection_identity_test()
     amplitude_test()
+    amplitude_calibration_test()
     rank_test()
     print("ALL TESTS PASSED")

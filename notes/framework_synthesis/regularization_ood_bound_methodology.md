@@ -1,8 +1,8 @@
 # A minimal methodology for regularization-to-OOD bounds
 
-Status: `PROBE / ADVANCE-TO-MAPPING`. This note gives a finite-dimensional
-population theorem and two falsification tests. It is not a universal theorem
-for all regularizers or all domain shifts.
+Status: `PROBE / ADVANCE-TO-MASTER-THEORY`. This note gives a finite-dimensional
+population theorem and falsification tests. It is not a universal theorem for
+all regularizers or all domain shifts.
 
 ## 1. Minimal population model
 
@@ -45,7 +45,42 @@ The identity follows from `D K^dagger D^T = Pi_range(D)` and
 `range(C_S) = range(D)`. It is a projection identity, not a new covariance
 estimator.
 
-## 2. Target shift and master support bound
+## 2. Operator/gauge master inequality
+
+The covariance-specific statement is an instance of a more general duality.
+For any positive semidefinite operator `A`, define
+
+```
+J_A(g) = ||A^{1/2} g||,
+J_A^circ(delta_parallel) = ||A^{dagger/2} delta_parallel||,
+```
+
+with `delta_parallel = Pi_range(A) delta`. Orthogonal decomposition and
+Cauchy-Schwarz yield
+
+```
+<g,delta>
+ <= J_A(g) J_A^circ(delta_parallel)
+    + ||Pi_ker(A) g|| ||Pi_ker(A) delta||.
+```
+
+The same statement can be written for any (possibly degenerate) convex gauge
+`J` using its polar `J^circ(delta) = sup_{J(g)<=1} <g,delta>`. If `J` has a
+nullspace, its polar is extended-real outside the corresponding dual domain;
+the explicit nullspace residual above is the finite-dimensional, auditable form.
+
+This separates three quantities that must not be conflated:
+
+* learner sensitivity `J_A(g_f)`;
+* target coverage radius `J_A^circ(delta_parallel)` (or a declared upper bound
+  `rho`); and
+* exposure-blind residual `||Pi_ker(A) delta_T||`, priced by `kappa`.
+
+For `A=C_S`, the previous mother bound is recovered. A regularizer can only be
+called a corollary after it supplies a particular `J` and a valid calibration
+of the target polar radius and nullspace budget.
+
+## 3. Target shift and master support bound
 
 Write the target displacement as
 
@@ -86,7 +121,7 @@ The last term is a representation/conditional-mismatch allowance. It cannot be
 removed using source exposure alone. The parameters `rho`, `kappa`, and target
 inclusion are target-family assumptions, not source-derived information.
 
-## 3. What the theorem does and does not unify
+## 4. What the theorem does and does not unify
 
 * **V-REx:** under the affine representation, its population penalty is exactly
   `<g_f,C_S g_f>`; empirical-to-population and non-affine translation errors need
@@ -104,14 +139,17 @@ Thus the current result is a common *bound template*, not yet a theorem that
 three algorithms are exact corollaries. The decisive next step is to prove
 method-specific `Omega -> (g_f, rho, kappa, epsilon_repr)` translation lemmas.
 
-## 4. Falsification tests
+## 5. Falsification tests
 
 The accompanying script `experiments/exposure_geometry_tests.py` checks:
 
 1. **Exposure amplitude.** Replacing every `delta_e` by `epsilon delta_e`
    changes `C_S` and risk variance by `epsilon^2`, while
-   `r^T K^dagger r` is invariant for nonzero `epsilon`. Low source-risk
-   variance therefore does not imply low intrinsic sensitivity.
+   `r^T K^dagger r` is invariant for nonzero `epsilon`. If `rho` is held fixed,
+   the declared ellipsoidal target set shrinks as well. For a fixed physical
+   target displacement, recalibration requires `rho_epsilon = rho/|epsilon|`
+   and exactly cancels the apparent scaling of the exposed term. Low
+   source-risk variance therefore does not imply low intrinsic sensitivity.
 2. **Exposure rank.** Two centered source systems have the same V-REx value for
    a chosen `ell`, but different `rank(C_S)`. With the same `(rho,kappa)`, the
    nullspace-aware target support is different. Any proposed certificate that
@@ -124,7 +162,9 @@ discarded by assumption.
 
 ## Decision
 
-The finite-dimensional affine mother bound survives these checks and is worth
-mapping to concrete regularizers. The novelty claim remains conditional: the
-operator and support algebra are standard; a contribution would require a
-non-vacuous, source-estimable translation theorem for multiple regularizers.
+The finite-dimensional affine mother bound and the operator/gauge inequality
+survive these checks. The next task is to calibrate sensitivity and target
+coverage before attempting any algorithm-specific mapping. The novelty claim
+remains conditional: the operator and support algebra are standard; a
+contribution would require a non-vacuous, source-estimable translation theorem
+for multiple regularizers.

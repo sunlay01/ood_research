@@ -61,12 +61,16 @@ falsification tests are documented in
 `notes/framework_synthesis/regularization_ood_bound_methodology.md` and
 `notes/framework_synthesis/minimal_population_experiment.md`. The tests verify
 the projection identity, amplitude scaling, and rank-sensitive nullspace support.
-This advances the probe to `ADVANCE-TO-MAPPING`; it does not establish that
+The candidate operator/gauge abstraction is documented in
+`notes/framework_synthesis/operator_gauge_master_theorem.md`; it separates
+learner sensitivity, target coverage radius, and exposure-blind residual. This
+advances the probe to `ADVANCE-TO-MASTER-THEORY`; it does not establish that
 V-REx, MMD, and DRO are exact corollaries.
 
 ## Next authorized step
 
-Choose one concrete method-translation route, preferably a bounded-loss MMD
-radius lemma or a restricted V-REx translation into the affine task functional.
-Keep `proofs/active/` empty until the local theorem is independently audited and
-promoted.
+First audit the operator/gauge theorem and calibrate `rho` and `kappa` for a
+fixed physical target family. Only then choose one concrete method-translation
+route, preferably a bounded-loss MMD radius lemma or a restricted V-REx
+translation into the affine task functional. Keep `proofs/active/` empty until
+the local theorem is independently audited and promoted.
