@@ -19,10 +19,15 @@ Current scope:
   certificate.
 - `Stage10/Basic.lean`: concrete two-dimensional hidden-direction, same-spectrum
   line-strength, and isotropic negative-control witnesses.
+- `Stage11/Basic.lean`: exact restricted supervised quadratic-state expansion
+  and empirical linear-state risk identity for squared-loss linear regression.
 
 The files currently use explicit Euclidean coordinates where this keeps the
-formal proof auditable. The control-composition lemma is formalized, while the
-general PSD domination, principal-angle, rank-nullity, source-domain-count, and
+formal proof auditable. Stage 11's exact quadratic identities are machine
+checked; its Taylor remainder, coordinate/gauge audit, identifiability limits,
+and exact-support comparison remain paper proofs with deterministic executable
+witnesses. The control-composition lemma is formalized, while the general PSD
+domination, principal-angle, rank-nullity, source-domain-count, and
 Courant--Fischer bounds remain scientific obligations documented in the Stage 9
 and Stage 10 notes. No unproved V-REx/MMD/DRO mapping is formalized.
 

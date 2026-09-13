@@ -89,11 +89,30 @@ complete on paper and has deterministic matrix checks in
 `notes/framework_synthesis/experiments/coverage_orientation_tests.py`; its
 concrete witnesses are also machine-checked under `lean/OodTheoryVerification/Stage10`.
 
+## Stage 11 risk-representation hard gate
+
+The restricted finite-dimensional audit is complete and recorded in
+[`notes/framework_synthesis/risk_representation_hard_gate.md`](notes/framework_synthesis/risk_representation_hard_gate.md), with deterministic checks in
+[`notes/framework_synthesis/experiments/risk_representation_tests.py`](notes/framework_synthesis/experiments/risk_representation_tests.py).
+The exact supervised quadratic state `(E[XX^T], E[XY], E[Y^2])` passes,
+including conditional/label information and zero residual in the declared
+model. The overall decision is **`REVISE`**, not `ADVANCE`: Euclidean split
+quantities such as `N_A` and pseudoinverse radii are not invariant under
+arbitrary non-orthogonal coordinate changes. The theorem interface must
+therefore declare its metric/gauge or be rewritten in a coordinate-covariant
+form; nullspace sensitivity is also not source-risk identifiable without extra
+structure.
+
+`lean/OodTheoryVerification/Stage11/Basic.lean` machine-checks the exact
+restricted squared-loss state/risk identities. Taylor bounds, coordinate-gauge
+claims, identifiability counterexamples, and exact-support comparisons remain
+paper proofs plus deterministic executable witnesses.
+
 ## Next authorized step
 
-Pass the Stage 11 risk-representation hard gate in a restricted finite-dimensional
-exact model. Keep the Stage 10 orientation theorem fixed; do not start algorithm
-mapping or new regularizer design.
+Revise and re-audit the Stage 11 metric/gauge interface. Keep the Stage 10
+orientation theorem fixed; do not start Stage 12, algorithm mapping, or new
+regularizer design until the revision passes.
 Keep `proofs/active/` empty until any local theorem is independently audited and
 promoted. Do not begin V-REx/MMD/DRO mapping or a new regularizer before Stage
 12.5 exact novelty audit is scheduled after the population theorem.

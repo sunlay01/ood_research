@@ -115,11 +115,14 @@ deterministic amplitude/rank probes, and controlled Stage 9 coverage conditions
 are complete. Stage 10 is also complete: its principal-angle, rank/domain-count,
 same-spectrum orientation, fixed-spectrum min-max, and negative-control results
 are recorded in `notes/framework_synthesis/coverage_orientation_theorem.md`.
-The next gate is the restricted Stage 11 risk-representation theorem. After the
-population theorem is complete, Stage 12.5 exact novelty audit is mandatory
-before common corollaries or any new regularizer. No algorithm-specific mapping,
-large benchmark, or universal novelty claim should be started before these gates
-pass.
+Stage 11 has now been audited in a restricted finite-dimensional supervised
+model. The exact quadratic state passes, but the overall hard gate is
+`REVISE`: the metric/gauge interface of the split certificate must be made
+explicit and coordinate-covariant, and the non-identifiability of nullspace
+sensitivity must remain visible. Until that revision is audited, do not start
+the Stage 12 population master theorem, algorithm-specific mapping, large
+benchmarks, or a new regularizer. After Stage 12 is complete, Stage 12.5 exact
+novelty audit remains mandatory before any bound-derived method.
 
 Authoritative working notes:
 
@@ -132,4 +135,6 @@ notes/framework_synthesis/physical_target_coverage.md
 notes/framework_synthesis/experiments/physical_target_coverage_tests.py
 notes/framework_synthesis/coverage_orientation_theorem.md
 notes/framework_synthesis/experiments/coverage_orientation_tests.py
+notes/framework_synthesis/risk_representation_hard_gate.md
+notes/framework_synthesis/experiments/risk_representation_tests.py
 ```

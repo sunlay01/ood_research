@@ -22,6 +22,10 @@ Read in this order:
     gauge duality theorem that separates sensitivity from target coverage.
 12. `coverage_orientation_theorem.md` — Stage 10's target-relative orientation,
     rank/domain-count barriers, fixed-spectrum optimization, and negative controls.
+13. `risk_representation_hard_gate.md` and
+    `experiments/risk_representation_tests.py` — Stage 11's restricted exact
+    supervised representation, identifiability attacks, residual audit, and
+    metric/gauge revision gate.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
@@ -30,4 +34,6 @@ method-specific `Omega -> B` translation lemmas.
 The exposure-geometry files remain a `PROBE`: the finite-dimensional affine
 support bound survives deterministic checks, but the typed calculus is not
 superseded until non-vacuous method translation lemmas and an out-of-sample
-optimizer mapping are established.
+optimizer mapping are established. Stage 11 is currently `REVISE`: its exact
+quadratic state is valid, but the split geometry needs an explicit metric/gauge
+interface before the population master theorem.
