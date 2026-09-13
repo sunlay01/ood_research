@@ -34,6 +34,10 @@ Read in this order:
     `experiments/stage12_population_theorem_tests.py` — the finite-dimensional
     theorem package: exact transfer, sharp support, quotient ambiguity,
     blind-direction impossibility, and exposed-span domination.
+16. `stage13_regularizer_translation.md` and
+    `experiments/stage13_regularizer_translation_tests.py` — method-level
+    translations, mechanism typing, cross-method consequences, and the
+    `PARTIAL-UNIFICATION` gate.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
@@ -48,3 +52,6 @@ is explicitly subordinate to a declared metric/gauge, while support and
 annihilator statements remain coordinate-free.
 Stage 12 is now complete with decision `ADVANCE-TO-STAGE-12.5`; only the exact
 novelty audit is authorized next.
+Stage 13 is complete with decision `PARTIAL-UNIFICATION`: several methods share
+the same state and exact/restricted bridges, but IRMv1 and Fishr prevent a
+universal exact claim.

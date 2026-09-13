@@ -27,6 +27,10 @@ Current scope:
 - `Stage12/Basic.lean`: exact two-source affine transfer identity; general
   support minimality, quotient barriers, and exposure domination remain paper
   theorems with deterministic witnesses.
+- `Stage13/Basic.lean`: Lean-checked V-REx exposure identity, finite two-group
+  convex-mixture/max-risk algebra, CORAL label-shift witness, ideal-IRM
+  stationarity identity, and a blind-direction witness. General RKHS,
+  optimization, and Fishr higher-moment claims remain paper-level.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine

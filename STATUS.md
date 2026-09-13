@@ -150,12 +150,31 @@ theorem. The exact transfer algebra has a Lean witness in
 annihilator, quotient, and convex-geometry arguments remain paper proofs with
 deterministic tests.
 
+## Stage 13 regularizer translation gate
+
+Stage 13 is complete in the finite-dimensional scope and recorded in
+[`notes/framework_synthesis/stage13_regularizer_translation.md`](notes/framework_synthesis/stage13_regularizer_translation.md), with deterministic checks in
+[`notes/framework_synthesis/experiments/stage13_regularizer_translation_tests.py`](notes/framework_synthesis/experiments/stage13_regularizer_translation_tests.py).
+The common affine supervised state is reused by ERM, V-REx, GroupDRO, MM-REx,
+fixed-state MMD, CORAL, and restricted ideal IRM. V-REx and finite-group
+GroupDRO have exact translation theorems; MM-REx is exact for a declared
+bounded affine coefficient set. IRMv1 is a fixed-scale relaxation, and Fishr
+requires higher-order derivative moments outside the minimal state.
+
+The decision is **`PARTIAL-UNIFICATION`**: this is stronger than a notation-only
+wrapper but does not establish a universal exact theory for all methods.
+`lean/OodTheoryVerification/Stage13/Basic.lean` machine-checks the exact
+V-REx exposure identity, finite two-group convex-mixture/max-risk algebra,
+CORAL label-shift witness, ideal-IRM stationarity, and a blind-direction
+witness. General RKHS, learned-representation, quotient, optimization, and
+Fishr higher-moment bridges remain paper proofs with deterministic tests.
+
 ## Next authorized step
 
-Proceed only to **Stage 12.5 exact novelty audit** of the exact operator,
-support, quotient, and exposure-domination structure. Do not map V-REx, MMD,
-DRO, IRM, or other algorithms, design a new regularizer, or run benchmarks
-until that audit is complete.
+Do not claim `UNIFICATION-PASS`, design a new regularizer, or run large
+benchmarks. The next work must narrow and sharpen the surviving common-state
+claim, or separately formalize a richer-state extension for Fishr/learned maps;
+any new method remains blocked until a new gate is defined.
 Keep `proofs/active/` empty until any local theorem is independently audited and
-promoted. Do not begin V-REx/MMD/DRO mapping or a new regularizer before Stage
-12.5 exact novelty audit is scheduled after the population theorem.
+promoted. The Stage 12.5 novelty audit is complete; any future new method must
+still pass a separately defined theorem and novelty gate.

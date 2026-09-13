@@ -122,9 +122,11 @@ quotient are the coordinate-free backbone; metric-dependent split quantities
 are subordinate corollaries. Stage 12 now supplies the population theorem
 package: exact transfer identity, sharp support minimality, source-observable
 quotient, blind-direction impossibility, and exposed-span seminorm domination.
-The revised gate is `ADVANCE-TO-STAGE-12.5`, meaning only the exact novelty
-audit is authorized next. Algorithm-specific mapping, large benchmarks, and
-new regularizer design remain blocked.
+Stage 13 has now tested the method translations. The result is
+`PARTIAL-UNIFICATION`: risk-level methods share exact/restricted translations,
+fixed-state MMD/CORAL and ideal IRM have explicit restricted bridges, while
+IRMv1 remains a surrogate and Fishr requires a richer state. New regularizer
+design and large benchmarks remain blocked.
 
 Authoritative working notes:
 
@@ -143,4 +145,6 @@ notes/framework_synthesis/stage11r_metric_gauge_revision.md
 notes/framework_synthesis/experiments/risk_representation_revision_tests.py
 notes/framework_synthesis/stage12_population_master_theorem.md
 notes/framework_synthesis/experiments/stage12_population_theorem_tests.py
+notes/framework_synthesis/stage13_regularizer_translation.md
+notes/framework_synthesis/experiments/stage13_regularizer_translation_tests.py
 ```
