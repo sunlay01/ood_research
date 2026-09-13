@@ -32,11 +32,14 @@ semantics. It is not the inner unifying theorem.
    `U_phys={delta: delta^T Q^{-1} delta <= 1}` or a bounded target subspace.
    Define this family before selecting an operator and keep it external to
    source-derived statistics.
-2. **Coverage calibration.** For a source-derived positive operator `A`, compute
-   `rho_A(U_phys)` and `kappa_A(U_phys)`. Prove finiteness, scale invariance for
-   a fixed physical family, and when the support is exact. Distinguish the exact
-   product-set identity for `U_A(rho,kappa)` from the outer-approximation bound
-   for an externally defined `U_phys`.
+2. **Coverage control and non-vacuity (Stage 9 hard gate).** Finiteness is not
+   enough. For the fixed physical family, derive explicit small upper bounds on
+   `rho_A` and `kappa_A` from coverage domination (`Q <= cA`), principal-angle
+   alignment, restricted excitation, or a shift generator `B`. Require the
+   resulting transfer term `rho_A S_A + kappa_A N_A + 2 epsilon_repr` to be below
+   a pre-registered tolerance (and below one for `[0,1]` losses). Keep target
+   structure, learner sensitivity, and source/augmentation design as separate
+   control paths.
 3. **Geometry orientation.** Test source operators with matched rank, spectrum,
    trace, and condition number but different orientation relative to target
    shifts. Diversity counts alone are not accepted as coverage evidence.
@@ -108,15 +111,15 @@ semantics. It is not the inner unifying theorem.
 ### Current position
 
 The finite-dimensional affine mother bound, PSD-operator/gauge inequality,
-deterministic amplitude/rank probes, and Stage 9 physical target coverage
-calibration are complete. Stage 9 passed for compact finite-dimensional ball and
-ellipsoid families, including exact-vs-outer support, scale calibration,
-orientation sensitivity, and ideal-vs-stable geometry. The current priority is
-the Stage 10 orientation theorem, followed by the **risk-representation hard
-gate**. After the population theorem is complete, Stage 12.5 exact novelty audit
-is mandatory before common corollaries or any new regularizer. No
-algorithm-specific mapping, large benchmark, or universal novelty claim should
-be started before these gates pass.
+deterministic amplitude/rank probes, and the finiteness portion of Stage 9 are
+complete. Stage 9 is now a **control-required** gate: compact ball and ellipsoid
+families must additionally receive explicit small `rho_A`/`kappa_A` bounds and a
+non-vacuity check. The current priority is to audit domination, excitation,
+generator, and learner-sensitivity conditions before Stage 10. After the
+population theorem is complete, Stage 12.5 exact novelty audit is mandatory
+before common corollaries or any new regularizer. No algorithm-specific mapping,
+large benchmark, or universal novelty claim should be started before these gates
+pass.
 
 Authoritative working notes:
 

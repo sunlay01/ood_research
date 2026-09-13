@@ -67,18 +67,29 @@ learner sensitivity, target coverage radius, and exposure-blind residual. This
 advances the probe to `ADVANCE-TO-MASTER-THEORY`; it does not establish that
 V-REx, MMD, and DRO are exact corollaries.
 
-Stage 9 physical target coverage calibration is now complete and recorded in
+Stage 9 physical target coverage calibration is recorded in
 `notes/framework_synthesis/physical_target_coverage.md`, with deterministic
 checks in `notes/framework_synthesis/experiments/physical_target_coverage_tests.py`.
 The compact-family finiteness, exact product support, external-family outer
 bound, scale calibration, orientation precursor, and ideal/stable geometry
-distinction all pass. Stage 9 decision: `ADVANCE` to the coverage-orientation
-theorem; algorithm mapping and new regularizer design remain blocked.
+distinction pass. The scientific gate has been upgraded: finiteness alone is
+insufficient, so Stage 9 is currently `REVISE / CONTROL-REQUIRED` until explicit
+small upper bounds on `rho_A` and `kappa_A` yield a non-vacuous transfer term.
+Algorithm mapping and new regularizer design remain blocked.
+
+The first machine-checked Stage 9 slice is under `lean/`: finite-dimensional
+range/kernel facts, the exact product-class support identity, scale calibration,
+and the monotone control/non-vacuity composition lemma all pass `lake build` on
+the local Lean 4.33.1 + mathlib cache. The general PSD-domination,
+principal-angle, and shift-generator theorems remain explicit proof obligations;
+they are not claimed as Lean-verified yet.
 
 ## Next authorized step
 
-Prove the Stage 10 coverage-orientation theorem, then pass the Stage 11
-risk-representation hard gate in a restricted finite-dimensional exact model.
+Instantiate and audit Stage 9 coverage-domination, excitation, shift-generator,
+and non-vacuity conditions first. Only after that, prove the Stage 10
+coverage-orientation theorem and pass the Stage 11 risk-representation hard gate
+in a restricted finite-dimensional exact model.
 Keep `proofs/active/` empty until any local theorem is independently audited and
 promoted. Do not begin V-REx/MMD/DRO mapping or a new regularizer before Stage
 12.5 exact novelty audit is scheduled after the population theorem.

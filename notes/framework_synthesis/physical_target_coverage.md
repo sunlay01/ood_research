@@ -1,8 +1,8 @@
 # Stage 9: physical target coverage calibration
 
-Status: `ADVANCE` for Stage 9 only. The results below authorize the orientation
-precursor and Stage 10. They do not authorize algorithm mapping or a new
-regularizer.
+Status: `REVISE / CONTROL-REQUIRED`. Finiteness and support algebra are proved,
+but Stage 9 is not complete until the coverage radii admit explicit
+non-vacuous upper bounds for at least one nontrivial physical family.
 
 ## 1. Status and scientific question
 
@@ -250,7 +250,94 @@ The deterministic checks are in
 scale calibration, ball/ellipsoid formulas, orientation, loose outer support,
 and ridge/cutoff sanity.
 
-## 12. Scientific interpretation
+## 12. Coverage controllability and non-vacuity
+
+Finiteness alone is insufficient. The quantity entering the risk bound is
+
+```text
+rho_A S_A(f) + kappa_A N_A(f),
+S_A(f)=||A^(1/2) g_f||,
+N_A(f)=||Pi_ker(A) g_f||.
+```
+
+The following sufficient conditions make the radii controllable.
+
+### Ellipsoid domination
+
+For the externally fixed ellipsoid `U_Q`, if
+
+```text
+Q <= c A
+```
+
+in the PSD order, then `range(Q) subseteq range(A)`, hence
+`kappa_A(U_Q)=0` and
+
+```text
+rho_A(U_Q)^2 = lambda_max(A^dagger/2 Q A^dagger/2) <= c.
+```
+
+Thus `rho_A <= sqrt(c)`. This is a coverage-domination condition, not a
+consequence of having many source domains. It says every target-relevant
+direction is excited by the source operator at least up to a common factor.
+
+### Subspace-ball orientation and excitation
+
+For `U_ball={delta in V_T: ||delta||<=R}`,
+
+```text
+kappa_A(U_ball) = R ||Pi_ker(A) P_V||_op <= R eta
+```
+
+whenever the principal-angle mismatch is bounded by `eta`. If `V_T` is a
+reducing subspace for `A` and `A|_{V_T} >= alpha I`, then
+
+```text
+rho_A(U_ball) <= R / sqrt(alpha),
+kappa_A(U_ball)=0.
+```
+
+The reducing-subspace qualification is essential; a bare ambient inequality
+without an invariance condition does not automatically control the pseudoinverse
+on `V_T`.
+
+### Shift-generator form
+
+If the physical mechanism is `delta=B z`, `||z||<=1`, then
+
+```text
+rho_A = ||A^dagger/2 Pi_range(A) B||_op,
+kappa_A = ||Pi_ker(A) B||_op.
+```
+
+If `B B^T <= c A`, then `range(B) subseteq range(A)`, `kappa_A=0`, and
+`rho_A <= sqrt(c)`. This expresses coverage directly as a relation between the
+source exposure operator and the physical shift generator.
+
+### Non-vacuity gate
+
+For a loss in `[0,1]`, a target-risk certificate is non-vacuous only if
+
+```text
+bar_R_S + rho_A S_A(f) + kappa_A N_A(f) + 2 epsilon_repr < 1.
+```
+
+A stronger pre-registered requirement is
+
+```text
+rho_A S_A(f) + kappa_A N_A(f) + 2 epsilon_repr <= epsilon_transfer,
+```
+
+where `epsilon_transfer` is fixed before comparing regularizers. If no explicit
+coverage or learner-side condition achieves this, the theorem correctly reports
+non-identifiability but does not provide a useful certificate.
+
+These conditions separate control paths: target-family structure can bound
+`rho_A,kappa_A`; learner design can reduce `S_A,N_A`; source or augmentation
+design can change `A`. None of these should be conflated with a source-only
+estimate of an unobserved target law.
+
+## 13. Scientific interpretation
 
 The quantities are finite and interpretable for compact finite-dimensional target
 families, but they remain target-semantic calibrations rather than source-only
@@ -264,19 +351,19 @@ physical family yields an outer bound, potentially arbitrarily loose. This
 distinction prevents the support algebra from being mistaken for a target-family
 theorem.
 
-## 13. Decision gate
+## 14. Decision gate
 
-**ADVANCE.** Stage 9 proves finite, explicit, and falsifiable coverage geometry
-for the required ball and ellipsoid families; proves the exact product support
-identity and the external-family outer bound; establishes scale calibration;
-demonstrates orientation sensitivity beyond rank/trace; and shows that stable
-geometry preserves, rather than erases, ideal non-identifiability semantics.
+**REVISE.** Stage 9 has proved finite, explicit, and falsifiable coverage
+geometry, exact product support, external-family outer bounds, scale calibration,
+orientation sensitivity, and ideal/stable semantics. However, the new scientific
+gate requires an explicit small-coverage sufficient condition and a non-vacuity
+check. The domination, excitation, and generator conditions above provide the
+candidate routes; they must be instantiated and audited before Stage 10.
 
-Stage 10 (coverage-orientation theorem) is authorized. Algorithm mapping,
-regularizer invention, finite-sample concentration, and universal-DG claims are
-not authorized by this decision.
+Stage 10, algorithm mapping, regularizer invention, finite-sample concentration,
+and universal-DG claims are not authorized yet.
 
-## 14. Final scientific verdict
+## 15. Final scientific verdict
 
 1. Proved: compact-family finiteness, zero-kernel equivalence, exact product support,
    outer physical-family bound, scale calibration, and ball/ellipsoid formulas.
@@ -289,4 +376,5 @@ not authorized by this decision.
    for an overly broad target family.
 8. Orientation matters beyond rank and trace.
 9. Stable geometry preserves the ideal meaning only when reported alongside it.
-10. Stage 10 is authorized; no algorithm mapping is authorized yet.
+10. Stage 10 is not yet authorized; first pass the controllability and
+    non-vacuity gate.

@@ -163,6 +163,57 @@ def ridge_cutoff_test() -> None:
     check_close("cutoff exposed radius", rho_cut, 0.0)
 
 
+def domination_control_test() -> None:
+    """Q <= c A gives rho <= sqrt(c) and zero kernel coverage."""
+    a = np.diag([4.0, 2.0])
+    q = np.diag([1.0, 0.5])
+    c = 0.25
+    q_half = psd_sqrt(q)
+    rho = np.linalg.svd(psd_pinv_sqrt(a) @ q_half, compute_uv=False)[0]
+    kappa = np.linalg.svd(projector_kernel(a) @ q_half, compute_uv=False)[0]
+    if not np.all(np.linalg.eigvalsh(c * a - q) >= -TOL):
+        raise AssertionError("Q <= cA domination premise failed")
+    if rho > np.sqrt(c) + TOL or kappa > TOL:
+        raise AssertionError("domination did not control rho/kappa")
+    check_close("domination rho upper bound", rho, 0.5)
+    check_close("domination kappa", kappa, 0.0)
+
+
+def excitation_control_test() -> None:
+    """A reducing target subspace with A|V >= alpha I controls rho."""
+    a = np.diag([4.0, 3.0, 0.0])
+    # V = span(e1,e2) is reducing, alpha=3, R=2.
+    basis = np.eye(3)[:, :2]
+    alpha, radius = 3.0, 2.0
+    rho = radius * np.linalg.svd(psd_pinv_sqrt(a) @ basis, compute_uv=False)[0]
+    kappa = radius * np.linalg.svd(projector_kernel(a) @ basis, compute_uv=False)[0]
+    check_close("excitation rho bound", rho, radius / np.sqrt(alpha))
+    check_close("excitation kappa", kappa, 0.0)
+
+
+def generator_control_test() -> None:
+    """A shift generator B with BB^T <= cA has bounded coverage."""
+    a = np.diag([4.0, 1.0, 0.0])
+    b = np.diag([1.0, 0.5, 0.0])
+    c = 0.25
+    if not np.all(np.linalg.eigvalsh(c * a - b @ b.T) >= -TOL):
+        raise AssertionError("generator domination premise failed")
+    rho = np.linalg.svd(psd_pinv_sqrt(a) @ b, compute_uv=False)[0]
+    kappa = np.linalg.svd(projector_kernel(a) @ b, compute_uv=False)[0]
+    if rho > np.sqrt(c) + TOL or kappa > TOL:
+        raise AssertionError("generator condition did not control coverage")
+    check_close("generator rho upper bound", rho, 0.5)
+    check_close("generator kappa", kappa, 0.0)
+
+
+def nonvacuity_test() -> None:
+    bar_risk, rho, sensitivity, kappa, null_sensitivity, repr_err = 0.2, 0.5, 0.4, 0.0, 0.0, 0.05
+    transfer = rho * sensitivity + kappa * null_sensitivity + 2.0 * repr_err
+    if not bar_risk + transfer < 1.0:
+        raise AssertionError("constructed certificate should be non-vacuous")
+    check_close("non-vacuous transfer budget", transfer, 0.3)
+
+
 def counterexample_summary() -> None:
     # F1: U=R^2 and A=I gives rho=+infinity.
     print("INFO F1 unbounded family: U=R^2, A=I => rho_A=+infinity")
@@ -179,5 +230,9 @@ if __name__ == "__main__":
     orientation_test()
     loose_outer_bound_test()
     ridge_cutoff_test()
+    domination_control_test()
+    excitation_control_test()
+    generator_control_test()
+    nonvacuity_test()
     counterexample_summary()
     print("ALL STAGE-9 TESTS PASSED")
