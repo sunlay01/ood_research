@@ -10,7 +10,7 @@ This file records live checks performed on 2026-09-13, after review of commit `2
 | Blanchard et al. 2011 | NeurIPS proceedings | Title is *Generalizing from Several Related Classification Tasks to a New Unlabeled Sample*; authors Blanchard, Lee, Scott. The old entry had conflated this with the 2021 JMLR extension. |
 | Blanchard et al. 2021 | JMLR v22 | Separate *Domain Generalization by Marginal Transfer Learning* entry added. |
 | Germain et al. | ScienceDirect PII `S0925231219315486`; Crossref title query | Final article is Neurocomputing 379 (2020), authors Germain, Habrard, Laviolette, Morvant, DOI `10.1016/j.neucom.2019.10.105`. |
-| Rivasplata et al. 2019 | NeurIPS proceedings | Record is *PAC-Bayes Bounds for Stable Algorithms with Instance-Dependent Priors*, not PAC-Bayes domain adaptation. Label corrected. |
+| Rivasplata et al. 2018 | NeurIPS proceedings | Record is *PAC-Bayes Bounds for Stable Algorithms with Instance-Dependent Priors*, not PAC-Bayes domain adaptation. Label corrected. |
 | Duchi & Namkoong | Crossref `10.1214/20-AOS2004` | AoS 49(3), 2021, DOI verified; old `10.1214/17-AOS1561` was unrelated. |
 | Lai & Wang 2024 | PMLR v235 page `lai24c` | Title, authors, pages 25913--25935, abstract, and claim “IRM is TV-l2 in classifier variable” verified from the publisher page. |
 | Wang, Wu & Zhang 2024 | Crossref `10.1609/aaai.v38i14.29497` | AAAI 38(14) title/authors/year/DOI verified. |

@@ -5,7 +5,7 @@
 | Citation | Link | Why / question | Inspect | Priority |
 |---|---|---|---|---|
 | Ben-David et al. (2010) | https://doi.org/10.1007/s10994-009-5152-4 | DA decomposition | Theorem 2, HDeltaH and lambda | high |
-| Mansour, Mohri & Rostamizadeh (2009) | https://proceedings.mlr.press/v5/mansour09a.html | loss-class discrepancy | discrepancy definition/theorem | high |
+| Mansour, Mohri & Rostamizadeh (2009) | https://arxiv.org/abs/0902.3430 | loss-class discrepancy | discrepancy definition/theorem | high |
 | Blanchard, Lee & Scott (2011) | https://papers.nips.cc/paper/4312-generalizing-from-several-related-classification-tasks-to-a-new-unlabeled-sample | source-only DG family | domain sampling assumptions | high |
 | Blanchard et al. (2021) | https://jmlr.org/papers/v22/20-305.html | marginal transfer extension | admissible marginal family | high |
 | Gretton et al. (2012) | https://jmlr.org/papers/v13/gretton12a.html | MMD/RKHS proof language | concentration theorem | high |
@@ -23,7 +23,7 @@
 |---|---|---|---|
 | Arjovsky et al. (2019) | https://arxiv.org/abs/1907.02893 | ideal IRM vs IRMv1 Eq. 3 | high |
 | Rosenfeld et al. (2021) | https://openreview.net/forum?id=BbNIbVPJ-42 | IRM counterexamples/failure | high |
-| Kamath et al. (2021) | https://arxiv.org/abs/2106.05200 | causal identifiability of IRM | high |
+| Kamath, Tangella, Sutherland & Srebro (2021) | https://proceedings.mlr.press/v130/kamath21a.html | limits of practical IRMv1 / invariance capture | high |
 | Krueger et al. (2021) | https://proceedings.mlr.press/v139/krueger21a.html | V-REx extrapolation | high |
 | Rame et al. (2022) | https://proceedings.mlr.press/v162/rame22a.html | Fishr gradient variance object | medium |
 | Sun & Saenko (2016) | https://arxiv.org/abs/1607.01719 | CORAL moment object | medium |

@@ -24,7 +24,7 @@ VC/Rademacher/Gaussian complexity, symmetrization, contraction, and Bernstein/Ho
 
 ### 4. PAC-Bayes
 
-Change of measure plus a KL variational inequality gives a high-probability bound on Gibbs risk. DA versions add a domain-disagreement/IPM term (Germain et al. 2020; Rivasplata et al. 2019). Source-only DG requires a prior/domain model or a meta-distribution; the posterior is a certificate, not automatically the output of a deep optimizer. The KL and disagreement terms are source-estimable only under the chosen domain formalism.
+Change of measure plus a KL variational inequality gives a high-probability bound on Gibbs risk. DA versions add a domain-disagreement/IPM term (Germain et al. 2020). Rivasplata et al. (2018) is a separate PAC-Bayes + algorithmic-stability result, not a DA bound. Source-only DG requires a prior/domain model or a meta-distribution; the posterior is a certificate, not automatically the output of a deep optimizer. The KL and disagreement terms are source-estimable only under the chosen domain formalism.
 
 ### 5. Stability
 

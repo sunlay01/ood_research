@@ -8,7 +8,7 @@ Arjovsky et al. (2019, Eq. 2) define ideal IRM as finding a representation `Phi`
 
 * The original paper's formal principle is population-level and uses a constrained argmin; experiments optimize IRMv1. Its theorem-like claims are restricted toy/linear constructions, not a finite-sample target-risk theorem for arbitrary deep IRMv1 training.
 * Rosenfeld et al. (2021, “The Risks of Invariant Risk Minimization”) construct linear counterexamples showing that IRM can prefer a noncausal or non-invariant solution under finite environments and finite penalty. This is a failure/lower-bound analysis of the idealized objective, not a generalization guarantee for SGD on IRMv1.
-* Kamath et al. (2021, “Does Invariant Risk Minimization Capture Causal Variables?”) show that even population IRM can fail to identify causal variables without additional assumptions. The proof studies invariance constraints and linear predictors, not deep optimizer dynamics.
+* Kamath et al. (2021, “Does Invariant Risk Minimization Capture Invariance?”) show that even population IRM can fail to capture natural invariances without additional assumptions. The proof studies invariance constraints and linear predictors, not deep optimizer dynamics.
 * Ahuja et al. (2021) and related invariant-learning theory use algebraic invariance/optimality conditions, restricted linear models, or identifiability assumptions. The gradient penalty is either absent from the theorem or represented through the corresponding population constraint.
 
 ## Three theory treatments of gradient-based IRM
