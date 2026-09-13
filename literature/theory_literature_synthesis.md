@@ -4,6 +4,8 @@
 
 The literature supports a structural taxonomy: (i) environment-risk consistency (`Var_e R_e`, worst-group risk); (ii) invariant optimality/conditional mechanisms; (iii) optimizer statistics (gradient covariance); (iv) feature moments and IPMs; (v) RKHS norms/mean embeddings; (vi) capacity, margin, spectral and Jacobian control; (vii) DRO/minimax uncertainty sets; (viii) causal invariance and anchor shifts; (ix) bilevel/meta objectives; and (x) posterior/PAC-Bayes complexity. Several are alternative estimators of the same high-level shift principle, but they are not interchangeable in a theorem.
 
+Recent verified additions sharpen the map rather than overturn it: Lai & Wang (2024) reinterpret the IRM gradient penalty as a TV functional; Wang et al. (2024) give a training-domain-count lower-bound perspective; Cao & Chen (2024) use PAC-Bayes for Mixup-induced extrapolation; Shui et al. (2022) provide an explicit INV framework for several invariance notions. These papers all state additional structure instead of claiming assumption-free source-only transfer.
+
 ## 2. Dominant proof architectures
 
 `risk decomposition -> discrepancy / complexity / robust dual / stability -> concentration -> oracle or approximation term` is the dominant pattern. DA uses `source + discrepancy + joint error`; DG replaces target discrepancy by a meta-distribution or admissible-family assumption; DRO replaces discrepancy by a chosen uncertainty set; RKHS and norm methods make the empirical-to-population step explicit. Stability controls sample perturbations, not domain shift, unless paired with a shift term.

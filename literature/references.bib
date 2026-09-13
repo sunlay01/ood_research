@@ -1,14 +1,21 @@
 @article{BenDavid2010,
-  author={Ben-David, Shai and Blitzer, John and Crammer, Koby and Pereira, Fernando},
-  title={A theory of learning from different domains}, journal={Machine Learning}, year={2010}, volume={79}, pages={151--175}, doi={10.1007/s10994-009-0130-7}
+  author={Ben-David, Shai and Blitzer, John and Crammer, Koby and Kulesza, Alex and Pereira, Fernando and Vaughan, Jennifer Wortman},
+  title={A theory of learning from different domains}, journal={Machine Learning}, year={2010}, volume={79}, pages={151--175}, doi={10.1007/s10994-009-5152-4}
+}
+@book{Vapnik1998,
+  author={Vapnik, Vladimir N.}, title={Statistical Learning Theory}, publisher={Wiley}, year={1998}
 }
 @inproceedings{Mansour2009,
   author={Mansour, Yishay and Mohri, Mehryar and Rostamizadeh, Afshin},
   title={Domain adaptation: Learning bounds and algorithms}, booktitle={COLT}, year={2009}, url={https://proceedings.mlr.press/v5/mansour09a.html}
 }
 @inproceedings{Blanchard2011,
-  author={Blanchard, Gilles and Desheures, Olivier and Loubes, Jean-Michel and others},
-  title={Domain generalization by marginal transfer learning}, booktitle={NIPS Workshop}, year={2011}, doi={10.1007/978-3-642-33486-3_3}
+  author={Blanchard, Gilles and Lee, Gyemin and Scott, Charles},
+  title={Generalizing from several related classification tasks to a new unlabeled sample}, booktitle={NeurIPS}, year={2011}, url={https://papers.nips.cc/paper/4312-generalizing-from-several-related-classification-tasks-to-a-new-unlabeled-sample}
+}
+@article{Blanchard2021,
+  author={Blanchard, Gilles and Deshmukh, Aniket A. and Dogan, U. and Lee, Gyemin and Scott, C.},
+  title={Domain generalization by marginal transfer learning}, journal={Journal of Machine Learning Research}, year={2021}, volume={22}, number={2}, pages={1--55}, url={https://jmlr.org/papers/v22/20-305.html}
 }
 @article{Gretton2012,
   author={Gretton, Arthur and Borgwardt, Karsten and Rasch, Malte and Schölkopf, Bernhard and Smola, Alexander},
@@ -20,14 +27,17 @@
 @article{Bartlett2017,
   author={Bartlett, Peter L. and Foster, Dylan J. and Telgarsky, Matus}, title={ Spectrally-normalized margin bounds for neural networks}, journal={PNAS}, year={2017}, volume={114}, number={30}, pages={E6158--E6167}, doi={10.1073/pnas.1618451114}
 }
-@article{Duchi2016,
-  author={Duchi, John C. and Namkoong, Hongseok}, title={Learning models with uniform performance via distributionally robust optimization}, journal={Annals of Statistics}, year={2018}, doi={10.1214/17-AOS1561}
+@article{Duchi2021,
+  author={Duchi, John C. and Namkoong, Hongseok}, title={Learning models with uniform performance via distributionally robust optimization}, journal={Annals of Statistics}, year={2021}, volume={49}, number={3}, pages={1378--1406}, doi={10.1214/20-AOS2004}
 }
 @article{Esfahani2018,
   author={Esfahani, Peyman Mohajerin and Kuhn, Daniel}, title={Data-driven distributionally robust optimization using the Wasserstein metric}, journal={Operations Research}, year={2018}, volume={66}, pages={438--466}, doi={10.1287/opre.2017.1673}
 }
-@article{Germain2016,
-  author={Germain, Pascal and Alquier, Pierre and Laviolette, François and Prouvost, Quentin}, title={PAC-Bayes and domain adaptation}, journal={Neurocomputing}, year={2016}, doi={10.1007/s10994-015-5490-1}
+@inproceedings{Sinha2018,
+  author={Sinha, Aman and Namkoong, Hongseok and Duchi, John}, title={Certifying some distributional robustness with principled adversarial training}, booktitle={ICLR}, year={2018}, url={https://openreview.net/forum?id=Hk6kPgPZf}
+}
+@article{Germain2020,
+  author={Germain, Pascal and Habrard, Amaury and Laviolette, François and Morvant, Emilie}, title={PAC-Bayes and domain adaptation}, journal={Neurocomputing}, year={2020}, volume={379}, pages={379--397}, doi={10.1016/j.neucom.2019.10.105}
 }
 @article{Peters2016,
   author={Peters, Jonas and Bühlmann, Peter and Meinshausen, Nicolai}, title={Causal inference by using invariant prediction: identification and confidence intervals}, journal={JRSSB}, year={2016}, volume={78}, pages={947--1012}, doi={10.1111/rssb.12167}
@@ -42,13 +52,16 @@
   author={Kamath, Pritish and Tangella, Hancheng and Suggala, Arun and others}, title={Does invariant risk minimization capture causal variables?}, booktitle={NeurIPS}, year={2021}, url={https://arxiv.org/abs/2106.05200}
 }
 @inproceedings{Krueger2021,
-  author={Krueger, David and Caballero, Ethan and Jacobsen, J. H. and others}, title={Out-of-distribution generalization via risk extrapolation (REx)}, booktitle={ICML}, year={2021}, url={https://arxiv.org/abs/2006.07500}
+  author={Krueger, David and Caballero, Ethan and Jacobsen, Joern-Henrik and Zhang, Amy and Binas, Jonathan and Zhang, Dinghuai and Le Priol, Remi and Courville, Aaron}, title={Out-of-distribution generalization via risk extrapolation (REx)}, booktitle={ICML}, year={2021}, pages={5815--5826}, volume={139}, series={Proceedings of Machine Learning Research}, url={https://proceedings.mlr.press/v139/krueger21a.html}
 }
 @inproceedings{Rame2022,
-  author={Rame, Alexandre and Dancette, Corentin and Cord, Matthieu}, title={Fishr: Invariant gradient variances for out-of-distribution generalization}, booktitle={ICML}, year={2022}, url={https://arxiv.org/abs/2202.05134}
+  author={Rame, Alexandre and Dancette, Corentin and Cord, Matthieu}, title={Fishr: Invariant gradient variances for out-of-distribution generalization}, booktitle={ICML}, year={2022}, pages={18347--18377}, volume={162}, series={Proceedings of Machine Learning Research}, url={https://proceedings.mlr.press/v162/rame22a.html}
 }
 @inproceedings{Sun2016,
   author={Sun, Baoqing and Saenko, Kate}, title={Deep CORAL: correlation alignment for deep domain adaptation}, booktitle={ECCV Workshops}, year={2016}, url={https://arxiv.org/abs/1607.01719}
+}
+@inproceedings{Ganin2016,
+  author={Ganin, Yaroslav and Ustinova, Evgeniya and Ajakan, Hana and others}, title={Domain-adversarial training of neural networks}, booktitle={JMLR}, year={2016}, volume={17}, pages={1--35}, url={https://jmlr.org/papers/v17/15-239.html}
 }
 @inproceedings{Li2018,
   author={Li, Da and Yang, Yongxin and Song, Yi-Zhe and Hospedales, Timothy}, title={Learning to generalize: Meta-learning for domain generalization}, booktitle={AAAI}, year={2018}, url={https://arxiv.org/abs/1710.03463}
@@ -70,4 +83,19 @@
 }
 @inproceedings{Gulrajani2021,
   author={Gulrajani, Ishaan and Lopez-Paz, David}, title={In search of lost domain generalization}, booktitle={ICLR}, year={2021}, url={https://arxiv.org/abs/2007.01434}
+}
+@inproceedings{Lai2024,
+  author={Lai, Zhao-Rong and Wang, Weiwen}, title={Invariant risk minimization is a total variation model}, booktitle={ICML}, year={2024}, pages={25913--25935}, volume={235}, series={Proceedings of Machine Learning Research}, url={https://proceedings.mlr.press/v235/lai24c.html}
+}
+@inproceedings{Wang2024Lost,
+  author={Wang, Yimu and Wu, Yihan and Zhang, Hongyang}, title={Lost domain generalization is a natural consequence of lack of training domains}, booktitle={AAAI}, year={2024}, volume={38}, number={14}, pages={15746--15754}, doi={10.1609/aaai.v38i14.29497}
+}
+@inproceedings{Cao2024Mixup,
+  author={Cao, Meng and Chen, Songcan}, title={Mixup-induced domain extrapolation for domain generalization}, booktitle={AAAI}, year={2024}, volume={38}, number={10}, pages={11052--11060}, doi={10.1609/aaai.v38i10.28994}
+}
+@article{Shui2022,
+  author={Shui, Changjian and Wang, Boyu and Gagné, Christian}, title={On the benefits of representation regularization in invariance based domain generalization}, journal={Machine Learning}, year={2022}, volume={111}, number={3}, pages={895--915}, doi={10.1007/s10994-021-06080-w}
+}
+@inproceedings{WangVeitch2022,
+  author={Wang, Xin and Veitch, Victor}, title={A unified causal view of domain invariant representation learning}, booktitle={NeurIPS}, year={2022}, url={https://openreview.net/forum?id=-l9cpeEYwJJ}
 }

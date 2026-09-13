@@ -16,7 +16,7 @@ where `lambda* = min_h R_S(h)+R_T(h)`. The discrepancy is estimable only with ta
 
 ### 2. Source-only DG / domain-of-domains
 
-Blanchard et al. (2011) and Mansour et al. (2021) treat domains as draws from a meta-distribution or define an admissible family. A typical route is (i) uniform convergence over environments for source risks and (ii) concentration of a domain-level statistic, yielding an unseen-domain or worst-family guarantee. The price is explicit assumptions on how source environments cover the meta-distribution; no-free-lunch results show these assumptions cannot be omitted.
+Blanchard et al. (2011) and Blanchard et al. (2021) treat domains as draws from a meta-distribution or define an admissible family. A typical route is (i) uniform convergence over environments for source risks and (ii) concentration of a domain-level statistic, yielding an unseen-domain or worst-family guarantee. The price is explicit assumptions on how source environments cover the meta-distribution; no-free-lunch results show these assumptions cannot be omitted.
 
 ### 3. Uniform convergence and complexity
 
@@ -24,7 +24,7 @@ VC/Rademacher/Gaussian complexity, symmetrization, contraction, and Bernstein/Ho
 
 ### 4. PAC-Bayes
 
-Change of measure plus a KL variational inequality gives a high-probability bound on Gibbs risk. DA versions add a domain-disagreement/IPM term (Germain et al. 2016; Rivasplata et al. 2019). Source-only DG requires a prior/domain model or a meta-distribution; the posterior is a certificate, not automatically the output of a deep optimizer. The KL and disagreement terms are source-estimable only under the chosen domain formalism.
+Change of measure plus a KL variational inequality gives a high-probability bound on Gibbs risk. DA versions add a domain-disagreement/IPM term (Germain et al. 2020; Rivasplata et al. 2019). Source-only DG requires a prior/domain model or a meta-distribution; the posterior is a certificate, not automatically the output of a deep optimizer. The KL and disagreement terms are source-estimable only under the chosen domain formalism.
 
 ### 5. Stability
 
@@ -40,7 +40,7 @@ MMD is the RKHS norm of a difference of kernel mean embeddings (Gretton et al. 2
 
 ### 8. DRO
 
-DRO bounds start with `sup_{Q in U(P)} R_Q(f)`. Convex duality turns f-divergence or Wasserstein balls into a regularized empirical objective (Duchi et al. 2016; Esfahani & Kuhn 2018; Sinha et al. 2018). Generalization then controls empirical robust risk uniformly over `f` and the uncertainty set. The uncertainty set, metric, radius, and support assumptions are the shift model; changing them changes the theorem.
+DRO bounds start with `sup_{Q in U(P)} R_Q(f)`. Convex duality turns f-divergence or Wasserstein balls into a regularized empirical objective (Duchi & Namkoong 2021; Esfahani & Kuhn 2018; Sinha et al. 2018). Generalization then controls empirical robust risk uniformly over `f` and the uncertainty set. The uncertainty set, metric, radius, and support assumptions are the shift model; changing them changes the theorem.
 
 ### 9. Impossibility/lower bounds
 
@@ -63,6 +63,12 @@ For finite-group DRO: target is `max_e R_e(f)`; Step 1 replace population group 
 For RKHS MMD: target is a risk difference or an IPM; Step 1 use the RKHS reproducing property; Step 2 bound mean-embedding estimation by bounded-kernel concentration; Step 3 apply loss-class/RKHS norm generalization; Step 4 retain conditional mismatch/joint error. Target data is needed for DA MMD, but not for source-source DG penalties.
 
 For Wasserstein DRO: target is worst-case risk over `U`; Step 1 dualize the inner supremum; Step 2 control empirical dual objective uniformly; Step 3 select radius from concentration; Step 4 retain approximation from the chosen ball. Source-only operation is natural, but only for shifts inside `U`.
+
+For REx/V-REx (Krueger et al. 2021, Sec. 2--3): Step 1 define an extrapolated environment as an affine combination of source risks; Step 2 maximize the affine risk over a bounded coefficient set (MM-REx); Step 3 observe that the resulting quadratic penalty is proportional to the variance of the source risk vector (V-REx); Step 4 in the linear-SEM analysis (Theorem 1) identify conditions under which the extrapolation objective selects invariant/causal directions. The slack is the restriction to a linear SEM and a chosen extrapolation set; the theorem is not a distribution-free finite-sample deep-network bound.
+
+For the INV framework (Shui et al. 2022, Proposition 1 and Theorem 1): Step 1 impose feature-conditional invariance and bounded loss; Step 2 express test balanced error as a nearest-source conditional shift term plus a representation-dependent contraction term; Step 3 bound the latter through total variation/Jensen--Shannon and a Lipschitz or Jacobian control on the representation; Step 4 add finite-source estimation. The target-family and bounded-loss assumptions are explicit, and the bound becomes vacuous when the representation's TV contraction coefficient is large. This is a genuine unified invariance framework, but not an exact analysis of a deep optimizer.
+
+For IRM-TV (Lai & Wang 2024, Theorems 3.1--3.11): Step 1 treat `R(w o Phi, rho)` as a function of classifier variable `w`; Step 2 identify the IRMv1 gradient norm as the TV-`ell_2` variation of that risk; Step 3 use variational/TV conditions to characterize global OOD objectives and admissible environment sets; Step 4 derive conditions for TV-`ell_1` or minimax variants to generalize. The price is functional regularity, measure/coarea conditions, and an environment-family assumption; the result is not a generic empirical-process theorem for SGD on deep IRMv1.
 
 ## What is source-estimable?
 
