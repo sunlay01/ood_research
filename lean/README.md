@@ -21,8 +21,9 @@ Current scope:
   line-strength, and isotropic negative-control witnesses.
 - `Stage11/Basic.lean`: exact restricted supervised quadratic-state expansion
   and empirical linear-state risk identity for squared-loss linear regression.
-- `Stage11R/Basic.lean`: concrete source-response annihilator and two-source
-  exposure-energy identities supporting the primal/dual revision.
+- `Stage11R/Basic.lean`: finite-source exposure-energy identity, concrete
+  `exposureKernel = sourceAnnihilator` theorem, and abstract paired linear-map
+  covariance theorem supporting the primal/dual revision.
 - `Stage12/Basic.lean`: exact two-source affine transfer identity; general
   support minimality, quotient barriers, and exposure domination remain paper
   theorems with deterministic witnesses.
@@ -31,10 +32,10 @@ The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine
 checked; its Taylor remainder, coordinate/gauge audit, identifiability limits,
 and exact-support comparison remain paper proofs with deterministic executable
-witnesses. Stage 11R's abstract quotient, metric-aware projection, and
-coordinate-covariance statements remain paper proofs; only the concrete
-annihilator and two-source algebraic witnesses are Lean checked. The control-
-composition lemma is formalized, while the general PSD
+witnesses. Stage 11R's quotient isomorphism, metric-aware projection, and
+general convex-geometry statements remain paper proofs; its finite-source
+annihilator equality and abstract paired covariance are Lean checked. The
+control-composition lemma is formalized, while the general PSD
 domination, principal-angle, rank-nullity, source-domain-count, and
 Courant--Fischer bounds remain scientific obligations documented in the Stage 9
 and Stage 10 notes. No unproved V-REx/MMD/DRO mapping is formalized.

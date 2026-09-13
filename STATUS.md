@@ -122,7 +122,11 @@ The coordinate-free backbone is the primal/dual pairing, exact target support
 `sqrt(g(A g))`, and source-observable quotient `V*/S°`. `N_A` is no longer
 treated as a primitive source-risk-observable quantity. Metric-dependent
 projections and `rho`/`kappa` are valid only relative to a declared metric `G`
-and its paired coordinate transformation.
+and its paired coordinate transformation. Lean now independently verifies the
+finite-source exposure-energy identity, concrete `ker A = S°` equality, and an
+abstract linear-map paired-covariance theorem in
+`lean/OodTheoryVerification/Stage11R/Basic.lean`; the quotient isomorphism and
+general convex-geometry statements remain paper proofs.
 
 The revised decision is **`ADVANCE-TO-STAGE-12`**. Keep the Stage 10
 orientation theorem fixed. Stage 12 may now formulate the population master
