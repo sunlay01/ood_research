@@ -56,8 +56,17 @@ scaffold and tests a source-domain covariance operator plus a target-relevant
 task functional as a possible inner core; it is not yet accepted as the final
 theory.
 
+The minimal finite-dimensional affine population theorem and deterministic
+falsification tests are documented in
+`notes/framework_synthesis/regularization_ood_bound_methodology.md` and
+`notes/framework_synthesis/minimal_population_experiment.md`. The tests verify
+the projection identity, amplitude scaling, and rank-sensitive nullspace support.
+This advances the probe to `ADVANCE-TO-MAPPING`; it does not establish that
+V-REx, MMD, and DRO are exact corollaries.
+
 ## Next authorized step
 
-Choose one concrete theorem route, preferably a bounded-loss MMD/conditional
-bound or a restricted IRMv1 translation. Keep `proofs/active/` empty until a
-proof is independently audited and promoted.
+Choose one concrete method-translation route, preferably a bounded-loss MMD
+radius lemma or a restricted V-REx translation into the affine task functional.
+Keep `proofs/active/` empty until the local theorem is independently audited and
+promoted.

@@ -15,11 +15,15 @@ Read in this order:
 8. `final_framework.md` and `validation_agenda.md` — current proposal and next tests.
 9. `source_exposure_geometry.md` and `exposure_geometry_novelty_audit.md` — the
    proposed inner mathematical core and its novelty/feasibility audit.
+10. `regularization_ood_bound_methodology.md` and
+    `minimal_population_experiment.md` — the finite-dimensional mother bound
+    and its falsification probe.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
 method-specific `Omega -> B` translation lemmas.
 
-The exposure-geometry files are a `PROBE`: they do not supersede the typed
-calculus until a non-vacuous master theorem and an out-of-sample optimizer mapping
-are established.
+The exposure-geometry files remain a `PROBE`: the finite-dimensional affine
+support bound survives deterministic checks, but the typed calculus is not
+superseded until non-vacuous method translation lemmas and an out-of-sample
+optimizer mapping are established.
