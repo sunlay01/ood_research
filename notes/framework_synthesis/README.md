@@ -30,6 +30,10 @@ Read in this order:
     `experiments/risk_representation_revision_tests.py` — the completed
     primal/dual, exposure-operator, annihilator-quotient, support-first, and
     metric-covariance revision.
+15. `stage12_population_master_theorem.md` and
+    `experiments/stage12_population_theorem_tests.py` — the finite-dimensional
+    theorem package: exact transfer, sharp support, quotient ambiguity,
+    blind-direction impossibility, and exposed-span domination.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
@@ -42,3 +46,5 @@ optimizer mapping are established. Stage 11R is complete with decision
 `ADVANCE-TO-STAGE-12`: the exact quadratic state is valid and the split geometry
 is explicitly subordinate to a declared metric/gauge, while support and
 annihilator statements remain coordinate-free.
+Stage 12 is now complete with decision `ADVANCE-TO-STAGE-12.5`; only the exact
+novelty audit is authorized next.

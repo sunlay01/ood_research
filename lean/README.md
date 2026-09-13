@@ -23,6 +23,9 @@ Current scope:
   and empirical linear-state risk identity for squared-loss linear regression.
 - `Stage11R/Basic.lean`: concrete source-response annihilator and two-source
   exposure-energy identities supporting the primal/dual revision.
+- `Stage12/Basic.lean`: exact two-source affine transfer identity; general
+  support minimality, quotient barriers, and exposure domination remain paper
+  theorems with deterministic witnesses.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine

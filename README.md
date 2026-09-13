@@ -119,10 +119,12 @@ Stage 11 has now been audited in a restricted finite-dimensional supervised
 model. Stage 11R completes the metric/gauge interface revision: the exact
 support function, primal/dual pairing, exposure seminorm, and annihilator
 quotient are the coordinate-free backbone; metric-dependent split quantities
-are subordinate corollaries. The revised gate is `ADVANCE-TO-STAGE-12`. The
-population master theorem is now authorized, but algorithm-specific mapping,
-large benchmarks, and new regularizer design remain blocked. Stage 12.5 exact
-novelty audit remains mandatory before any bound-derived method.
+are subordinate corollaries. Stage 12 now supplies the population theorem
+package: exact transfer identity, sharp support minimality, source-observable
+quotient, blind-direction impossibility, and exposed-span seminorm domination.
+The revised gate is `ADVANCE-TO-STAGE-12.5`, meaning only the exact novelty
+audit is authorized next. Algorithm-specific mapping, large benchmarks, and
+new regularizer design remain blocked.
 
 Authoritative working notes:
 
@@ -139,4 +141,6 @@ notes/framework_synthesis/risk_representation_hard_gate.md
 notes/framework_synthesis/experiments/risk_representation_tests.py
 notes/framework_synthesis/stage11r_metric_gauge_revision.md
 notes/framework_synthesis/experiments/risk_representation_revision_tests.py
+notes/framework_synthesis/stage12_population_master_theorem.md
+notes/framework_synthesis/experiments/stage12_population_theorem_tests.py
 ```

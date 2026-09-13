@@ -125,6 +125,29 @@ orientation theorem fixed. Stage 12 may now formulate the population master
 theorem, but algorithm mapping, large benchmarks, and new regularizer design
 remain blocked until that theorem and the later Stage 12.5 exact novelty audit
 pass.
+
+## Stage 12 population theorem package
+
+Stage 12 is complete in finite dimension and recorded in
+[`notes/framework_synthesis/stage12_population_master_theorem.md`](notes/framework_synthesis/stage12_population_master_theorem.md), with deterministic checks in
+[`notes/framework_synthesis/experiments/stage12_population_theorem_tests.py`](notes/framework_synthesis/experiments/stage12_population_theorem_tests.py).
+It contains the exact residual transfer identity, the proof that `h_U(g)` is
+the smallest uniform additive certificate given only `delta_T in U`, the
+source-observable quotient `V*/S°`, the compatible-fiber ambiguity lower bound,
+the unbounded blind-direction impossibility theorem, and the exposed-span
+ellipsoid corollary `h_U(g) <= rho * sqrt(g(A g))` with equality witnesses.
+The package includes both a positive domination theorem and an impossibility
+theorem. The exact transfer algebra has a Lean witness in
+`lean/OodTheoryVerification/Stage12/Basic.lean`; general supremum,
+annihilator, quotient, and convex-geometry arguments remain paper proofs with
+deterministic tests.
+
+## Next authorized step
+
+Proceed only to **Stage 12.5 exact novelty audit** of the exact operator,
+support, quotient, and exposure-domination structure. Do not map V-REx, MMD,
+DRO, IRM, or other algorithms, design a new regularizer, or run benchmarks
+until that audit is complete.
 Keep `proofs/active/` empty until any local theorem is independently audited and
 promoted. Do not begin V-REx/MMD/DRO mapping or a new regularizer before Stage
 12.5 exact novelty audit is scheduled after the population theorem.
