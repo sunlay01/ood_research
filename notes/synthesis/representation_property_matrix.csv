@@ -1,0 +1,13 @@
+representation,target_family_explicit,source_only_concentration,source_identifiable_shift,conditional_shift_control,oracle_term_visible,method_coverage,optimizer_fidelity,main_failure
+domain-of-domains / risk-vector,YES,YES,PARTIAL,NO,YES,ERM/V-REx/GroupDRO,NOT-ANALYZED,coverage and meta-law misspecification
+finite-group risk / GroupDRO,YES,YES,YES for observed groups,NO,YES,GroupDRO and robust group ERM,EXACT,does not cover arbitrary unseen domains
+f-divergence DRO,YES,YES,PARTIAL,NO,YES,robust reweighting and group DRO,EXACT,uncertainty-set/radius misspecification
+Wasserstein DRO,YES,YES,PARTIAL,NO,YES,Wasserstein robust/adversarial training,EXACT,metric/radius/support misspecification
+HDeltaH / loss discrepancy,NO in classic DA,YES with target samples,NO,YES,YES,DA discrepancy classifiers,EXACT,target data and joint-error oracle
+RKHS/IPM/MMD,PARTIAL,YES with samples,NO without conditional assumptions,YES,YES,MMD/CORAL/kernel alignment,SURROGATE,target dependence and conditional mismatch
+causal conditional / SCM,YES,YES under interventions,YES under SCM,YES,YES,ICP/anchor/causal invariance,POPULATION-ABSTRACTION,graph and intervention assumptions
+INV + TV contraction,YES,YES conditional on family,PARTIAL,YES,YES,representation invariance,POPULATION-ABSTRACTION,bounded loss and nearest-source assumptions
+direct-sum latent decomposition,YES,YES conditional on latent model,PARTIAL,YES,YES,invariance plus augmentation,POPULATION-ABSTRACTION,restricted latent structure and deterministic invariant labels
+TV functional translation,YES conditional on environment family,PARTIAL,NO,YES,PARTIAL,IRM gradient translation,FUNCTIONAL-TRANSLATION,no general deep finite-sample theorem
+PAC-Bayes / information,PARTIAL,YES for stochastic learner model,PARTIAL,NO,YES,posterior/stochastic learners,SURROGATE,information/prior/radius terms may be non-operational
+stability / norm complexity,NO,YES for source distribution,NO,YES,YES,stable ERM and norm-controlled nets,EXACT,does not specify target family
