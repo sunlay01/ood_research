@@ -107,10 +107,12 @@ semantics. It is not the inner unifying theorem.
 
 ### Current position
 
-The finite-dimensional affine mother bound, PSD-operator/gauge inequality, and
-deterministic amplitude/rank falsification probes are complete. The current
-priority is **physical target coverage calibration in a compact finite-dimensional
-family**, followed by the orientation theorem and the **risk-representation hard
+The finite-dimensional affine mother bound, PSD-operator/gauge inequality,
+deterministic amplitude/rank probes, and Stage 9 physical target coverage
+calibration are complete. Stage 9 passed for compact finite-dimensional ball and
+ellipsoid families, including exact-vs-outer support, scale calibration,
+orientation sensitivity, and ideal-vs-stable geometry. The current priority is
+the Stage 10 orientation theorem, followed by the **risk-representation hard
 gate**. After the population theorem is complete, Stage 12.5 exact novelty audit
 is mandatory before common corollaries or any new regularizer. No
 algorithm-specific mapping, large benchmark, or universal novelty claim should
@@ -123,4 +125,6 @@ notes/framework_synthesis/operator_gauge_master_theorem.md
 notes/framework_synthesis/regularization_ood_bound_methodology.md
 notes/framework_synthesis/minimal_population_experiment.md
 notes/framework_synthesis/exposure_geometry_novelty_audit.md
+notes/framework_synthesis/physical_target_coverage.md
+notes/framework_synthesis/experiments/physical_target_coverage_tests.py
 ```

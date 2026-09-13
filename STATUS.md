@@ -67,10 +67,18 @@ learner sensitivity, target coverage radius, and exposure-blind residual. This
 advances the probe to `ADVANCE-TO-MASTER-THEORY`; it does not establish that
 V-REx, MMD, and DRO are exact corollaries.
 
+Stage 9 physical target coverage calibration is now complete and recorded in
+`notes/framework_synthesis/physical_target_coverage.md`, with deterministic
+checks in `notes/framework_synthesis/experiments/physical_target_coverage_tests.py`.
+The compact-family finiteness, exact product support, external-family outer
+bound, scale calibration, orientation precursor, and ideal/stable geometry
+distinction all pass. Stage 9 decision: `ADVANCE` to the coverage-orientation
+theorem; algorithm mapping and new regularizer design remain blocked.
+
 ## Next authorized step
 
-First audit the operator/gauge theorem and calibrate `rho` and `kappa` for a
-fixed physical target family. Only then choose one concrete method-translation
-route, preferably a bounded-loss MMD radius lemma or a restricted V-REx
-translation into the affine task functional. Keep `proofs/active/` empty until
-the local theorem is independently audited and promoted.
+Prove the Stage 10 coverage-orientation theorem, then pass the Stage 11
+risk-representation hard gate in a restricted finite-dimensional exact model.
+Keep `proofs/active/` empty until any local theorem is independently audited and
+promoted. Do not begin V-REx/MMD/DRO mapping or a new regularizer before Stage
+12.5 exact novelty audit is scheduled after the population theorem.
