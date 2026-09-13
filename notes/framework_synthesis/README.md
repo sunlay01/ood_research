@@ -13,7 +13,13 @@ Read in this order:
 6. `candidate_framework_01.md` — the typed bridge-calculus candidate;
 7. `framework_stress_test.md` — method-by-method reconstruction;
 8. `final_framework.md` and `validation_agenda.md` — current proposal and next tests.
+9. `source_exposure_geometry.md` and `exposure_geometry_novelty_audit.md` — the
+   proposed inner mathematical core and its novelty/feasibility audit.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
 method-specific `Omega -> B` translation lemmas.
+
+The exposure-geometry files are a `PROBE`: they do not supersede the typed
+calculus until a non-vacuous master theorem and an out-of-sample optimizer mapping
+are established.

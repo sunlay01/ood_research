@@ -49,6 +49,13 @@ and proposes a typed bridge calculus as a research architecture. This does not
 promote a theorem to `proofs/active/` and does not replace the problem-first
 audit.
 
+An exposure-geometry probe is documented in
+`notes/framework_synthesis/source_exposure_geometry.md` and
+`exposure_geometry_novelty_audit.md`. It treats the typed calculus as an outer
+scaffold and tests a source-domain covariance operator plus a target-relevant
+task functional as a possible inner core; it is not yet accepted as the final
+theory.
+
 ## Next authorized step
 
 Choose one concrete theorem route, preferably a bounded-loss MMD/conditional
