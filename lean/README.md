@@ -49,3 +49,11 @@ Run from this directory:
 ```text
 lake build
 ```
+
+To compile the Stage 11 file independently of the aggregate target:
+
+```text
+lake env lean OodTheoryVerification/Stage11/Basic.lean
+```
+
+This direct target check passes on the local Lean 4.33.1 toolchain.

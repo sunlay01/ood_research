@@ -108,6 +108,10 @@ restricted squared-loss state/risk identities. Taylor bounds, coordinate-gauge
 claims, identifiability counterexamples, and exact-support comparisons remain
 paper proofs plus deterministic executable witnesses.
 
+Stage 11 was also compiled as an independent Lean target with
+`lake env lean OodTheoryVerification/Stage11/Basic.lean` (Lean 4.33.1, local
+mathlib cache), in addition to the repository-wide `lake build`.
+
 ## Stage 11R metric/gauge interface revision
 
 Stage 11R is complete and recorded in
