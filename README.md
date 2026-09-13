@@ -307,3 +307,6 @@ The first controlled perturbation-response dataset is in `round3_redesign/method
 The intervention produces large, reproducible short-horizon effects when the regularizer is removed (mean horizon-5 effect norms: IRMv1 69.95, V-REx 36.15, Fishr 34.04) and much smaller effects for half/double scaling. This validates the matched-fork apparatus and establishes intervention sensitivity. It does **not** isolate forcing `C` from filtering `K`, nor does it establish an OOD mechanism; those require separate common-base component interventions.
 
 The initial C/K factorial pilot is recorded in `round3_redesign/method_agnostic_mechanism/ck_factorial/`. It is currently a numerical diagnostic, not a mechanism result: absolute epsilon was not trust-region calibrated, producing method-dependent blow-up in C-driven steps (especially IRMv1/V-REx). The scientific gate now requires common metric step normalization, finite-difference linearity, and projected-Hessian conditioning checks before interpreting forcing/filtering or interaction effects.
+## Research branch architecture
+
+This checkout is the `ood-algorithm` branch. The branch-specific scope is documented in [`README_BRANCH.md`](README_BRANCH.md), [`research_program.md`](research_program.md), [`historical_status.md`](historical_status.md), and [`migration_map.md`](migration_map.md).
