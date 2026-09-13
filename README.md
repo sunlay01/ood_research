@@ -111,11 +111,11 @@ semantics. It is not the inner unifying theorem.
 ### Current position
 
 The finite-dimensional affine mother bound, PSD-operator/gauge inequality,
-deterministic amplitude/rank probes, and the finiteness portion of Stage 9 are
-complete. Stage 9 is now a **control-required** gate: compact ball and ellipsoid
-families must additionally receive explicit small `rho_A`/`kappa_A` bounds and a
-non-vacuity check. The current priority is to audit domination, excitation,
-generator, and learner-sensitivity conditions before Stage 10. After the
+deterministic amplitude/rank probes, and controlled Stage 9 coverage conditions
+are complete. Stage 10 is also complete: its principal-angle, rank/domain-count,
+same-spectrum orientation, fixed-spectrum min-max, and negative-control results
+are recorded in `notes/framework_synthesis/coverage_orientation_theorem.md`.
+The next gate is the restricted Stage 11 risk-representation theorem. After the
 population theorem is complete, Stage 12.5 exact novelty audit is mandatory
 before common corollaries or any new regularizer. No algorithm-specific mapping,
 large benchmark, or universal novelty claim should be started before these gates
@@ -130,4 +130,6 @@ notes/framework_synthesis/minimal_population_experiment.md
 notes/framework_synthesis/exposure_geometry_novelty_audit.md
 notes/framework_synthesis/physical_target_coverage.md
 notes/framework_synthesis/experiments/physical_target_coverage_tests.py
+notes/framework_synthesis/coverage_orientation_theorem.md
+notes/framework_synthesis/experiments/coverage_orientation_tests.py
 ```

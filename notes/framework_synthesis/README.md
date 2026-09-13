@@ -20,6 +20,8 @@ Read in this order:
     and its falsification probe.
 11. `operator_gauge_master_theorem.md` — the candidate PSD-operator and convex-
     gauge duality theorem that separates sensitivity from target coverage.
+12. `coverage_orientation_theorem.md` — Stage 10's target-relative orientation,
+    rank/domain-count barriers, fixed-spectrum optimization, and negative controls.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires

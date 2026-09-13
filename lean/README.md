@@ -15,12 +15,14 @@ Current scope:
 - `Stage9/Control.lean`: monotone composition of explicit `rho`/`kappa`, learner
   sensitivity, and representation-residual upper bounds into the non-vacuity
   certificate.
+- `Stage10/Basic.lean`: concrete two-dimensional hidden-direction, same-spectrum
+  line-strength, and isotropic negative-control witnesses.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. The control-composition lemma is formalized, while the
-general PSD domination, principal-angle, and shift-generator bounds remain
-scientific obligations documented in the Stage 9 notes. No unproved V-REx/MMD/
-DRO mapping is formalized.
+general PSD domination, principal-angle, rank-nullity, source-domain-count, and
+Courant--Fischer bounds remain scientific obligations documented in the Stage 9
+and Stage 10 notes. No unproved V-REx/MMD/DRO mapping is formalized.
 
 The checked-in lakefile pins mathlib to the commit used by the local cache
 (Lean 4.33.1). No build artifacts or machine-specific paths are committed;

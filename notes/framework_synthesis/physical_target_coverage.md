@@ -1,8 +1,10 @@
 # Stage 9: physical target coverage calibration
 
-Status: `REVISE / CONTROL-REQUIRED`. Finiteness and support algebra are proved,
-but Stage 9 is not complete until the coverage radii admit explicit
-non-vacuous upper bounds for at least one nontrivial physical family.
+Status: `ADVANCE`. Finiteness and support algebra are proved, and explicit
+coverage-control routes now yield non-vacuous upper bounds for nontrivial
+ellipsoid, subspace-ball, and shift-generator instances. The conditions remain
+assumptions to be checked for each declared physical family; they are not
+automatic source-only guarantees.
 
 ## 1. Status and scientific question
 
@@ -353,12 +355,12 @@ theorem.
 
 ## 14. Decision gate
 
-**REVISE.** Stage 9 has proved finite, explicit, and falsifiable coverage
+**ADVANCE.** Stage 9 has proved finite, explicit, and falsifiable coverage
 geometry, exact product support, external-family outer bounds, scale calibration,
-orientation sensitivity, and ideal/stable semantics. However, the new scientific
-gate requires an explicit small-coverage sufficient condition and a non-vacuity
-check. The domination, excitation, and generator conditions above provide the
-candidate routes; they must be instantiated and audited before Stage 10.
+orientation sensitivity, and ideal/stable semantics. The upgraded scientific
+gate is met for explicit domination, restricted-excitation, shift-generator, and
+non-vacuity instances, with deterministic tests and separate target/learner
+control paths. Stage 10 geometry orientation is therefore authorized.
 
 Stage 10, algorithm mapping, regularizer invention, finite-sample concentration,
 and universal-DG claims are not authorized yet.
@@ -376,5 +378,5 @@ and universal-DG claims are not authorized yet.
    for an overly broad target family.
 8. Orientation matters beyond rank and trace.
 9. Stable geometry preserves the ideal meaning only when reported alongside it.
-10. Stage 10 is not yet authorized; first pass the controllability and
-    non-vacuity gate.
+10. Stage 10 geometry orientation is authorized and recorded separately in
+    `coverage_orientation_theorem.md`; algorithm mapping remains blocked.
