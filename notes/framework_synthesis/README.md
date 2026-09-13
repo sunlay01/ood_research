@@ -26,6 +26,10 @@ Read in this order:
     `experiments/risk_representation_tests.py` — Stage 11's restricted exact
     supervised representation, identifiability attacks, residual audit, and
     metric/gauge revision gate.
+14. `stage11r_metric_gauge_revision.md` and
+    `experiments/risk_representation_revision_tests.py` — the completed
+    primal/dual, exposure-operator, annihilator-quotient, support-first, and
+    metric-covariance revision.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
@@ -34,6 +38,7 @@ method-specific `Omega -> B` translation lemmas.
 The exposure-geometry files remain a `PROBE`: the finite-dimensional affine
 support bound survives deterministic checks, but the typed calculus is not
 superseded until non-vacuous method translation lemmas and an out-of-sample
-optimizer mapping are established. Stage 11 is currently `REVISE`: its exact
-quadratic state is valid, but the split geometry needs an explicit metric/gauge
-interface before the population master theorem.
+optimizer mapping are established. Stage 11R is complete with decision
+`ADVANCE-TO-STAGE-12`: the exact quadratic state is valid and the split geometry
+is explicitly subordinate to a declared metric/gauge, while support and
+annihilator statements remain coordinate-free.

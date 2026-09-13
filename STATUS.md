@@ -108,11 +108,23 @@ restricted squared-loss state/risk identities. Taylor bounds, coordinate-gauge
 claims, identifiability counterexamples, and exact-support comparisons remain
 paper proofs plus deterministic executable witnesses.
 
-## Next authorized step
+## Stage 11R metric/gauge interface revision
 
-Revise and re-audit the Stage 11 metric/gauge interface. Keep the Stage 10
-orientation theorem fixed; do not start Stage 12, algorithm mapping, or new
-regularizer design until the revision passes.
+Stage 11R is complete and recorded in
+[`notes/framework_synthesis/stage11r_metric_gauge_revision.md`](notes/framework_synthesis/stage11r_metric_gauge_revision.md), with deterministic checks in
+[`notes/framework_synthesis/experiments/risk_representation_revision_tests.py`](notes/framework_synthesis/experiments/risk_representation_revision_tests.py).
+The coordinate-free backbone is the primal/dual pairing, exact target support
+`h_U(g)`, source exposure operator `A : V* -> V`, invariant seminorm
+`sqrt(g(A g))`, and source-observable quotient `V*/S°`. `N_A` is no longer
+treated as a primitive source-risk-observable quantity. Metric-dependent
+projections and `rho`/`kappa` are valid only relative to a declared metric `G`
+and its paired coordinate transformation.
+
+The revised decision is **`ADVANCE-TO-STAGE-12`**. Keep the Stage 10
+orientation theorem fixed. Stage 12 may now formulate the population master
+theorem, but algorithm mapping, large benchmarks, and new regularizer design
+remain blocked until that theorem and the later Stage 12.5 exact novelty audit
+pass.
 Keep `proofs/active/` empty until any local theorem is independently audited and
 promoted. Do not begin V-REx/MMD/DRO mapping or a new regularizer before Stage
 12.5 exact novelty audit is scheduled after the population theorem.

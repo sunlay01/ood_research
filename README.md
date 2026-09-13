@@ -116,12 +116,12 @@ are complete. Stage 10 is also complete: its principal-angle, rank/domain-count,
 same-spectrum orientation, fixed-spectrum min-max, and negative-control results
 are recorded in `notes/framework_synthesis/coverage_orientation_theorem.md`.
 Stage 11 has now been audited in a restricted finite-dimensional supervised
-model. The exact quadratic state passes, but the overall hard gate is
-`REVISE`: the metric/gauge interface of the split certificate must be made
-explicit and coordinate-covariant, and the non-identifiability of nullspace
-sensitivity must remain visible. Until that revision is audited, do not start
-the Stage 12 population master theorem, algorithm-specific mapping, large
-benchmarks, or a new regularizer. After Stage 12 is complete, Stage 12.5 exact
+model. Stage 11R completes the metric/gauge interface revision: the exact
+support function, primal/dual pairing, exposure seminorm, and annihilator
+quotient are the coordinate-free backbone; metric-dependent split quantities
+are subordinate corollaries. The revised gate is `ADVANCE-TO-STAGE-12`. The
+population master theorem is now authorized, but algorithm-specific mapping,
+large benchmarks, and new regularizer design remain blocked. Stage 12.5 exact
 novelty audit remains mandatory before any bound-derived method.
 
 Authoritative working notes:
@@ -137,4 +137,6 @@ notes/framework_synthesis/coverage_orientation_theorem.md
 notes/framework_synthesis/experiments/coverage_orientation_tests.py
 notes/framework_synthesis/risk_representation_hard_gate.md
 notes/framework_synthesis/experiments/risk_representation_tests.py
+notes/framework_synthesis/stage11r_metric_gauge_revision.md
+notes/framework_synthesis/experiments/risk_representation_revision_tests.py
 ```
