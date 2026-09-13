@@ -1,0 +1,14 @@
+paper,Omega,B1,B2,target_quantity,key_edge_type,main_assumption,main_irreducible_term,fidelity
+BenDavid2010,HDeltaH,loss-class discrepancy,uniform loss gap,target risk,INEQUALITY,target samples and VC,joint-error oracle,EXACT
+Mansour2009,loss discrepancy,disc_L,transfer triangle,target risk,INEQUALITY,target discrepancy,joint error,EXACT
+Zhao2019,marginal alignment,feature discrepancy,conditional mismatch counterexample,target risk,COUNTEREXAMPLE,shared marginals,conditional shift,LOWER-BOUND
+Krueger2021,V-REx,risk vector,variance/extrapolation proxy,DG risk,RELAXATION,restricted domain model,unseen tail,RELAXATION
+Sagawa2020,GroupDRO,risk vector,simplex support,group robust risk,DUALITY,finite groups,unseen groups,EXACT
+Blanchard2021,domain risk,g_f(P),Pi concentration,fresh-domain expected risk,CONCENTRATION,iid Pi,tail/coverage,POPULATION-ABSTRACTION
+Arjovsky2019,ideal IRM,shared optimum,invariant predictor,DG objective,INVARIANCE-ASSUMPTION,realizability,finite exposure,POPULATION-ABSTRACTION
+Kamath2021,IRM constraints,stationarity,rank identifiability,unseen-domain risk,RANK-ARGUMENT,linear rank,noncausal solutions,EQUIVALENT-UNDER-ASSUMPTIONS
+Peters2016,ICP,conditional invariance,causal parent set,intervention risk,IDENTIFIABILITY,SCM faithfulness,coverage,EXACT
+Lai2024,IRMv1 gradient,TV variation,variational condition,OOD functional,VARIATIONAL-TRANSLATION,smoothness,optimization gap,FUNCTIONAL-TRANSLATION
+Duchi2021,f-DRO,uncertainty set,dual reweighting,robust risk,DUALITY,divergence radius,misspecification,EXACT
+Esfahani2018,Wasserstein DRO,transport ball,Kantorovich dual,robust risk,DUALITY,metric radius,support,EXACT
+Wang2026TriSpace,latent decomposition,direct sum,localized discrepancy,target risk,UNIQUE-DECOMPOSITION,latent assumptions,model misspecification,POPULATION-ABSTRACTION
