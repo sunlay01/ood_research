@@ -72,7 +72,7 @@ The project should therefore use a layered theorem design: domain-level target f
 
 ## 8. Minimal validating theorem
 
-The first proof should establish a two-level uniform convergence result for `Q_Pi(f)`. A concrete attempt is recorded in [`proofs/source_only_meta_domain_bound.md`](../../proofs/source_only_meta_domain_bound.md). It decomposes error into between-domain complexity, within-domain complexity, and concentration. The theorem is useful only if its domain-level class complexity is finite and the empirical source domains are representative of `Pi`.
+The first proof should establish a two-level uniform convergence result for `Q_Pi(f)`. A concrete attempt is recorded in [`proofs/baselines/source_only_meta_domain_bound.md`](../../proofs/baselines/source_only_meta_domain_bound.md). It decomposes error into between-domain complexity, within-domain complexity, and concentration. The theorem is useful only if its domain-level class complexity is finite and the empirical source domains are representative of `Pi`.
 
 The next extension should add a fresh-domain quantile or robust remainder. If the project cannot estimate or scientifically bound that remainder, it should report expected future-domain risk rather than claim a pointwise target-domain guarantee.
 

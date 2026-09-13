@@ -2,7 +2,7 @@
 
 ## Selected works
 
-Shui, Wang & Gagné (2022), *A Principled Approach to Domain Generalization*; Wang & Veitch (2022), *A General Framework for Invariant Representation Learning*; Lai & Wang (2024), IRM-TV; Wang et al. (2026), Tri-Space; Rothenhäusler et al. (2021), Anchor Regression. Repository evidence: `notes/bridge_synthesis/validated_bridge_chains.md` and cited detailed cards.
+Shui, Wang & Gagné (2022), *A Principled Approach to Domain Generalization*; Wang & Veitch (2022), *A General Framework for Invariant Representation Learning*; Lai & Wang (2024), IRM-TV; Wang et al. (2026), Tri-Space; Rothenhäusler et al. (2021), Anchor Regression. Repository evidence: `notes/evidence/ood_bridges/synthesis/validated_bridge_chains.md` and cited detailed cards.
 
 ## Framework cards
 

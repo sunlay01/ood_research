@@ -2,7 +2,7 @@
 
 ## Theorem audited
 
-`proofs/source_group_robust_bound.md` and `proofs/typed_conditional_shift_bound.md`.
+`proofs/baselines/source_group_robust_bound.md` and `proofs/baselines/typed_conditional_shift_bound.md`.
 
 ## Findings
 

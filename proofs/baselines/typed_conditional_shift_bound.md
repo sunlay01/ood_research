@@ -59,6 +59,6 @@ average with fixed source-mixture weights `alpha`.
 - Irreducible without additional structure: `rho_c` and any out-of-family
   misspecification.
 
-The binary channel-swap construction in `notes/formalization_round1/critics.md`
+The binary channel-swap construction in `archive/failed_formalization_round1/critics.md`
 shows that dropping `rho_c` makes the claim false even when all marginal MMD
 and CORAL terms vanish.

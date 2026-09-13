@@ -3,9 +3,9 @@
 `literature/ledger/` is the authoritative, compact entry point for the OOD/DG theory line. A future model should read the files below in this order before opening any paper or historical note:
 
 1. [`../research_program.md`](../research_program.md)
-2. [`../notes/problem_formulation.md`](../notes/problem_formulation.md)
-3. [`../notes/representation_methodology.md`](../notes/representation_methodology.md)
-4. [`../notes/open_questions.md`](../notes/open_questions.md)
+2. [`../notes/foundations/problem_formulation.md`](../notes/foundations/problem_formulation.md)
+3. [`../notes/foundations/representation_methodology.md`](../notes/foundations/representation_methodology.md)
+4. [`../notes/foundations/open_questions.md`](../notes/foundations/open_questions.md)
 5. [`ledger/family_map.md`](ledger/family_map.md)
 6. [`ledger/representation_map.csv`](ledger/representation_map.csv)
 7. [`ledger/compact_papers.csv`](ledger/compact_papers.csv)
