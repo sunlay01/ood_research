@@ -2,7 +2,9 @@
 
 ## Current branch
 
-`ood-theory` is clean and synchronized with `origin/ood-theory`.
+`ood-theory` contains the completed problem-first formalization audit. The
+working decision is `YES-WITH-LOCAL-THEOREM`; no new universal representation
+has been accepted.
 
 ## Epistemic status
 
@@ -30,6 +32,18 @@ Do not recursively read `archive/` by default. It contains failed or superseded 
 
 `proofs/active/` is intentionally empty. Existing source-only, robust, and conditional theorem scaffolds are in `proofs/baselines/`; their audit is in `proofs/audits/`. No theorem has been promoted as the project's active result.
 
+## Current design result
+
+The design audit is recorded in `notes/framework_design/`. Read
+`adequacy_audit.md`, `problem_instances.md`, `reuse_test.md`,
+`information_sufficiency.md`, `bottlenecks.md`, the route files,
+`comparison.md`, `novelty_check.md`, and `decision.md` in that order. Existing
+IPM, conditional/causal, DRO, and meta-domain formalisms are adequate for the
+declared problem instances; the remaining work is an algorithm-local theorem,
+an explicit ambiguity term, or an impossibility result.
+
 ## Next authorized step
 
-Use both evidence bases to generate and compare candidate architectures under a new design task. Keep candidates under `notes/framework_design/`, with requirements, stress tests, comparison and decision separated from evidence.
+Choose one concrete theorem route, preferably a bounded-loss MMD/conditional
+bound or a restricted IRMv1 translation. Keep `proofs/active/` empty until a
+proof is independently audited and promoted.
