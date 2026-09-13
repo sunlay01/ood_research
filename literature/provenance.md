@@ -1,0 +1,9 @@
+# Provenance
+
+- Search date: 2026-09-13 (Asia/Shanghai).
+- Sources consulted: publisher proceedings/pages (NeurIPS, ICML/PMLR, JMLR, PNAS, RSSB, Springer), DOI records, and arXiv records for papers without a convenient archival page. Links are recorded in `reading_queue.md` and `references.bib`.
+- Query families: `domain generalization generalization bound`, `unseen domains theory`, `H-divergence discrepancy`, `IRM IRMv1 gradient penalty theory`, `V-REx risk variance`, `Fishr gradient variance`, `CORAL MMD kernel domain generalization`, `spectral norm OOD bound`, `DRO Wasserstein domain generalization`, `PAC-Bayes domain adaptation`, `stability domain shift`, `domain generalization impossibility`, and `unified domain generalization framework`.
+- Inclusion: original papers with a theorem, formal objective, counterexample, or framework directly relevant to source-only DG/OOD, plus foundational tools used by those papers. Surveys are navigation only.
+- Exclusion: purely empirical OOD benchmarks without a mathematical object or bound; target adaptation papers are retained only when the target-data requirement is explicitly labeled DA.
+- Verification limits: some recent conference records and arXiv pages were checked at abstract/equation level rather than every proof line; these are marked as restricted or “theorem scope” claims. The queue intentionally includes them for a second full-text pass.
+- Unresolved: a complete census of 2024–2026 IRMv1/Fishr finite-sample theorems; whether a useful source-only meta-distribution can be estimated from the project's available environments; tightness of joint-error terms under conditional shift.

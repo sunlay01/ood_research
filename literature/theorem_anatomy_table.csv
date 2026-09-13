@@ -1,0 +1,11 @@
+Paper,year,setting,DA_DG_OOD,bounded_quantity,decomposition,tools,complexity_term,shift_term,irreducible_term,target_data,algorithm_specific,restrictions,key_limitation
+Ben-David et al.,2010,unsupervised domain adaptation,DA,R_T,"R_S + HDeltaH + lambda",VC/concentration,VC, HDeltaH,lambda*,yes,no,finite VC,not source-only
+Mansour et al.,2009,domain adaptation,DA,R_T,discrepancy triangle,loss-class discrepancy,Rademacher,discrepancy,joint error,yes,no,loss class,oracle term
+Blanchard et al.,2011,domain generalization,DG,unseen-domain risk,meta-distribution concentration,concentration,environment complexity,domain sampling,approximation,no,no,domain family,coverage assumption
+Germain et al.,2016,domain adaptation,DA, target Gibbs risk,change of measure + disagreement,PAC-Bayes,KL,domain disagreement,joint term,yes,no,loss boundedness,not source-only
+Bartlett et al.,2017,same-distribution generalization,OOD-adjacent,source risk,uniform margin bound,spectral complexity,product norms,none,margin approximation,no,no,ReLU/margins,no shift model
+Rivasplata et al.,2019,DA PAC-Bayes,DA,target risk,source Gibbs + disagreement,PAC-Bayes,KL,disagreement,joint term,yes,no,bounded loss,posterior certificate
+Esfahani & Kuhn,2018,Wasserstein DRO,DRO,robust population risk,duality + concentration,duality/uniform convergence,model class,Wasserstein ball,ball misspecification,no,no,transport assumptions,radius selection
+Sagawa et al.,2020,group robustness,DG/group,max-group risk,empirical-to-population group bound,concentration,group complexity,group weights,coverage,no,no,finite groups,not arbitrary unseen domains
+Krueger et al.,2021,V-REx,DG,extrapolated risk,risk variance heuristic/toy analysis,algebra/concentration,model-specific,environment variance,model misspecification,no,partly,linear/toy,limited theorem scope
+Rosenfeld et al.,2021,IRM failure/DG,DG,lower bounds/impossibility,constructive counterexample,linear algebra,none,environment ambiguity,non-identifiability,no,yes linear,linear,not upper bound

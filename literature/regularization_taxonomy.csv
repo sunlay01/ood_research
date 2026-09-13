@@ -1,0 +1,15 @@
+Method,paper,year,family,canonical_objective,object_regularized,uses_gradients,uses_second_order,target_data,level,theory,caveat
+ERM,Vapnik1998,1998,ERM,"mean_e R_e",none,no,no,no,function,class complexity only,DG needs shift assumption
+GroupDRO,Sagawa2020,2020,DRO,"max_e R_e",worst-group risk,no,no,no,function,finite-group robust bound,coverage and group family
+V-REx,Krueger2021,2021,risk consistency,"mean R + lambda Var(R_e)",risk dispersion,no,no,no,function,population/linear analyses,not general deep target theorem
+IRM,Arjovsky2019,2019,invariance,"min sum R s.t. shared argmin",shared optimal classifier,indirect,no,no,function+representation,restricted/ideal analyses,identifiability assumptions
+IRMv1,Arjovsky2019,2019,gradient penalty,"mean R + lambda sum ||grad_w R_e||^2",first-order optimality,yes,no,no,parameter surrogate,surrogate theory,gradient is classifier w
+Fishr,Rame2022,2022,optimizer statistics,"match Var(g_e)",gradient covariance,yes,yes,no,parameter,algorithm paper,exact deep finite-sample theorem scarce
+CORAL,Sun2016,2016,moment matching,"loss + ||Cov_e-Cov_e'||^2",feature covariance,no,yes,DA often,representation,moment concentration possible,conditional shift remains
+MMD,Gretton2012,2012,kernel IPM,"loss + MMD",RKHS mean embedding,no,no,DA often,representation,function,RKHS concentration,oracle joint term
+ICP,Peters2016,2016,causal invariance,"P(Y|X_S) invariant",conditional mechanism,no,no,no,statistical,causal guarantees,structural assumptions
+Anchor regression,Rothenhaeusler2021,2021,shift robustness,"weighted residual covariance",anchor shift sensitivity,no,no,no,linear,function,robustness over anchor family,linear/anchor scope
+Wasserstein DRO,Sinha2018,2018,DRO,"min sup_{W<=rho} R_Q",uncertainty set,no,no,no,function,duality + concentration,metric/radius assumptions
+Spectral norm,Bartlett2017,2017,norm capacity,layer norm constraints,capacity/Lipschitz,no,no,no,class,norm generalization,not shift identification
+PAC-Bayes DG,Germain2016,2016,PAC-Bayes,"Gibbs source + KL + discrepancy",posterior complexity,no,no,variant,function/posterior,PAC-Bayes transfer bound,prior and shift term
+MLDG,Li2018,2018,bilevel,"meta-test after meta-train step",cross-domain optimizer,no,no,no,parameter,restricted/Taylor analyses,optimization abstraction
