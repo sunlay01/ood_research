@@ -42,6 +42,13 @@ IPM, conditional/causal, DRO, and meta-domain formalisms are adequate for the
 declared problem instances; the remaining work is an algorithm-local theorem,
 an explicit ambiguity term, or an impossibility result.
 
+The subsequent bottom-up synthesis is recorded in
+[`notes/framework_synthesis/`](notes/framework_synthesis/). Its entry point is
+`README.md`; it starts from exact method cards, attacks candidate primitives,
+and proposes a typed bridge calculus as a research architecture. This does not
+promote a theorem to `proofs/active/` and does not replace the problem-first
+audit.
+
 ## Next authorized step
 
 Choose one concrete theorem route, preferably a bounded-loss MMD/conditional
