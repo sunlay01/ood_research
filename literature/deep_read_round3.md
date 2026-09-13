@@ -1,3 +1,5 @@
+> **Status: HISTORICAL / INTERMEDIATE RESEARCH NOTE.** Retained for provenance. Do not read by default; use `literature/ledger/` as the current authoritative entry point.
+
 # Deep-read round 3: representation and formalization papers
 
 This note is deliberately narrow. It records what was inspected in publisher HTML/PDF text and separates proof-level reading from metadata-only verification.

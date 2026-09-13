@@ -1,3 +1,5 @@
+> **Status: HISTORICAL / INTERMEDIATE RESEARCH NOTE.** Retained for provenance. Do not read by default; use `literature/ledger/` as the current authoritative entry point.
+
 # Formalization lessons
 
 1. Pick the theorem target first. A source-risk bound, unseen-domain expectation, robust supremum, and target risk are different quantities.

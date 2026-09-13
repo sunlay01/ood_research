@@ -1,3 +1,5 @@
+> **Status: HISTORICAL / INTERMEDIATE RESEARCH NOTE.** Retained for provenance. Do not read by default; use `literature/ledger/` as the current authoritative entry point.
+
 # OOD/DG regularization taxonomy
 
 Scope: source-only domain generalization (DG) unless a row says DA, and statistical objects at the population level. The displayed objectives are the authors' objectives or their direct population analogues; a theorem's surrogate is called out explicitly.

@@ -1,3 +1,5 @@
+> **Status: HISTORICAL / INTERMEDIATE RESEARCH NOTE.** Retained for provenance. Do not read by default; use `literature/ledger/` as the current authoritative entry point.
+
 # IRM / IRMv1 theory audit
 
 ## Exact objects in the proposal

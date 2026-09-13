@@ -1,3 +1,5 @@
+> **Status: HISTORICAL / INTERMEDIATE RESEARCH NOTE.** Retained for provenance. Do not read by default; use `literature/ledger/` as the current authoritative entry point.
+
 # Unified formalization frameworks
 
 | Framework / paper | Common mathematical object | Algorithms covered | Excluded or awkward methods | Exact vs surrogate | Optimization treatment | Generalization theorem? | Source-only? | Main advantage | Main loss of fidelity |

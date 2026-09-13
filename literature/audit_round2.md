@@ -1,3 +1,5 @@
+> **Status: HISTORICAL / INTERMEDIATE RESEARCH NOTE.** Retained for provenance. Do not read by default; use `literature/ledger/` as the current authoritative entry point.
+
 # Literature audit round 2: network-verified corrections and additions
 
 This file records live checks performed on 2026-09-13, after review of commit `2ac90c7`. The first round did not use an online search API; this round does.
