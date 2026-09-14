@@ -152,13 +152,15 @@ optimizer-diameter candidates are stopped, robust regret is crowded, and the
 risk-landscape quotient is retained only for a bounded discrepancy hard gate.
 Its natural sup-norm quotient is already exactly half classical loss-class
 discrepancy, so no new master has been accepted.
-The next accepted research direction is **Stage 13R.2 — source identifiability
-of the established transfer measure**. We now treat Zhang et al. (2021)'s and
-Moment Alignment's transfer measure as the imported endpoint and study the new
-source-information layer: excess-risk affine representation, source quotient
-`V*/S°`, sharp compatible-fiber certificate, exposed-span positive theorem, and
-blind-direction impossibility. This is a candidate source-to-transfer theorem,
-not a claim that transfer measure itself is new.
+The next research direction is **Stage 13R.2 — source identifiability of the
+established transfer measure**, currently at **`REVISE-TRANSFER-LIFT`**. We treat
+Zhang et al. (2021)'s and Moment Alignment's transfer measure as an imported
+endpoint and retain the source-information layer: source quotient `V*/S°`, sharp
+compatible-fiber certificate, exposed-span positive theorem, and blind-direction
+impossibility. The regularizer lift is not yet generic: excess-risk affinity is
+an extra assumption, native V-REx controls `Var R_e` rather than `Var E_e`, and
+the source average is not Moment Alignment's center-of-mass reference. A native
+V-REx route with an explicit `range_e R_e^*` correction is now the next gate.
 
 Authoritative working notes:
 

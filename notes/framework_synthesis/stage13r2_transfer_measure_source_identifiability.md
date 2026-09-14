@@ -11,11 +11,14 @@ question:
 The scope is finite-dimensional population theory. No new regularizer is
 designed, and no claim is made that the transfer measure itself is novel.
 
-**Decision: `ADVANCE-TO-TRANSFER-CERTIFICATE`.** The Stage 12 support/quotient
-machinery lifts exactly to a robust transfer-measure theorem and a sharp
-source-only identifiability barrier. This is a candidate contribution about the
-source-information interface, not a replacement for Zhang et al. (2021) or
-Moment Alignment (Chen et al., UAI 2025).
+**Decision: `REVISE-TRANSFER-LIFT`.** The source-observability quotient,
+compatible-fiber certificate, and blind-direction barrier survive. The claimed
+regularizer-to-transfer lift does not yet hold generically: excess risk is not
+automatically affine, native V-REx controls raw-risk variance rather than
+excess-risk variance, and the source average used below is not Moment
+Alignment's center-of-mass reference. The transfer endpoint is imported from
+prior work; the next gate must repair these interfaces before any certificate
+claim is advanced.
 
 ## 1. Imported endpoint
 
@@ -31,6 +34,10 @@ The one-sided transfer measure is
 T_Gamma(S || T) = sup_{f in Gamma} [E_T(f) - E_S(f)].
 ```
 
+Here `E_S` denotes the source reference used by the cited endpoint (pairwise
+or the paper's multi-source center construction). It is not automatically the
+uniform average `(1/m)sum_e E_e(f)` used in the centered construction below.
+
 Zhang, Zhao, Yu & Poupart (NeurIPS 2021, arXiv:2106.03632) introduced this
 transferability/transfer-measure framework, proved a target-error bound, and
 showed equivalence with their transferability definition. Chen et al. (UAI
@@ -41,7 +48,7 @@ gradient/Hessian moments.
 We therefore treat `T_Gamma` as established prior work and place the new theorem
 interface after the endpoint.
 
-## 2. Excess-risk affine representation
+## 2. Excess-risk representation is an additional assumption
 
 Let `Psi(P) in V`, source center
 
@@ -51,11 +58,18 @@ delta_T = Psi(P_T) - Psi_bar_S,
 delta_e = Psi(P_e) - Psi_bar_S.
 ```
 
-Assume the declared representation
+Stage 12's affine representation for raw risk does **not** imply an affine
+representation for excess risk, because `R_P^* = inf_h R_P(h)` is generally a
+concave lower envelope of affine functions. We therefore make the following
+additional, explicit assumption whenever the support theorem is invoked:
 
 ```text
 E_P(f) = a_f + g_f(Psi(P)) + eta_f(P),
 ```
+
+This `(ER-affine)` condition can follow, for example, from a common optimizer
+whose optimal risk is itself affine on the declared family; it does not follow
+merely from an IRM common optimizer. Under this extra assumption,
 
 with `|eta_f(P)| <= epsilon_f` on the declared source/target family. Then
 
@@ -64,11 +78,12 @@ E_T(f) - (1/m)sum_e E_e(f)
  = g_f(delta_T) + eta_f(P_T) - (1/m)sum_e eta_f(P_e).
 ```
 
-For the ideal affine case `eta=0`, the robust transfer measure over an external
-target-shift family `U` is exactly
+For the ideal affine case `eta=0`, define the centered-average quantity over an
+external target-shift family `U`:
 
 ```text
-T_Gamma^U(S) := sup_{delta in U} sup_{f in Gamma} [E_delta(f)-E_barS(f)]
+T_bar^U(S) := sup_{delta in U} sup_{f in Gamma}
+              [E_delta(f)-(1/m)sum_e E_e(f)]
               = sup_{f in Gamma} h_U(g_f),
 h_U(g) = sup_{delta in U} g(delta).
 ```
@@ -76,11 +91,14 @@ h_U(g) = sup_{delta in U} g(delta).
 With the uniform residual bound, the inequality becomes
 
 ```text
-T_Gamma^U(S) <= sup_f h_U(g_f) + 2 sup_f epsilon_f.
+T_bar^U(S) <= sup_f h_U(g_f) + 2 sup_f epsilon_f.
 ```
 
-This is the exact Stage 12 support theorem with the endpoint renamed to the
-established transfer measure. The residual remains explicit.
+`T_bar^U` is a useful robust centered-excess quantity, but it is not silently
+identified with Zhang et al.'s pairwise transfer measure or Moment Alignment's
+multi-source center-of-mass construction. Passing from this average reference
+to those endpoints requires a separate center/multi-source theorem. The
+residual remains explicit.
 
 ## 3. Source-observable quotient and sharp certificate
 
@@ -105,7 +123,7 @@ indistinguishable and one uniform certificate must cover every target support.
 This is a minimality theorem at the transfer-measure level, not a new definition
 of transfer measure.
 
-## 4. Positive coverage theorem
+## 4. Positive coverage theorem (conditional excess-risk corollary)
 
 If `U` lies in the exposed source span and is contained in the ellipsoid induced
 by the source exposure operator `A`,
@@ -119,7 +137,7 @@ then
 
 ```text
 h_U(g_f) <= rho * sqrt(g_f(A g_f)),
-T_Gamma^U(S) <= rho * sup_f sqrt(g_f(A g_f)) + 2 epsilon_repr.
+T_bar^U(S) <= rho * sup_f sqrt(g_f(A g_f)) + 2 epsilon_repr.
 ```
 
 In the exact affine representation,
@@ -128,14 +146,39 @@ In the exact affine representation,
 g_f(A g_f) = (1/m)sum_e g_f(delta_e)^2
 ```
 
-is the variance of the source excess-risk responses. Therefore V-REx supplies
-an exact learner-side statistic for this certificate under the explicit exposed-
-span coverage assumption. GroupDRO and MM-REx give alternative support choices
-when `U` is respectively the observed convex hull or a declared bounded affine
-extrapolation family. These are corollaries under different target families,
-not claims that the native objectives are identical.
+is the variance of the source excess-risk responses. It is therefore not, in
+general, the native V-REx statistic. Native V-REx uses `Var_e R_e(f)`; exact
+identification with excess-risk variance requires the extra condition
+`R_e^*` constant across environments. GroupDRO and MM-REx likewise act on raw
+risks unless their objectives are explicitly redefined on excess risks. Their
+support interpretations are conditional statements, not generic exact
+translations of the native algorithms.
 
-## 5. Blind-direction impossibility
+## 5. Native V-REx bound for the established transfer endpoint
+
+To preserve the actual algorithm, retain raw risks. For every pair of source
+environments and every predictor,
+
+```text
+|R_j(f)-R_i(f)| <= sqrt(2*m*Var_e R_e(f)).
+```
+
+Combining this elementary range bound with the existing convex-hull/pairwise
+transfer theorem from Moment Alignment gives the conditional certificate
+
+```text
+T_Gamma(S||T)
+ <= sqrt(m/2) * sup_f sqrt(Var_e R_e(f))
+    + (1/2) * range_e R_e^*.
+```
+
+The second term is the correction for source optimum-risk heterogeneity. It
+vanishes when `R_e^*` is constant, without changing the native V-REx objective.
+This is the correct route from a real regularizer to an established transfer
+measure; it is not a new transfer theorem and remains conditional on the
+target-family assumptions of the imported result.
+
+## 6. Blind-direction impossibility
 
 If `U` contains `delta_perp notin S` and no restriction is imposed on blind dual
 extensions, choose `h_0 in S°` with `h_0(delta_perp) != 0`. Then `g_f+t h_0`
@@ -153,7 +196,7 @@ family. It also explains why Moment Alignment's derivative bounds require
 convex-hull/IRM/curvature assumptions rather than following from source risks
 alone.
 
-## 6. What is actually new here
+## 7. What is actually new here
 
 The endpoint, target-risk decomposition, and Moment Alignment derivative bounds
 are imported. The surviving theorem contribution is the explicit information
@@ -173,7 +216,7 @@ relabeling Stage 12 because the theorem now targets the established transfer
 measure and yields method-specific source certificates as corollaries; it is not
 an assertion that support functions or transfer measures are new mathematics.
 
-## 7. Proof status
+## 8. Proof status
 
 Paper proofs: the affine excess-risk transfer identity with residuals, sharp
 fiber minimality, exposed-span transfer bound, and blind-direction impossibility.
@@ -183,5 +226,7 @@ cover positive and negative cases.
 
 The next authorized task is a strict regularizer-to-transfer certificate gate.
 It must use one declared target family at a time, expose all residual and
-coverage assumptions, and compare against Zhang 2021, Hemati 2023, and Chen
-2025 before any novelty claim.
+coverage assumptions, distinguish raw-risk objectives from excess-risk
+representations, and compare against Zhang 2021, Hemati 2023, Chen 2025, Xu
+2022, and Partial Transportability for Domain Generalization (NeurIPS 2024)
+before any novelty claim.

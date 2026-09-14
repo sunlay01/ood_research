@@ -22,6 +22,14 @@
    classical loss-class discrepancy and source-risk/discrepancy/joint-error
    bounds. These are component-level or special-case neighbors, not exact
    source-quotient transfer certificates.
+5. Xu et al., *Adversarially Robust Models may not Transfer Better: Sufficient
+   Conditions for Domain Transferability from the View of Regularization*, ICML
+   2022, directly connect function-class regularization to relative domain
+   transferability.
+6. *Partial Transportability for Domain Generalization*, NeurIPS 2024, frames
+   target-functional guarantees through partial identification and explicit
+   nontransportability. This is a conceptual neighbor to any source-fiber or
+   blind-direction claim and must be compared at theorem level.
 
 ## Classification of the present theorem package
 
@@ -33,17 +41,21 @@
 | source quotient `V*/S°` for transfer responses | `COMPONENT-LEVEL-OVERLAP` | quotient/partial-identification structure is classical, but not found stated at this transfer-measure interface |
 | sharp minimum of source-only transfer certificates over compatible fibers | `NO-EXACT-OVERLAP-FOUND` | specific interface claim; absence is negative evidence only |
 | blind-direction impossibility for source-only transfer certificates | `NO-EXACT-OVERLAP-FOUND` | target-information limitations are known, but this exact support/annihilator form was not found in checked primary sources |
-| V-REx/GroupDRO/MMD/IRM corollaries | `SPECIAL-CASE` / `COMPONENT-LEVEL` | existing method-specific theory and standard duality are strong neighbors |
+| V-REx/GroupDRO/MMD/IRM corollaries | `SPECIAL-CASE` / `COMPONENT-LEVEL` | existing method-specific theory and standard duality are strong neighbors; native V-REx is raw-risk variance, not excess-risk variance |
 
 ## Conservative conclusion
 
 The contribution cannot be advertised as a new transfer measure, new discrepancy,
-or new moment-alignment theory. The defensible claim is narrower:
+or new moment-alignment theory. The generic excess-risk lift is also not yet
+valid: it needs an explicit `(ER-affine)` assumption and a declared source
+reference. The defensible claim is narrower:
 
 > We develop a source-observability and sharp-certificate theory for an
 > established transfer-measure endpoint, exposing the quotient ambiguity and
 > proving when source-only regularizer statistics can or cannot control it.
 
-This is a `DISTINCT-BUT-RISKY` theory direction. It requires a strict
-source-certificate theorem and comparison against the cited transfer-measure
-papers before any publication-level novelty claim.
+This remains a `REVISE-TRANSFER-LIFT` direction, not an advance gate. It
+requires a strict native-regularizer certificate theorem, explicit optimum-risk
+correction terms, a center/multi-source comparison, and theorem-level
+comparison against Xu (2022) and Partial Transportability (2024) before any
+publication-level novelty claim.

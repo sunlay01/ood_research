@@ -31,6 +31,30 @@ def robust_transfer_support_and_vrex() -> None:
     check("exposed transfer support", support, rho * np.sqrt(vrex))
 
 
+def native_vrex_is_not_excess_vrex() -> None:
+    """Regression test for the raw-risk/excess-risk distinction."""
+    raw = np.array([1.0, 1.0])
+    opt = np.array([0.0, 0.9])
+    excess = raw - opt
+    check("native V-REx variance", float(np.var(raw)), 0.0)
+    if np.isclose(float(np.var(excess)), 0.0, atol=TOL):
+        raise AssertionError("heterogeneous optimum risks must change excess variance")
+    print("PASS native V-REx is not excess-risk V-REx without constant optima")
+
+
+def native_vrex_transfer_correction() -> None:
+    """Check the explicit optimum-risk heterogeneity correction term."""
+    risks = np.array([0.8, 0.2, 0.5])
+    optima = np.array([0.1, 0.2, 0.4])
+    m = len(risks)
+    variance_term = float(np.var(risks))
+    range_opt = float(np.max(optima) - np.min(optima))
+    certificate = np.sqrt(m / 2.0) * np.sqrt(variance_term) + 0.5 * range_opt
+    if certificate < 0.5 * range_opt:
+        raise AssertionError("correction term must be present in the native bound")
+    print("PASS native V-REx transfer certificate includes optimum-risk correction")
+
+
 def groupdro_hull_certificate() -> None:
     g = np.array([0.8, -0.2])
     deltas = np.array([[1.0, 0.0], [-1.0, 0.0], [0.0, 1.0]])
@@ -69,6 +93,8 @@ def source_vs_target_information() -> None:
 if __name__ == "__main__":
     affine_excess_transfer_identity()
     robust_transfer_support_and_vrex()
+    native_vrex_is_not_excess_vrex()
+    native_vrex_transfer_correction()
     groupdro_hull_certificate()
     blind_transfer_impossibility()
     residual_transfer_bound()

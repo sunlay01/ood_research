@@ -99,10 +99,12 @@ pairwise loss discrepancy, so a non-arbitrary alternative geometry and a new
     `experiments/stage13r2_transfer_measure_tests.py`; the finite Lean slice is
     in `lean/OodTheoryVerification/Stage13R2/Basic.lean`.
 Stage 13R.2 now redirects the research line to an established endpoint:
-`T_Gamma(S||T)=sup_f[E_T(f)-E_S(f)]`. The new theorem target is source
-identifiability and certificate minimality for this transfer measure, using the
-Stage 12 support/quotient machinery. See the Stage 13R.2 source-identifiability,
-certificate, and novelty-audit files plus
+`T_Gamma(S||T)=sup_f[E_T(f)-E_S(f)]`. The source-identifiability and certificate
+minimality layer survives, but the regularizer lift is currently
+`REVISE-TRANSFER-LIFT`: excess-risk affinity is an explicit extra assumption,
+native V-REx controls raw-risk variance, and the source-average reference is not
+Moment Alignment's center-of-mass domain. See the Stage 13R.2
+source-identifiability, certificate, and novelty-audit files plus
 `experiments/stage13r2_transfer_measure_tests.py`; the finite algebraic slice is
-`lean/OodTheoryVerification/Stage13R2/Basic.lean`. The direction is
-`ADVANCE-TO-TRANSFER-CERTIFICATE`, not a claim that the endpoint itself is new.
+`lean/OodTheoryVerification/Stage13R2/Basic.lean`. The endpoint itself is not
+claimed as new.

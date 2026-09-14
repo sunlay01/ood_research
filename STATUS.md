@@ -258,30 +258,36 @@ claiming it as a new master. Stage 13R.2 is recorded in
 [`notes/framework_synthesis/experiments/stage13r2_transfer_measure_tests.py`](notes/framework_synthesis/experiments/stage13r2_transfer_measure_tests.py), and a finite algebraic Lean slice in
 `lean/OodTheoryVerification/Stage13R2/Basic.lean`.
 
-The theorem package lifts Stage 12 to the established endpoint
-`T_Gamma(S||T)=sup_f[E_T(f)-E_S(f)]`: under an excess-risk affine state it gives
-`T_Gamma^U <= sup_f h_U(g_f)+2 epsilon_repr`; source responses identify `g_f`
-only modulo `S°`; every source-only certificate is lower-bounded by the
-compatible-fiber support; and unrestricted blind target directions make any
-finite certificate impossible. Exposed-span ellipsoids yield the positive
-V-REx-style corollary, while GroupDRO/MM-REx/MMD/CORAL/IRM remain explicit
-restricted or projection certificates.
+The theorem package lifts Stage 12 to an established transfer endpoint only
+under additional conditions. An affine representation for raw risk does not
+imply one for excess risk, so `(ER-affine)` is an explicit extra assumption;
+the centered source average is also distinct from Moment Alignment's
+center-of-mass reference. Under `(ER-affine)`, the support/quotient machinery
+gives the centered-excess identity, compatible-fiber lower bound, and blind
+direction impossibility. Native V-REx instead controls `Var_e R_e(f)` and can be
+connected to the imported transfer measure only through a conditional bound
+with correction `(1/2) range_e R_e^*`. GroupDRO/MM-REx/MMD/CORAL/IRM remain
+restricted or projection certificates, not generic exact translations.
 
 This is not a new transfer measure, discrepancy, or Moment Alignment theorem.
 The defensible potential contribution is the source-observability, sharp
-certificate, and impossibility layer at that established endpoint. The current
-direction is **`ADVANCE-TO-TRANSFER-CERTIFICATE`** for a strict next gate, not a
-publication-level novelty pass. New regularizer design and Stage 14 remain
-blocked.
+certificate, and impossibility layer at that established endpoint. The generic
+regularizer lift is not yet accepted. The current direction is
+**`REVISE-TRANSFER-LIFT`**, not a publication-level novelty pass. New
+regularizer design and Stage 14 remain blocked. The next certificate gate must
+compare theorem-level overlap with Xu et al. (ICML 2022) and Partial
+Transportability for Domain Generalization (NeurIPS 2024), in addition to the
+already checked transfer-measure papers.
 
 ## Next authorized step
 
 Do not claim `UNIFICATION-PASS`, design a new regularizer, or run large
 benchmarks. Stage 13R.1 terminates ESF as an independent inner master: preserve
-the valid Stage 12/13 local support and translation results, and define any
-future relative-risk quotient or alternative master only through a new,
-separately justified theorem and novelty gate. Do not enter Stage 14 until such
-a gate exists.
+the valid Stage 12/13 local support and translation results. Stage 13R.2 is
+currently `REVISE-TRANSFER-LIFT`; the next task is a strict native
+regularizer-to-transfer certificate gate with explicit optimum-risk,
+representation, source-center, and target-coverage assumptions. Do not enter
+Stage 14 until that gate and the expanded novelty comparison pass.
 Keep `proofs/active/` empty until any local theorem is independently audited and
 promoted. The Stage 12.5 novelty audit is complete; any future new method must
 still pass a separately defined theorem and novelty gate.
