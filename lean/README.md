@@ -37,6 +37,9 @@ Current scope:
   derivatives can agree while environment derivatives and target risks differ.
   General path-integral, Taylor, and Gateaux-derivative claims remain paper
   proofs.
+- `Stage13R1/Basic.lean`: algebraic nuisance-shift and pairwise-risk cancellation
+  identities, plus the reclassified Stage 13R separation witness. Envelope,
+  path, and quotient-space theorems remain paper-level.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine

@@ -45,6 +45,14 @@ Read in this order:
     Alignment, and the exact-overlap audit. Deterministic checks are in
     `experiments/stage13r_esf_master_tests.py`; the stable algebraic Lean slice
     is in `lean/OodTheoryVerification/Stage13R/Basic.lean`.
+18. `stage13r1_master_invariance_audit.md`,
+    `stage13r1_excess_vs_moment_alignment.md`,
+    `stage13r1_fixed_tangent_reaudit.md`, and
+    `stage13r1_novelty_audit.md` — the nuisance/invariance hard gate, the
+    excess-risk equivalence analysis, the fixed physical tangent comparison,
+    and the prior-art audit. Deterministic checks are in
+    `experiments/stage13r1_master_invariance_tests.py`; stable algebraic
+    identities are in `lean/OodTheoryVerification/Stage13R1/Basic.lean`.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
@@ -67,3 +75,9 @@ sensitivity functional is coherent and separated from parameter-side Moment
 Alignment, but source-only global control requires an explicit path envelope or
 coverage assumption, and derivative-rich methods remain restricted. No Stage 14,
 new regularizer, or large benchmark is authorized yet.
+Stage 13R.1 supersedes that provisional status with decision
+`FAIL-ESF-AS-INDEPENDENT-MASTER`: raw ESF fails additive-nuisance invariance,
+excess ESF is Moment Alignment-equivalent at the endpoint/path level, and the
+pairwise quotient is relative-risk only without a new fixed-tangent theorem.
+The valid Stage 12/13 results remain preserved; no Stage 14 or new regularizer
+is authorized.

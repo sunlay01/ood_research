@@ -137,6 +137,14 @@ certificate still needs an explicit path-envelope/coverage assumption, while
 IRMv1 and Fishr do not have unconditional natural bridges. Stage 14 and any new
 regularizer remain blocked until this interface is repaired or explicitly scoped
 as an oracle/path-local theorem.
+Stage 13R.1 subsequently ran the nuisance/invariance hard gate. Raw ESF changes
+under predictor-independent additive environment difficulty; excess ESF removes
+that nuisance but is endpoint/path equivalent to Moment Alignment's excess-risk
+transfer measure. A pairwise risk quotient survives only as a relative-risk
+object and does not yield the required absolute target-risk certificate. The
+decision is **`FAIL-ESF-AS-INDEPENDENT-MASTER`**. Stage 12/13 support and
+translation results remain valid, but ESF is no longer treated as an independent
+inner master functional.
 
 Authoritative working notes:
 
@@ -162,4 +170,10 @@ notes/framework_synthesis/stage13r_moment_alignment_separation.md
 notes/framework_synthesis/stage13r_novelty_audit.md
 notes/framework_synthesis/experiments/stage13r_esf_master_tests.py
 lean/OodTheoryVerification/Stage13R/Basic.lean
+notes/framework_synthesis/stage13r1_master_invariance_audit.md
+notes/framework_synthesis/stage13r1_excess_vs_moment_alignment.md
+notes/framework_synthesis/stage13r1_fixed_tangent_reaudit.md
+notes/framework_synthesis/stage13r1_novelty_audit.md
+notes/framework_synthesis/experiments/stage13r1_master_invariance_tests.py
+lean/OodTheoryVerification/Stage13R1/Basic.lean
 ```

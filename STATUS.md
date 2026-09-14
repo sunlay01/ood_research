@@ -3,9 +3,9 @@
 ## Current branch
 
 `ood-theory` contains the completed problem-first formalization audit and the
-finite-dimensional theorem probes through Stage 13R. The current working
-decision is **`REVISE-ESF-MASTER`**; no universal representation or source-only
-global ESF certificate has been accepted.
+finite-dimensional theorem probes through Stage 13R.1. The current working
+decision is **`FAIL-ESF-AS-INDEPENDENT-MASTER`**; no universal representation or
+source-only global ESF certificate has been accepted.
 
 ## Epistemic status
 
@@ -199,13 +199,42 @@ increment/support algebra, translation invariance, and a concrete separation
 witness. General Gateaux derivatives, path integration, Taylor bounds, and
 literature-level novelty claims remain paper proofs with deterministic tests.
 
+## Stage 13R.1 master-functional invariance gate
+
+Stage 13R.1 is recorded in
+[`notes/framework_synthesis/stage13r1_master_invariance_audit.md`](notes/framework_synthesis/stage13r1_master_invariance_audit.md), with the excess-risk comparison in
+[`notes/framework_synthesis/stage13r1_excess_vs_moment_alignment.md`](notes/framework_synthesis/stage13r1_excess_vs_moment_alignment.md), the fixed-tangent re-audit in
+[`notes/framework_synthesis/stage13r1_fixed_tangent_reaudit.md`](notes/framework_synthesis/stage13r1_fixed_tangent_reaudit.md), the novelty audit in
+[`notes/framework_synthesis/stage13r1_novelty_audit.md`](notes/framework_synthesis/stage13r1_novelty_audit.md), deterministic tests in
+[`notes/framework_synthesis/experiments/stage13r1_master_invariance_tests.py`](notes/framework_synthesis/experiments/stage13r1_master_invariance_tests.py), and stable algebraic Lean checks in
+`lean/OodTheoryVerification/Stage13R1/Basic.lean`.
+
+The gate finds that raw ESF changes under `R -> R+c(xi)`, even though `c` is
+predictor-independent environment difficulty. Excess ESF removes this nuisance,
+but under explicit Danskin/envelope and path regularity assumptions it is exactly
+a differential/path representation of Moment Alignment's excess-risk transfer
+measure. The original Stage 13R witness therefore proves information separation,
+not predictor-relevant OOD separation. A pairwise risk quotient is nuisance
+invariant, but it only certifies relative risk/ranking and does not yield the
+required absolute target-risk certificate. Re-auditing V-REx, GroupDRO, fixed-
+state MMD, and ideal IRM under one externally fixed Euclidean tangent ball gives
+only coverage-dependent upper bounds, relaxations, or structural surrogates, not
+a new common ESF theorem.
+
+The final decision is **`FAIL-ESF-AS-INDEPENDENT-MASTER`**. This is not a failure
+of the Stage 12/13 support calculus: those local results remain valid and
+authoritative. It means ESF should no longer be presented as an independent inner
+master for absolute OOD risk. Any future relative-risk quotient or alternative
+master requires a new scientific target and a separate theorem/novelty gate.
+
 ## Next authorized step
 
 Do not claim `UNIFICATION-PASS`, design a new regularizer, or run large
-benchmarks while `REVISE-ESF-MASTER` is active. The next work must repair or
-explicitly scope the ESF source-only path interface (for example by declaring a
-source-estimable path envelope), then define a fresh gate before any Stage 14
-extension.
+benchmarks. Stage 13R.1 terminates ESF as an independent inner master: preserve
+the valid Stage 12/13 local support and translation results, and define any
+future relative-risk quotient or alternative master only through a new,
+separately justified theorem and novelty gate. Do not enter Stage 14 until such
+a gate exists.
 Keep `proofs/active/` empty until any local theorem is independently audited and
 promoted. The Stage 12.5 novelty audit is complete; any future new method must
 still pass a separately defined theorem and novelty gate.
