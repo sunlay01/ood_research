@@ -38,6 +38,13 @@ Read in this order:
     `experiments/stage13_regularizer_translation_tests.py` — method-level
     translations, mechanism typing, cross-method consequences, and the
     `PARTIAL-UNIFICATION` gate.
+17. `stage13r_environmental_sensitivity_master.md`,
+    `stage13r_moment_alignment_separation.md`, and
+    `stage13r_novelty_audit.md` — the frozen environmental-sensitivity master
+    functional, its path/local-to-global theorem, separation from Moment
+    Alignment, and the exact-overlap audit. Deterministic checks are in
+    `experiments/stage13r_esf_master_tests.py`; the stable algebraic Lean slice
+    is in `lean/OodTheoryVerification/Stage13R/Basic.lean`.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
@@ -55,3 +62,8 @@ novelty audit is authorized next.
 Stage 13 is complete with decision `PARTIAL-UNIFICATION`: several methods share
 the same state and exact/restricted bridges, but IRMv1 and Fishr prevent a
 universal exact claim.
+Stage 13R is complete with decision `REVISE-ESF-MASTER`: the environmental-side
+sensitivity functional is coherent and separated from parameter-side Moment
+Alignment, but source-only global control requires an explicit path envelope or
+coverage assumption, and derivative-rich methods remain restricted. No Stage 14,
+new regularizer, or large benchmark is authorized yet.

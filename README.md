@@ -20,10 +20,11 @@ source-only OOD/DG
   -> derive different regularizer bounds from one mathematical state and one master theorem
 ```
 
-The current candidate core is an operator/gauge view of source exposure. The
-existing typed bridge calculus remains the outer scaffold for source information,
-target assumptions, identifiability, estimation, optimization, and failure
-semantics. It is not the inner unifying theorem.
+The current candidate core is an operator/gauge view of source exposure, under
+revision by the environmental-sensitivity functional (ESF). The existing typed
+bridge calculus remains the outer scaffold for source information, target
+assumptions, identifiability, estimation, optimization, and failure semantics.
+Neither candidate is accepted as a universal inner theorem yet.
 
 ### Required order
 
@@ -127,6 +128,15 @@ Stage 13 has now tested the method translations. The result is
 fixed-state MMD/CORAL and ideal IRM have explicit restricted bridges, while
 IRMv1 remains a surrogate and Fishr requires a richer state. New regularizer
 design and large benchmarks remain blocked.
+Stage 13R then tested the frozen environmental-sensitivity master functional
+`S_D(f;xi)=sup_{delta in D(xi)} D_xi R(f,xi)[delta]`. Its exact affine reduction
+to Stage 12, path-integral risk theorem, all-order separation from parameter-side
+Moment Alignment, and cross-method support consequences survive deterministic
+and Lean checks. The decision is **`REVISE-ESF-MASTER`**: a source-only global
+certificate still needs an explicit path-envelope/coverage assumption, while
+IRMv1 and Fishr do not have unconditional natural bridges. Stage 14 and any new
+regularizer remain blocked until this interface is repaired or explicitly scoped
+as an oracle/path-local theorem.
 
 Authoritative working notes:
 
@@ -147,4 +157,9 @@ notes/framework_synthesis/stage12_population_master_theorem.md
 notes/framework_synthesis/experiments/stage12_population_theorem_tests.py
 notes/framework_synthesis/stage13_regularizer_translation.md
 notes/framework_synthesis/experiments/stage13_regularizer_translation_tests.py
+notes/framework_synthesis/stage13r_environmental_sensitivity_master.md
+notes/framework_synthesis/stage13r_moment_alignment_separation.md
+notes/framework_synthesis/stage13r_novelty_audit.md
+notes/framework_synthesis/experiments/stage13r_esf_master_tests.py
+lean/OodTheoryVerification/Stage13R/Basic.lean
 ```

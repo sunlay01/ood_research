@@ -2,9 +2,10 @@
 
 ## Current branch
 
-`ood-theory` contains the completed problem-first formalization audit. The
-working decision is `YES-WITH-LOCAL-THEOREM`; no new universal representation
-has been accepted.
+`ood-theory` contains the completed problem-first formalization audit and the
+finite-dimensional theorem probes through Stage 13R. The current working
+decision is **`REVISE-ESF-MASTER`**; no universal representation or source-only
+global ESF certificate has been accepted.
 
 ## Epistemic status
 
@@ -169,12 +170,42 @@ CORAL label-shift witness, ideal-IRM stationarity, and a blind-direction
 witness. General RKHS, learned-representation, quotient, optimization, and
 Fishr higher-moment bridges remain paper proofs with deterministic tests.
 
+## Stage 13R environmental-sensitivity revision gate
+
+Stage 13R is recorded in
+[`notes/framework_synthesis/stage13r_environmental_sensitivity_master.md`](notes/framework_synthesis/stage13r_environmental_sensitivity_master.md), with the direct Moment Alignment comparison in
+[`notes/framework_synthesis/stage13r_moment_alignment_separation.md`](notes/framework_synthesis/stage13r_moment_alignment_separation.md), the recent-literature audit in
+[`notes/framework_synthesis/stage13r_novelty_audit.md`](notes/framework_synthesis/stage13r_novelty_audit.md), deterministic checks in
+[`notes/framework_synthesis/experiments/stage13r_esf_master_tests.py`](notes/framework_synthesis/experiments/stage13r_esf_master_tests.py), and a stable algebraic Lean slice in
+`lean/OodTheoryVerification/Stage13R/Basic.lean`.
+
+The frozen functional is
+`S_D(f;xi) = sup_{delta in D(xi)} D_xi R(f,xi)[delta]`, with `D` declared
+independently of any native algorithm. Gate A passes: ESF is coordinate/gauge
+covariant, reduces exactly to the Stage 12 support function in affine models,
+and has an explicit nonlinear Taylor remainder. Gate B passes as a genuine
+absolutely-continuous path theorem, but source-local sensitivity is not a
+source-only global certificate without path coverage/envelope control. Gate C
+gives exact/dual/projection/restricted translations for several methods; IRMv1
+remains a surrogate and Fishr has no natural bridge in the minimal state. Gate D
+passes via an all-order parameter-derivative versus environment-derivative
+separation witness for Moment Alignment. Gate E yields shared path-control and
+support-ordering consequences. The final decision is
+**`REVISE-ESF-MASTER`**, not `ADVANCE-ESF-MASTER` and not
+`FAIL-NOVELTY-MOMENT-ALIGNMENT`.
+
+Lean status is deliberately narrow: the Stage 13R file checks finite affine
+increment/support algebra, translation invariance, and a concrete separation
+witness. General Gateaux derivatives, path integration, Taylor bounds, and
+literature-level novelty claims remain paper proofs with deterministic tests.
+
 ## Next authorized step
 
 Do not claim `UNIFICATION-PASS`, design a new regularizer, or run large
-benchmarks. The next work must narrow and sharpen the surviving common-state
-claim, or separately formalize a richer-state extension for Fishr/learned maps;
-any new method remains blocked until a new gate is defined.
+benchmarks while `REVISE-ESF-MASTER` is active. The next work must repair or
+explicitly scope the ESF source-only path interface (for example by declaring a
+source-estimable path envelope), then define a fresh gate before any Stage 14
+extension.
 Keep `proofs/active/` empty until any local theorem is independently audited and
 promoted. The Stage 12.5 novelty audit is complete; any future new method must
 still pass a separately defined theorem and novelty gate.

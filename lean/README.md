@@ -31,6 +31,12 @@ Current scope:
   convex-mixture/max-risk algebra, CORAL label-shift witness, ideal-IRM
   stationarity identity, and a blind-direction witness. General RKHS,
   optimization, and Fishr higher-moment claims remain paper-level.
+- `Stage13R/Basic.lean`: finite-dimensional affine environmental-sensitivity
+  equals a finite support calculation, translation invariance of the affine
+  increment, and a concrete separation witness showing that parameter-side
+  derivatives can agree while environment derivatives and target risks differ.
+  General path-integral, Taylor, and Gateaux-derivative claims remain paper
+  proofs.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine
