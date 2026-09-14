@@ -248,6 +248,32 @@ non-arbitrary alternative geometry plus a genuinely new cross-method theorem
 would be required. This is a search-stage result, not an accepted master or a
 novelty claim.
 
+## Stage 13R.2 transfer-measure source-identifiability theorem
+
+The project now accepts the transfer measure as an imported endpoint rather than
+claiming it as a new master. Stage 13R.2 is recorded in
+[`notes/framework_synthesis/stage13r2_transfer_measure_source_identifiability.md`](notes/framework_synthesis/stage13r2_transfer_measure_source_identifiability.md), with method certificates in
+[`notes/framework_synthesis/stage13r2_regularizer_certificates.md`](notes/framework_synthesis/stage13r2_regularizer_certificates.md), the primary-source audit in
+[`notes/framework_synthesis/stage13r2_novelty_audit.md`](notes/framework_synthesis/stage13r2_novelty_audit.md), deterministic tests in
+[`notes/framework_synthesis/experiments/stage13r2_transfer_measure_tests.py`](notes/framework_synthesis/experiments/stage13r2_transfer_measure_tests.py), and a finite algebraic Lean slice in
+`lean/OodTheoryVerification/Stage13R2/Basic.lean`.
+
+The theorem package lifts Stage 12 to the established endpoint
+`T_Gamma(S||T)=sup_f[E_T(f)-E_S(f)]`: under an excess-risk affine state it gives
+`T_Gamma^U <= sup_f h_U(g_f)+2 epsilon_repr`; source responses identify `g_f`
+only modulo `S°`; every source-only certificate is lower-bounded by the
+compatible-fiber support; and unrestricted blind target directions make any
+finite certificate impossible. Exposed-span ellipsoids yield the positive
+V-REx-style corollary, while GroupDRO/MM-REx/MMD/CORAL/IRM remain explicit
+restricted or projection certificates.
+
+This is not a new transfer measure, discrepancy, or Moment Alignment theorem.
+The defensible potential contribution is the source-observability, sharp
+certificate, and impossibility layer at that established endpoint. The current
+direction is **`ADVANCE-TO-TRANSFER-CERTIFICATE`** for a strict next gate, not a
+publication-level novelty pass. New regularizer design and Stage 14 remain
+blocked.
+
 ## Next authorized step
 
 Do not claim `UNIFICATION-PASS`, design a new regularizer, or run large

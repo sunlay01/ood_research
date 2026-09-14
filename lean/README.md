@@ -44,6 +44,10 @@ Current scope:
   equals half the pairwise diameter, and additive environment shifts cancel in
   pairwise differences. General loss-class discrepancy and target-risk bounds
   remain paper-level.
+- `Stage13R2/Basic.lean`: finite affine excess-risk transfer identity, finite
+  support upper-bound algebra, and a concrete blind-extension witness showing
+  identical source responses with arbitrary target response. General transfer-
+  measure suprema and source-certificate minimality remain paper-level.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine

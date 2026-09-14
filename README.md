@@ -152,6 +152,13 @@ optimizer-diameter candidates are stopped, robust regret is crowded, and the
 risk-landscape quotient is retained only for a bounded discrepancy hard gate.
 Its natural sup-norm quotient is already exactly half classical loss-class
 discrepancy, so no new master has been accepted.
+The next accepted research direction is **Stage 13R.2 — source identifiability
+of the established transfer measure**. We now treat Zhang et al. (2021)'s and
+Moment Alignment's transfer measure as the imported endpoint and study the new
+source-information layer: excess-risk affine representation, source quotient
+`V*/S°`, sharp compatible-fiber certificate, exposed-span positive theorem, and
+blind-direction impossibility. This is a candidate source-to-transfer theorem,
+not a claim that transfer measure itself is new.
 
 Authoritative working notes:
 
@@ -187,4 +194,9 @@ notes/framework_synthesis/master_functional_search.md
 notes/framework_synthesis/master_functional_discrepancy_audit.md
 notes/framework_synthesis/experiments/master_functional_search_tests.py
 lean/OodTheoryVerification/MasterFunctionalSearch/Basic.lean
+notes/framework_synthesis/stage13r2_transfer_measure_source_identifiability.md
+notes/framework_synthesis/stage13r2_regularizer_certificates.md
+notes/framework_synthesis/stage13r2_novelty_audit.md
+notes/framework_synthesis/experiments/stage13r2_transfer_measure_tests.py
+lean/OodTheoryVerification/Stage13R2/Basic.lean
 ```

@@ -90,4 +90,19 @@ The subsequent master-functional search is now active. Its first screen stops
 transfer and optimizer-diameter candidates, and marks the risk-landscape
 quotient `REVISE`: the natural sup-norm quotient is exactly half classical
 pairwise loss discrepancy, so a non-arbitrary alternative geometry and a new
-cross-method theorem are required before any master claim.
+    cross-method theorem are required before any master claim.
+20. `stage13r2_transfer_measure_source_identifiability.md`,
+    `stage13r2_regularizer_certificates.md`, and
+    `stage13r2_novelty_audit.md` — the transfer-measure endpoint lift, sharp
+    source-certificate/quotient theorem, regularizer corollaries, and primary
+    literature comparison. Deterministic checks are in
+    `experiments/stage13r2_transfer_measure_tests.py`; the finite Lean slice is
+    in `lean/OodTheoryVerification/Stage13R2/Basic.lean`.
+Stage 13R.2 now redirects the research line to an established endpoint:
+`T_Gamma(S||T)=sup_f[E_T(f)-E_S(f)]`. The new theorem target is source
+identifiability and certificate minimality for this transfer measure, using the
+Stage 12 support/quotient machinery. See the Stage 13R.2 source-identifiability,
+certificate, and novelty-audit files plus
+`experiments/stage13r2_transfer_measure_tests.py`; the finite algebraic slice is
+`lean/OodTheoryVerification/Stage13R2/Basic.lean`. The direction is
+`ADVANCE-TO-TRANSFER-CERTIFICATE`, not a claim that the endpoint itself is new.
