@@ -227,6 +227,27 @@ authoritative. It means ESF should no longer be presented as an independent inne
 master for absolute OOD risk. Any future relative-risk quotient or alternative
 master requires a new scientific target and a separate theorem/novelty gate.
 
+## Master Functional Search (active, no accepted master)
+
+Stage 13R.1 killed ESF as an independent master, not the search for a master
+functional. The first candidate screen is recorded in
+[`notes/framework_synthesis/master_functional_search.md`](notes/framework_synthesis/master_functional_search.md), with the risk-landscape discrepancy hard gate in
+[`notes/framework_synthesis/master_functional_discrepancy_audit.md`](notes/framework_synthesis/master_functional_discrepancy_audit.md) and deterministic checks in
+[`notes/framework_synthesis/experiments/master_functional_search_tests.py`](notes/framework_synthesis/experiments/master_functional_search_tests.py). A finite algebraic slice is checked in
+`lean/OodTheoryVerification/MasterFunctionalSearch/Basic.lean`.
+
+The search is explicitly conducted at the risk-functional level
+`R_P : F -> R`, not as another scalar sensitivity for one predictor. The first
+screen stops the transfer-functional candidate as already covered by Moment
+Alignment, stops optimizer-map diameter because it has no target-risk
+certificate, and marks robust regret as crowded with robust decision/DRO
+theory. The risk-landscape quotient modulo environment-only constants remains
+`REVISE`: under the natural sup norm it is exactly half the classical
+loss-class pairwise discrepancy of Mansour--Mohri--Rostamizadeh/Ben-David, so a
+non-arbitrary alternative geometry plus a genuinely new cross-method theorem
+would be required. This is a search-stage result, not an accepted master or a
+novelty claim.
+
 ## Next authorized step
 
 Do not claim `UNIFICATION-PASS`, design a new regularizer, or run large

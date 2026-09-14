@@ -53,6 +53,11 @@ Read in this order:
     and the prior-art audit. Deterministic checks are in
     `experiments/stage13r1_master_invariance_tests.py`; stable algebraic
     identities are in `lean/OodTheoryVerification/Stage13R1/Basic.lean`.
+19. `master_functional_search.md` and `master_functional_discrepancy_audit.md`
+    — the first post-ESF search over transfer, risk-landscape, robust-regret,
+    and optimality-map candidates, including the exact reduction of the natural
+    sup-norm quotient to classical loss-class discrepancy. Deterministic checks
+    are in `experiments/master_functional_search_tests.py`.
 
 Status: this is a research architecture, not an accepted universal theorem.
 The current evidence supports several irreducible mechanism types and requires
@@ -81,3 +86,8 @@ excess ESF is Moment Alignment-equivalent at the endpoint/path level, and the
 pairwise quotient is relative-risk only without a new fixed-tangent theorem.
 The valid Stage 12/13 results remain preserved; no Stage 14 or new regularizer
 is authorized.
+The subsequent master-functional search is now active. Its first screen stops
+transfer and optimizer-diameter candidates, and marks the risk-landscape
+quotient `REVISE`: the natural sup-norm quotient is exactly half classical
+pairwise loss discrepancy, so a non-arbitrary alternative geometry and a new
+cross-method theorem are required before any master claim.

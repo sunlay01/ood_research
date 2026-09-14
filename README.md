@@ -145,6 +145,13 @@ object and does not yield the required absolute target-risk certificate. The
 decision is **`FAIL-ESF-AS-INDEPENDENT-MASTER`**. Stage 12/13 support and
 translation results remain valid, but ESF is no longer treated as an independent
 inner master functional.
+The project therefore continues with a separate **Master Functional Search**,
+not a return to ad hoc method stitching. The first candidate screen is recorded
+in `notes/framework_synthesis/master_functional_search.md`: transfer and
+optimizer-diameter candidates are stopped, robust regret is crowded, and the
+risk-landscape quotient is retained only for a bounded discrepancy hard gate.
+Its natural sup-norm quotient is already exactly half classical loss-class
+discrepancy, so no new master has been accepted.
 
 Authoritative working notes:
 
@@ -176,4 +183,8 @@ notes/framework_synthesis/stage13r1_fixed_tangent_reaudit.md
 notes/framework_synthesis/stage13r1_novelty_audit.md
 notes/framework_synthesis/experiments/stage13r1_master_invariance_tests.py
 lean/OodTheoryVerification/Stage13R1/Basic.lean
+notes/framework_synthesis/master_functional_search.md
+notes/framework_synthesis/master_functional_discrepancy_audit.md
+notes/framework_synthesis/experiments/master_functional_search_tests.py
+lean/OodTheoryVerification/MasterFunctionalSearch/Basic.lean
 ```

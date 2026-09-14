@@ -40,6 +40,10 @@ Current scope:
 - `Stage13R1/Basic.lean`: algebraic nuisance-shift and pairwise-risk cancellation
   identities, plus the reclassified Stage 13R separation witness. Envelope,
   path, and quotient-space theorems remain paper-level.
+- `MasterFunctionalSearch/Basic.lean`: finite risk-landscape quotient radius
+  equals half the pairwise diameter, and additive environment shifts cancel in
+  pairwise differences. General loss-class discrepancy and target-risk bounds
+  remain paper-level.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine
