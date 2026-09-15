@@ -26,3 +26,16 @@ The current analysis tests seed-level factorial interaction contrasts for
 scale-invariant probability-space counterfactual sensitivity; raw-logit
 `C_pred` is retained only for comparison. Categorical labels and contamination
 causality are deliberately not used as acceptance criteria.
+
+The follow-up optimizer/capacity audit is run with:
+
+```bash
+PYTHONPATH=src python -m ood_repr_reg.run_optimizer_capacity_audit
+```
+
+It matches SGD and Adam states by source BCE before comparing `G_repr`, then
+sweeps continuous task difficulty `alpha` and capacities
+`d_z in {1,2,3,4,6,8,16}`. Its current result is in
+`results/optimizer_capacity_report.md`: the matched optimizer gap is small,
+while the dense sweep shows a capacity/difficulty trend without supporting a
+single phase-boundary theorem.

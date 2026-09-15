@@ -175,8 +175,12 @@ the completed run is recorded in `results/final_verdict.md` as
 **`TWO-AXIS-STRUCTURE-SUPPORTED; CONTAMINATION-UNRESOLVED`**. The
 `rho x sigma_c -> G_use` interaction has seed-level `z=-23.41`, while
 `k x optimizer -> G_repr` has `z=5.76` and `k x d_z -> G_repr` has `z=-8.41`.
-This is evidence for a follow-up mechanism study, not a theorem or a universal
-failure taxonomy.
+The follow-up convergence-matched optimizer/capacity audit is in
+`results/optimizer_capacity_report.md`: matched source-risk states have mean
+absolute `G_repr` difference `0.0173`, so the original optimizer interaction is
+not evidence of implicit bias under this protocol; the dense sweep shows a
+capacity/difficulty trend but no single phase boundary. This is evidence for a
+follow-up mechanism study, not a theorem or a universal failure taxonomy.
 
 Authoritative working notes:
 

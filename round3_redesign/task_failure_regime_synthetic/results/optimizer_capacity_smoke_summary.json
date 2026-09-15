@@ -1,0 +1,158 @@
+{
+  "dense": {
+    "capacity_monotonicity_violations": {
+      "adam|alpha=0.0": 0,
+      "adam|alpha=0.2": 0,
+      "adam|alpha=0.4": 0,
+      "adam|alpha=0.6": 0,
+      "adam|alpha=0.8": 0,
+      "adam|alpha=1.0": 0,
+      "sgd|alpha=0.0": 0,
+      "sgd|alpha=0.2": 0,
+      "sgd|alpha=0.4": 0,
+      "sgd|alpha=0.6": 0,
+      "sgd|alpha=0.8": 0,
+      "sgd|alpha=1.0": 0
+    },
+    "critical_capacity": {
+      "adam|alpha=0.0": {
+        "first_dz_below_0.10": 1
+      },
+      "adam|alpha=0.2": {
+        "first_dz_below_0.10": 1
+      },
+      "adam|alpha=0.4": {
+        "first_dz_below_0.10": null
+      },
+      "adam|alpha=0.6": {
+        "first_dz_below_0.10": null
+      },
+      "adam|alpha=0.8": {
+        "first_dz_below_0.10": null
+      },
+      "adam|alpha=1.0": {
+        "first_dz_below_0.10": null
+      },
+      "sgd|alpha=0.0": {
+        "first_dz_below_0.10": null
+      },
+      "sgd|alpha=0.2": {
+        "first_dz_below_0.10": null
+      },
+      "sgd|alpha=0.4": {
+        "first_dz_below_0.10": null
+      },
+      "sgd|alpha=0.6": {
+        "first_dz_below_0.10": null
+      },
+      "sgd|alpha=0.8": {
+        "first_dz_below_0.10": null
+      },
+      "sgd|alpha=1.0": {
+        "first_dz_below_0.10": null
+      }
+    },
+    "mean_G_repr": {
+      "adam|alpha=0.0|dz=1": 0.05038800059027225,
+      "adam|alpha=0.0|dz=16": NaN,
+      "adam|alpha=0.0|dz=2": -0.0035470724099629786,
+      "adam|alpha=0.0|dz=3": NaN,
+      "adam|alpha=0.0|dz=4": NaN,
+      "adam|alpha=0.0|dz=6": NaN,
+      "adam|alpha=0.0|dz=8": NaN,
+      "adam|alpha=0.2|dz=1": 0.02488577243668623,
+      "adam|alpha=0.2|dz=16": NaN,
+      "adam|alpha=0.2|dz=2": 0.02348412167405603,
+      "adam|alpha=0.2|dz=3": NaN,
+      "adam|alpha=0.2|dz=4": NaN,
+      "adam|alpha=0.2|dz=6": NaN,
+      "adam|alpha=0.2|dz=8": NaN,
+      "adam|alpha=0.4|dz=1": NaN,
+      "adam|alpha=0.4|dz=16": NaN,
+      "adam|alpha=0.4|dz=2": NaN,
+      "adam|alpha=0.4|dz=3": NaN,
+      "adam|alpha=0.4|dz=4": NaN,
+      "adam|alpha=0.4|dz=6": NaN,
+      "adam|alpha=0.4|dz=8": NaN,
+      "adam|alpha=0.6|dz=1": NaN,
+      "adam|alpha=0.6|dz=16": NaN,
+      "adam|alpha=0.6|dz=2": NaN,
+      "adam|alpha=0.6|dz=3": NaN,
+      "adam|alpha=0.6|dz=4": NaN,
+      "adam|alpha=0.6|dz=6": NaN,
+      "adam|alpha=0.6|dz=8": NaN,
+      "adam|alpha=0.8|dz=1": NaN,
+      "adam|alpha=0.8|dz=16": NaN,
+      "adam|alpha=0.8|dz=2": NaN,
+      "adam|alpha=0.8|dz=3": NaN,
+      "adam|alpha=0.8|dz=4": NaN,
+      "adam|alpha=0.8|dz=6": NaN,
+      "adam|alpha=0.8|dz=8": NaN,
+      "adam|alpha=1.0|dz=1": NaN,
+      "adam|alpha=1.0|dz=16": NaN,
+      "adam|alpha=1.0|dz=2": NaN,
+      "adam|alpha=1.0|dz=3": NaN,
+      "adam|alpha=1.0|dz=4": NaN,
+      "adam|alpha=1.0|dz=6": NaN,
+      "adam|alpha=1.0|dz=8": NaN,
+      "sgd|alpha=0.0|dz=1": 0.1828903142451959,
+      "sgd|alpha=0.0|dz=16": NaN,
+      "sgd|alpha=0.0|dz=2": 0.1043293965905506,
+      "sgd|alpha=0.0|dz=3": NaN,
+      "sgd|alpha=0.0|dz=4": NaN,
+      "sgd|alpha=0.0|dz=6": NaN,
+      "sgd|alpha=0.0|dz=8": NaN,
+      "sgd|alpha=0.2|dz=1": 0.16051889466295274,
+      "sgd|alpha=0.2|dz=16": NaN,
+      "sgd|alpha=0.2|dz=2": 0.13422017296319352,
+      "sgd|alpha=0.2|dz=3": NaN,
+      "sgd|alpha=0.2|dz=4": NaN,
+      "sgd|alpha=0.2|dz=6": NaN,
+      "sgd|alpha=0.2|dz=8": NaN,
+      "sgd|alpha=0.4|dz=1": NaN,
+      "sgd|alpha=0.4|dz=16": NaN,
+      "sgd|alpha=0.4|dz=2": NaN,
+      "sgd|alpha=0.4|dz=3": NaN,
+      "sgd|alpha=0.4|dz=4": NaN,
+      "sgd|alpha=0.4|dz=6": NaN,
+      "sgd|alpha=0.4|dz=8": NaN,
+      "sgd|alpha=0.6|dz=1": NaN,
+      "sgd|alpha=0.6|dz=16": NaN,
+      "sgd|alpha=0.6|dz=2": NaN,
+      "sgd|alpha=0.6|dz=3": NaN,
+      "sgd|alpha=0.6|dz=4": NaN,
+      "sgd|alpha=0.6|dz=6": NaN,
+      "sgd|alpha=0.6|dz=8": NaN,
+      "sgd|alpha=0.8|dz=1": NaN,
+      "sgd|alpha=0.8|dz=16": NaN,
+      "sgd|alpha=0.8|dz=2": NaN,
+      "sgd|alpha=0.8|dz=3": NaN,
+      "sgd|alpha=0.8|dz=4": NaN,
+      "sgd|alpha=0.8|dz=6": NaN,
+      "sgd|alpha=0.8|dz=8": NaN,
+      "sgd|alpha=1.0|dz=1": NaN,
+      "sgd|alpha=1.0|dz=16": NaN,
+      "sgd|alpha=1.0|dz=2": NaN,
+      "sgd|alpha=1.0|dz=3": NaN,
+      "sgd|alpha=1.0|dz=4": NaN,
+      "sgd|alpha=1.0|dz=6": NaN,
+      "sgd|alpha=1.0|dz=8": NaN
+    },
+    "n_final": 8
+  },
+  "elapsed_seconds": 4.5075860023498535,
+  "interpretation": "No categorical regime or phase-boundary claim; matched source loss tests speed confounding, and dense sweep tests boundary stability.",
+  "matched_optimizer": {
+    "matched_source_risk_tolerance": 0.01,
+    "mean_G_repr_diff_sgd_minus_adam": 0.0,
+    "mean_abs_G_repr_diff": 0.0,
+    "mean_abs_source_risk_diff": 0.0,
+    "n_matched_pairs": 1,
+    "n_pairs": 3
+  },
+  "n_convergence_rows": 6,
+  "n_dense_rows": 8,
+  "n_rows": 14,
+  "task_id": "TASK-OPTIMIZER-CAPACITY-AUDIT",
+  "verdict": "SMOKE-ONLY"
+}

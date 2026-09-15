@@ -1,0 +1,158 @@
+{
+  "dense": {
+    "capacity_monotonicity_violations": {
+      "adam|alpha=0.0": 0,
+      "adam|alpha=0.2": 0,
+      "adam|alpha=0.4": 0,
+      "adam|alpha=0.6": 0,
+      "adam|alpha=0.8": 0,
+      "adam|alpha=1.0": 0,
+      "sgd|alpha=0.0": 0,
+      "sgd|alpha=0.2": 0,
+      "sgd|alpha=0.4": 0,
+      "sgd|alpha=0.6": 0,
+      "sgd|alpha=0.8": 0,
+      "sgd|alpha=1.0": 0
+    },
+    "critical_capacity": {
+      "adam|alpha=0.0": {
+        "first_dz_below_0.10": 1
+      },
+      "adam|alpha=0.2": {
+        "first_dz_below_0.10": 1
+      },
+      "adam|alpha=0.4": {
+        "first_dz_below_0.10": 1
+      },
+      "adam|alpha=0.6": {
+        "first_dz_below_0.10": 1
+      },
+      "adam|alpha=0.8": {
+        "first_dz_below_0.10": 1
+      },
+      "adam|alpha=1.0": {
+        "first_dz_below_0.10": 1
+      },
+      "sgd|alpha=0.0": {
+        "first_dz_below_0.10": 6
+      },
+      "sgd|alpha=0.2": {
+        "first_dz_below_0.10": 6
+      },
+      "sgd|alpha=0.4": {
+        "first_dz_below_0.10": 16
+      },
+      "sgd|alpha=0.6": {
+        "first_dz_below_0.10": null
+      },
+      "sgd|alpha=0.8": {
+        "first_dz_below_0.10": 16
+      },
+      "sgd|alpha=1.0": {
+        "first_dz_below_0.10": null
+      }
+    },
+    "mean_G_repr": {
+      "adam|alpha=0.0|dz=1": 0.033193456650004054,
+      "adam|alpha=0.0|dz=16": -0.014362098121213184,
+      "adam|alpha=0.0|dz=2": 0.012679374693357814,
+      "adam|alpha=0.0|dz=3": 0.018759502913052516,
+      "adam|alpha=0.0|dz=4": 0.015000158300285194,
+      "adam|alpha=0.0|dz=6": 0.012533071552887498,
+      "adam|alpha=0.0|dz=8": 0.02592893922369723,
+      "adam|alpha=0.2|dz=1": 0.029527538028073397,
+      "adam|alpha=0.2|dz=16": -0.003626452385205916,
+      "adam|alpha=0.2|dz=2": 0.015354618883594517,
+      "adam|alpha=0.2|dz=3": 0.017206779238450053,
+      "adam|alpha=0.2|dz=4": 0.022321118874904722,
+      "adam|alpha=0.2|dz=6": 0.018327200197106593,
+      "adam|alpha=0.2|dz=8": 0.0019900042449347427,
+      "adam|alpha=0.4|dz=1": 0.06236725372068363,
+      "adam|alpha=0.4|dz=16": -0.08835884986684746,
+      "adam|alpha=0.4|dz=2": -0.010494624205360329,
+      "adam|alpha=0.4|dz=3": -0.005567418314453361,
+      "adam|alpha=0.4|dz=4": -0.04163986431529684,
+      "adam|alpha=0.4|dz=6": -0.06585462650559291,
+      "adam|alpha=0.4|dz=8": -0.06204063584535963,
+      "adam|alpha=0.6|dz=1": 0.059556597733218676,
+      "adam|alpha=0.6|dz=16": -0.017117696511102565,
+      "adam|alpha=0.6|dz=2": 0.0642484290464832,
+      "adam|alpha=0.6|dz=3": 0.0421656803447345,
+      "adam|alpha=0.6|dz=4": 0.019197339439548072,
+      "adam|alpha=0.6|dz=6": 0.014722688790237309,
+      "adam|alpha=0.6|dz=8": 0.0059805513323874055,
+      "adam|alpha=0.8|dz=1": 0.05103365272298699,
+      "adam|alpha=0.8|dz=16": -0.03960058325796063,
+      "adam|alpha=0.8|dz=2": 0.05174106656676347,
+      "adam|alpha=0.8|dz=3": 0.010886008356223503,
+      "adam|alpha=0.8|dz=4": -0.0006373056646258776,
+      "adam|alpha=0.8|dz=6": 0.0115474595653754,
+      "adam|alpha=0.8|dz=8": -0.012371555259002432,
+      "adam|alpha=1.0|dz=1": 0.05781774472684998,
+      "adam|alpha=1.0|dz=16": -0.02190167412862284,
+      "adam|alpha=1.0|dz=2": 0.028117402066540082,
+      "adam|alpha=1.0|dz=3": 0.016498322325444768,
+      "adam|alpha=1.0|dz=4": 0.021635833617169146,
+      "adam|alpha=1.0|dz=6": 0.0019194278577463475,
+      "adam|alpha=1.0|dz=8": -0.009099249891843977,
+      "sgd|alpha=0.0|dz=1": 0.1749164052049106,
+      "sgd|alpha=0.0|dz=16": 0.04543631310881941,
+      "sgd|alpha=0.0|dz=2": 0.1548342006640204,
+      "sgd|alpha=0.0|dz=3": 0.1291725752707368,
+      "sgd|alpha=0.0|dz=4": 0.12165565242426463,
+      "sgd|alpha=0.0|dz=6": 0.08139838283547511,
+      "sgd|alpha=0.0|dz=8": 0.08130795196591116,
+      "sgd|alpha=0.2|dz=1": 0.1687812693264433,
+      "sgd|alpha=0.2|dz=16": 0.04180242246985752,
+      "sgd|alpha=0.2|dz=2": 0.14094113580036874,
+      "sgd|alpha=0.2|dz=3": 0.12857178882593615,
+      "sgd|alpha=0.2|dz=4": 0.1370767062662728,
+      "sgd|alpha=0.2|dz=6": 0.07216501803378077,
+      "sgd|alpha=0.2|dz=8": 0.0767811891980551,
+      "sgd|alpha=0.4|dz=1": 0.48297097157701935,
+      "sgd|alpha=0.4|dz=16": 0.034607665376967855,
+      "sgd|alpha=0.4|dz=2": 0.3389790608438859,
+      "sgd|alpha=0.4|dz=3": 0.32935773653898937,
+      "sgd|alpha=0.4|dz=4": 0.23885167533103935,
+      "sgd|alpha=0.4|dz=6": 0.15314616907940246,
+      "sgd|alpha=0.4|dz=8": 0.1149206894195095,
+      "sgd|alpha=0.6|dz=1": 0.5903872350787046,
+      "sgd|alpha=0.6|dz=16": 0.1134217199794851,
+      "sgd|alpha=0.6|dz=2": 0.6087544294452735,
+      "sgd|alpha=0.6|dz=3": 0.37450050002235025,
+      "sgd|alpha=0.6|dz=4": 0.3191830277215632,
+      "sgd|alpha=0.6|dz=6": 0.3033479937237538,
+      "sgd|alpha=0.6|dz=8": 0.2853860996389954,
+      "sgd|alpha=0.8|dz=1": 0.5939256079985135,
+      "sgd|alpha=0.8|dz=16": 0.056164603611816084,
+      "sgd|alpha=0.8|dz=2": 0.4824262587185144,
+      "sgd|alpha=0.8|dz=3": 0.42736930926549394,
+      "sgd|alpha=0.8|dz=4": 0.4302897491933105,
+      "sgd|alpha=0.8|dz=6": 0.3846015539845698,
+      "sgd|alpha=0.8|dz=8": 0.23028093638889968,
+      "sgd|alpha=1.0|dz=1": 0.6103707655379275,
+      "sgd|alpha=1.0|dz=16": 0.15445038575343542,
+      "sgd|alpha=1.0|dz=2": 0.4170937214313861,
+      "sgd|alpha=1.0|dz=3": 0.4054639442612406,
+      "sgd|alpha=1.0|dz=4": 0.3757653277825073,
+      "sgd|alpha=1.0|dz=6": 0.29280993481130296,
+      "sgd|alpha=1.0|dz=8": 0.2153430285754779
+    },
+    "n_final": 252
+  },
+  "elapsed_seconds": 252.85230207443237,
+  "interpretation": "No categorical regime or phase-boundary claim; matched source loss tests speed confounding, and dense sweep tests boundary stability.",
+  "matched_optimizer": {
+    "matched_source_risk_tolerance": 0.01,
+    "mean_G_repr_diff_sgd_minus_adam": 0.007916238640171696,
+    "mean_abs_G_repr_diff": 0.017271679624129146,
+    "mean_abs_source_risk_diff": 0.0025862592880375504,
+    "n_matched_pairs": 150,
+    "n_pairs": 252
+  },
+  "n_convergence_rows": 420,
+  "n_dense_rows": 252,
+  "n_rows": 672,
+  "task_id": "TASK-OPTIMIZER-CAPACITY-AUDIT",
+  "verdict": "CONTINUOUS-AXIS-AUDIT"
+}

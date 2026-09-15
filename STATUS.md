@@ -46,10 +46,14 @@ retraining. After removing circular priority labels and replacing raw-logit
 contamination with probability-space `C_prob`, the verdict is
 **`TWO-AXIS-STRUCTURE-SUPPORTED; CONTAMINATION-UNRESOLVED`**. The seed-level
 interaction z-scores are -23.41 for `rho x sigma_c -> G_use`, 5.76 for
-`k x optimizer -> G_repr`, and -8.41 for `k x d_z -> G_repr`. These are
-continuous synthetic diagnostic results only. They do not prove a theory or
-justify a universal taxonomy. Raw rows, checkpoint summaries, cell summaries,
-and the final verdict are in the experiment's `results/` directory.
+`k x optimizer -> G_repr`, and -8.41 for `k x d_z -> G_repr`. The follow-up
+convergence-matched audit finds mean absolute matched `G_repr` difference
+0.0173, so the optimizer interaction is not evidence of implicit bias under
+this protocol. The dense sweep shows a capacity/difficulty trend but no single
+phase boundary. These are continuous synthetic diagnostic results only. They
+do not prove a theory or justify a universal taxonomy. Raw rows, checkpoint
+summaries, cell summaries, and the final verdict are in the experiment's
+`results/` directory.
 
 The design audit is recorded in `notes/framework_design/`. Read
 `adequacy_audit.md`, `problem_instances.md`, `reuse_test.md`,
