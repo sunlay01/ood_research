@@ -181,6 +181,13 @@ absolute `G_repr` difference `0.0173`, so the original optimizer interaction is
 not evidence of implicit bias under this protocol; the dense sweep shows a
 capacity/difficulty trend but no single phase boundary. This is evidence for a
 follow-up mechanism study, not a theorem or a universal failure taxonomy.
+The binary core-shortcut model is now solved exactly in
+`results/formalization_report.md`: the source population switches coefficient
+preference precisely at `rho > 1-sigma_c`, and the corresponding target BCE and
+balanced-head repair gain are available in closed finite-state form. Reanalysis
+of 156 source-loss matched trajectory pairs gives mean absolute `G_repr` gap
+`0.0227` (89.7% below `0.05`), consistent with optimizer speed/progress rather
+than an optimizer-identity primitive. A neural acquisition theorem remains open.
 
 Authoritative working notes:
 

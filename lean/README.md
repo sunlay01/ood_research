@@ -48,6 +48,10 @@ Current scope:
   support upper-bound algebra, and a concrete blind-extension witness showing
   identical source responses with arbitrary target response. General transfer-
   measure suprema and source-certificate minimality remain paper-level.
+- `PreferenceAcquisition/Basic.lean`: odds comparison for the binary
+  core/shortcut population model, machine-checking that shortcut preference is
+  equivalent to `rho > 1 - sigma_c` under positive-noise assumptions. The
+  neural acquisition-collapse result remains numerical, not Lean-verified.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine

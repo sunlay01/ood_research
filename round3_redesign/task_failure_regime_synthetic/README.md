@@ -39,3 +39,16 @@ sweeps continuous task difficulty `alpha` and capacities
 `results/optimizer_capacity_report.md`: the matched optimizer gap is small,
 while the dense sweep shows a capacity/difficulty trend without supporting a
 single phase-boundary theorem.
+
+The exact binary preference calculation and acquisition-collapse audit are run
+with:
+
+```bash
+PYTHONPATH=src python -m ood_repr_reg.run_preference_acquisition_formalization
+```
+
+The binary model proves the declared-model switch `rho > 1 - sigma_c` and
+computes exact target BCE and balanced-head repair gain. The acquisition audit
+reuses the convergence trajectories and finds a mean absolute matched
+`G_repr` gap of `0.0227`; this supports a training-progress explanation but is
+not a neural-dynamics theorem.

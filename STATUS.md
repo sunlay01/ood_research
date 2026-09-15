@@ -55,6 +55,14 @@ do not prove a theory or justify a universal taxonomy. Raw rows, checkpoint
 summaries, cell summaries, and the final verdict are in the experiment's
 `results/` directory.
 
+The binary preference model is now exact under its declared conditional-noise
+assumptions: the source-optimal shortcut coefficient exceeds the core
+coefficient iff `rho > 1-sigma_c`, with exact target BCE and balanced-head
+repair gain computed by four-state enumeration. A trajectory reanalysis yields
+156 source-risk matched pairs, mean absolute `G_repr` gap `0.0227`, and 89.7%
+of gaps below `0.05`. This is consistent with optimizer speed/progress as the
+main confound; it is not yet a neural feature-acquisition theorem.
+
 The design audit is recorded in `notes/framework_design/`. Read
 `adequacy_audit.md`, `problem_instances.md`, `reuse_test.md`,
 `information_sufficiency.md`, `bottlenecks.md`, the route files,

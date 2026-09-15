@@ -1,0 +1,42 @@
+{
+  "binary_rows": 25,
+  "exact_switch_rule": "rho > 1 - sigma_c",
+  "interpretation": "The binary model is exact for its declared population assumptions. The acquisition conclusion is an audit of the existing neural trajectories, not a network theorem.",
+  "matched_acquisition": {
+    "fraction_abs_G_repr_gap_below_0.05": 0.8974358974358975,
+    "mean_G_repr_sgd_minus_adam": 0.01326374325093803,
+    "mean_abs_G_repr_gap": 0.022691251560282233,
+    "mean_abs_source_risk_gap": 0.002709213944747354,
+    "n_matched_pairs": 156,
+    "optimizer_speed_consistent": true,
+    "status": "OK"
+  },
+  "shortcut_switch_examples": [
+    {
+      "G_use_exact": 0.7185853755797121,
+      "R_target_balanced_head": 0.500402423538188,
+      "R_target_source_opt": 1.2189877991179001,
+      "core_weight": 1.3862943611198908,
+      "rho": 0.85,
+      "rho_target": 0.1,
+      "shortcut_weight": 1.7346010553881064,
+      "sigma_c": 0.2,
+      "source_prefers_shortcut": true,
+      "threshold_gap": 0.04999999999999993
+    },
+    {
+      "G_use_exact": 1.5457733191187835,
+      "R_target_balanced_head": 0.500402423538188,
+      "R_target_source_opt": 2.0461757426569713,
+      "core_weight": 1.3862943611198908,
+      "rho": 0.95,
+      "rho_target": 0.1,
+      "shortcut_weight": 2.9444389791664394,
+      "sigma_c": 0.2,
+      "source_prefers_shortcut": true,
+      "threshold_gap": 0.1499999999999999
+    }
+  ],
+  "task_id": "TASK-PREFERENCE-ACQUISITION-FORMALIZATION",
+  "verdict": "ACQUISITION-SPEED-CONSISTENT; PREFERENCE-MODEL-EXACT"
+}
