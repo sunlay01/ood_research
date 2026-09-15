@@ -306,7 +306,7 @@ def run(smoke: bool = False) -> dict[str, object]:
 
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser(); ap.add_argument("--smoke", action="store_true"); ap.add_argument("--analyze-existing", action="store_true"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--smoke", action="store_true"); ap.add_argument("--analyze-existing", action="store_true"); ap.add_argument("--elapsed-seconds", type=float, default=0.0); args = ap.parse_args()
     if args.analyze_existing:
         raw_path = OUT / ("smoke_rows.csv" if args.smoke else "factorial_rows.csv")
         with raw_path.open(newline="", encoding="utf-8") as f:
@@ -316,6 +316,6 @@ if __name__ == "__main__":
                 row[key] = int(row[key])
             for key in ("sigma_c_value", "rho0", "rho1", "R_actual", "R_head", "R_probe", "R_core", "G_use", "G_repr", "C_pred", "C_linear", "C_actual", "C_actual_after_balanced", "head_repair_gain", "full_retrain_gain", "contamination_repair", "R_full_retrain"):
                 row[key] = float(row[key])
-        print(json.dumps(_persist_results(rows, args.smoke, 0.0), indent=2, allow_nan=True))
+        print(json.dumps(_persist_results(rows, args.smoke, args.elapsed_seconds), indent=2, allow_nan=True))
     else:
         print(json.dumps(run(args.smoke), indent=2, allow_nan=True))
