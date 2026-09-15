@@ -1,0 +1,37 @@
+{
+  "cell_metric_spread": {
+    "C_pred": 2.692320983784919,
+    "G_repr": 0.1275793867058573,
+    "G_use": 0.45373307098960736
+  },
+  "contamination_incremental_r2": 0.0943775290932275,
+  "elapsed_seconds": 0.0,
+  "interpretation": "diagnostic evidence only; no theory claim",
+  "intervention_ok": true,
+  "means": {
+    "C_pred": 1.9592060101211373,
+    "G_repr": 0.09887125022110863,
+    "G_use": 0.3040358462665349,
+    "contamination_repair": 3.303650145381421,
+    "full_retrain_gain": 0.32383811954998987,
+    "head_repair_gain": 0.3040358462665349
+  },
+  "n_cells": 32,
+  "n_final": 160,
+  "n_rows": 800,
+  "optimizer_disagreement_rate": 0.25,
+  "optimizer_dominates": false,
+  "optimizer_gap": {
+    "C_pred": 1.1920405409387669,
+    "G_repr": 0.13201595905354446,
+    "G_use": 0.1260552927719477
+  },
+  "regime_counts": {
+    "contamination": 21,
+    "readout": 7,
+    "representation": 4
+  },
+  "runtime": "macOS-26.3-arm64-arm-64bit-Mach-O",
+  "task_id": "TASK-FAILURE-REGIME-SYNTHETIC",
+  "verdict": "REGIMES-SUPPORTED"
+}

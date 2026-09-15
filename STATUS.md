@@ -35,6 +35,21 @@ Do not recursively read `archive/` by default. It contains failed or superseded 
 
 ## Current design result
 
+### Synthetic failure-regime audit
+
+The controlled latent experiment in
+[`round3_redesign/task_failure_regime_synthetic/`](round3_redesign/task_failure_regime_synthetic/)
+has completed its preregistered 32-cell x 5-seed factorial (800 checkpoint
+rows). It uses frozen-head repair, nonlinear representation probes, true-core
+oracle probes, nuisance/spurious counterfactual pairs, and balanced full
+retraining. The final diagnostic gate is **`REGIMES-SUPPORTED`**: 21 cells are
+contamination-labelled, 7 readout-labelled, and 4 representation-labelled;
+the optimizer-disagreement rate is 0.25; intervention checks pass; and a
+regression of `C_pred` on `(G_use, G_repr)` has incremental `R^2=0.094`.
+These are synthetic diagnostic results only. They do not prove a theory or
+justify a universal taxonomy. Raw rows, checkpoint summaries, cell summaries,
+and the final verdict are in the experiment's `results/` directory.
+
 The design audit is recorded in `notes/framework_design/`. Read
 `adequacy_audit.md`, `problem_instances.md`, `reuse_test.md`,
 `information_sufficiency.md`, `bottlenecks.md`, the route files,
