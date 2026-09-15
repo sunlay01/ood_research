@@ -182,12 +182,20 @@ not evidence of implicit bias under this protocol; the dense sweep shows a
 capacity/difficulty trend but no single phase boundary. This is evidence for a
 follow-up mechanism study, not a theorem or a universal failure taxonomy.
 The binary core-shortcut model is now solved exactly in
-`results/formalization_report.md`: the source population switches coefficient
-preference precisely at `rho > 1-sigma_c`, and the corresponding target BCE and
-balanced-head repair gain are available in closed finite-state form. Reanalysis
-of 156 source-loss matched trajectory pairs gives mean absolute `G_repr` gap
-`0.0227` (89.7% below `0.05`), consistent with optimizer speed/progress rather
-than an optimizer-identity primitive. A neural acquisition theorem remains open.
+`results/formalization_report.md`: with acquisition error `delta`, effective
+core reliability is `q_t = 1-sigma_c-(1-2 sigma_c)delta`, and the source
+population switches coefficient preference precisely at `rho > q_t`. For the
+pooled source mixtures used by the neural audit, `rho_bar=.90` (high) stays
+shortcut-preferred even at perfect acquisition `q_t=.80`, while `rho_bar=.60`
+(low) switches at `delta_c=1/3`. The corresponding target BCE and balanced-head
+repair gain are available in closed finite-state form. Reanalysis of 156
+source-loss matched trajectory pairs gives mean absolute `G_repr` gap `0.0227`
+(89.7% below `0.05`), consistent with optimizer speed/progress rather than an
+optimizer-identity primitive. The new checkpoint diagnostic adds `q_hat` and
+counterfactual shortcut reliance: 25/60 trajectories cross `q_hat=.90`, with
+correlations `0.240` (preference margin vs. shortcut reliance) and `0.310`
+(preference margin vs. `G_use`). This is descriptive evidence for the proposed
+coupling, not a neural acquisition theorem.
 
 Authoritative working notes:
 

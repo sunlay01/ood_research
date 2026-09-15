@@ -60,18 +60,33 @@ def _make_env(seed: int, alpha: float, sigma: float, agreement: float, n: int, o
     return torch.cat((u, s[:, None], noise), dim=1), y, u
 
 
-def _diagnose(model: Net, target: tuple[torch.Tensor, torch.Tensor, torch.Tensor], probe: tuple[torch.Tensor, torch.Tensor, torch.Tensor], steps: int = 120) -> dict[str, float]:
+def _diagnose(
+    model: Net,
+    target: tuple[torch.Tensor, torch.Tensor, torch.Tensor],
+    probe_train: tuple[torch.Tensor, torch.Tensor, torch.Tensor],
+    probe_eval: tuple[torch.Tensor, torch.Tensor, torch.Tensor],
+    pair_x: torch.Tensor,
+    pair_flipped_x: torch.Tensor,
+    steps: int = 120,
+) -> dict[str, float]:
     with torch.no_grad():
         actual = _risk(model(target[0]), target[1])
-        z_probe = model.representation(probe[0]); z_target = model.representation(target[0])
-    head = _fit_head(z_probe.detach(), probe[1], nonlinear=False, seed=9181, steps=steps)
-    nprobe = _fit_head(z_probe.detach(), probe[1], nonlinear=True, seed=9182, steps=steps)
-    core = _fit_head(probe[2], probe[1], nonlinear=True, seed=9183, steps=steps)
+        z_probe_train = model.representation(probe_train[0])
+        z_probe_eval = model.representation(probe_eval[0])
+        z_target = model.representation(target[0])
+    head = _fit_head(z_probe_train.detach(), probe_train[1], nonlinear=False, seed=9181, steps=steps)
+    nprobe = _fit_head(z_probe_train.detach(), probe_train[1], nonlinear=True, seed=9182, steps=steps)
+    core = _fit_head(probe_train[2], probe_train[1], nonlinear=True, seed=9183, steps=steps)
     with torch.no_grad():
         r_head = _risk(head(z_target)[:, 0], target[1])
         r_probe = _risk(nprobe(z_target)[:, 0], target[1])
         r_core = _risk(core(target[2])[:, 0], target[1])
-    return {"R_actual": actual, "R_head": r_head, "R_probe": r_probe, "R_core": r_core, "G_use": actual - r_head, "G_repr": r_probe - r_core}
+        probe_probability = torch.sigmoid(nprobe(z_probe_eval)[:, 0])
+        q_hat = float(((probe_probability >= 0.5) == (probe_eval[1] > 0)).double().mean().item())
+        actual_pair = model(pair_x)
+        flipped_pair = model(pair_flipped_x)
+        shortcut_reliance = float((torch.sigmoid(actual_pair) - torch.sigmoid(flipped_pair)).abs().mean().item())
+    return {"R_actual": actual, "R_head": r_head, "R_probe": r_probe, "R_core": r_core, "G_use": actual - r_head, "G_repr": r_probe - r_core, "q_hat": q_hat, "shortcut_reliance": shortcut_reliance}
 
 
 def _train_trajectory(seed: int, alpha: float, sigma: float, dz: int, optimizer: str, lr: float, momentum: float, max_steps: int, checkpoints: tuple[int, ...]) -> list[dict[str, object]]:
@@ -82,7 +97,12 @@ def _train_trajectory(seed: int, alpha: float, sigma: float, dz: int, optimizer:
     src0 = _make_env(seed, alpha, sigma, rho[0], 1024, 30100)
     src1 = _make_env(seed, alpha, sigma, rho[1], 1024, 30200)
     target = _make_env(seed, alpha, sigma, 0.10, 2048, 30300)
-    probe = _make_env(seed, alpha, sigma, 0.50, 2048, 30400)
+    probe_train = _make_env(seed, alpha, sigma, 0.50, 2048, 30400)
+    probe_eval = _make_env(seed, alpha, sigma, 0.50, 2048, 30500)
+    pair = _make_env(seed, alpha, sigma, 0.50, 2048, 30600)
+    pair_x = pair[0]
+    pair_flipped_x = pair_x.clone()
+    pair_flipped_x[:, 2] = -pair_flipped_x[:, 2]
     if optimizer == "adam":
         opt = torch.optim.Adam(model.parameters(), lr=lr)
     else:
@@ -92,8 +112,9 @@ def _train_trajectory(seed: int, alpha: float, sigma: float, dz: int, optimizer:
         if step in checkpoints:
             with torch.no_grad():
                 source_risk = float(0.5 * (F.binary_cross_entropy_with_logits(model(src0[0]), (src0[1] > 0).double()) + F.binary_cross_entropy_with_logits(model(src1[0]), (src1[1] > 0).double())).item())
-            diag = _diagnose(model, target, probe)
-            rows.append({"seed": seed, "alpha": alpha, "sigma_c": sigma, "d_z": dz, "optimizer": optimizer, "optimizer_config": config_name(optimizer, lr, momentum), "lr": lr, "momentum": momentum, "checkpoint": step, "source_risk": source_risk, **diag})
+            diag = _diagnose(model, target, probe_train, probe_eval, pair_x, pair_flipped_x)
+            rho_bar = 0.90
+            rows.append({"seed": seed, "alpha": alpha, "sigma_c": sigma, "d_z": dz, "optimizer": optimizer, "optimizer_config": config_name(optimizer, lr, momentum), "lr": lr, "momentum": momentum, "checkpoint": step, "source_risk": source_risk, "rho_bar": rho_bar, "preference_margin": rho_bar - diag["q_hat"], "source_prefers_shortcut_predicted": rho_bar > diag["q_hat"], **diag})
         if step == max_steps:
             break
         opt.zero_grad(set_to_none=True)
@@ -152,6 +173,42 @@ def _dense_summary(rows: list[dict[str, object]]) -> dict[str, object]:
     return {"n_final": len(final), "mean_G_repr": means, "capacity_monotonicity_violations": violations, "critical_capacity": critical}
 
 
+def _coupling_summary(rows: list[dict[str, object]]) -> dict[str, object]:
+    """Summarize descriptive acquisition/preference and shortcut diagnostics."""
+    valid = [r for r in rows if "q_hat" in r and "shortcut_reliance" in r]
+
+    def corr(left: str, right: str) -> float:
+        x = np.asarray([float(r[left]) for r in valid])
+        y = np.asarray([float(r[right]) for r in valid])
+        return float(np.corrcoef(x, y)[0, 1]) if len(x) > 2 and np.std(x) > 1e-12 and np.std(y) > 1e-12 else float("nan")
+
+    groups = {(r["seed"], r["alpha"], r["sigma_c"], r["d_z"], r["optimizer_config"]) for r in valid}
+    trajectories = 0
+    crossings = 0
+    for group in groups:
+        series = sorted(
+            (r for r in valid if (r["seed"], r["alpha"], r["sigma_c"], r["d_z"], r["optimizer_config"]) == group),
+            key=lambda r: int(r["checkpoint"]),
+        )
+        if not series:
+            continue
+        trajectories += 1
+        q_values = [float(r["q_hat"]) for r in series]
+        rho_bar = float(series[0]["rho_bar"])
+        if any(q_values[i] < rho_bar and any(q >= rho_bar for q in q_values[i + 1:]) for i in range(len(q_values) - 1)):
+            crossings += 1
+    return {
+        "n_rows": len(valid),
+        "n_trajectories": trajectories,
+        "q_hat_crossings_below_to_above": crossings,
+        "fraction_trajectories_crossing": crossings / trajectories if trajectories else float("nan"),
+        "corr_preference_margin_shortcut_reliance": corr("preference_margin", "shortcut_reliance"),
+        "corr_q_hat_shortcut_reliance": corr("q_hat", "shortcut_reliance"),
+        "corr_preference_margin_G_use": corr("preference_margin", "G_use"),
+        "corr_q_hat_G_use": corr("q_hat", "G_use"),
+    }
+
+
 def run(smoke: bool = False) -> dict[str, object]:
     started = time.time()
     seeds = (10,) if smoke else SEEDS
@@ -178,9 +235,10 @@ def run(smoke: bool = False) -> dict[str, object]:
     _write_csv(OUT / ("optimizer_capacity_smoke_rows.csv" if smoke else "optimizer_capacity_rows.csv"), rows)
     matched = _matched_pairs(conv_rows)
     dense = _dense_summary(dense_rows)
-    summary = {"task_id": "TASK-OPTIMIZER-CAPACITY-AUDIT", "verdict": "SMOKE-ONLY" if smoke else "CONTINUOUS-AXIS-AUDIT", "n_rows": len(rows), "n_convergence_rows": len(conv_rows), "n_dense_rows": len(dense_rows), "matched_optimizer": {key: value for key, value in matched.items() if key != "matched_pairs"}, "dense": dense, "elapsed_seconds": time.time() - started, "interpretation": "No categorical regime or phase-boundary claim; matched source loss tests speed confounding, and dense sweep tests boundary stability."}
+    coupling = _coupling_summary(conv_rows)
+    summary = {"task_id": "TASK-OPTIMIZER-CAPACITY-AUDIT", "verdict": "SMOKE-ONLY" if smoke else "CONTINUOUS-AXIS-AUDIT", "n_rows": len(rows), "n_convergence_rows": len(conv_rows), "n_dense_rows": len(dense_rows), "matched_optimizer": {key: value for key, value in matched.items() if key != "matched_pairs"}, "dense": dense, "acquisition_preference_coupling": coupling, "elapsed_seconds": time.time() - started, "interpretation": "No categorical regime or phase-boundary claim; matched source loss tests speed confounding, dense sweep tests boundary stability, and q_hat diagnostics test a descriptive acquisition/preference coupling."}
     (OUT / ("optimizer_capacity_smoke_summary.json" if smoke else "optimizer_capacity_summary.json")).write_text(json.dumps(summary, indent=2, sort_keys=True, allow_nan=True) + "\n", encoding="utf-8")
-    report = ["# Optimizer/capacity audit", "", f"- Verdict: **{summary['verdict']}**", f"- Convergence rows: {len(conv_rows)}; dense rows: {len(dense_rows)}", f"- Matched source-risk pairs: {matched['n_matched_pairs']}", f"- Mean matched `G_repr` difference (SGD - Adam): `{matched['mean_G_repr_diff_sgd_minus_adam']}`", f"- Mean absolute matched `G_repr` difference: `{matched['mean_abs_G_repr_diff']}`", f"- Dense first-capacity-below-0.10 map: `{dense['critical_capacity']}`", "", "This report tests optimization-speed and capacity confounds. It does not validate a phase-boundary theorem or a categorical failure taxonomy."]
+    report = ["# Optimizer/capacity audit", "", f"- Verdict: **{summary['verdict']}**", f"- Convergence rows: {len(conv_rows)}; dense rows: {len(dense_rows)}", f"- Matched source-risk pairs: {matched['n_matched_pairs']}", f"- Mean matched `G_repr` difference (SGD - Adam): `{matched['mean_G_repr_diff_sgd_minus_adam']}`", f"- Mean absolute matched `G_repr` difference: `{matched['mean_abs_G_repr_diff']}`", f"- Dense first-capacity-below-0.10 map: `{dense['critical_capacity']}`", "", "## Acquisition/preference diagnostic", "", f"- `q_hat` rows: `{coupling['n_rows']}` across `{coupling['n_trajectories']}` trajectories", f"- Below-to-above `q_hat` crossings of pooled `rho_bar=0.90`: `{coupling['q_hat_crossings_below_to_above']}` (`{coupling['fraction_trajectories_crossing']:.4f}` of trajectories)", f"- Correlation(`rho_bar-q_hat`, `shortcut_reliance`): `{coupling['corr_preference_margin_shortcut_reliance']}`", f"- Correlation(`rho_bar-q_hat`, `G_use`): `{coupling['corr_preference_margin_G_use']}`", "", "The q_hat and counterfactual shortcut metrics are descriptive diagnostics, not a theorem about neural representation dynamics. This report does not validate a phase-boundary theorem or a categorical failure taxonomy."]
     (OUT / ("optimizer_capacity_smoke_report.md" if smoke else "optimizer_capacity_report.md")).write_text("\n".join(report) + "\n", encoding="utf-8")
     return summary
 

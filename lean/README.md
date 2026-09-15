@@ -49,9 +49,11 @@ Current scope:
   identical source responses with arbitrary target response. General transfer-
   measure suprema and source-certificate minimality remain paper-level.
 - `PreferenceAcquisition/Basic.lean`: odds comparison for the binary
-  core/shortcut population model, machine-checking that shortcut preference is
-  equivalent to `rho > 1 - sigma_c` under positive-noise assumptions. The
-  neural acquisition-collapse result remains numerical, not Lean-verified.
+  core/shortcut population model, including the effective acquisition
+  reliability `q_t = 1-sigma_c-(1-2 sigma_c)delta`; machine-checks that
+  shortcut preference is equivalent to `rho > q_t` under positivity
+  assumptions. The neural `q_hat` coupling diagnostic remains numerical, not
+  Lean-verified.
 
 The files currently use explicit Euclidean coordinates where this keeps the
 formal proof auditable. Stage 11's exact quadratic identities are machine

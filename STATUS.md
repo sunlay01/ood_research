@@ -56,12 +56,19 @@ summaries, cell summaries, and the final verdict are in the experiment's
 `results/` directory.
 
 The binary preference model is now exact under its declared conditional-noise
-assumptions: the source-optimal shortcut coefficient exceeds the core
-coefficient iff `rho > 1-sigma_c`, with exact target BCE and balanced-head
-repair gain computed by four-state enumeration. A trajectory reanalysis yields
-156 source-risk matched pairs, mean absolute `G_repr` gap `0.0227`, and 89.7%
-of gaps below `0.05`. This is consistent with optimizer speed/progress as the
-main confound; it is not yet a neural feature-acquisition theorem.
+assumptions. With acquisition error `delta`, effective core reliability is
+`q_t = 1-sigma_c-(1-2 sigma_c)delta`, and the source-optimal shortcut
+coefficient exceeds the effective core coefficient iff `rho > q_t`. For the
+pooled source mixtures used by the neural audit, high has `rho_bar=.90` and
+remains shortcut-preferred at perfect acquisition `q_t=.80`; low has
+`rho_bar=.60` and switches at `delta_c=1/3` when `sigma_c=.20`. Exact target
+BCE and balanced-head repair gain are computed by finite-state enumeration. A
+trajectory reanalysis yields 156 source-risk matched pairs, mean absolute
+`G_repr` gap `0.0227`, and 89.7% of gaps below `0.05`, consistent with optimizer
+speed/progress as the main confound. The added `q_hat` checkpoint diagnostic
+finds 25/60 below-to-above crossings of `rho_bar=.90`; correlations with
+counterfactual shortcut reliance and `G_use` are `0.240` and `0.310`. These
+are descriptive coupling evidence, not a neural feature-acquisition theorem.
 
 The design audit is recorded in `notes/framework_design/`. Read
 `adequacy_audit.md`, `problem_instances.md`, `reuse_test.md`,

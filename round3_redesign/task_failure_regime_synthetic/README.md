@@ -47,8 +47,12 @@ with:
 PYTHONPATH=src python -m ood_repr_reg.run_preference_acquisition_formalization
 ```
 
-The binary model proves the declared-model switch `rho > 1 - sigma_c` and
-computes exact target BCE and balanced-head repair gain. The acquisition audit
-reuses the convergence trajectories and finds a mean absolute matched
-`G_repr` gap of `0.0227`; this supports a training-progress explanation but is
-not a neural-dynamics theorem.
+The binary model proves the declared-model switch `rho > q_t`, where
+`q_t = 1-sigma_c-(1-2 sigma_c)delta` is the effective core reliability after
+acquisition error. It also computes exact target BCE and balanced-head repair
+gain for pooled source mixtures. The convergence audit now reports `q_hat`,
+`rho_bar-q_hat`, and a same-core counterfactual shortcut-reliance metric;
+25/60 trajectories cross `q_hat=.90`, with correlations `0.240` and `0.310`
+to shortcut reliance and `G_use`, respectively. The mean absolute matched
+`G_repr` gap remains `0.0227`, supporting a training-progress explanation.
+These diagnostics are descriptive evidence, not a neural-dynamics theorem.

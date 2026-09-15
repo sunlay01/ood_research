@@ -1,4 +1,14 @@
 {
+  "acquisition_preference_coupling": {
+    "corr_preference_margin_G_use": 0.3101143339859971,
+    "corr_preference_margin_shortcut_reliance": 0.2396371730897138,
+    "corr_q_hat_G_use": -0.3101143339859971,
+    "corr_q_hat_shortcut_reliance": -0.23963717308971375,
+    "fraction_trajectories_crossing": 0.4166666666666667,
+    "n_rows": 420,
+    "n_trajectories": 60,
+    "q_hat_crossings_below_to_above": 25
+  },
   "dense": {
     "capacity_monotonicity_violations": {
       "adam|alpha=0.0": 0,
@@ -140,8 +150,8 @@
     },
     "n_final": 252
   },
-  "elapsed_seconds": 252.85230207443237,
-  "interpretation": "No categorical regime or phase-boundary claim; matched source loss tests speed confounding, and dense sweep tests boundary stability.",
+  "elapsed_seconds": 246.27380514144897,
+  "interpretation": "No categorical regime or phase-boundary claim; matched source loss tests speed confounding, dense sweep tests boundary stability, and q_hat diagnostics test a descriptive acquisition/preference coupling.",
   "matched_optimizer": {
     "matched_source_risk_tolerance": 0.01,
     "mean_G_repr_diff_sgd_minus_adam": 0.007916238640171696,

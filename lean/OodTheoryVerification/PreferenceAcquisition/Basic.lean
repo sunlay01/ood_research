@@ -9,6 +9,18 @@ noncomputable def coreWeight (sigma : ℝ) : ℝ :=
 noncomputable def shortcutWeight (rho : ℝ) : ℝ :=
   Real.log (rho / (1 - rho))
 
+noncomputable def effectiveReliability (sigma delta : ℝ) : ℝ :=
+  1 - sigma - (1 - 2 * sigma) * delta
+
+noncomputable def effectiveCoreWeight (sigma delta : ℝ) : ℝ :=
+  Real.log (effectiveReliability sigma delta /
+    (1 - effectiveReliability sigma delta))
+
+theorem effective_reliability_formula (sigma delta : ℝ) :
+    effectiveReliability sigma delta =
+      1 - sigma - (1 - 2 * sigma) * delta := by
+  rfl
+
 theorem odds_preference_iff (rho sigma : ℝ)
     (hsigma_pos : 0 < sigma) (hrho_lt : rho < 1) :
     (1 - sigma) / sigma < rho / (1 - rho) ↔ 1 - sigma < rho := by
@@ -32,5 +44,20 @@ theorem shortcut_weight_gt_core_iff (rho sigma : ℝ)
   unfold coreWeight shortcutWeight
   rw [Real.log_lt_log_iff hcore hshortcut]
   exact odds_preference_iff rho sigma hsigma_pos hrho_lt
+
+theorem shortcut_weight_gt_effective_core_iff (rho sigma delta : ℝ)
+    (hrho_pos : 0 < rho) (hrho_lt : rho < 1)
+    (hq_pos : 0 < effectiveReliability sigma delta)
+    (hq_lt : effectiveReliability sigma delta < 1) :
+    effectiveCoreWeight sigma delta < shortcutWeight rho ↔
+      effectiveReliability sigma delta < rho := by
+  let q := effectiveReliability sigma delta
+  have hq_pos' : 0 < q := hq_pos
+  have hq_lt' : q < 1 := hq_lt
+  have hnoise_pos : 0 < 1 - q := sub_pos.mpr hq_lt'
+  have hnoise_lt : 1 - q < 1 := by linarith
+  have h := shortcut_weight_gt_core_iff rho (1 - q)
+    hrho_pos hrho_lt hnoise_pos hnoise_lt
+  simpa [q, effectiveCoreWeight, coreWeight] using h
 
 end OodTheoryVerification.PreferenceAcquisition
