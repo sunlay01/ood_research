@@ -1,0 +1,61 @@
+{
+  "seed": 20260915,
+  "random_instances": 100,
+  "checks": {
+    "toy_head_full": true,
+    "toy_information_limited": true,
+    "toy_spectral_slack": true,
+    "nested_monotonicity": true,
+    "coordinate_invariance": true,
+    "solver_grid": true
+  },
+  "pass": true,
+  "separation": {
+    "R_info": 0.0,
+    "R_head_star": 0.5,
+    "R_full_star": 0.0,
+    "R_actual": 0.25000000000000006,
+    "V_repr": 0.5,
+    "Delta_real": 0.25000000000000006,
+    "head_solver": "SUCCESS",
+    "full_solver": "SUCCESS"
+  },
+  "information_limited": {
+    "R_info": 1.0000000000000002,
+    "R_class_star": 1.0000000000000002,
+    "control_gap": 0.0,
+    "Pi_star": [
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "solver_status": "SUCCESS",
+    "membership_residual": 0.0,
+    "slack_feasible": true
+  },
+  "spectral_slack": {
+    "R_info": 0.5,
+    "R_class_star": 0.5,
+    "E_norm": 1.0,
+    "condition_holds": true,
+    "support_compatible": true
+  },
+  "nested_monotonicity": {
+    "pass": true,
+    "count": 100
+  },
+  "coordinate_invariance": {
+    "pass": true,
+    "errors": {
+      "R_info": 3.3306690738754696e-16,
+      "R_class_star": 1.808494562993701e-07,
+      "control_gap": 1.80849456632437e-07,
+      "operator_residual": 1.1865170024272231e-07
+    }
+  },
+  "solver_grid": {
+    "pass": true,
+    "optimizer_minus_grid": 0.0
+  }
+}
