@@ -1,12 +1,10 @@
 # Failure-regime synthetic audit: final report
 
-- Verdict: **REGIMES-SUPPORTED**
+- Verdict: **TWO-AXIS-STRUCTURE-SUPPORTED; CONTAMINATION-UNRESOLVED**
 - Rows: 800; final-checkpoint rows: 160; data/optimizer cells: 32
-- Regime labels: {'contamination': 21, 'readout': 7, 'representation': 4}
-- Optimizer-dominance flag: `False`
-- Optimizer disagreement rate: `0.25`
-- Incremental contamination R2 from (G_use, G_repr): `0.0943775290932275`
-- Intervention validation flag: `True`
+- Mean diagnostic vector `(G_use, G_repr, C_prob)`: `(0.304036, 0.0988713, 0.0167737)`
+- Independent head-repair correlation with `G_use`: `0.9981`
+- Probability-sensitivity incremental R2 from `(G_use, G_repr)`: `0.5967`
 
-This is a controlled synthetic diagnostic. It does not establish a theorem, a universal taxonomy, or a claim about any specific OOD algorithm.
-Threshold flags and labels are pre-registered descriptive diagnostics; they should be revisited with independent seeds before a paper-level claim.
+This is a continuous synthetic diagnostic. It does not establish a theorem, a universal taxonomy, or a claim about any specific OOD algorithm.
+Categorical regime labels, raw-logit sensitivity, and contamination causality are intentionally not used as acceptance criteria.

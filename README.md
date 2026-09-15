@@ -169,13 +169,14 @@ The first mechanism-level experiment is implemented under
 with runner [`src/ood_repr_reg/run_failure_regime_synthetic.py`](src/ood_repr_reg/run_failure_regime_synthetic.py).
 It scans 32 synthetic source/representation/optimizer configurations over five
 seeds and measures readout repair, nonlinear representation repair, and
-nuisance/spurious counterfactual sensitivity. The completed run is recorded in
-`results/final_verdict.md` as **`REGIMES-SUPPORTED`** under the preregistered
-diagnostic gate: 21 cells are contamination-labelled, 7 readout-labelled, and
-4 representation-labelled; optimizer disagreement is 0.25; and contamination
-sensitivity has incremental `R^2 = 0.094` after controlling for the two gap
-measures. This is evidence for a follow-up mechanism study, not a theorem or a
-universal failure taxonomy.
+nuisance/spurious counterfactual sensitivity. After removing circular priority
+labels and replacing raw-logit contamination with probability-space `C_prob`,
+the completed run is recorded in `results/final_verdict.md` as
+**`TWO-AXIS-STRUCTURE-SUPPORTED; CONTAMINATION-UNRESOLVED`**. The
+`rho x sigma_c -> G_use` interaction has seed-level `z=-23.41`, while
+`k x optimizer -> G_repr` has `z=5.76` and `k x d_z -> G_repr` has `z=-8.41`.
+This is evidence for a follow-up mechanism study, not a theorem or a universal
+failure taxonomy.
 
 Authoritative working notes:
 

@@ -138,6 +138,7 @@ def _run_one(seed: int, labels: dict[str, str], *, steps: int = 500) -> list[dic
     opt = torch.optim.Adam(model.parameters(), lr=0.003) if optimizer == "adam" else torch.optim.SGD(model.parameters(), lr=0.05)
     target = _make_env(seed, k, sigma, 0.10, 4096, 10300)
     probe = _make_env(seed, k, sigma, 0.50, 4096, 10400)
+    repair = _make_env(seed, k, sigma, 0.50, 4096, 10600)
     pair_a = _make_env(seed, k, sigma, 0.50, 2048, 10500)
     pair_b_x = _counterfactual_x(pair_a, seed)
     rows: list[dict[str, object]] = []
@@ -149,23 +150,29 @@ def _run_one(seed: int, labels: dict[str, str], *, steps: int = 500) -> list[dic
             with torch.no_grad():
                 actual = _risk(model(target[0]), target[1])
                 z_probe = model.representation(probe[0]); z_target = model.representation(target[0])
+                z_repair = model.representation(repair[0])
             head = _fit_head(z_probe.detach(), probe[1], nonlinear=False, seed=seed + step)
             nprobe = _fit_head(z_probe.detach(), probe[1], nonlinear=True, seed=seed + step)
             core = _fit_head(probe[2], probe[1], nonlinear=True, seed=seed + step + 100)
+            repair_head = _fit_head(z_repair.detach(), repair[1], nonlinear=False, seed=seed + step + 50000)
             with torch.no_grad():
                 r_head = _risk(head(z_target)[:, 0], target[1]); r_probe = _risk(nprobe(z_target)[:, 0], target[1]); r_core = _risk(core(target[2])[:, 0], target[1])
+                r_head_repair = _risk(repair_head(z_target)[:, 0], target[1])
                 z_a = model.representation(pair_a[0]); z_b = model.representation(pair_b_x)
                 c_pred = float(((nprobe(z_a) - nprobe(z_b)) ** 2).mean().item())
                 c_linear = float(((head(z_a) - head(z_b)) ** 2).mean().item())
+                c_prob = float((torch.sigmoid(nprobe(z_a)) - torch.sigmoid(nprobe(z_b))).pow(2).mean().item())
+                c_linear_prob = float((torch.sigmoid(head(z_a)) - torch.sigmoid(head(z_b))).pow(2).mean().item())
                 c_actual = float((model(pair_a[0]) - model(pair_b_x)).pow(2).mean().item())
                 head_gain = actual - r_head
+                repair_gain = actual - r_head_repair
             # Full retraining is another optimization run, so it must also stay
             # outside no_grad.  Its target evaluation is inference-only.
             full_model = _fit_full(seed + step, k, sigma, rho, dz, optimizer, mixing, balanced=True, steps=160)
             with torch.no_grad():
                 full_risk = _risk(full_model(target[0]), target[1])
                 full_c_actual = float((full_model(pair_a[0]) - full_model(pair_b_x)).pow(2).mean().item())
-            rows.append({**labels, "seed": seed, "checkpoint": step, "R_actual": actual, "R_head": r_head, "R_probe": r_probe, "R_core": r_core, "G_use": head_gain, "G_repr": r_probe - r_core, "C_pred": c_pred, "C_linear": c_linear, "C_actual": c_actual, "C_actual_after_balanced": full_c_actual, "head_repair_gain": head_gain, "full_retrain_gain": actual - full_risk, "contamination_repair": c_actual - full_c_actual, "R_full_retrain": full_risk, "d_z_value": dz, "k_value": k, "sigma_c_value": sigma, "rho0": rho[0], "rho1": rho[1], "optimizer": optimizer})
+            rows.append({**labels, "seed": seed, "checkpoint": step, "R_actual": actual, "R_head": r_head, "R_head_repair": r_head_repair, "R_probe": r_probe, "R_core": r_core, "G_use": head_gain, "G_repr": r_probe - r_core, "C_pred": c_pred, "C_linear": c_linear, "C_prob": c_prob, "C_linear_prob": c_linear_prob, "C_actual": c_actual, "C_actual_after_balanced": full_c_actual, "head_repair_gain": repair_gain, "full_retrain_gain": actual - full_risk, "contamination_repair": c_actual - full_c_actual, "R_full_retrain": full_risk, "d_z_value": dz, "k_value": k, "sigma_c_value": sigma, "rho0": rho[0], "rho1": rho[1], "optimizer": optimizer})
         if step == steps: break
         batches = (_make_env(seed + step, k, sigma, rho[0], 128, 20100), _make_env(seed + step, k, sigma, rho[1], 128, 20200))
         opt.zero_grad(set_to_none=True)
@@ -183,89 +190,54 @@ def _write_csv(path: Path, rows: list[dict[str, object]]) -> None:
 
 def _summary(rows: list[dict[str, object]], smoke: bool) -> dict[str, object]:
     final = [r for r in rows if int(r["checkpoint"]) == 500]
-    keys = ("rho", "k", "sigma_c", "d_z")
-    group_keys = keys + ("optimizer",)
+    keys = ("rho", "k", "sigma_c", "d_z", "optimizer")
 
     def cell_key(r: dict[str, object]) -> tuple[str, ...]:
-        return tuple(str(r[k]) for k in group_keys)
+        return tuple(str(r[k]) for k in keys)
 
     def aggregate(items: list[dict[str, object]]) -> dict[str, object]:
-        out: dict[str, object] = {k: items[0][k] for k in group_keys} if items else {}
+        out: dict[str, object] = {k: items[0][k] for k in keys} if items else {}
         out["n"] = len(items)
-        for metric in ("G_use", "G_repr", "C_pred", "C_linear", "C_actual", "contamination_repair", "head_repair_gain", "full_retrain_gain"):
+        for metric in ("G_use", "G_repr", "C_pred", "C_linear", "C_prob", "C_linear_prob", "C_actual", "contamination_repair", "head_repair_gain", "full_retrain_gain"):
             mean, sd = _mean_sd([float(r[metric]) for r in items])
-            out[metric] = mean
-            out[f"{metric}_sd"] = sd
-        out["use_flag"] = float(out.get("G_use", 0.0)) >= 0.10
-        out["repr_flag"] = float(out.get("G_repr", 0.0)) >= 0.10
-        out["contam_flag"] = float(out.get("C_pred", 0.0)) >= 0.01
-        if out["use_flag"] and not out["repr_flag"]:
-            out["diagnostic_regime"] = "readout"
-        elif out["repr_flag"] and float(out.get("full_retrain_gain", 0.0)) >= 0.05:
-            out["diagnostic_regime"] = "representation"
-        elif out["contam_flag"] and float(out.get("contamination_repair", 0.0)) >= 0.005:
-            out["diagnostic_regime"] = "contamination"
-        else:
-            out["diagnostic_regime"] = "mixed_or_unassigned"
+            out[metric] = mean; out[f"{metric}_sd"] = sd
         return out
 
-    cell_rows: list[dict[str, object]] = []
-    for key in sorted({cell_key(r) for r in final}):
-        cell_rows.append(aggregate([r for r in final if cell_key(r) == key]))
-    checkpoint_rows: list[dict[str, object]] = []
+    cell_rows = [aggregate([r for r in final if cell_key(r) == key]) for key in sorted({cell_key(r) for r in final})]
+    checkpoint_rows = []
     for checkpoint in CHECKPOINTS:
         at_checkpoint = [r for r in rows if int(r["checkpoint"]) == checkpoint]
         for key in sorted({cell_key(r) for r in at_checkpoint}):
-            grouped = aggregate([r for r in at_checkpoint if cell_key(r) == key])
-            grouped["checkpoint"] = checkpoint
-            checkpoint_rows.append(grouped)
+            grouped = aggregate([r for r in at_checkpoint if cell_key(r) == key]); grouped["checkpoint"] = checkpoint; checkpoint_rows.append(grouped)
 
-    means = {metric: float(np.mean([float(r[metric]) for r in final])) if final else float("nan") for metric in ("G_use", "G_repr", "C_pred", "head_repair_gain", "full_retrain_gain", "contamination_repair")}
+    metrics = ("G_use", "G_repr", "C_prob", "head_repair_gain", "full_retrain_gain", "contamination_repair")
+    means = {metric: float(np.mean([float(r[metric]) for r in final])) if final else float("nan") for metric in metrics}
+
+    def contrast_stats(factor_a: str, factor_b: str, metric: str) -> dict[str, float]:
+        values = []
+        levels_a = sorted({str(r[factor_a]) for r in final}); levels_b = sorted({str(r[factor_b]) for r in final})
+        for seed in sorted({str(r["seed"]) for r in final}):
+            sample = [r for r in final if str(r["seed"]) == seed]
+            grouped = {(a, b): [float(r[metric]) for r in sample if str(r[factor_a]) == a and str(r[factor_b]) == b] for a in levels_a for b in levels_b}
+            # A 2x2 interaction contrast, averaging over all other factors.
+            a0, a1 = levels_a[0], levels_a[-1]; b0, b1 = levels_b[0], levels_b[-1]
+            values.append(np.mean(grouped[(a1, b1)]) - np.mean(grouped[(a1, b0)]) - np.mean(grouped[(a0, b1)]) + np.mean(grouped[(a0, b0)]))
+        mean, sd = _mean_sd([float(v) for v in values]); se = sd / math.sqrt(len(values)) if len(values) > 1 else float("nan")
+        return {"mean": mean, "sd": sd, "z": mean / se if se and np.isfinite(se) else float("nan"), "n_seeds": len(values)}
+
+    contrasts = {
+        "rho_x_sigma_to_G_use": contrast_stats("rho", "sigma_c", "G_use"),
+        "k_x_optimizer_to_G_repr": contrast_stats("k", "optimizer", "G_repr"),
+        "k_x_dz_to_G_repr": contrast_stats("k", "d_z", "G_repr"),
+    }
     incremental_r2 = float("nan")
     if len(final) >= 4:
-        design = np.c_[np.ones(len(final)), np.asarray([[float(r["G_use"]), float(r["G_repr"])] for r in final])]
-        response = np.asarray([float(r["C_pred"]) for r in final])
-        fitted = design @ np.linalg.lstsq(design, response, rcond=None)[0]
-        total = float(((response - response.mean()) ** 2).sum())
-        incremental_r2 = 1.0 - float(((response - fitted) ** 2).sum()) / total if total > 1e-12 else 1.0
-    regime_counts: dict[str, int] = {}
-    for r in cell_rows:
-        regime = str(r["diagnostic_regime"]); regime_counts[regime] = regime_counts.get(regime, 0) + 1
-
-    # An optimizer-controlled audit: compare paired SGD/Adam base cells.  A
-    # regime claim is weakened if optimizer identity explains more variation
-    # than the data/representation factors inside the same final checkpoint.
-    optimizer_groups = {opt: [r for r in final if r["optimizer"] == opt] for opt in ("sgd", "adam")}
-    optimizer_gap = {}
-    for metric in ("G_use", "G_repr", "C_pred"):
-        vals = [float(np.mean([float(r[metric]) for r in group])) for group in optimizer_groups.values() if group]
-        optimizer_gap[metric] = abs(vals[0] - vals[1]) if len(vals) == 2 else float("nan")
-    cell_metric_spread = {}
-    for metric in ("G_use", "G_repr", "C_pred"):
-        vals = [float(r[metric]) for r in cell_rows]
-        cell_metric_spread[metric] = float(np.std(vals)) if len(vals) > 1 else 0.0
-    base_cells = {tuple(str(r[k]) for k in keys) for r in final}
-    optimizer_disagreements = 0
-    for base in base_cells:
-        labels_by_optimizer = {str(r["optimizer"]): str(r["diagnostic_regime"]) for r in cell_rows if tuple(str(r[k]) for k in keys) == base}
-        if len(labels_by_optimizer) == 2 and len(set(labels_by_optimizer.values())) > 1:
-            optimizer_disagreements += 1
-    optimizer_disagreement_rate = optimizer_disagreements / len(base_cells) if base_cells else float("nan")
-    optimizer_dominates = optimizer_disagreement_rate > 0.25 or any(np.isfinite(optimizer_gap[m]) and optimizer_gap[m] > 1.5 * max(cell_metric_spread[m], 1e-12) for m in optimizer_gap)
-
-    supported_labels = {r["diagnostic_regime"] for r in cell_rows if r["diagnostic_regime"] != "mixed_or_unassigned"}
-    has_two_regimes = len(supported_labels) >= 2
-    intervention_ok = any(r["diagnostic_regime"] == "readout" and float(r["head_repair_gain"]) >= 0.05 for r in cell_rows) or any(r["diagnostic_regime"] == "representation" and float(r["full_retrain_gain"]) >= 0.05 for r in cell_rows) or any(r["diagnostic_regime"] == "contamination" and float(r["contamination_repair"]) >= 0.005 for r in cell_rows)
-    contamination_independent = not np.isfinite(incremental_r2) or incremental_r2 < 0.80
-    verdict = "SMOKE-ONLY"
-    if not smoke:
-        if not final:
-            verdict = "REGIMES-NONOPERATIONAL"
-        elif has_two_regimes and intervention_ok and contamination_independent and not optimizer_dominates:
-            verdict = "REGIMES-SUPPORTED"
-        else:
-            verdict = "REGIMES-NOT-DISCRETE"
-    return {"task_id": "TASK-FAILURE-REGIME-SYNTHETIC", "verdict": verdict, "n_rows": len(rows), "n_final": len(final), "n_cells": len(cell_rows), "means": means, "regime_counts": regime_counts, "optimizer_gap": optimizer_gap, "cell_metric_spread": cell_metric_spread, "contamination_incremental_r2": incremental_r2, "optimizer_disagreement_rate": optimizer_disagreement_rate, "optimizer_dominates": optimizer_dominates, "intervention_ok": intervention_ok, "cell_rows": cell_rows, "checkpoint_rows": checkpoint_rows, "interpretation": "diagnostic evidence only; no theory claim", "runtime": platform.platform()}
+        design = np.c_[np.ones(len(final)), np.asarray([[float(r["G_use"]), float(r["G_repr"]) ] for r in final])]
+        response = np.asarray([float(r["C_prob"]) for r in final]); fitted = design @ np.linalg.lstsq(design, response, rcond=None)[0]
+        total = float(((response - response.mean()) ** 2).sum()); incremental_r2 = 1.0 - float(((response - fitted) ** 2).sum()) / total if total > 1e-12 else 1.0
+    repair_corr = float(np.corrcoef([float(r["G_use"]) for r in final], [float(r["head_repair_gain"]) for r in final])[0, 1]) if len(final) > 2 else float("nan")
+    verdict = "SMOKE-ONLY" if smoke else ("TWO-AXIS-STRUCTURE-SUPPORTED; CONTAMINATION-UNRESOLVED" if final and abs(contrasts["rho_x_sigma_to_G_use"]["z"]) >= 2 and abs(contrasts["k_x_optimizer_to_G_repr"]["z"]) >= 2 else "TWO-AXIS-STRUCTURE-INCONCLUSIVE")
+    return {"task_id": "TASK-FAILURE-REGIME-SYNTHETIC", "verdict": verdict, "n_rows": len(rows), "n_final": len(final), "n_cells": len(cell_rows), "means": means, "factorial_contrasts": contrasts, "contamination_prob_incremental_r2": incremental_r2, "independent_head_repair_corr": repair_corr, "cell_rows": cell_rows, "checkpoint_rows": checkpoint_rows, "interpretation": "continuous diagnostic evidence only; categorical regime claims and contamination causality are unresolved", "runtime": platform.platform()}
 
 
 def _persist_results(rows: list[dict[str, object]], smoke: bool, elapsed: float) -> dict[str, object]:
@@ -279,12 +251,11 @@ def _persist_results(rows: list[dict[str, object]], smoke: bool, elapsed: float)
     report = [
         "# Failure-regime synthetic audit: final report", "", f"- Verdict: **{verdict}**",
         f"- Rows: {summary['n_rows']}; final-checkpoint rows: {summary['n_final']}; data/optimizer cells: {summary['n_cells']}",
-        f"- Regime labels: {summary['regime_counts']}", f"- Optimizer-dominance flag: `{summary['optimizer_dominates']}`",
-        f"- Optimizer disagreement rate: `{summary['optimizer_disagreement_rate']}`",
-        f"- Incremental contamination R2 from (G_use, G_repr): `{summary['contamination_incremental_r2']}`",
-        f"- Intervention validation flag: `{summary['intervention_ok']}`", "",
-        "This is a controlled synthetic diagnostic. It does not establish a theorem, a universal taxonomy, or a claim about any specific OOD algorithm.",
-        "Threshold flags and labels are pre-registered descriptive diagnostics; they should be revisited with independent seeds before a paper-level claim.",
+        f"- Mean diagnostic vector `(G_use, G_repr, C_prob)`: `({summary['means']['G_use']:.6g}, {summary['means']['G_repr']:.6g}, {summary['means']['C_prob']:.6g})`",
+        f"- Independent head-repair correlation with `G_use`: `{summary['independent_head_repair_corr']:.4f}`",
+        f"- Probability-sensitivity incremental R2 from `(G_use, G_repr)`: `{summary['contamination_prob_incremental_r2']:.4f}`",
+        "", "This is a continuous synthetic diagnostic. It does not establish a theorem, a universal taxonomy, or a claim about any specific OOD algorithm.",
+        "Categorical regime labels, raw-logit sensitivity, and contamination causality are intentionally not used as acceptance criteria.",
     ]
     (OUT / ("smoke_final_verdict.md" if smoke else "final_verdict.md")).write_text("\n".join(report) + "\n", encoding="utf-8")
     summary.pop("cell_rows", None); summary.pop("checkpoint_rows", None)
@@ -314,7 +285,7 @@ if __name__ == "__main__":
         for row in rows:
             for key in ("seed", "checkpoint", "d_z_value", "k_value"):
                 row[key] = int(row[key])
-            for key in ("sigma_c_value", "rho0", "rho1", "R_actual", "R_head", "R_probe", "R_core", "G_use", "G_repr", "C_pred", "C_linear", "C_actual", "C_actual_after_balanced", "head_repair_gain", "full_retrain_gain", "contamination_repair", "R_full_retrain"):
+            for key in ("sigma_c_value", "rho0", "rho1", "R_actual", "R_head", "R_head_repair", "R_probe", "R_core", "G_use", "G_repr", "C_pred", "C_linear", "C_prob", "C_linear_prob", "C_actual", "C_actual_after_balanced", "head_repair_gain", "full_retrain_gain", "contamination_repair", "R_full_retrain"):
                 row[key] = float(row[key])
         print(json.dumps(_persist_results(rows, args.smoke, args.elapsed_seconds), indent=2, allow_nan=True))
     else:

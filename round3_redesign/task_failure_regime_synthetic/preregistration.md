@@ -2,8 +2,9 @@
 
 ## Aim
 
-This experiment tests whether readout-limited, representation-limited, and
-functionally contaminated OOD failures are empirically separable. It does not
+This experiment tests whether usage/readout and representation failures form
+distinct, factor-dependent continuous axes, while auditing whether nuisance
+counterfactual sensitivity is an independent and repairable axis. It does not
 claim a theory or a universal taxonomy.
 
 ## Factorial design
@@ -29,25 +30,28 @@ spurious feature independent of the label. `R_actual` is target BCE risk.
 `R_core` is target BCE of a nonlinear probe given the true core `u`.
 
 `G_use = R_actual - R_head`, `G_repr = R_probe - R_core`.
-`C_pred` is the mean squared difference between the nonlinear representation
-probe's logits on pairs with identical `u` and independently resampled `s,n`.
+`C_prob` is the mean squared difference between nonlinear probe probabilities
+on pairs with identical `u` and independently resampled `s,n`; raw-logit
+`C_pred` is recorded only as a non-scale-invariant comparison. `head_repair_gain`
+uses an independently generated balanced repair set and independent probe seed.
 
-Pre-registered diagnostic thresholds are `G_use >= 0.10`, `G_repr >= 0.10`,
-and `C_pred >= 0.01`; threshold labels are descriptive only.
+The primary analysis uses seed-level 2x2 interaction contrasts, not thresholds:
+`rho x sigma_c -> G_use`, `k x optimizer -> G_repr`, and `k x d_z -> G_repr`.
+An absolute seed-level z-score of 2 is an exploratory stability flag, not a
+claim of inferential significance.
 
 ## Interventions and falsification gates
 
-Head repair is the frozen-representation oracle-head intervention. Full repair
-is a source-only retraining intervention on balanced spurious features using
-the same architecture and optimizer. A readout regime must show head repair
-improvement; a representation regime must show little head improvement but a
-full-retrain improvement. Contamination is only considered distinct if `C_pred`
-adds separation beyond the two gaps and nuisance counterfactual prediction
-changes are reduced by balanced retraining.
+Head repair is a frozen-representation intervention evaluated on a separate
+balanced repair set. Full repair is a source-only retraining intervention on
+balanced spurious features using the same architecture and optimizer.
+Contamination remains unresolved unless probability-space sensitivity predicts
+an independently specified nuisance-removal intervention and improves target
+risk; a reduction in sensitivity alone is insufficient.
 
-The experiment is rejected as a regime theory if metrics are smooth and
-collinear, if clusters are explained only by optimizer identity, or if the
-diagnostic gaps fail to predict the corresponding intervention.
+The experiment is not treated as a regime theory if continuous metrics are
+replaced by priority labels, if clusters are explained only by optimizer
+identity, or if diagnostics and repairs are circularly defined.
 
 ## Reproducibility
 

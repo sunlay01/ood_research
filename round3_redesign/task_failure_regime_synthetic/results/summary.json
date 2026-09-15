@@ -1,37 +1,40 @@
 {
-  "cell_metric_spread": {
-    "C_pred": 2.692320983784919,
-    "G_repr": 0.1275793867058573,
-    "G_use": 0.45373307098960736
+  "contamination_prob_incremental_r2": 0.5966559855945328,
+  "elapsed_seconds": 235.06883597373962,
+  "factorial_contrasts": {
+    "k_x_dz_to_G_repr": {
+      "mean": -0.0769480681580956,
+      "n_seeds": 5,
+      "sd": 0.02045535621431753,
+      "z": -8.411543135013034
+    },
+    "k_x_optimizer_to_G_repr": {
+      "mean": 0.11452738984645053,
+      "n_seeds": 5,
+      "sd": 0.04449307947687414,
+      "z": 5.755749702948505
+    },
+    "rho_x_sigma_to_G_use": {
+      "mean": -0.7754216219810219,
+      "n_seeds": 5,
+      "sd": 0.07407112664062866,
+      "z": -23.408520115875397
+    }
   },
-  "contamination_incremental_r2": 0.0943775290932275,
-  "elapsed_seconds": 0.0,
-  "interpretation": "diagnostic evidence only; no theory claim",
-  "intervention_ok": true,
+  "independent_head_repair_corr": 0.9980673368890521,
+  "interpretation": "continuous diagnostic evidence only; categorical regime claims and contamination causality are unresolved",
   "means": {
-    "C_pred": 1.9592060101211373,
+    "C_prob": 0.016773665497545533,
     "G_repr": 0.09887125022110863,
     "G_use": 0.3040358462665349,
     "contamination_repair": 3.303650145381421,
     "full_retrain_gain": 0.32383811954998987,
-    "head_repair_gain": 0.3040358462665349
+    "head_repair_gain": 0.31293021637552765
   },
   "n_cells": 32,
   "n_final": 160,
   "n_rows": 800,
-  "optimizer_disagreement_rate": 0.25,
-  "optimizer_dominates": false,
-  "optimizer_gap": {
-    "C_pred": 1.1920405409387669,
-    "G_repr": 0.13201595905354446,
-    "G_use": 0.1260552927719477
-  },
-  "regime_counts": {
-    "contamination": 21,
-    "readout": 7,
-    "representation": 4
-  },
   "runtime": "macOS-26.3-arm64-arm-64bit-Mach-O",
   "task_id": "TASK-FAILURE-REGIME-SYNTHETIC",
-  "verdict": "REGIMES-SUPPORTED"
+  "verdict": "TWO-AXIS-STRUCTURE-SUPPORTED; CONTAMINATION-UNRESOLVED"
 }
