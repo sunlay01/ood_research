@@ -1,0 +1,141 @@
+{
+  "status": "PASS",
+  "scope": "data conditions, proof inequalities, and recomputed derivatives at prior endpoints; no new training",
+  "rows": [
+    {
+      "seed": 21,
+      "k_st": [
+        19,
+        2,
+        6,
+        11
+      ],
+      "minimum_overlap_width": 1.9594925537161332,
+      "p_s": [
+        0.2339622641509434,
+        0.7611336032388664
+      ],
+      "kappa": 0.03125,
+      "noncollinearity_rho": 0.053054725776913975,
+      "G_min": 0.9238561750974654,
+      "explicit_stationary_S_lower_bound": 3.286735213763086e-14,
+      "thresholds_t": [
+        0.03125,
+        0.0036273219248208277,
+        6.647615088277284e-07
+      ],
+      "identity_error": 2.3592239273284576e-16,
+      "max_positive_inequality_violation": 0.0,
+      "reference_endpoints_recomputed": [
+        {
+          "init": 0,
+          "S": 0.02632698073195532,
+          "gradient_norm_recomputed": 1.717203612359686e-14,
+          "hessian_min_recomputed": 0.29464106936264955
+        },
+        {
+          "init": 1,
+          "S": 0.026326980731955205,
+          "gradient_norm_recomputed": 1.345625538188121e-13,
+          "hessian_min_recomputed": 0.29464106936263745
+        },
+        {
+          "init": 2,
+          "S": 0.02632698073195497,
+          "gradient_norm_recomputed": 9.946670013608598e-14,
+          "hessian_min_recomputed": 0.29464106936266177
+        }
+      ]
+    },
+    {
+      "seed": 22,
+      "k_st": [
+        22,
+        4,
+        3,
+        18
+      ],
+      "minimum_overlap_width": 2.865747746459669,
+      "p_s": [
+        0.2751937984496124,
+        0.7598425196850394
+      ],
+      "kappa": 0.02734375,
+      "noncollinearity_rho": 0.11276134870680649,
+      "G_min": 0.9635776267353615,
+      "explicit_stationary_S_lower_bound": 1.1788447573330756e-13,
+      "thresholds_t": [
+        0.02734375,
+        0.003261110304955819,
+        1.0783049583950747e-06
+      ],
+      "identity_error": 1.6653345369377348e-16,
+      "max_positive_inequality_violation": 0.0,
+      "reference_endpoints_recomputed": [
+        {
+          "init": 0,
+          "S": 0.11439440342345947,
+          "gradient_norm_recomputed": 1.6213998167200342e-13,
+          "hessian_min_recomputed": 0.2138645370023453
+        },
+        {
+          "init": 1,
+          "S": 0.1143944034234595,
+          "gradient_norm_recomputed": 1.6257123806219543e-13,
+          "hessian_min_recomputed": 0.21386453700234428
+        },
+        {
+          "init": 2,
+          "S": 0.11439440342345923,
+          "gradient_norm_recomputed": 2.4545781714200037e-13,
+          "hessian_min_recomputed": 0.21386453700226374
+        }
+      ]
+    },
+    {
+      "seed": 23,
+      "k_st": [
+        23,
+        6,
+        5,
+        26
+      ],
+      "minimum_overlap_width": 2.5978907727706417,
+      "p_s": [
+        0.22388059701492538,
+        0.7581967213114754
+      ],
+      "kappa": 0.04296875,
+      "noncollinearity_rho": 0.09090506242432676,
+      "G_min": 0.9444867608275926,
+      "explicit_stationary_S_lower_bound": 3.512605976256726e-13,
+      "thresholds_t": [
+        0.04296875,
+        0.004758814622539477,
+        2.0578972941899695e-06
+      ],
+      "identity_error": 2.220446049250313e-16,
+      "max_positive_inequality_violation": 0.0,
+      "reference_endpoints_recomputed": [
+        {
+          "init": 0,
+          "S": 0.06852199893481306,
+          "gradient_norm_recomputed": 1.1797803002624118e-13,
+          "hessian_min_recomputed": 0.3209586976124833
+        },
+        {
+          "init": 1,
+          "S": 0.06852199893481305,
+          "gradient_norm_recomputed": 5.837384222507933e-14,
+          "hessian_min_recomputed": 0.3209586976124822
+        },
+        {
+          "init": 2,
+          "S": 0.06852199893481282,
+          "gradient_norm_recomputed": 6.455894437291394e-13,
+          "hessian_min_recomputed": 0.3209586976124867
+        }
+      ]
+    }
+  ]
+}
